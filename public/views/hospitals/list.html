@@ -1,0 +1,165 @@
+<html>
+    <head>
+        <title>IVF : Hospital List </title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/css/app.css" />
+    </head>
+<body>
+    
+    <nav class="navbar" id="header"></nav>
+
+      <main class="container">
+         <h1 class="text-center">Hospital List</h1>
+
+         <form>
+            <div class="hospital-search-wrapper">
+                <div class="form-group">
+                    <select class="form-control" id="centerCombo">
+                        <option>Centre Wise</option>
+                        <option>Mumbai</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="chainCombo">
+                        <option>Chain Wise</option>
+                        <option>Mumbai</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="drCombo">
+                        <option>Doctor Wise</option>
+                        <option>Mumbai</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="specialityCombo">
+                        <option>Speciality Wise</option>
+                        <option>Mumbai</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="zbmCombo">
+                        <option>ZBM Wise</option>
+                        <option>Mumbai</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="rbmCombo">
+                        <option>RBM Wise</option>
+                        <option>Mumbai</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="kamCombo">
+                        <option>KAM Wise</option>
+                        <option>Mumbai</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="potentialCombo">
+                        <option>Potential Wise</option>
+                        <option>Mumbai</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="businessProdCombo">
+                        <option>Business Product Wise</option>
+                        <option>Mumbai</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="periodCombo">
+                        <option>Period Wise</option>
+                        <option>Mumbai</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="marketingInniateCombo">
+                        <option>Marketing Innitiatives Wise</option>
+                        <option>Mumbai</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="search" placeholder="Search" />
+                </div>
+             </div>
+    
+             <div class="search-btn-wrapper">
+                <button type="reset" class="btn btn-success">Reset</button>
+                <button type="submit" class="btn btn-success">Search</button>
+             </div>
+         </form>
+         
+
+         <table class="table table-bordered table-bg">
+            <thead>
+              <tr>
+                <th>Dynamic Ivf</th>
+                <th>Name of Embryologist</th>
+                <th>Add Potential</th>
+                <th>Add Business</th>
+                <th>Competition</th>
+                <th>Rate Contract Status</th>
+                <th>Track Performance</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>MOTHER & CHILD HOPITAL</td>
+                    <td>Ajay Kumar Mishra</td>
+                    <td><a href="./add-potential?pid=1" class="btn btn-default">Add Potential</a></td>
+                    <td><a href="./add-business?bid=1" class="btn btn-default">Add Business</a></td>
+                    <td><a href="./add-competition?cid=1" class="btn btn-default">Competition</a></td>
+                    <td>Yes</td>
+                    <td><a href="#" class="btn btn-default">Track Performance</a></td>
+                </tr>
+                <tr>
+                    <td>MOTHER & CHILD HOPITAL</td>
+                    <td>Ajay Kumar Mishra</td>
+                    <td><a href="./add-potential?pid=2" class="btn btn-default">Add Potential</a></td>
+                    <td><a href="./add-business?bid=2" class="btn btn-default">Add Business</a></td>
+                    <td><a href="./add-competition?cid=2" class="btn btn-default">Competition</a></td>
+                    <td>Yes</td>
+                    <td><a href="#" class="btn btn-default">Track Performance</a></td>
+                </tr>
+                <tr>
+                    <td>MOTHER & CHILD HOPITAL</td>
+                    <td>Ajay Kumar Mishra</td>
+                    <td><a href="./add-potential?pid=3" class="btn btn-default">Add Potential</a></td>
+                    <td><a href="./add-business?bid=3" class="btn btn-default">Add Business</a></td>
+                    <td><a href="#" class="btn btn-default">Competition</a></td>
+                    <td>Yes</td>
+                    <td><a href="./add-competition?cid=3" class="btn btn-default">Track Performance</a></td>
+                </tr>
+                <tr>
+                    <td>MOTHER & CHILD HOPITAL</td>
+                    <td>Ajay Kumar Mishra</td>
+                    <td><a href="./add-potential?pid=4" class="btn btn-default">Add Potential</a></td>
+                    <td><a href="./add-business?bid=4" class="btn btn-default">Add Business</a></td>
+                    <td><a href="./add-competition?cid=4" class="btn btn-default">Competition</a></td>
+                    <td>Yes</td>
+                    <td><a href="#" class="btn btn-default">Track Performance</a></td>
+                </tr>
+                <tr>
+                    <td>MOTHER & CHILD HOPITAL</td>
+                    <td>Ajay Kumar Mishra</td>
+                    <td><a href="./add-potential?pid=5" class="btn btn-default">Add Potential</a></td>
+                    <td><a href="./add-business?bid=5" class="btn btn-default">Add Business</a></td>
+                    <td><a href="./add-competition?cid=5" class="btn btn-default">Competition</a></td>
+                    <td>Yes</td>
+                    <td><a href="#" class="btn btn-default">Track Performance</a></td>
+                </tr>
+            </tbody>
+          </table>
+      </main>
+
+      <script src="../../js/common.js"></script>
+        <script src="../../js/jquery.min.js"></script>
+        <script src="../../js/axios.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
+        <script src="../../js/admin.js"></script>
+
+</body>
+</html>

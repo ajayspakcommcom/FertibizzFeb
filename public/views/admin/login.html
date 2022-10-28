@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <title>IVF : Login </title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/css/app.css" />
+        <script src="../../js/common.js"></script>
+        <script src="../../js/jquery.min.js"></script>
+        <script src="../../js/axios.min.js"></script>
+        <script src="../../js/bootstrap.min.js"></script>
+        <script src="../../js/admin.js"></script>
+    </head>
+<body>
+    <div class="login-pop">
+        <div class="modal fade in" id="myModal" role="dialog">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                <div class="text-center">
+                  <h2 class="project-name">
+                    <img src="img/ivf.png" alt="ivf" class="img-response">
+                  </h2>
+                  <div id="lblmsg"></div>
+                  <form class="login-form" id="frm1" onsubmit="letMeLogin();return false;">
+                    <div class="form-group">
+                      <label for="usr">Username</label>
+                      <input type="text" placeholder="test@bsv.com" name='txtUsername' id='txtUsername' placeholder="username" value="vishal.bajaj@bsvgroup.com" class="form-control" />
+                    </div>
+      
+                    <div class="form-group">
+                      <label for="pwd">Password</label>
+                      <input type="password" name='txtPassword' id='txtPassword' placeholder="password" value='BSV@112233' class="form-control" value="BSV@112233">
+                    </div>
+                      
+                      <div class="login-btn-wrapper">
+                        <button class="btn btn-default btn-grad">Sign In</button>
+                      </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+</body>
+</html>

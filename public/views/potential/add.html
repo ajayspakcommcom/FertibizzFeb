@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <title>IVF : Add Potential </title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/css/app.css" />
+    </head>
+<body>
+    
+  <nav class="navbar" id="header"></nav>
+
+      <main class="container">
+         <h1 class="text-center">Add Potential</h1>
+         <div class="text-right"><a href="./hospitals" class="btn btn-success">Go Back</a></div>
+         <div class="form-wrapper">
+          <form>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <input type="number" class="form-control" id="iuiTxt" name="iuiTxt" placeholder="Total no. of IUI cycles" required />
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <input type="number" class="form-control" id="ivfTxt" name="ivfTxt" placeholder="Total no. of IVF cycles" required />
+                </div>    
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="freshTxt" name="freshTxt" placeholder="Fresh pick-ups" required />
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="frozenTxt" name="frozenTxt" placeholder="Frozen Transfers" required />
+                </div>    
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="patientTxt" name="patientTxt" placeholder="Self (Patient) cycles" required />
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="donotTxt" name="donotTxt" placeholder="Donor cycles" required />
+                </div>    
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="agonistTxt" name="agonistTxt" placeholder="Agonist cycles" required />
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="antagonistTxt" name="antagonistTxt" placeholder="Antagonist cycles" required />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="two-btn-wrapper">
+                  <button type="reset" class="btn btn-default btn-grad">Reset</button>
+                  <button type="submit" class="btn btn-default btn-grad" onclick="validateMe();return false;">Save</button>
+                </div>
+              </div>
+            </div>
+          </form>
+         </div>
+      </main>
+
+      <script src="../../js/common.js"></script>
+      <script src="../../js/jquery.min.js"></script>
+      <script src="../../js/axios.min.js"></script>
+      <script src="../../js/bootstrap.min.js"></script>
+      <script src="../../js/admin.js"></script>
+      <script src="../../js/potential.js"></script>
+
+</body>
+</html>
