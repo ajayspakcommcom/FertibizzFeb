@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <title>IVF : Business report </title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/css/app.css" />
+    </head>
+<body>
+    
+  <nav class="navbar" id="header"></nav>
+
+  <main class="container">
+    <h1>Business Report</h1>
+
+    <form>
+      <div class="hospital-search-wrapper admin-filter-wrapper">
+          <div class="form-group">
+            <input type="text" name="daterange" value="01/01/2018 - 01/15/2018" class="common-input" />
+          </div>
+          <div class="form-group">
+              <select class="form-control" id="zbmCombo">
+                  <option>Zbm</option>
+                  <option>Mumbai</option>
+              </select>
+          </div>
+          <div class="form-group">
+            <select class="form-control" id="rbmCombo">
+              <option>Rbm</option>
+              <option>Mumbai</option>
+          </select>
+          </div>
+          <div class="form-group">
+            <select class="form-control" id="kbmCombo">
+              <option>Kbm</option>
+              <option>Mumbai</option>
+          </select>
+        </div>
+          <div class="form-group">
+            <select class="form-control" id="brandCombo">
+              <option>Brand</option>
+              <option>Mumbai</option>
+          </select>
+          </div>
+       </div>
+      </div>
+      <div class="search-btn-wrapper">
+        <button type="reset" class="btn btn-success">Reset</button>
+        <button type="submit" class="btn btn-success">Search</button>
+     </div>
+   </form>
+
+    <div id="business_chart"></div>
+
+  </main>
+
+  <script src="../../js/common.js"></script>
+  <script src="../../js/jquery.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="../../js/axios.min.js"></script>
+  <script src="../../js/bootstrap.min.js"></script>
+  <script src="../../js/admin.js"></script>
+
+  <script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.setOnLoadCallback(drawStacked);
+    function drawStacked() {
+        var data = google.visualization.arrayToDataTable([
+          ['Element', 'ACHIEVEMENT', 'TARGET', '% ACH', { role: 'annotation' } ],
+          ['Brand', 10, 24, 20, ''],
+          ['Brand Wise', 16, 22, 23, ''],
+          ['Brand Wise', 28, 19, 29, '']
+        ]);
+
+        var options = {
+          width: 1140,
+          height: 400,
+          legend: { position: 'top', maxLines: 3 },
+          bar: { groupWidth: '80%' },
+          isStacked: true,
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('business_chart'));
+        chart.draw(data, options);
+    }
+  </script>
+
+</body>
+</html>

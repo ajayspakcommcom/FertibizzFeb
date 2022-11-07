@@ -33,6 +33,8 @@ app.use(cookieParser());
  const potentialRoutes = require('./routes/potentail');
  const businessRoutes = require('./routes/business');
  const competitionRoutes = require('./routes/competition');
+ const reportRoutes = require('./routes/report');
+
 
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -45,6 +47,7 @@ app.use(skuRoutes);
 app.use(potentialRoutes);
 app.use(businessRoutes);
 app.use(competitionRoutes);
+app.use(reportRoutes);
 
 //app.use(managerRoutes);
 
