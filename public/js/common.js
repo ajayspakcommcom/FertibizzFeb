@@ -139,3 +139,18 @@ function getIdFromURL() {
     return urlArr[urlArr.length - 1];
 }
 
+$('.col-wrapper').on('click', '.img-wrapper', function(){
+    let $this = $(this);
+    $this.parents('.col-wrapper').append(`
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group add-input-wrapper">
+            <input type="text" class="form-control" id="assistantTxt" name="assistantTxt" placeholder="Ivf Dr Assistant" />
+            <div class="img-wrapper">
+                <img src="../../img/plus.png" alt="add input" class="img-responsive" />
+            </div>
+            </div>    
+        </div>
+    `);
+    
+});
+
