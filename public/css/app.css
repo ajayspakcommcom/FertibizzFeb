@@ -7821,3 +7821,37 @@ label {
 .chart-wrapper h2 {
   text-align: center;
 }
+
+.business-rc-char-wrapper > div {
+  width: 50%;
+}
+
+.business-rc-char-wrapper > div iframe {
+  width: 560px;
+  height: 440px;
+}
+
+.customer-master-chart-wrapper > div {
+  width: 100%;
+  height: 220px;
+}
+
+.customer-master-chart-wrapper > div iframe {
+  width: 100%;
+  height: 100%;
+}
+
+.potential-main-chart-wrapper > div {
+  width: 100%;
+  height: 245px;
+}
+
+.potential-main-chart-wrapper > div iframe {
+  width: 100%;
+  height: 100%;
+}
+
+.product-entry-wrapper iframe {
+  width: 100%;
+  height: 700px;
+}

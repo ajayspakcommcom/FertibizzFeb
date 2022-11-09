@@ -1,112 +1,90 @@
-<html>
-    <head>
-        <title>IVF : Potential </title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" type="text/css" href="/css/daterangepicker.css" />
-        <link rel="stylesheet" href="/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="/css/app.css" />
-    </head>
-<body>
-    
-  <nav class="navbar" id="header"></nav>
 
-  <main class="container">
-    <h1>Potential</h1>
-    <form>
-      <div class="hospital-search-wrapper admin-filter-wrapper">
-          <div class="form-group">
-            <input type="text" name="daterange" value="01/01/2018 - 01/15/2018" class="common-input" />
-          </div>
-          <div class="form-group">
-              <select class="form-control" id="zbmCombo">
-                  <option>Zbm</option>
-                  <option>Mumbai</option>
-              </select>
-          </div>
-          <div class="form-group">
-            <select class="form-control" id="rbmCombo">
-              <option>Rbm</option>
-              <option>Mumbai</option>
-          </select>
-          </div>
-          <div class="form-group">
-            <select class="form-control" id="kbmCombo">
-              <option>Kbm</option>
-              <option>Mumbai</option>
-          </select>
-        </div>
-          <div class="form-group">
-            <select class="form-control" id="brandCombo">
-              <option>Brand</option>
-              <option>Mumbai</option>
-          </select>
-          </div>
-       </div>
-      </div>
-      <div class="search-btn-wrapper">
-        <button type="reset" class="btn btn-success">Reset</button>
-        <button type="submit" class="btn btn-success">Search</button>
-     </div>
-   </form>
+<style>
+  .chart-wrapper, .potential-chart-wrapper {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-around;
+    background: #fff;
+    margin-bottom: 30px;
+}
+</style>
 
-    <div id="potential_chart"></div>
+<div class="potential-chart-wrapper">
+  <div id="potential_chart1"></div>
+  <div id="potential_chart2"></div>
+  <div id="potential_chart3"></div>
+</div>
 
-  </main>
+<script type="text/javascript" src="../../js/googlechart.js"></script>
+<script>
+  google.charts.load('current', { packages: ['corechart', 'bar'] });
+  google.charts.setOnLoadCallback(potentialChart1);
+  google.charts.setOnLoadCallback(potentialChart2);
+  google.charts.setOnLoadCallback(potentialChart3);
 
-  
-  <!-- Reference Url -->
-  <!-- https://jsfiddle.net/api/post/library/pure/ -->
-  
 
-  <script src="../../js/jquery.min.js"></script>
-  <script src="../../js/common.js"></script>
+  function potentialChart1() {
 
-  <script src="../../js/moment.min.js"></script>
-  <script src="../../js/daterangepicker.min.js"></script>
+    var data = google.visualization.arrayToDataTable([
+      ['Task', 'Hours per Day'],
+      ['Total No of IUI Cycles', 40],
+      ['Total No of IVF Cycles', 60]
+    ]);
 
-  <script src="../../js/axios.min.js"></script>
-  <script src="../../js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script src="../../js/admin.js"></script>
+    var options = {
+      title: 'Potential Chart 1',
+      width: 300,
+      is3D: true,
+      legend: { position: 'bottom' },
+      backgroundColor: 'transparent'
+    };
 
-  <script>
-   google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+    var chart = new google.visualization.PieChart(document.getElementById('potential_chart1'));
 
-      function drawChart() {
+    chart.draw(data, options);
+  }
 
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Total No of IUI cycles',     11],
-          ['Total No of IVF cycles',      2],
-          ['Fresh Pick Ups',  2],
-          ['Frozen Transfers', 2],
-          ['Self (Patient) Cycles',    7],
-          ['Donor Cycles',    7],
-          ['Agonist Cycles',    7],
-          ['Antagonist Cycles',    7]
-        ]);
+  function potentialChart2() {
 
-        var options = {
-          title: 'My Daily Activities',
-          height:800
-        };
+    var data = google.visualization.arrayToDataTable([
+      ['Task', 'Hours per Day'],
+      ['Self (Patient) Cycles', 50],
+      ['Donor cycles', 50]
+    ]);
 
-        var chart = new google.visualization.PieChart(document.getElementById('potential_chart'));
+    var options = {
+      title: 'Potential Chart 2',
+      width: 300,
+      is3D: true,
+      legend: { position: 'bottom' },
+      backgroundColor: 'transparent'
+    };
 
-        chart.draw(data, options);
-      }
+    var chart = new google.visualization.PieChart(document.getElementById('potential_chart2'));
 
-    $(function () {
-        $('input[name="daterange"]').daterangepicker({
-          opens: 'left'
-        }, function (start, end, label) {
-          console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-        });
-      });
+    chart.draw(data, options);
+  }
 
-  </script>
+  function potentialChart3() {
 
-</body>
-</html>
+    var data = google.visualization.arrayToDataTable([
+      ['Task', 'Hours per Day'],
+      ['Agonist Cycles', 40],
+      ['Antagonist cycles', 60]
+    ]);
+
+    var options = {
+      title: 'Potential Chart 3',
+      width: 300,
+      is3D: true,
+      legend: { position: 'bottom' },
+      backgroundColor: 'transparent'
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('potential_chart3'));
+
+    chart.draw(data, options);
+  }
+
+
+</script>

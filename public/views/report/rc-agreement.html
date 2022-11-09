@@ -1,112 +1,32 @@
-<html>
-    <head>
-        <title>IVF : RC Agreement </title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" type="text/css" href="/css/daterangepicker.css" />
-        <link rel="stylesheet" href="/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="/css/app.css" />
-    </head>
-<body>
-    
-  <nav class="navbar" id="header"></nav>
 
-  <main class="container">
-    <h1>RC Agreement</h1>
-    <form>
-      <div class="hospital-search-wrapper admin-filter-wrapper">
-          <div class="form-group">
-            <input type="text" name="daterange" value="01/01/2018 - 01/15/2018" class="common-input" />
-          </div>
-          <div class="form-group">
-              <select class="form-control" id="zbmCombo">
-                  <option>Zbm</option>
-                  <option>Mumbai</option>
-              </select>
-          </div>
-          <div class="form-group">
-            <select class="form-control" id="rbmCombo">
-              <option>Rbm</option>
-              <option>Mumbai</option>
-          </select>
-          </div>
-          <div class="form-group">
-            <select class="form-control" id="kbmCombo">
-              <option>Kbm</option>
-              <option>Mumbai</option>
-          </select>
-        </div>
-          <div class="form-group">
-            <select class="form-control" id="brandCombo">
-              <option>Brand</option>
-              <option>Mumbai</option>
-          </select>
-          </div>
-       </div>
-      </div>
-      <div class="search-btn-wrapper">
-        <button type="reset" class="btn btn-success">Reset</button>
-        <button type="submit" class="btn btn-success">Search</button>
-     </div>
-   </form>
 
-    <div id="rc_agreement_chart"></div>
+  <div id="rc_agreement_chart"></div>
 
-  </main>
-
-  
-  <!-- Reference Url -->
-  <!-- https://jsfiddle.net/api/post/library/pure/ -->
-  
-
-  <script src="../../js/jquery.min.js"></script>
-  <script src="../../js/common.js"></script>
-
-  <script src="../../js/moment.min.js"></script>
-  <script src="../../js/daterangepicker.min.js"></script>
-
-  <script src="../../js/axios.min.js"></script>
-  <script src="../../js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script src="../../js/admin.js"></script>
-
+  <script type="text/javascript" src="../../js/googlechart.js"></script>
   <script>
-   google.charts.load('current', {packages: ['corechart', 'bar']});
-  google.charts.setOnLoadCallback(drawColColors);
-
-function drawColColors() {
-      var data = new google.visualization.DataTable();
-      // var data = google.visualization.arrayToDataTable([
-      //    ['Element', 'Density', { role: 'style' }],
-      //    ['Copper', 8.94, '#b87333'],            // RGB value
-      //    ['Silver', 10.49, 'silver'],            // English color name
-      //    ['Gold', 19.30, 'gold'],
-      //    ['Platinum', 21.45, 'color: #e5e4e2' ], // CSS-style declaration
-      // ]);
-
-      var data = google.visualization.arrayToDataTable([
-         ['Element', 'RC Agreement', { role: 'style' }],
-         ['Customers', 3734834, '#272666'],            // RGB value
-         ['Centre Agreements Count', 3734734, '#272666'],            // English color name
-         ['Collapsible List', 3734834, '#272666']
-      ]);
-
-      // c
-
-      var chart = new google.visualization.ColumnChart(document.getElementById('rc_agreement_chart'));
-      chart.draw(data, null);
-    }
-
-
-    $(function () {
-        $('input[name="daterange"]').daterangepicker({
-          opens: 'left'
-        }, function (start, end, label) {
-          console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-        });
-      });
-
+      google.charts.load('current', { packages: ['corechart', 'bar'] });
+      google.charts.setOnLoadCallback(rcAgreementChart);
+  
+  
+      function rcAgreementChart() {
+        let data = google.visualization.arrayToDataTable([
+          ['Element', 'ACHIEVEMENT', 'TARGET', { role: 'annotation' }],
+          ['RBM', 10, 24, ''],
+          ['Centre Agreements Count', 16, 22, ''],
+          ['Collapsible List', 28, 19, '']
+        ]);
+  
+        let options = {
+          width: 550,
+          height: 400,
+          legend: { position: 'bottom', maxLines: 3 },
+          bar: { groupWidth: '80%' },
+          isStacked: true,
+          title: 'RC Agreement Chart',
+        };
+  
+        let chart = new google.visualization.ColumnChart(document.getElementById('rc_agreement_chart'));
+        chart.draw(data, options);
+      }
+  
   </script>
-
-</body>
-</html>
