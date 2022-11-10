@@ -1,9 +1,9 @@
 exports.dataBaseConfig = {
-    server: "N1NWPLSK12SQL-v03.shr.prod.ams1.secureserver.net",
-    user: "aasha",
-    password: "2!Oryc83",
+    server: "A2NWPLSK14SQL-v01.shr.prod.iad2.secureserver.net",
+    user: "BSV_IVF",
+    password: "4_uGdn74",
     port: 1433,
-    database: "aasha-bsvwithu",
+    database: "BSV_IVF",
     pool: {
       max: 10,
       min: 0,

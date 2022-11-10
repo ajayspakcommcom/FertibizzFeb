@@ -9,5 +9,7 @@ router.get('/potential-report', reportController.potentialReport);
 router.get('/rate-with-product-report', reportController.rateWithProductReport);
 router.get('/rc-agreement-report', reportController.rcAgreementReport);
 router.get('/dashboard-report', reportController.dashboardReport);
+router.post('/report/potential', reportController.getPotentialData);
+
 
 module.exports = router;

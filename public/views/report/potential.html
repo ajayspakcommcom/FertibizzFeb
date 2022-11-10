@@ -14,35 +14,38 @@
   <div id="potential_chart2"></div>
   <div id="potential_chart3"></div>
 </div>
-
+<script src="../../js/axios.min.js"></script>
 <script type="text/javascript" src="../../js/googlechart.js"></script>
+<script type="text/javascript" src="../../js/reports_potential.js"></script>
+
+
 <script>
   google.charts.load('current', { packages: ['corechart', 'bar'] });
-  google.charts.setOnLoadCallback(potentialChart1);
+ // google.charts.setOnLoadCallback(potentialChart1);
   google.charts.setOnLoadCallback(potentialChart2);
   google.charts.setOnLoadCallback(potentialChart3);
 
 
-  function potentialChart1() {
+  // function potentialChart1() {
 
-    var data = google.visualization.arrayToDataTable([
-      ['Task', 'Hours per Day'],
-      ['Total No of IUI Cycles', 40],
-      ['Total No of IVF Cycles', 60]
-    ]);
+  //   var data = google.visualization.arrayToDataTable([
+  //     ['Task', 'Hours per Day'],
+  //     ['Total No of IUI Cycles', 40],
+  //     ['Total No of IVF Cycles', 60]
+  //   ]);
 
-    var options = {
-      title: 'Potential Chart 1',
-      width: 300,
-      is3D: true,
-      legend: { position: 'bottom' },
-      backgroundColor: 'transparent'
-    };
+  //   var options = {
+  //     title: 'Potential Chart 1',
+  //     width: 300,
+  //     is3D: true,
+  //     legend: { position: 'bottom' },
+  //     backgroundColor: 'transparent'
+  //   };
 
-    var chart = new google.visualization.PieChart(document.getElementById('potential_chart1'));
+  //   var chart = new google.visualization.PieChart(document.getElementById('potential_chart1'));
 
-    chart.draw(data, options);
-  }
+  //   chart.draw(data, options);
+  // }
 
   function potentialChart2() {
 
@@ -86,5 +89,5 @@
     chart.draw(data, options);
   }
 
-
+  setupPage()
 </script>
