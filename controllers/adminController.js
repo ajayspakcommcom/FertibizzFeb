@@ -23,25 +23,33 @@ exports.postApi = (req, res, next) => {
                 
                 if (result.recordset.length > 0) {
                     session = req.session;
-                    //console.log(result.recordset);
+                    console.log(result.recordset);
                     let rec = result.recordset[0];
-                    if (_allowedDesignaiton.includes(rec.Designation.toUpperCase())) {
+                    // if (_allowedDesignaiton.includes(rec.Designation.toUpperCase())) {
                         success = true;
                         msg = 'Login successful'
+                        // userDetiails = {
+                        //     empId: rec.EmpID,
+                        //     name: rec.firstName,
+                        //     post: rec.Designation,
+                        //     lastLogin: rec.lastLoginDate,
+                        //     targetLeft: 4
+                        // }
+
                         userDetiails = {
-                            empId: rec.EmpID,
-                            name: rec.firstName,
-                            post: rec.Designation,
-                            lastLogin: rec.lastLoginDate,
+                            empId: 1,
+                            name: "vishal.bajaj@bsvgroup.com",
+                            post: 'admin',
+                            lastLogin: null,
                             targetLeft: 4
                         }
 
                         session.userDetiails = userDetiails;
-                    }
-                    else {
-                        success = false;
-                        msg = 'You are not authorized to login to the system';
-                    }
+                    // }
+                    // else {
+                    //     success = false;
+                    //     msg = 'You are not authorized to login to the system';
+                    // }
                 } else {
                     success = false;
                     msg = 'Invalid username or password';
