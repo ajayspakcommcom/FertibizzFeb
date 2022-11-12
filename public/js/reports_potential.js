@@ -1,86 +1,162 @@
 function setupPage() {
-    console.log('set up pge')
-    getPotentialData();
+  console.log('set up pge')
+  //  getPotentialData();
 }
 
 
 async function getPotentialData() {
-    let param = {}
-    const reqPotential = axios.post("/report/potential", param);
-   // const axiosrequest2 = axios.post("/admin/api/actuals", paramActuals);
-   //await axios.all([axiosrequestWest,  axiosrequest2]).then(axios.spread(function (res1, res2) {
-    await axios.all([reqPotential]).then(axios.spread(function (res1) {
-       // console.log(res1.data);
-        let data = res1.data,
-          totalIVF = 0,
-          totalIUI = 0,
-          ivfCycleArr = [],
-          iuiCycleArr = [];
+  let param = {}
+  const reqPotential = axios.post("/report/potential", param);
+  // const axiosrequest2 = axios.post("/admin/api/actuals", paramActuals);
+  //await axios.all([axiosrequestWest,  axiosrequest2]).then(axios.spread(function (res1, res2) {
+  await axios.all([reqPotential]).then(axios.spread(function (res1) {
+    //console.log(res1.data);
+    let data = res1.data,
+      totalIVF = 0,
+      totalIVFFrozenTransfers = 0,
+      totalIVFFreshPickups = 0,
+      totalIUI = 0,
+      percIVF_FrozenTransfers,
+      percIVF_FreshPickups,
+      totalSelftCycle = 0,
+      totalDonorCycle = 0,
 
-        data.forEach(item => {
-          totalIVF += parseInt(item.IVFCycle)
-          totalIUI += parseInt(item.IUICycle)
-          ivfCycleArr.push({
-            name: parseInt(item.IVFCycle), value: parseInt(item.IVFCycle)
-          })
-          iuiCycleArr.push({
-            name: parseInt(item.IUICycle), value: parseInt(item.IUICycle)
-          })
-        });
+      totalAntagonistcycles = 0,
+      totalAgonistCycles = 0 ;
 
+    data.forEach(item => {
+      // report 1
+      totalIVF += (parseInt(item.FreshPickUps) + parseInt(item.frozenTransfers))
+      totalIUI += parseInt(item.IUICycle)
+      // report 1- sub report
+      totalIVFFreshPickups += parseInt(item.FreshPickUps)
+      totalIVFFrozenTransfers += parseInt(item.frozenTransfers)
+      // reoprt 2
+      totalSelftCycle+= parseInt(item.SelftCycle)
+      totalDonorCycle+= parseInt(item.DonorCycles)
 
-        console.log(totalIVF)
-        console.log(ivfCycleArr)
-
-        chartData = {
-                name: "Total IUI/IVF Cycle: " + parseInt(totalIUI + totalIVF),
-                children: [
-                  {name: "Total IUI "+totalIUI+"" ,value: totalIUI,
-                  children: iuiCycleArr
-                 },
-                  {
-                    name: "Total IVF "+totalIVF+"",value: totalIVF,
-                    children: ivfCycleArr
-                  }
-                 
-                ]
-            };
-
-              console.log(chartData)
-          //    console.log(data)
+      // reoprt 2
+      totalAntagonistcycles+= parseInt(item.Antagonistcycles)
+      totalAgonistCycles+= parseInt(item.AgonistCycles)
 
 
-              const color = d3.scaleOrdinal(d3.schemePaired);
-            Sunburst()
-                .data(chartData)
-                .color(d => color(d.name))
-                 .minSliceAngle(.1)
-                 .excludeRoot(false)
-                 .maxLevels(10)
-                .showLabels(true)
-                .tooltipContent((d, node) => `Size: <i>${node.value}</i>`)
-                (document.getElementById('potential_chart1'));
-
-            // populateDataTable(response.data);
+    });
 
 
-    //     gdata = google.visualization.arrayToDataTable([
-    //         ['Task', 'Hours per Day'],
-    //         ['Total No of IUI Cycles', data.IUICycle],
-    //         ['Total No of IVF Cycles', data.IVFCycle]
-    //       ]);
-      
-    //       var options = {
-    //         title: 'Potential Chart 1',
-    //         width: 300,
-    //         is3D: true,
-    //         legend: { position: 'bottom' },
-    //         backgroundColor: 'transparent'
-    //       };
-      
-    //       var chart = new google.visualization.PieChart(document.getElementById('potential_chart1'));
-      
-    //       chart.draw(gdata, options);
+    // console.log(totalIVFFreshPickups+ '--> Fresh Pickup') // 238
+    // console.log(totalIVFFrozenTransfers+ '--> frozenTransfers') // 238
+
+    // console.log(totalIVF) // 238
+    // console.log(totalIUI)
+
+    // console.log(totalIUI)
+    // console.log(totalIUI)
+
+    percIVF_FrozenTransfers = percentage(totalIVFFrozenTransfers,totalIVF);
+    percIVF_FreshPickups = percentage(totalIVFFreshPickups,totalIVF);
+
+
+    gdata = google.visualization.arrayToDataTable([
+      ['Task', 'Hours per Day'],
+      ['Total No of IUI Cycles', totalIUI],
+      ['Total No of IVF Cycles', totalIVF]
+    ]);
+
+    var options = {
+      title: 'IVF / IUI Count',
+      width: 300,
+      is3D: true,
+      legend: { position: 'bottom' },
+      backgroundColor: 'transparent'
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('potential_chart1'));
+
+    function selectHandler() {
+      var selectedItem = chart.getSelection()[0];
+
+      if (selectedItem) {
+        var topping = gdata.getValue(selectedItem.row, 0);
+        $('#potential_chart1_bar').attr('hidden', topping === 'Total No of IUI Cycles')
+      }
+    }
+    google.visualization.events.addListener(chart, 'select', selectHandler, chart);
+    chart.draw(gdata, options);
+
+
+
+
+    let ivfData = google.visualization.arrayToDataTable([
+      ['Title', 'Fresh Pick Ups (%)', 'Frozen Transfers (%)'],
+      ['Type', percIVF_FreshPickups, percIVF_FrozenTransfers]
+    ]);
+
+    let ivfOptions = {
+      width: 150,
+      height: 200,
+      legend: { position: 'bottom', maxLines: 3 },
+      bar: { groupWidth: '20%' },
+      isStacked: true,
+      title: 'Fresh Pick Ups / Frozen Transfers'
+    };
+
+    let chartIVFDetails = new google.visualization.ColumnChart(document.getElementById('potential_chartIVF'));
+    chartIVFDetails.draw(ivfData, ivfOptions);
+
+    potentialChart2(totalSelftCycle, totalDonorCycle);
+
+    potentialChart3(totalAntagonistcycles, totalAgonistCycles)
+
+
     //    // console.log(res2.data[0]);
-    }));
+  }));
 }
+
+function potentialChart2(selftCare, donorCycle) {
+// console.log('inside report 2')
+// console.log(arguments)
+  var data = google.visualization.arrayToDataTable([
+    ['Title', 'Value'],
+    ['Self (Patient) Cycles', selftCare],
+    ['Donor cycles', donorCycle]
+  ]);
+
+  var options = {
+    title: 'Self (Patient) /  Donor cycles',
+    width: 300,
+    is3D: true,
+    legend: { position: 'bottom' },
+    backgroundColor: 'transparent'
+  };
+
+  var chart = new google.visualization.PieChart(document.getElementById('potential_chart2'));
+
+  chart.draw(data, options);
+}
+
+
+function potentialChart3(antagonistCycles, agonistCycles) {
+
+  var data = google.visualization.arrayToDataTable([
+    ['Title', 'Value'],
+    ['Agonist Cycles', agonistCycles],
+    ['Antagonist cycles', antagonistCycles]
+  ]);
+
+  var options = {
+    title: 'Potential Chart 3',
+    width: 300,
+    is3D: true,
+    legend: { position: 'bottom' },
+    backgroundColor: 'transparent'
+  };
+
+  var chart = new google.visualization.PieChart(document.getElementById('potential_chart3'));
+
+  chart.draw(data, options);
+}
+
+
+function percentage(partialValue, totalValue) {
+  return (100 * partialValue) / totalValue;
+} 

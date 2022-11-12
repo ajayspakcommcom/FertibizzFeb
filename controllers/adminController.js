@@ -20,7 +20,8 @@ exports.postApi = (req, res, next) => {
         case 'adminLogin':
             userLogin(req.body).then((result) => {
                 let response, success, msg, userDetiails, session, statusCode
-                if (result.recordset) {
+                
+                if (result.recordset.length > 0) {
                     session = req.session;
                     //console.log(result.recordset);
                     let rec = result.recordset[0];
@@ -81,7 +82,7 @@ userLogin = (objParam) => {
                     .input("password", sql.NVarChar, objParam.password)
                     .execute("USP_VALIDATE_USER")
                     .then(function (resp) {
-                        // console.log(resp)
+                        console.log(resp)
                         resolve(resp);
                         dbConn.close();
                     })

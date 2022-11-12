@@ -11,86 +11,23 @@
 
 <div class="potential-chart-wrapper">
   <div id="potential_chart1"></div>
+  <div id="potential_chart1_bar" hidden>
+
+    <div id="potential_chartIVF"></div>
+  </div>
+
+
+
   <div id="potential_chart2"></div>
   <div id="potential_chart3"></div>
 </div>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
 <script src="../../js/axios.min.js"></script>
 <script type="text/javascript" src="../../js/googlechart.js"></script>
 <script type="text/javascript" src="../../js/reports_potential.js"></script>
 
-<script src="//unpkg.com/d3"></script>
-<script src="//unpkg.com/sunburst-chart"></script>
-<script src="//unpkg.com/sunburst-chart"></script>
 
 <script>
   google.charts.load('current', { packages: ['corechart', 'bar'] });
- // google.charts.setOnLoadCallback(potentialChart1);
-  google.charts.setOnLoadCallback(potentialChart2);
-  google.charts.setOnLoadCallback(potentialChart3);
-
-
-  // function potentialChart1() {
-
-  //   var data = google.visualization.arrayToDataTable([
-  //     ['Task', 'Hours per Day'],
-  //     ['Total No of IUI Cycles', 40],
-  //     ['Total No of IVF Cycles', 60]
-  //   ]);
-
-  //   var options = {
-  //     title: 'Potential Chart 1',
-  //     width: 300,
-  //     is3D: true,
-  //     legend: { position: 'bottom' },
-  //     backgroundColor: 'transparent'
-  //   };
-
-  //   var chart = new google.visualization.PieChart(document.getElementById('potential_chart1'));
-
-  //   chart.draw(data, options);
-  // }
-
-  function potentialChart2() {
-
-    var data = google.visualization.arrayToDataTable([
-      ['Task', 'Hours per Day'],
-      ['Self (Patient) Cycles', 50],
-      ['Donor cycles', 50]
-    ]);
-
-    var options = {
-      title: 'Potential Chart 2',
-      width: 300,
-      is3D: true,
-      legend: { position: 'bottom' },
-      backgroundColor: 'transparent'
-    };
-
-    var chart = new google.visualization.PieChart(document.getElementById('potential_chart2'));
-
-    chart.draw(data, options);
-  }
-
-  function potentialChart3() {
-
-    var data = google.visualization.arrayToDataTable([
-      ['Task', 'Hours per Day'],
-      ['Agonist Cycles', 40],
-      ['Antagonist cycles', 60]
-    ]);
-
-    var options = {
-      title: 'Potential Chart 3',
-      width: 300,
-      is3D: true,
-      legend: { position: 'bottom' },
-      backgroundColor: 'transparent'
-    };
-
-    var chart = new google.visualization.PieChart(document.getElementById('potential_chart3'));
-
-    chart.draw(data, options);
-  }
-
-  setupPage()
+  google.charts.setOnLoadCallback(getPotentialData);
 </script>
