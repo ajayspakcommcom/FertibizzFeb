@@ -25,11 +25,17 @@ exports.rcAgreementReport = (req, res, next) => {
     res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/report/rc-agreement.html`);
 };
 
-exports.dashboardReport = (req, res, next) => {
-    res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/report/dashboard.html`);
+exports.dataReport = (req, res, next) => {
+    res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/report/report.html`);
 };
 
+// exports.dashboardReport = (req, res, next) => {
+//     res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/report/dashboard.html`);
+// };
 
+exports.dashboardChartReport = (req, res, next) => {
+    res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/report/chart.html`);
+};
 
 exports.getPotentialData = (req, res, next) => {
    // console.log('i am here');
