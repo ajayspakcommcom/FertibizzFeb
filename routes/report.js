@@ -11,6 +11,7 @@ router.get('/rc-agreement-report', reportController.rcAgreementReport);
 router.get('/dashboard-report', reportController.dashboardReport);
 router.post('/report/potential', reportController.getPotentialData);
 router.post('/report/RCAgreement', reportController.getRateContractData);
+router.post('/report/businessReport', reportController.getBusinessReport);
 
 
 module.exports = router;

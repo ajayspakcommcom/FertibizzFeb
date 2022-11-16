@@ -1,32 +1,14 @@
 
    <div id="business_chart"></div>
    <script type="text/javascript" src="../../js/googlechart.js"></script>
+   <script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script src="../../js/axios.min.js"></script>
+<script type="text/javascript" src="../../js/businessReport.js"></script>
 
   <script>
     google.charts.load('current', { packages: ['corechart', 'bar'] });
     google.charts.setOnLoadCallback(drawBusinessChart);
 
-
-    function drawBusinessChart() {
-      let data = google.visualization.arrayToDataTable([
-        ['Element', 'ACHIEVEMENT', 'TARGET', '% ACH', { role: 'annotation' }],
-        ['Brand', 10, 24, 20, ''],
-        ['Brand Wise', 16, 22, 23, ''],
-        ['Brand Wise', 28, 19, 29, '']
-      ]);
-
-      let options = {
-        width: 550,
-        height: 400,
-        legend: { position: 'bottom', maxLines: 3 },
-        bar: { groupWidth: '80%' },
-        isStacked: true,
-        title: 'Business Chart'
-      };
-
-      let chart = new google.visualization.ColumnChart(document.getElementById('business_chart'));
-      chart.draw(data, options);
-    }
 
 </script>
 
