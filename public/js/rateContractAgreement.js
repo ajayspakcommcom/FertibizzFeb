@@ -2,7 +2,7 @@ async function rcAgreementChart() {
     let param = {};
     const reqRateContract = axios.post("/report/RCAgreement", param);
     await axios.all([reqRateContract]).then(axios.spread(function (res1) {
-        console.log(res1.data);
+      //  console.log(res1.data);
         let reportDataItems = res1.data;
 
         // let data = google.visualization.arrayToDataTable([
@@ -23,7 +23,7 @@ async function rcAgreementChart() {
             //rbmArr.push([1,2,3])
             data.addRows([[item.RBM,item.contract,item.hospitalCount]])
         });
-        console.log([rbmArr])
+       // console.log([rbmArr])
         //data.addRows([rbmArr]);
 
         let options = {

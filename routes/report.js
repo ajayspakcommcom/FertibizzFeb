@@ -13,6 +13,7 @@ router.get('/report', reportController.dataReport);
 router.post('/report/potential', reportController.getPotentialData);
 router.post('/report/RCAgreement', reportController.getRateContractData);
 router.post('/report/businessReport', reportController.getBusinessReport);
+router.post('/report/allbusinessReports', reportController.getAllBusinessReport);
 
 
 

@@ -164,3 +164,48 @@ exports.getBusinessReport = (req, res, next) => {
              });
      });
  };
+
+
+ 
+
+
+
+exports.getAllBusinessReport = (req, res, next) => {
+    // console.log('i am here');
+     getAllBusinessReport(req.body).then((result) => {
+         res.status(200).json(result);
+     });
+ };
+ 
+ 
+ 
+ getAllBusinessReport = (objParam) => {
+     //console.log('I am Here', objParam);
+     return new Promise((resolve) => {
+         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+         dbConn
+             .connect()
+             .then(function () {
+                 var request = new sql.Request(dbConn);
+                 request
+                     .input("hospitalId", sql.Int, null)
+                     .input("empId", sql.Int, 999)
+                     .input("startDate", sql.Int, null)
+                     .input("endDate", sql.Int, null)
+                     .execute("USP_BSVIVF_REPORT_GET_BUSINESS_TRACKER_All_reports")
+                     .then(function (resp) {
+                        // console.log('***********')
+                         // console.log(resp)
+                         resolve(resp.recordset);
+                         dbConn.close();
+                     })
+                     .catch(function (err) {
+                        // console.log(err);
+                         dbConn.close();
+                     });
+             })
+             .catch(function (err) {
+                 console.log(err);
+             });
+     });
+ };
