@@ -3,7 +3,6 @@ function setupPage() {
   //  getPotentialData();
 }
 
-
 async function getPotentialData() {
   let param = {}
   const reqPotential = axios.post("/report/potential", param);
@@ -58,14 +57,14 @@ async function getPotentialData() {
 
     gdata = google.visualization.arrayToDataTable([
       ['Task', 'Hours per Day'],
-      ['Total No of IUI Cycles', totalIUI],
-      ['Total No of IVF Cycles', totalIVF]
+      ['IUI Cycles', totalIUI],
+      ['IVF Cycles', totalIVF]
     ]);
 
     var options = {
       title: 'IVF / IUI Count',
       width: 300,
-      is3D: true,
+      is3D: false,
       legend: { position: 'bottom' },
       backgroundColor: 'transparent'
     };
@@ -77,7 +76,7 @@ async function getPotentialData() {
 
       if (selectedItem) {
         var topping = gdata.getValue(selectedItem.row, 0);
-        $('#potential_chart1_bar').attr('hidden', topping === 'Total No of IUI Cycles')
+        $('#potential_chart1_bar').attr('hidden', topping === 'IUI Cycles')
       }
     }
     google.visualization.events.addListener(chart, 'select', selectHandler, chart);
@@ -124,7 +123,7 @@ function potentialChart2(selftCare, donorCycle) {
   var options = {
     title: 'Self (Patient) /  Donor cycles',
     width: 300,
-    is3D: true,
+    is3D: false,
     legend: { position: 'bottom' },
     backgroundColor: 'transparent'
   };
@@ -146,7 +145,7 @@ function potentialChart3(antagonistCycles, agonistCycles) {
   var options = {
     title: 'Potential Chart 3',
     width: 300,
-    is3D: true,
+    is3D: false,
     legend: { position: 'bottom' },
     backgroundColor: 'transparent'
   };

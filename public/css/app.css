@@ -7799,14 +7799,14 @@ label {
 }
 
 .chart-wrapper, .potential-chart-wrapper {
-  display: flex;
+  /* display: flex;
   display: -webkit-flex;
-  justify-content: space-around;
+  justify-content: space-around; */
   background: #fff;
   margin-bottom: 30px;
 }
 
-.chart-wrapper.no-border div {
+/* .chart-wrapper.no-border div {
   border: 0 !important;
 }
 
@@ -7816,18 +7816,19 @@ label {
 
 .chart-wrapper.bottom-border {
   border-bottom: 1px solid rgba(128, 128, 128, 0.1);
-}
+} */
 
 .chart-wrapper h2 {
   text-align: center;
 }
 
 .business-rc-char-wrapper > div {
-  width: 50%;
+  width: 100%;
 }
 
 .business-rc-char-wrapper > div iframe {
-  width: 560px;
+  /* width: 560px; */
+  width: 100%;
   height: 440px;
 }
 

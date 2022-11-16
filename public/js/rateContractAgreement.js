@@ -27,7 +27,7 @@ async function rcAgreementChart() {
         //data.addRows([rbmArr]);
 
         let options = {
-            width: 1050,
+            width: 1100,
             height: 400,
             legend: { position: 'bottom', maxLines: 30 },
             bar: { groupWidth: '40%' },

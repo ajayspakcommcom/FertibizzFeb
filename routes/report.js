@@ -8,10 +8,12 @@ router.get('/business-report', reportController.businessReport);
 router.get('/potential-report', reportController.potentialReport);
 router.get('/rate-with-product-report', reportController.rateWithProductReport);
 router.get('/rc-agreement-report', reportController.rcAgreementReport);
-router.get('/dashboard-report', reportController.dashboardReport);
+router.get('/dashboard-chart-report', reportController.dashboardChartReport);
+router.get('/report', reportController.dataReport);
 router.post('/report/potential', reportController.getPotentialData);
 router.post('/report/RCAgreement', reportController.getRateContractData);
 router.post('/report/businessReport', reportController.getBusinessReport);
+
 
 
 module.exports = router;
