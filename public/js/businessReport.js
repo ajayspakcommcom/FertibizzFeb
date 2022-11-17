@@ -82,12 +82,13 @@ async function getAllBusinessReport() {
 
                 let data = new google.visualization.DataTable();
                 data.addColumn('string', 'Brand');
-                data.addColumn('number', 'Target');
-                data.addColumn('number', 'Actual');
-                data.addColumn('number', 'achieved');
+               // data.addColumn('number', 'Target');
+                data.addColumn('number', 'Business Value');
+               // data.addColumn('number', 'achieved');
 
                 brandReport.forEach(item => {
-                    data.addRows([[item.medicineName, item.Targets, item.Qty, item.Targets]])
+                  //  data.addRows([[item.medicineName, item.Targets, item.Qty, item.Targets]])
+                    data.addRows([[item.medicineName, item.TotalSalesVAlue]])
                 });
                // console.log(data)
                 let options = {
