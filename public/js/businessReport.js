@@ -27,18 +27,19 @@ async function drawBusinessChart() {
     let param = {};
     const businessReport = axios.post("/report/businessReport", param);
     await axios.all([businessReport]).then(axios.spread(function (res1) {
-        //console.log(res1.data);
+        console.log(res1.data);
         let reportDataItems = res1.data;
 
 
         let data = new google.visualization.DataTable();
         data.addColumn('string', 'Brand');
         data.addColumn('number', 'Business Value');
+        data.addColumn('number', 'Unit sold');
         // let rbmArr = []
 
         reportDataItems.forEach(item => {
             //rbmArr.push([1,2,3])
-            data.addRows([[item.brandName, item.TotalSalesVAlue]])
+            data.addRows([[item.brandName, item.TotalSalesVAlue, item.totalUnit]])
         });
         // console.log([rbmArr])
         // //data.addRows([rbmArr]);
@@ -46,9 +47,9 @@ async function drawBusinessChart() {
         let options = {
             width: 1050,
             height: 400,
-            legend: { position: 'bottom', maxLines: 30 },
+            legend: { position: 'right', maxLines: 30 },
             bar: { groupWidth: '40%' },
-            isStacked: true,
+            isStacked: false,
             title: 'Over All Business Value',
         };
 
@@ -66,41 +67,48 @@ async function drawBusinessChart() {
 
 async function getAllBusinessReport() {
     let param = {};
+    let brandsArr = ['FOLIGRAF', 'HUMOG', 'ASPORELIX', 'R-HUCOG', 'FOLICULIN', 'AGOTRIG', 'MIDYDROGESTERONE'];
     const businessReport = axios.post("/report/allbusinessReports", param);
     await axios.all([businessReport]).then(axios.spread(function (res1) {
-       // console.log(res1.data);
+        // console.log(res1.data);
         let reportDataItems = res1.data;
-        debugger;
+        brandsArr.forEach(brand => {
+           // console.log(brand);
+            let brandReport = reportDataItems.filter(item => {
+                return item.brandName === brand
+            })
+          //  console.log(brandReport)
+            if (brandReport.length > 0) {
 
-        let data = new google.visualization.DataTable();
-        data.addColumn('string', 'Brand');
-        data.addColumn('number', 'Target');
-        data.addColumn('number', 'Actual');
-        data.addColumn('number', 'achieved');
-        // let rbmArr = []
-        let brandReportFOLIGRAF = reportDataItems.filter(item => {
-          return  item.brandId === 1
+                let data = new google.visualization.DataTable();
+                data.addColumn('string', 'Brand');
+                data.addColumn('number', 'Target');
+                data.addColumn('number', 'Actual');
+                data.addColumn('number', 'achieved');
+
+                brandReport.forEach(item => {
+                    data.addRows([[item.medicineName, item.Targets, item.Qty, item.Targets]])
+                });
+               // console.log(data)
+                let options = {
+                    width: 1050,
+                    height: 400,
+                    legend: { position: 'bottom', maxLines: 30 },
+                    bar: { groupWidth: '20%' },
+                    isStacked: false,
+                    title: brand,
+                };
+
+                let chart = new google.visualization.ColumnChart(document.getElementById('business_chart_' + brand));
+                chart.draw(data, options);
+            }
+
         })
 
-        console.log(brandReportFOLIGRAF)
-        brandReportFOLIGRAF.forEach(item => {
-            //rbmArr.push([1,2,3])
-            data.addRows([[item.medicineName, item.Targets, item.Qty, item.Targets]])
-        });
+
         // // console.log([rbmArr])
         // // //data.addRows([rbmArr]);
 
-        let options = {
-            width: 1050,
-            height: 400,
-            legend: { position: 'bottom', maxLines: 30 },
-            bar: { groupWidth: '40%' },
-            isStacked: false,
-            title: 'FOLIGRAF',
-        };
-
-        let chart = new google.visualization.ColumnChart(document.getElementById('business_chart_FOLIGRAF'));
-        chart.draw(data, options);
 
 
     }));
