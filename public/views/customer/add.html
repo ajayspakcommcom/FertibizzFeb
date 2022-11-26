@@ -14,75 +14,147 @@
          <h1 class="text-center">Add Customer</h1>
          <div class="text-right"><a href="./customer" class="btn btn-success">Go Back</a></div>
          <div class="form-wrapper">
-          <form>
+          <form id="frm1" onsubmit="submitMe();return false;">
             <div class="row col-wrapper">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group add-input-wrapper">
-                  <input type="text" class="form-control" id="centerAdminTxt" name="centerAdminTxt" placeholder="Centre Admin" />
-                  <div class="img-wrapper">
+                  <input type="text" class="form-control" id="txtCode" name="txtCode" placeholder="Centre Code" />
+                  <!-- <div class="img-wrapper">
                     <img src="../../img/plus.png" alt="add input" class="img-responsive" />
-                  </div>
+                  </div> -->
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group add-input-wrapper">
-                  <input type="text" class="form-control" id="ambryTxt" name="ambryTxt" placeholder="Ambryologist" />
-                  <div class="img-wrapper">
+                  <input type="text" class="form-control" id="txtDoctorName" name="txtDoctorName" placeholder="Doctor name" />
+                  <!-- <div class="img-wrapper">
                     <img src="../../img/plus.png" alt="add input" class="img-responsive" />
-                  </div>
+                  </div> -->
                 </div>    
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group add-input-wrapper">
-                  <input type="text" class="form-control" id="purchaseTxt" name="purchaseTxt" placeholder="Purchase Incharge" />
-                  <div class="img-wrapper">
-                    <img src="../../img/plus.png" alt="add input" class="img-responsive" />
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <div class="form-group add-input-wrapper">
-                  <input type="text" class="form-control" id="iuipSpecialistTxt" name="iuipSpecialistTxt" placeholder="Iui Specialists" />
-                  <div class="img-wrapper">
-                    <img src="../../img/plus.png" alt="add input" class="img-responsive" />
-                  </div>
-                </div>    
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <div class="form-group add-input-wrapper">
-                  <input type="text" class="form-control" id="headNurseTxt" name="headNurseTxt" placeholder="Ivf Head Nurse" />
-                  <div class="img-wrapper">
-                    <img src="../../img/plus.png" alt="add input" class="img-responsive" />
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <div class="form-group add-input-wrapper">
-                  <input type="text" class="form-control" id="assistantTxt" name="assistantTxt" placeholder="Ivf Dr Assistant" />
-                  <div class="img-wrapper">
-                    <img src="../../img/plus.png" alt="add input" class="img-responsive" />
-                  </div>
-                </div>    
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <div class="form-group add-input-wrapper">
-                  <input type="text" class="form-control" id="drCoreTxt" name="drCoreTxt" placeholder="Ivf Dr Core" />
-                  <div class="img-wrapper">
-                    <img src="../../img/plus.png" alt="add input" class="img-responsive" />
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <div class="form-group">
-                  <select class="form-control" id="comboStatus">
-                    <option>Chain Status</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
+                  <select  id="cmbVisitCategory" class="form-control">
                   </select>
-                </div> 
+                  <input type="hidden" class="form-control" id="hidVisitCategory"  />
+                  <!-- <div class="img-wrapper">
+                    <img src="../../img/plus.png" alt="add input" class="img-responsive" />
+                  </div> -->
+                </div>
               </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group add-input-wrapper">
+                  <select  id="cmbSpecialty" class="form-control">
+                  </select>
+                  <input type="hidden" class="form-control" id="hidSpecialty"  />
+                  <!-- <div class="img-wrapper">
+                    <img src="../../img/plus.png" alt="add input" class="img-responsive" />
+                  </div> -->
+                </div>    
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group add-input-wrapper">
+                  <input type="text" class="form-control" id="txtDoctorUniqueCode" name="txtDoctorUniqueCode" placeholder="Doctor Unique Code" />
+                  <!-- <div class="img-wrapper">
+                    <img src="../../img/plus.png" alt="add input" class="img-responsive" />
+                  </div> -->
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group add-input-wrapper">
+                  <input type="text" class="form-control" id="txtEmail" name="txtEmail" placeholder="Email" />
+                  <!-- <div class="img-wrapper">
+                    <img src="../../img/plus.png" alt="add input" class="img-responsive" />
+                  </div> -->
+                </div>    
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group add-input-wrapper">
+                  <input type="text" class="form-control" id="txtMobile" name="txtMobile" placeholder="mobile" />
+                  <!-- <div class="img-wrapper">
+                    <img src="../../img/plus.png" alt="add input" class="img-responsive" />
+                  </div> -->
+                </div>    
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group add-input-wrapper">
+                  <input type="text" class="form-control" id="txtCenterName" name="txtCenterName" placeholder="Centre Name" />
+                  <!-- <div class="img-wrapper">
+                    <img src="../../img/plus.png" alt="add input" class="img-responsive" />
+                  </div> -->
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group add-input-wrapper">
+                  <input type="text" class="form-control" id="txtAddress1" name="txtAddress1" placeholder="Address 1" />
+                  <!-- <div class="img-wrapper">
+                    <img src="../../img/plus.png" alt="add input" class="img-responsive" />
+                  </div> -->
+                </div>    
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group add-input-wrapper">
+                  <input type="text" class="form-control" id="txtAddress2" name="txtAddress2" placeholder="Address 2" />
+                  <!-- <div class="img-wrapper">
+                    <img src="../../img/plus.png" alt="add input" class="img-responsive" />
+                  </div> -->
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group add-input-wrapper">
+                  <input type="text" class="form-control" id="txtLocalArea" name="txtLocalArea" placeholder="Local Area" />
+                  <!-- <div class="img-wrapper">
+                    <img src="../../img/plus.png" alt="add input" class="img-responsive" />
+                  </div> -->
+                </div>    
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group add-input-wrapper">
+                  <input type="text" class="form-control" id="txtCity" name="txtCity" placeholder="City" />
+                  <!-- <div class="img-wrapper">
+                    <img src="../../img/plus.png" alt="add input" class="img-responsive" />
+                  </div> -->
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group add-input-wrapper">
+                 <select  id="cmbState" class="form-control">
+                 </select>
+                </div>    
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group add-input-wrapper">
+                  <input type="text" class="form-control" id="txtPinCode" name="txtPinCode" placeholder="Pin Code" />
+                  <!-- <div class="img-wrapper">
+                    <img src="../../img/plus.png" alt="add input" class="img-responsive" />
+                  </div> -->
+                </div>
+              </div>
+            
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group add-input-wrapper">
+                  <input type="text" class="form-control" id="txtChemistMapped" name="txtChemistMapped" placeholder="Chemist Mapped" />
+                  <!-- <div class="img-wrapper">
+                    <img src="../../img/plus.png" alt="add input" class="img-responsive" />
+                  </div> -->
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group add-input-wrapper">
+                 Chain Type: &nbsp;&nbsp;<select id="cmbChain" class="form-control">
+                 </select>
+                </div>    
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group add-input-wrapper">
+                  <input type="checkbox" value="on" id="chkDisabled" name="chkDisabled" /> &nbsp;Check to mark it disabled
+                  <!-- <div class="img-wrapper">
+                    <img src="../../img/plus.png" alt="add input" class="img-responsive" />
+                  </div> -->
+                </div>    
+              </div>
+
+              
             </div>
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
@@ -93,6 +165,8 @@
                 </div>
               </div>
             </div>
+            <input type="hidden" class="form-control" id="txtStateId" value="">
+            <input type="hidden" class="form-control" id="txtChainId" value="">
           </form>
          </div>
       </main>
@@ -101,7 +175,13 @@
         <script src="../../js/common.js"></script>
         <script src="../../js/axios.min.js"></script>
         <script src="../../js/bootstrap.min.js"></script>
-        <script src="../../js/admin.js"></script>
-
+        <script src="../../js/hospitals.js"></script>
+        <script>
+          $(function () {
+            // console.log( "ready!" );
+      
+            getCustomerDetails();
+          });
+        </script>
 </body>
 </html>
