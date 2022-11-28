@@ -93,6 +93,8 @@ function getCustomerDetails() {
         }).catch((err) => {
             console.log(err);
         });
+
+        $('h1').text('Edit Customer');
 }
 
 
