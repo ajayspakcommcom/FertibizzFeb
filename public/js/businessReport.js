@@ -9,7 +9,7 @@ function drawBusinessChart1() {
     ]);
 
     let options = {
-        width: 550,
+        width: 1050,
         height: 400,
         legend: { position: 'bottom', maxLines: 3 },
         bar: { groupWidth: '80%' },
@@ -45,12 +45,13 @@ async function drawBusinessChart() {
         // //data.addRows([rbmArr]);
 
         let options = {
-            width: 1050,
-            height: 400,
-            legend: { position: 'right', maxLines: 30 },
-            bar: { groupWidth: '40%' },
+            width: 300,
+            height: 300,
+            legend: { position: 'bottom', maxLines: 30 },
+            bar: { groupWidth: '100%' },
             isStacked: false,
             title: 'Over All Business Value',
+            hAxis: { textPosition: 'none' },
         };
 
         let chart = new google.visualization.ColumnChart(document.getElementById('business_chart'));
@@ -92,12 +93,15 @@ async function getAllBusinessReport() {
                 });
                // console.log(data)
                 let options = {
-                    width: 1050,
-                    height: 400,
+                    // width: 1050,
+                    // height: 400,
+                    width: 300,
+                    height: 300,
                     legend: { position: 'bottom', maxLines: 30 },
-                    bar: { groupWidth: '20%' },
+                    bar: { groupWidth: '100%' },
                     isStacked: false,
                     title: brand,
+                    hAxis: { textPosition: 'none' },
                 };
 
                 let chart = new google.visualization.ColumnChart(document.getElementById('business_chart_' + brand));

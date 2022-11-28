@@ -30,9 +30,10 @@ async function rcAgreementChart() {
             width: 1100,
             height: 400,
             legend: { position: 'bottom', maxLines: 30 },
-            bar: { groupWidth: '40%' },
+            bar: { groupWidth: '30%' },
             isStacked: true,
             title: 'RC Agreement Chart',
+            hAxis: { textPosition: 'none' }
         };
 
         let chart = new google.visualization.ColumnChart(document.getElementById('rc_agreement_chart'));

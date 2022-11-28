@@ -7762,10 +7762,10 @@ label {
 }
 
 .add-input-wrapper {
-  display: flex;
+  /* display: flex;
   display: -webkit-flex;
   justify-items: center;
-  align-items: center;
+  align-items: center; */
 }
 
 .add-input-wrapper .img-wrapper {
@@ -7855,4 +7855,34 @@ label {
 .product-entry-wrapper iframe {
   width: 100%;
   height: 700px;
+}
+
+.tab-content {
+  padding: 15px 15px;
+  background: #fff;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: 1px solid #ddd;
+  border-top: 0;
+}
+
+.tab-content>.tab-pane h3 {
+  margin-top: 0;
+}
+
+.tab-content>.tab-pane .list-group {
+  margin-bottom: 0;
+}
+
+label {
+  margin-left: 0;
+}
+
+.multi-chart > div {
+  width: 81%;
+  margin: auto;
+}
+
+.multi-chart > div iframe {
+  height: 630px;
 }
