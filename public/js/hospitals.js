@@ -1,12 +1,12 @@
-function getHospitalList() {
+function getCustomerList() {
 
     let param = {
         method: 'getHospitalList'
     };
- 
-    axios
-        .get("/hospitals/list", param).then((response) => {
 
+    axios
+        .get(_URL._CUSTOMER_LIST, param).then((response) => {
+            console.log(response.data)
             populateDataTable(response.data);
 
         }).catch((err) => {
@@ -18,68 +18,103 @@ function getHospitalList() {
 function populateDataTable(data) {
     //  console.log("populating data table...");
     // clear the table before populating it with more data
-    $("#hospitalList").DataTable().clear();
+    $("#customerList").DataTable().clear();
     var length = data.length;
     //  console.log(length)
     if (length == 0) {
-        $("#hospitalList").DataTable().clear();
+        $("#customerList").DataTable().clear();
     } else {
         var i = 1;
         data.forEach(item => {
-            $('#hospitalList').dataTable().fnAddData([
-                i,
-                item.hospitalName,
-                item.regionName,
-                item.bedNo,
-                item.ICUbedNo,
-                `<a href="/hospitals-edit/${item.hospitalId}">Edit</a> | <a href='javascript:void(0)' onclick='DeleteHospital(${item.hospitalId},"${item.hospitalName}");return false;'>Delete</a>`
+            $('#customerList').dataTable().fnAddData([
+                item.CENTRENAME,
+                item.DoctorName,
+                item.specialtyType,
+                item.mobile,
+                item.email,
+                `${item.Address1} <br> 
+                    ${item.Address2}<br> 
+                    ${item.LocalArea}<br> 
+                    ${item.City} ${item.PinCode} <br> ${item.stateName} `,
+                item.ChemistMapped,
+                item.ChainStatusName,
+                `<a href="/customer-edit/${item.customerId}">Edit</a> | <a href='javascript:void(0)' onclick='DeleteCustomer(${item.customerId},"${item.CENTRENAME}");return false;'>Delete</a>`
             ]);
-            i++;
         });
     }
 }
 
 
-function getHospitaDetails() {
-    if (!isEditPage() ) {
-        return ;
+function getCustomerDetails() {
+    getMasterData();
+    if (!isEditPage()) {
+        return;
     }
+
+
     let urlArr = window.location.href.split('/'),
-        hospitalId = urlArr[urlArr.length - 1];
-
-    console.log(hospitalId);
-
-    let param = {
-        method: 'getHospitalById',
-        hospitalId: hospitalId
-    };
-
+        customerId = urlArr[urlArr.length - 1];
+    console.log(customerId);
     axios
-        .get('/hospitals-details/'+hospitalId).then((response) => {
-           console.log(response.data)
-           let hospitalData = response.data[0];
-           console.log(hospitalData.hospitalName);
-           $('#txtHospitalName').val(hospitalData.hospitalName);
-           $('#txtRegionName').val(hospitalData.regionName);
-           $("#chkIsDisable").prop("checked", hospitalData.isDisabled);
+        .get('/customer-details/' + customerId).then((response) => {
+            console.log(response.data)
+            let customerData = response.data;
+            $('#txtCode').val(customerData.code)
+            $('#txtDoctorName').val(customerData.DoctorName)
+           
+            $('#txtDoctorUniqueCode').val(customerData.DoctorUniqueCode),
+                $('#txtMobile').val(customerData.mobile)
+            $('#txtEmail').val(customerData.email)
+            $('#txtCenterName').val(customerData.CENTRENAME)
+            $('#txtAddress1').val(customerData.Address1)
+            $('#txtAddress2').val(customerData.Address2)
+            $('#txtLocalArea').val(customerData.LocalArea)
+            $('#txtCity').val(customerData.City)
+            $('#txtPinCode').val(customerData.PinCode)
+            $('#txtChemistMapped').val(customerData.ChemistMapped)
 
+            $('#txtStateId').val(customerData.StateID)
+            $('#txtChainId').val(customerData.chainID)
 
+            $('#hidSpecialty').val(customerData.SpecialtyId)
+            $('#hidVisitCategory').val(customerData.visitId)
+            
+
+            $('#chkDisabled').prop('checked', customerData.isdisabled);
+
+            setTimeout(cmbValues,5000);
+            // $('#txtVisitCategory').val()
+            // $('#txtSpecialty').val()
+            // $('#cmbChain').val()
+            // $('#cmbState').val(customerData.StateID);
+            
+            
+            //$('#chkDisabled').is(":checked")
         }).catch((err) => {
             console.log(err);
         });
 }
 
 
-function DeleteHospital(id, name) {
+
+function cmbValues() {
+    $("#cmbState").val($('#txtStateId').val());
+    $("#cmbChain").val($('#txtChainId').val())
+
+    $("#cmbSpecialty").val($('#hidSpecialty').val())
+    $("#cmbVisitCategory").val($('#hidVisitCategory').val())
+
+}
+
+function DeleteCustomer(id, name) {
     let text = `Are you sure you want to delete "${name}"`; // "Are you sure you want to delete '+  +'!\nEither OK or Cancel.";
     if (confirm(text) == true) {
         let param = {
-            method: 'deleteHospital',
             hospitalId: id
         };
         //  console.log(param)
         axios
-            .post("/hospitals/delete", param).then((response) => {
+            .post("/customer/delete", param).then((response) => {
                 //console.log(response.data)
                 alert(response.data.msg)
 
@@ -103,31 +138,91 @@ function getQueryStringValue(key) {
 
 function validateMe() {
     let urlArr = window.location.href.split('/'),
-    hospitalId = urlArr[urlArr.length - 1];
+        hospitalId = urlArr[urlArr.length - 1];
 
-console.log(hospitalId);
+    console.log(hospitalId);
     let param = {
-        hospitalName : $('#txtHospitalName').val(),
-        hospitalregion : $('#txtRegionName').val(),
-        isDisabled : $('#chkIsDisable').val()
+        hospitalName: $('#txtHospitalName').val(),
+        hospitalregion: $('#txtRegionName').val(),
+        isDisabled: $('#chkIsDisable').val()
     },
-    URL =  isEditPage()? _URL._HOSPITAL_UPDATE+hospitalId: _URL._HOSPITAL_ADD
-    
+        URL = isEditPage() ? _URL._HOSPITAL_UPDATE + hospitalId : _URL._HOSPITAL_ADD
+
     axios
-    .post(URL, param).then((response) => {
-        console.log(response.data[0])
-        let res = response.data[0];
-        if (res.sucess === 'true') {
-             redirect(_URL._hospitalListing);
-        } else {
-            $('#lblMsg').text(res.msg);
-        }
-       
-
-    }).catch((err) => {
-        console.log(err);
-    });
-    
+        .post(URL, param).then((response) => {
+            console.log(response.data[0])
+            let res = response.data[0];
+            if (res.sucess === 'true') {
+                redirect(_URL._hospitalListing);
+            } else {
+                $('#lblMsg').text(res.msg);
+            }
 
 
+        }).catch((err) => {
+            console.log(err);
+        });
+
+}
+
+
+function submitMe() {
+    let urlArr = window.location.href.split('/'),
+        customerId = urlArr[urlArr.length - 1];
+
+    let param = {
+        txtCode: $('#txtCode').val(),
+        txtDoctorName: $('#txtDoctorName').val(),
+        txtVisitCategory: $('#cmbVisitCategory').val(),
+        txtSpecialty: $('#cmbSpecialty').val(),
+        txtDoctorUniqueCode: $('#txtDoctorUniqueCode').val(),
+        txtMobile: $('#txtMobile').val(),
+        txtEmail: $('#txtEmail').val(),
+        txtCenterName: $('#txtCenterName').val(),
+        txtAddress1: $('#txtAddress1').val(),
+        txtAddress2: $('#txtAddress2').val(),
+        txtLocalArea: $('#txtLocalArea').val(),
+        txtCity: $('#txtCity').val(),
+        txtPinCode: $('#txtPinCode').val(),
+        cmbChain: $('#cmbChain').val(),
+        txtPinCode: $('#txtPinCode').val(),
+        txtChemistMapped: $('#txtChemistMapped').val(),
+        cmbState: parseInt($('#cmbState').val()),
+        chkDisabled: $('#chkDisabled').is(":checked"),
+        customerId: isNaN(customerId) ? null : parseInt(customerId)
+    }
+
+    console.log(param)
+    axios
+        .post(_URL._CUSTOMER_ADD, param).then((response) => {
+            console.log(response.data[0])
+            let res = response.data[0];
+            if (res.sucess === 'true') {
+                redirect('/customers');
+            } else {
+                $('#lblMsg').text(res.msg);
+            }
+        }).catch((err) => {
+            console.log(err);
+        });
+}
+
+
+
+function getMasterData() {
+    axios
+        .get(`${_URL._MASTER_DATA}`).then((response) => {
+             console.log(response.data)
+            let stateList = response.data[0],
+                chainList = response.data[1],
+                visitTypeList = response.data[2],
+                specialtyList = response.data[3];
+            loadComboBox(stateList, 'cmbState', 'stateId', 'stateName');
+            loadComboBox(chainList, 'cmbChain', 'chainId', 'Name');
+            loadComboBox(visitTypeList, 'cmbVisitCategory', 'VisitID', 'Name');
+            loadComboBox(specialtyList, 'cmbSpecialty', 'SpecialtyID', 'Name');
+
+        }).catch((err) => {
+            console.log(err);
+        });
 }
