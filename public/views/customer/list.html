@@ -10,16 +10,20 @@
     
     <nav class="navbar" id="header"></nav>
 
+
+
       <main class="container">
          <h1 class="text-center">Customer List</h1>
-         <div class="text-right"><a href="./add-customer" class="btn btn-success">New Customer</a></div>
+         <div class="text-right">
+            <a href="./add-customer" class="btn btn-success">New Customer</a>
+            <button id="deleteBtn" class="btn btn-success" onclick="bulkCustomerDataDelete()">Delete Multiple Records</button>
+          </div>
          <table class="table table-bordered table-bg" id="customerList">
             <thead>
               <tr>
                 <th>Centre Name</th>
                 <th>Doctor Name</th>
                 <th>Specialty</th>
-
                 <th>Mobile</th>
                 <th>Email</th>
                 <th>Full Address</th>
@@ -28,7 +32,7 @@
                 <th>Action</th>
               </tr>
             </thead>
-            
+            <tbody>
             </tbody>
           </table>
       </main>
@@ -48,18 +52,9 @@
 
         <script>
           $(function() {
-             // console.log( "ready!" );
+
               getCustomerList();
-      
-              $('#employeesList').DataTable({
-                "iDisplayLength": 100,
-                    "paging": false,
-                    "language": {
-                        emptyTable: 'Loading data', // 
-                        loadingRecords: "Please wait .. ", // default Loading...
-                        zeroRecords: "No matching records found"
-                    }
-                  });
+              selectCustomerRow();
           });
           
           </script>

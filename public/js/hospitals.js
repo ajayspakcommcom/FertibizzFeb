@@ -38,7 +38,7 @@ function populateDataTable(data) {
                     ${item.City} ${item.PinCode} <br> ${item.stateName} `,
                 item.ChemistMapped,
                 item.ChainStatusName,
-                `<a href="/customer-edit/${item.customerId}">Edit</a> | <a href='javascript:void(0)' onclick='DeleteCustomer(${item.customerId},"${item.CENTRENAME}");return false;'>Delete</a>`
+                `<a href="/customer-edit/${item.customerId}">Edit</a> | <a href='javascript:void(0)' onclick='DeleteCustomer(${item.customerId},"${item.CENTRENAME}");return false;' class='${item.customerId}' title='${item.CENTRENAME}'>Delete</a>`
             ]);
         });
     }
@@ -108,26 +108,41 @@ function cmbValues() {
 
 }
 
-function DeleteCustomer(id, name) {
-    let text = `Are you sure you want to delete "${name}"`; // "Are you sure you want to delete '+  +'!\nEither OK or Cancel.";
-    if (confirm(text) == true) {
-        let param = {
-            hospitalId: id
-        };
-        //  console.log(param)
-        axios
-            .post("/customer/delete", param).then((response) => {
-                //console.log(response.data)
-                alert(response.data.msg)
+function DeleteCustomer(id, name, bulkDelete) {
 
-            }).catch((err) => {
-                console.log(err);
-            });
+    let param = {
+        hospitalId: id
+    };
+
+    if (!bulkDelete) {
+        let text = `Are you sure you want to delete "${name}"`; // "Are you sure you want to delete '+  +'!\nEither OK or Cancel.";
+        if (confirm(text) == true) {
+            // let param = {
+            //     hospitalId: id
+            // };
+            //  console.log(param)
+            axios
+                .post("/customer/delete", param).then((response) => {
+                    //console.log(response.data)
+                    alert(response.data.msg)
+
+                }).catch((err) => {
+                    console.log(err);
+                });
+        } else {
+            text = "You canceled!";
+        }
     } else {
-        text = "You canceled!";
+
+        axios
+        .post("/customer/delete", param).then((response) => {
+            console.log(response.data.msg)
+        }).catch((err) => {
+            console.log(err);
+        });
+
     }
 }
-
 
 function getQueryStringValue(key) {
     console.log(window.location)
@@ -210,7 +225,6 @@ function submitMe() {
 }
 
 
-
 function getMasterData() {
     axios
         .get(`${_URL._MASTER_DATA}`).then((response) => {
@@ -227,4 +241,21 @@ function getMasterData() {
         }).catch((err) => {
             console.log(err);
         });
+}
+
+function selectCustomerRow() {
+    let table = $('#customerList').DataTable();
+
+    $('#customerList tbody').on('click', 'tr', function () {
+        $(this).toggleClass('selected');
+    });
+}
+
+function bulkCustomerDataDelete() {
+    let table = $('#customerList').DataTable();
+    $.map(table.rows('.selected').data(), function (item, index) {
+        let elem = $($(`#customerList tbody tr:eq(${index})`)[0]).find(`td > a:last-child`);
+        DeleteCustomer(elem[0].className, elem[0].title, true);
+    });
+    table.rows('.selected').remove().draw(false);
 }
