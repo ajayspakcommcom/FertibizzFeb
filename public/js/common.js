@@ -82,8 +82,8 @@ function loadComboBox(data, dropdown, displayValue, displayText, optionTextAlong
         case 'cmbZBM':
             selectHeader = 'Select ZBM';
         break;
-        case 'cmbZone':
-            selectHeader = 'Select Zone';
+        case 'cmbBrands':
+            selectHeader = 'Select Brands';
         break;
 
         default:

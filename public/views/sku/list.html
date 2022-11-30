@@ -23,48 +23,8 @@
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>Lorem Ipsum</td>
-                <td>Lorem Ipsum</td>
-                <td>Lorem Ipsum</td>
-                <td>Lorem Ipsum</td>
-                <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
-              </tr>
-              <tr>
-                <td>Lorem Ipsum</td>
-                <td>Lorem Ipsum</td>
-                <td>Lorem Ipsum</td>
-                <td>Lorem Ipsum</td>
-                <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
-              </tr>
-              <tr>
-                <td>Lorem Ipsum</td>
-                <td>Lorem Ipsum</td>
-                <td>Lorem Ipsum</td>
-                <td>Lorem Ipsum</td>
-                <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
-              </tr>
-              <tr>
-                <td>Lorem Ipsum</td>
-                <td>Lorem Ipsum</td>
-                <td>Lorem Ipsum</td>
-                <td>Lorem Ipsum</td>
-                <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
-              </tr>
-              <tr>
-                <td>Lorem Ipsum</td>
-                <td>Lorem Ipsum</td>
-                <td>Lorem Ipsum</td>
-                <td>Lorem Ipsum</td>
-                <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
-              </tr>
-              <tr>
-                <td>Lorem Ipsum</td>
-                <td>Lorem Ipsum</td>
-                <td>Lorem Ipsum</td>
-                <td>Lorem Ipsum</td>
-                <td><a href="#">Edit</a> | <a href="#">Delete</a></td>
+            <tbody id="skudata">
+              
               </tr>
             </tbody>
           </table>
@@ -74,7 +34,13 @@
       <script src="../../js/common.js"></script>
         <script src="../../js/axios.min.js"></script>
         <script src="../../js/bootstrap.min.js"></script>
-        <script src="../../js/admin.js"></script>
+        <script src="../../js/sku.js"></script>
+        <script>
+          $(function() {
+              getSKUList();
+          });
+          
+          </script>
 
 </body>
 </html>
