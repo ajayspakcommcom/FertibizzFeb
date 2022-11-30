@@ -98,7 +98,7 @@ async function getAllBusinessReport() {
                     width: 300,
                     height: 300,
                     legend: { position: 'bottom', maxLines: 30 },
-                    bar: { groupWidth: '100%' },
+                    bar: { groupWidth: '40%' },
                     isStacked: false,
                     title: brand,
                     hAxis: { textPosition: 'none' },

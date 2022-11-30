@@ -24,9 +24,11 @@ function populateDataTable(data) {
     if (length == 0) {
         $("#customerList").DataTable().clear();
     } else {
+        console.log(data);
         var i = 1;
         data.forEach(item => {
             $('#customerList').dataTable().fnAddData([
+                '<input type="checkbox" value="">',
                 item.CENTRENAME,
                 item.DoctorName,
                 item.specialtyType,
@@ -248,6 +250,14 @@ function selectCustomerRow() {
 
     $('#customerList tbody').on('click', 'tr', function () {
         $(this).toggleClass('selected');
+
+        // console.log($(this));
+        // console.log($(this)[0].classList[1]);
+        if($(this)[0].classList[1] == 'selected') {
+            $(this).find('input[type="checkbox"]').attr('checked', true);
+        } else {
+            $(this).find('input[type="checkbox"]').attr('checked', false);
+        }
     });
 }
 

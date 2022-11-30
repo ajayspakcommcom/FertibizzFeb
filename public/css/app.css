@@ -7886,3 +7886,8 @@ label {
 .multi-chart > div iframe {
   height: 630px;
 }
+
+table.dataTable tbody tr.selected > * {
+  box-shadow: none !important;
+  color: #000 !important;
+}
