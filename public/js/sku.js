@@ -18,17 +18,15 @@ function getSkuDetails() {
             $('#hidBrand').val(skuData.brandId);
             $('#hidBrandGroup').val(skuData.brandGroupId);
             setTimeout(cmbValues,5000);
-        
-
         }).catch((err) => {
             console.log(err);
         });
-
 }
 
 function cmbValues() {
     $("#cmbBrands").val($('#hidBrand').val());
-    loadBrandGroup($("#cmbBrands"))
+    //loadBrandGroup($("#cmbBrands"));
+    loadBrandGroup($("#cmbBrands")[0]);
     setTimeout(() => {
         $("#cmbBrandGroup").val($('#hidBrandGroup').val())    
     }, 2000);
@@ -50,9 +48,11 @@ function getMasterData() {
 }
 
 function loadBrandGroup(obj) {
-    console.log(obj.val())
+    // console.log(obj.val());
+    console.log(obj.value);
     filterList = brandGroupList.filter((item) => {
-        return (item.brandId == obj.value || obj.val())
+        //return (item.brandId == obj.value || obj.val())
+        return (item.brandId == obj.value);
     })
     loadComboBox(filterList, 'cmbBrandGroup', 'brandGroupID', 'groupName');
 }
