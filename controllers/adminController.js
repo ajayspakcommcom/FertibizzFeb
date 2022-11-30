@@ -23,27 +23,18 @@ exports.postApi = (req, res, next) => {
                 
                 if (result.recordset.length > 0) {
                     session = req.session;
-                    console.log(result.recordset);
+                   // console.log(result.recordset);
                     let rec = result.recordset[0];
                     // if (_allowedDesignaiton.includes(rec.Designation.toUpperCase())) {
                         success = true;
                         msg = 'Login successful'
-                        // userDetiails = {
-                        //     empId: rec.EmpID,
-                        //     name: rec.firstName,
-                        //     post: rec.Designation,
-                        //     lastLogin: rec.lastLoginDate,
-                        //     targetLeft: 4
-                        // }
-
                         userDetiails = {
-                            empId: 1,
-                            name: "vishal.bajaj@bsvgroup.com",
-                            post: 'admin',
-                            lastLogin: null,
+                            empId: rec.EmpID,
+                            name: rec.firstName,
+                            post: rec.Designation,
+                            lastLogin: rec.lastLoginDate,
                             targetLeft: 4
                         }
-
                         session.userDetiails = userDetiails;
                     // }
                     // else {
@@ -78,7 +69,7 @@ exports.postApi = (req, res, next) => {
 
 
 userLogin = (objParam) => {
-    //    console.log('I am Here', objParam);
+        console.log('I am Here', objParam);
     return new Promise((resolve) => {
         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
         dbConn
@@ -90,7 +81,7 @@ userLogin = (objParam) => {
                     .input("password", sql.NVarChar, objParam.password)
                     .execute("USP_VALIDATE_USER")
                     .then(function (resp) {
-                        console.log(resp)
+                       // console.log(resp)
                         resolve(resp);
                         dbConn.close();
                     })

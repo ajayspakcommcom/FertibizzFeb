@@ -11,7 +11,7 @@ function letMeLogin() {
             console.log(response);
             switch (checkIfValidStatus(response.status)) {
                 case 1:
-                    localStorage.setItem("BSV_HR_Admin_Data", JSON.stringify(response.data.userDetiails));
+                    localStorage.setItem("BSV_IVF_Admin_Data", JSON.stringify(response.data.userDetiails));
                     (document.location.href = _URL._POSTLOGINURL);
                     break;
                 case 2:

@@ -63,7 +63,7 @@ function getCustomerDetails() {
             let customerData = response.data;
             $('#txtCode').val(customerData.code)
             $('#txtDoctorName').val(customerData.DoctorName)
-           
+
             $('#txtDoctorUniqueCode').val(customerData.DoctorUniqueCode),
                 $('#txtMobile').val(customerData.mobile)
             $('#txtEmail').val(customerData.email)
@@ -80,23 +80,23 @@ function getCustomerDetails() {
 
             $('#hidSpecialty').val(customerData.SpecialtyId)
             $('#hidVisitCategory').val(customerData.visitId)
-            
+
 
             $('#chkDisabled').prop('checked', customerData.isdisabled);
 
-            setTimeout(cmbValues,5000);
+            setTimeout(cmbValues, 5000);
             // $('#txtVisitCategory').val()
             // $('#txtSpecialty').val()
             // $('#cmbChain').val()
             // $('#cmbState').val(customerData.StateID);
-            
-            
+
+
             //$('#chkDisabled').is(":checked")
         }).catch((err) => {
             console.log(err);
         });
 
-        $('h1').text('Edit Customer');
+    $('h1').text('Edit Customer');
 }
 
 
@@ -137,11 +137,11 @@ function DeleteCustomer(id, name, bulkDelete) {
     } else {
 
         axios
-        .post("/customer/delete", param).then((response) => {
-            console.log(response.data.msg)
-        }).catch((err) => {
-            console.log(err);
-        });
+            .post("/customer/delete", param).then((response) => {
+                console.log(response.data.msg)
+            }).catch((err) => {
+                console.log(err);
+            });
 
     }
 }
@@ -230,7 +230,7 @@ function submitMe() {
 function getMasterData() {
     axios
         .get(`${_URL._MASTER_DATA}`).then((response) => {
-             console.log(response.data)
+            console.log(response.data)
             let stateList = response.data[0],
                 chainList = response.data[1],
                 visitTypeList = response.data[2],
@@ -253,7 +253,7 @@ function selectCustomerRow() {
 
         // console.log($(this));
         // console.log($(this)[0].classList[1]);
-        if($(this)[0].classList[1] == 'selected') {
+        if ($(this)[0].classList[1] == 'selected') {
             $(this).find('input[type="checkbox"]').attr('checked', true);
         } else {
             $(this).find('input[type="checkbox"]').attr('checked', false);
@@ -268,4 +268,38 @@ function bulkCustomerDataDelete() {
         DeleteCustomer(elem[0].className, elem[0].title, true);
     });
     table.rows('.selected').remove().draw(false);
+}
+
+
+/** HOSPITAL LIST */
+
+function getMyHospitalList() {
+    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
+        param = {
+            empId: userData.empId
+        };
+    axios
+        .post('/hospitals-list/', param).then((response) => {
+            console.log(response.data)
+            let lists = response.data,
+                listArr = [];
+
+            lists.forEach(list => {
+                listArr.push(
+                    `<tr>
+                    <td>${camelCaseText(list.CENTRENAME)}</td>
+                    <td>${camelCaseText(list.DoctorName)}</td>
+                    <td><a href="./add-potential?cid=${list.customerId}" class="btn btn-default">Add Potential</a></td>
+                    <td><a href="./add-business?cid=${list.customerId}" class="btn btn-default">Add Business</a></td>
+                    <td><a href="./add-competition?cid=${list.customerId}" class="btn btn-default">Competition</a></td>
+                    <td>${list.ContractStatus}</td>
+                    <td><a href="#?cid=${list.customerId}" class="btn btn-default">Track Performance</a></td>
+                </tr>
+                    `)
+            });
+            $('#centerList').append(listArr.join(''))
+
+        }).catch((err) => {
+            console.log(err);
+        });
 }

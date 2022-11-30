@@ -10,20 +10,21 @@ router.use((req, res, next) => {
 
   //listing
 router.get('/hospitals', hospitalController.listHospitals);
-router.get('/hospitals/list', hospitalController.getHospitalList);
+router.post('/hospitals-list/', hospitalController.getHospitalList);
+
 
 // update
-router.get('/hospitals-edit/:id', hospitalController.getHospitalDetailsPage);
-router.get('/hospitals-details/:hospitalId', hospitalController.getHospitalDetailsById);
-router.post('/hospitals-update/:hospitalId', hospitalController.updateHospitals);
+// router.get('/hospitals-edit/:id', hospitalController.getHospitalDetailsPage);
+// router.get('/hospitals-details/:hospitalId', hospitalController.getHospitalDetailsById);
+// router.post('/hospitals-update/:hospitalId', hospitalController.updateHospitals);
 
 
-// DELETE
-router.post('/hospitals/delete', hospitalController.deleteHospitals);
+// // DELETE
+// router.post('/hospitals/delete', hospitalController.deleteHospitals);
 
 
-//ADD
-router.get('/hospitals-add/', hospitalController.getHospitalDetailsPage);
-router.post('/hospitals-add/', hospitalController.addNewHospital);
+// //ADD
+// router.get('/hospitals-add/', hospitalController.getHospitalDetailsPage);
+// router.post('/hospitals-add/', hospitalController.addNewHospital);
 
 module.exports = router;

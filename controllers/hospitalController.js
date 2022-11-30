@@ -40,7 +40,6 @@ exports.deleteHospitals = (req, res, next) => {
 
 
 listHospitalsList = (objParam) => {
-    //console.log('I am Here', objParam);
     return new Promise((resolve) => {
         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
         dbConn
@@ -48,7 +47,8 @@ listHospitalsList = (objParam) => {
             .then(function () {
                 var request = new sql.Request(dbConn);
                 request
-                    .execute("USP_BSVHR_LIST_HOSPITAL")
+                    .input("empId", sql.Int, objParam.empId)
+                    .execute("USP_GET_MY_CENTER_LIST")
                     .then(function (resp) {
                         // console.log(resp)
                         resolve(resp.recordset);
