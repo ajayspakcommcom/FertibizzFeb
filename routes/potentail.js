@@ -1,8 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
-const potentialController = require('../controllers/potentialController');
+const controller = require('../controllers/potentialController');
 
-router.get('/add-potential', potentialController.addPotential);
+router.get('/potential-add', controller.addPotential);
+router.post('/center-potentials-add', controller.addCenterPotential);
+router.post('/center-potentials-details', controller.getCenterPotentialDetails);
+
+
+
+
 
 module.exports = router;
