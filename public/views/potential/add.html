@@ -13,38 +13,57 @@
       <main class="container">
          <h1 class="text-center">Add Potential</h1>
          <div class="text-right"><a href="./hospitals" class="btn btn-success">Go Back</a></div>
+<!-- 
+         <div id="drName"></div>
+         <div id="centreName"></div> -->
+
+        <div class="custom-table form">
+          <div class="zone-profile">
+            <div class="zone-profile">
+              <div class="zone-head">
+                <div class="text-center zone-manager">
+                  <span>Centre Name</span>
+                  <div><b id="centreName"></b></div>
+                </div>
+                <div class="text-center rbm-wrapper">
+                  <div><span>Doctor Name</span> </div>
+                  <ul class="rbmm-list">
+                    <li><b id="drName"></b></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
          <div class="form-wrapper">
           <form>
             <div class="row">
               
-
               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                 <div class="form-group">
+                  <label for="cmbMonth">Select Month</label>
                   <select  id="cmbMonth" class="form-control">
-
                     <option value="">---- Select Month ----</option>
                     <option value="1">Jan</option>
                     <option value="2">Feb</option>
                     <option value="3">Mar</option>
-
                     <option value="4">Apr</option>
                     <option value="5">May</option>
                     <option value="6">Jun</option>
-
                     <option value="7">Jul</option>
                     <option value="8">Aug</option>
                     <option value="9">Sep</option>
-
                     <option value="10">Oct</option>
                     <option value="11">Nov</option>
                     <option value="12">Dec</option>
-
                   </select>
                   
                 </div>
               </div>
               <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                 <div class="form-group">
+                  <label for="cmbYear">Select Year</label>
                   <select  id="cmbYear" class="form-control">
                     <option value="">---- Select Year ----</option>                 
                     <option value="2022">2022</option>
@@ -56,42 +75,50 @@
 
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
+                  <label for="iuiTxt">IUI</label>
                   <input type="number" class="form-control" id="iuiTxt" name="iuiTxt" placeholder="Total no. of IUI cycles" required />
                 </div>
               </div>
 
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
+                  <label for="ivfTxt">IVF</label>
                   <input type="number" class="form-control" id="ivfTxt" name="ivfTxt" placeholder="Total no. of IVF cycles" required />
                 </div>    
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
+                  <label for="freshTxt">Fress</label>
                   <input type="number" class="form-control" id="freshTxt" name="freshTxt" placeholder="Fresh pick-ups" required />
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
+                  <label for="frozenTxt">Frozen</label>
                   <input type="number" class="form-control" id="frozenTxt" name="frozenTxt" placeholder="Frozen Transfers" required />
                 </div>    
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
+                  <label for="patientTxt">Patient</label>
                   <input type="number" class="form-control" id="patientTxt" name="patientTxt" placeholder="Self (Patient) cycles" required />
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
+                  <label for="donotTxt">Donot</label>
                   <input type="number" class="form-control" id="donotTxt" name="donotTxt" placeholder="Donor cycles" required />
                 </div>    
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
+                  <label for="agonistTxt">Agonist</label>
                   <input type="number" class="form-control" id="agonistTxt" name="agonistTxt" placeholder="Agonist cycles" required />
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group">
+                  <label for="antagonistTxt">Antagonist</label>
                   <input type="number" class="form-control" id="antagonistTxt" name="antagonistTxt" placeholder="Antagonist cycles" required />
                 </div>
               </div>
