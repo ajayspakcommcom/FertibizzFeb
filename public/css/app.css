@@ -7891,3 +7891,55 @@ table.dataTable tbody tr.selected > * {
   box-shadow: none !important;
   color: #000 !important;
 }
+
+.custom-table.form {
+  margin: 20px auto;
+}
+
+.zone-profile {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: end;
+}
+
+.zone-head {
+  background: #e6e6e6;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px rgb(115 115 115 / 30%);
+  -moz-box-shadow: 5px 5px 5px rgb(115 115 115 / 30%);
+  -webkit-box-shadow: 5px 5px 5px rgb(115 115 115 / 30%);
+  font-size: 13px;
+}
+
+.zone-manager {
+  background: #e6e6e6;
+  padding: 8px 15px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  cursor: pointer;
+}
+
+.rbm-wrapper {
+  padding: 8px 15px;
+  background: #fff;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.zone-profile b {
+  font-family: 'Bold';
+}
+
+.rbmm-list {
+  list-style: none;
+  padding: 0 0;
+  margin: 0 0;
+}
+
+.rbmm-list > li {
+  line-height: 25px;
+}
+
+.zone-profile b {
+  font-family: 'Bold';
+}

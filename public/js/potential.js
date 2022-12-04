@@ -122,7 +122,7 @@ function getPotentialsDetails() {
          //   console.log(response.data[0])
             if (response.data.length > 0) {
                 let res = response.data[0];
-
+                console.log(res);
                 $('#iuiTxt').val(res.IUICycle);
                 $('#ivfTxt').val(res.IVFCycle);
                 $('#freshTxt').val(res.FreshPickUps);
@@ -144,3 +144,13 @@ function getPotentialsDetails() {
             console.log(err);
         });
 }
+
+function showDrNameCentreName() {
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    console.log(params);
+    $('#drName').text(params.drName);
+    $('#centreName').text(params.centreName);
+}
+
+showDrNameCentreName();
