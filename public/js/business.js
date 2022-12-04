@@ -7,7 +7,7 @@ function getSkuDetails() {
     let skuBrands = ['FOLIGRAF', 'HUMOG', 'ASPORELIX', 'R-HUCOG', 'FOLICULIN', 'AGOTRIG', 'MIDYDROGESTERONE'];
     axios
         .get('/sku-details/').then((response) => {
-            console.log(response.data)
+          //  console.log(response.data)
             let skus = response.data,
                 html = [];
 
@@ -81,23 +81,40 @@ function getSKUHtml(skuBrandGroups, brandGroup) {
             </thead>
             <tbody>`)
     skuArr.forEach(sku => {
+        let fieldName = `${sku.brandId}_${sku.brandGroupId}_${sku.medid}`
         html.push(`<tr>
                 <td>
                 <span>${sku.medicineName}</span>
                 </td>
                 <td>
                 <div class="form-group">
-                    <input type="text" disabled=true class="form-control business-rate" id="" name="" placeholder="00" required="">
+                    <input type="text" 
+                    disabled=true class="form-control business-rate" 
+                    id="txt_${fieldName}_ContractRate" name="txt_${fieldName}_ContractRate" placeholder="00" required="">
+                    <input type="hidden" 
+                    class="form-control business-rate" id="hid_${fieldName}_Price" name="hid_${fieldName}_Price" placeholder="00" value="${sku.Price}">
+
                 </div>
                 </td>
                 <td>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="" name="" placeholder="00" required="">
+                    <input type="text" 
+                        onkeypress="return isNumber(event)"
+                        maxLength="2"
+                        class="form-control" 
+                        id="txt_${fieldName}_unitSold" 
+                        name="txt_${fieldName}_unitSold" 
+                        priceField = 'hid_${fieldName}_Price'
+                        rateContractField = 'txt_${fieldName}_ContractRate'
+                        unitSoldBusinessfield = 'txt_${fieldName}_unitSoldBusiness'
+                        required="" onblur="calculateBusiness(this);">
                 </div>
                 </td>
                 <td>
                 <div class="form-group">
-                    <input type="text" disabled=true  class="form-control disabled" id="" name="" placeholder="00" required="">
+                    <input type="text" disabled=true  class="form-control disabled" 
+                        id="txt_${fieldName}_unitSoldBusiness" 
+                        name="txt_${fieldName}_unitSoldBusiness" placeholder="00">
                 </div>
                 </td>
             </tr>`)
@@ -107,10 +124,37 @@ function getSKUHtml(skuBrandGroups, brandGroup) {
 
 
 
-    console.log(skuArr);
+  //  console.log(skuArr);
 
     return html.join('');
 }
+
+function calculateBusiness(obj) {
+   // console.log(obj)
+    let priceField =  obj.getAttribute('priceField'),
+        rateContractField = obj.getAttribute('rateContractField'),
+        unitSoldBusinessfield = obj.getAttribute('unitSoldBusinessfield')
+        isRateContractApplicable = $('#chkIsContractRateApplicable').is(':checked'), 
+        unitPrice = $('#'+ priceField).val(),
+        rateContractPrice = $('#'+ rateContractField).val(),
+        finalPrice = (isRateContractApplicable)? rateContractPrice : unitPrice,
+        roundOffPrice = Math.round(($('#'+obj.id).val() * finalPrice) * 100) / 100;
+        
+        $('#'+unitSoldBusinessfield).val(roundOffPrice);
+
+
+   // console.log(priceField, rateContractField, unitPrice)
+}
+
+function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+}
+
 
 function validateMe() {
 
