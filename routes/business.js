@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const businessController = require('../controllers/businessController');
+const controller = require('../controllers/businessController');
 
-router.get('/add-business', businessController.addBusiness);
+router.get('/add-business', controller.addBusiness);
+router.get('/sku-details/', controller.getSKUDetails);
+
+
 
 module.exports = router;

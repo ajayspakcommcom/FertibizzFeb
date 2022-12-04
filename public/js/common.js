@@ -116,12 +116,20 @@ function formatText(str, type) {
         case 'UPPER':
             return str.toUpperCase()
         break;
+        case 'FirstLetterUPPER':
+            return capitalizeFirstLetter(str.toLowerCase());
+        break;
         default:
             return camelCaseText(str)
             break;
     }
    
 }
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+  
 
 function camelCaseText(str) {
     if (str) {
