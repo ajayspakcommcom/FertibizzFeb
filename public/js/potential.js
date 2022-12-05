@@ -137,7 +137,8 @@ function getPotentialsDetails() {
                     year = arr[0],
                     month = arr[1] <= 9 ? parseInt(arr[1].substring(1, 2)) : parseInt(arr[1])
                 $('#cmbYear').val(year)
-                $('#cmbMonth').val(month)
+                //$('#cmbMonth').val(month)
+                getFirstDayPreviousMonth();
             }
 
         }).catch((err) => {

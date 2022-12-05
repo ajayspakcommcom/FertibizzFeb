@@ -293,7 +293,7 @@ function getMyHospitalList() {
                     <td><a href="./add-business?cid=${list.customerId}" class="btn btn-default">Add Business</a></td>
                     <td><a href="./add-competition?cid=${list.customerId}" class="btn btn-default">Competition</a></td>
                     <td>${list.ContractStatus}</td>
-                    <td><a href="#?cid=${list.customerId}" class="btn btn-default">Track Performance</a></td>
+                    <td><a href="#?cid=${list.customerId}" class="btn btn-default">View Profile</a></td>
                 </tr>
                     `)
             });

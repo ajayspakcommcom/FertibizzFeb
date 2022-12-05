@@ -147,6 +147,17 @@ function getIdFromURL() {
     return urlArr[urlArr.length - 1];
 }
 
+function getFirstDayPreviousMonth() {
+    const date = new Date();
+    let dt = new Date(date.getFullYear(), date.getMonth() - 1, 1);
+    $('#cmbMonth').val(dt.getMonth() + 1); // our combo box starts with 1
+    $('#cmbYear').val(dt.getFullYear());
+    //$('#cmbMonth').attr('disabled', 'disabled');
+    $('#cmbYear').attr('disabled', 'disabled');
+  }
+
+
+
 $('.col-wrapper').on('click', '.img-wrapper', function(){
     let $this = $(this);
     $this.parents('.col-wrapper').append(`
