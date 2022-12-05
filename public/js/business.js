@@ -1,4 +1,4 @@
-
+var skuDetails;
 function setupPage() {
     getSkuDetails()
 }
@@ -8,7 +8,8 @@ function getSkuDetails() {
     axios
         .get('/sku-details/').then((response) => {
           //  console.log(response.data)
-            let skus = response.data,
+          skuDetails = response.data;
+            let skus = skuDetails,
                 html = [];
 
 
@@ -114,7 +115,7 @@ function getSKUHtml(skuBrandGroups, brandGroup) {
                 <div class="form-group">
                     <input type="text" disabled=true  class="form-control disabled" 
                         id="txt_${fieldName}_unitSoldBusiness" 
-                        name="txt_${fieldName}_unitSoldBusiness" placeholder="00">
+                        name="txt_${fieldName}_unitSoldBusiness">
                 </div>
                 </td>
             </tr>`)
@@ -142,8 +143,20 @@ function calculateBusiness(obj) {
         
         $('#'+unitSoldBusinessfield).val(roundOffPrice);
 
-
+        calculateTotal();
    // console.log(priceField, rateContractField, unitPrice)
+}
+
+function calculateTotal() {
+    let skus = skuDetails,
+        totalBusiness = 0;
+        skus.forEach(sku => {
+            let unitSoldBusinessfield = `txt_${sku.brandId}_${sku.brandGroupId}_${sku.medid}_unitSoldBusiness`,
+                businessValue = $('#'+unitSoldBusinessfield).val().length > 0 ? parseFloat($('#'+unitSoldBusinessfield).val()) : 0;
+            totalBusiness  = parseFloat(totalBusiness+businessValue)
+        })
+//        console.log(totalBusiness);
+        $('#spnTotalBusinessValue').html(totalBusiness);
 }
 
 function isNumber(evt) {
@@ -158,62 +171,89 @@ function isNumber(evt) {
 
 function validateMe() {
 
-    if ($('#iuiTxt').val() === "") {
-        alert('Total no. of IUI cycles is empty');
+    console.log('save into database')
+
+    if ($('#cmbMonth').val() === "") {
+        alert('Month field is empty');
+        $('#cmbMonth').focus();
         return false;
     }
 
-    if ($('#ivfTxt').val() === "") {
-        alert('Total no. of IVF cycles is empty');
+    if ($('#cmbYear').val() === "") {
+        alert('Year field is empty');
+        $('#cmbYear').focus();
+        return false;
+    }
+    let checkBox = document.getElementById('chkIsContractRateApplicable');
+    
+    if (checkBox.checked && $('#txtContractEndDate').val() === '') {
+        alert('Select contract End date');
+        $('#txtContractEndDate').focus();
         return false;
     }
 
-    if ($('#freshTxt').val() === "") {
-        alert('Fresh pick-ups is empty');
-        return false;
-    }
+    let skus = skuDetails,
+        totalBusiness = 0,
+        userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
+        hospitalId = new URLSearchParams(window.location.search).get('cid'),
+        empId= parseInt(userData.empId),
+        month= parseInt($('#cmbMonth').val()),
+        year= parseInt($('#cmbYear').val()),
+        isRateContractApplicable = $('#chkIsContractRateApplicable').is(':checked')
+        contractEndDate = $('#txtContractEndDate').val()
+        ;
+        
+        skus.forEach(sku => {
+           let brandId = sku.brandId,
+                brandGroupId = sku.brandGroupId,
+                skuId = sku.medid,
+                fieldId = `${sku.brandId}_${sku.brandGroupId}_${sku.medid}`,
+                rateContractPrice =  $(`#txt_${fieldId}_ContractRate`).val(),
+                unitPrice = $(`#hid_${fieldId}_Price`).val(),
+                unitSold = parseInt($(`#txt_${fieldId}_unitSold`).val()),
+                finalPrice = (isRateContractApplicable)? rateContractPrice : unitPrice
+        ;
+        if (unitSold >0) {
+            param = {
+                empId: empId,
+                hospitalId: hospitalId,
+                month: month,
+                year: year,
+                brandId: brandId,
+                brandGroupID: brandGroupId,
+                skuId: skuId,
+                rate: finalPrice,
+                qty: unitSold,
+                isContractApplicable: isRateContractApplicable,
+                contractEndDate: contractEndDate.length > 0? contractEndDate : null,
+                
+            }
+            console.log(param)
 
-    if ($('#frozenTxt').val() === "") {
-        alert('Frozen Transfers is empty');
-        return false;
-    }
-
-    if ($('#patientTxt').val() === "") {
-        alert('Self (Patient) cycles is empty');
-        return false;
-    }
-
-    if ($('#donotTxt').val() === "") {
-        alert('Donor cycles is empty');
-        return false;
-    }
-
-    if ($('#agonistTxt').val() === "") {
-        alert('Agonist cycles is empty');
-        return false;
-    }
-
-    if ($('#antagonistTxt').val() === "") {
-        alert('Antagonist cycles is empty');
-        return false;
-    }
-
-    let pId = new URLSearchParams(window.location.search).get('pid'),
-        iuiTxt = $('#iuiTxt').val(),
-        ivfTxt = $('#ivfTxt').val(),
-        freshTxt = $('#freshTxt').val(),
-        frozenTxt = $('#frozenTxt').val(),
-        patientTxt = $('#patientTxt').val(),
-        donotTxt = $('#donotTxt').val(),
-        agonistTxt = $('#agonistTxt').val(),
-        antagonistTxt = $('#antagonistTxt').val();
+                axios
+                .post('/sku-add/', param).then((response) => {
+                    //console.log(response.data[0])
+                    let res = response.data[0];
+                    if (res.sucess === 'true') {
+                        redirect('/hospitals');
+                    } else {
+                        //     $('#lblMsg').text(res.msg);
+                    }
+                }).catch((err) => {
+                    console.log(err);
+                });
+                
+        }
+           
+        })
+    return false;
 
 }
 
 $(".disabled").attr("disabled", true);
 
 function setRate() {
-    let checkBox = document.getElementById('rateApplicable');
+    let checkBox = document.getElementById('chkIsContractRateApplicable');
     console.log(checkBox.checked);
     if (checkBox.checked) {
         $('.business-rate').attr("disabled", false);

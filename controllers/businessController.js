@@ -14,6 +14,62 @@ exports.addBusiness = (req, res, next) => {
 
 
 
+exports.addUpdateBusinessTracker = (req, res, next) => {
+    // console.log('inside update employee');
+     let params = Object.assign(req.params, req.body);
+     addUpdateBusinessTracker(params).then(result => {
+         res.status(_STATUSCODE).json(result)
+     })
+ };
+
+ 
+
+function addUpdateBusinessTracker( objParam ) {
+    console.log('--------------------------------')
+    console.log(objParam)
+    console.log('--------------------------------')
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    .input("empId", sql.Int, objParam.empId)
+                    .input("hospitalId", sql.Int, objParam.hospitalId)
+                    .input("Month", sql.Int, objParam.month)
+                    .input("Year", sql.Int, objParam.year)
+                   
+                    .input("brandId", sql.Int, objParam.brandId)
+                    .input("brandGroupId", sql.Int, objParam.brandGroupID)
+                    .input("skuId", sql.Int, objParam.skuId)
+                    
+                    .input("rate", sql.Float, objParam.rate)
+                    .input("qty", sql.Int, objParam.qty)
+                   
+                    .input("isContractApplicable", sql.Bit, objParam.isContractApplicable)
+                    .input("contractEndDate", sql.SmallDateTime, objParam.contractEndDate)
+                    
+
+
+                    .execute("USP_add_update_BUSINESS_TRACKER")
+                    .then(function (resp) {
+                        //console.log(resp.recordset)
+                        resolve(resp.recordset);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    });
+};
+
+
 
 exports.getSKUDetails = (req, res, next) => {
     // console.log('inside update employee');
