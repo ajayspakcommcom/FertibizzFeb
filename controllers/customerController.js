@@ -29,6 +29,7 @@ exports.getCustomerListData = (req, res, next) => {
             .then(function () {
                 var request = new sql.Request(dbConn);
                 request
+                    .input("empId", sql.Int, objParam.empId)    
                     .execute("USP_GET_CUSTSOMER_LIST")
                     .then(function (resp) {
                        //  console.log(resp)
@@ -92,6 +93,7 @@ function addUpdateCustomer( objParam ) {
                     .input("ChemistMapped", sql.NVarChar, (objParam.txtChemistMapped))
                     .input("isDisabled", sql.Bit, (objParam.chkDisabled))
                     .input("chainID", sql.NVarChar, (objParam.cmbChain))
+                    .input("chainAccountTypeId", sql.Int, (objParam.chainAccountTypeId))
                     
                     .execute("USP_ADD_UPDATE_CUSTSOMER")
                     .then(function (resp) {
@@ -194,13 +196,13 @@ getCustomerDetailsById = (objParam) => {
 
 /************* MASTER MODULE *************/
 exports.getMasterData = (req, res, next) => {
-    getMasterData(req.params).then((result) => {
+    getCustomerMasterData(req.params).then((result) => {
         res.status(_STATUSCODE).json(result);
     });
 };
 
 
-getMasterData = (objParam) => {
+getCustomerMasterData = (objParam) => {
     return new Promise((resolve) => {
         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
         dbConn
@@ -210,6 +212,7 @@ getMasterData = (objParam) => {
                 request
                     .execute("USP_BSV_GET_MASTER_DATA")
                     .then(function (resp) {
+                        console.log('****** fetching the data ******')
                         resolve(resp.recordsets);
                         dbConn.close();
                     })

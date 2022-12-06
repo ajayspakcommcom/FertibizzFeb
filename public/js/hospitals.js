@@ -1,11 +1,12 @@
 function getCustomerList() {
-
-    let param = {
-        method: 'getHospitalList'
-    };
+    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
+        param = {
+            empId: userData.empId,
+            method: 'getHospitalList'
+        };
 
     axios
-        .get(_URL._CUSTOMER_LIST, param).then((response) => {
+        .post(_URL._CUSTOMER_LIST, param).then((response) => {
             console.log(response.data)
             populateDataTable(response.data);
 
@@ -73,12 +74,13 @@ function getCustomerDetails() {
             $('#txtLocalArea').val(customerData.LocalArea)
             $('#txtCity').val(customerData.City)
             $('#txtPinCode').val(customerData.PinCode)
-            $('#txtChemistMapped').val(customerData.ChemistMapped)
+            $('#txtChemistMapped').val(customerData.chainAccountTypeId)
 
             $('#txtStateId').val(customerData.StateID)
             $('#txtChainId').val(customerData.chainID)
 
             $('#hidSpecialty').val(customerData.SpecialtyId)
+            $('#hidChainAccountType').val(customerData.SpecialtyId)
             $('#hidVisitCategory').val(customerData.visitId)
 
 
@@ -107,6 +109,7 @@ function cmbValues() {
 
     $("#cmbSpecialty").val($('#hidSpecialty').val())
     $("#cmbVisitCategory").val($('#hidVisitCategory').val())
+    $("#cmbChainAccountType").val($('#hidChainAccountType').val())
 
 }
 
@@ -208,7 +211,8 @@ function submitMe() {
         txtChemistMapped: $('#txtChemistMapped').val(),
         cmbState: parseInt($('#cmbState').val()),
         chkDisabled: $('#chkDisabled').is(":checked"),
-        customerId: isNaN(customerId) ? null : parseInt(customerId)
+        customerId: isNaN(customerId) ? null : parseInt(customerId),
+        chainAccountTypeId: parseInt($('#cmbChainAccountType').val()),
     }
 
     console.log(param)
@@ -230,15 +234,18 @@ function submitMe() {
 function getMasterData() {
     axios
         .get(`${_URL._MASTER_DATA}`).then((response) => {
-            console.log(response.data)
+           // console.log(response)
             let stateList = response.data[0],
                 chainList = response.data[1],
                 visitTypeList = response.data[2],
-                specialtyList = response.data[3];
+                specialtyList = response.data[3],
+                chainAccountList = response.data[4];
+                console.log(chainAccountList)
             loadComboBox(stateList, 'cmbState', 'stateId', 'stateName');
             loadComboBox(chainList, 'cmbChain', 'chainId', 'Name');
             loadComboBox(visitTypeList, 'cmbVisitCategory', 'VisitID', 'Name');
             loadComboBox(specialtyList, 'cmbSpecialty', 'SpecialtyID', 'Name');
+            loadComboBox(chainAccountList, 'cmbChainAccountType', 'accountId', 'Name');
 
         }).catch((err) => {
             console.log(err);
