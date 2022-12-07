@@ -40,7 +40,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(hospitalsRoutes);
 app.use(adminRoutes);
-// app.use(employeesRoutes);
+app.use(employeesRoutes);
 // app.use(hierarchyRoutes);
 app.use(customerRoutes);
 app.use(skuRoutes);

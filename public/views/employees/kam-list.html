@@ -1,0 +1,49 @@
+<html>
+
+<head>
+  <title>IVF : KAM List </title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/app.css" />
+</head>
+
+<body>
+
+  <nav class="navbar" id="header"></nav>
+
+  <main class="container">
+    <h1 class="text-center">KAM List</h1>
+    <table class="table table-bordered table-bg">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Mobile</th>
+          <th>Emp Number</th>
+          <th>HQ Code</th>
+          <th>State</th>
+          <th>DOJ</th>
+          <th>Centre</th>
+        </tr>
+      </thead>
+      <tbody id="kamData"></tbody>
+    </table>
+  </main>
+
+  <script src="../../js/jquery.min.js"></script>
+  <script src="../../js/common.js"></script>
+  <script src="../../js/axios.min.js"></script>
+  <script src="../../js/bootstrap.min.js"></script>
+  <script src="../../js/admin.js"></script>
+  <script src="../../js/employees1.js"></script>
+
+  <script>
+    $(document).ready(function(){
+      getKamList();
+    });
+  </script>
+
+</body>
+
+</html>

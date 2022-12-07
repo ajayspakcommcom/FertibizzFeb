@@ -101,8 +101,6 @@ exports.getSKUDetailsById = (req, res, next) => {
  };
 
  
-
-
 exports.getSKUListData = (req, res, next) => {
     // console.log('inside getSKUListData employee');
       let params = Object.assign(req.params, req.body);

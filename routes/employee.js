@@ -14,6 +14,11 @@ router.get('/employees', controller.listingPage);
 router.get('/employees/list', controller.getEmployeesList);
 
 
+router.get('/employees/kam-list', controller.getkamList);
+router.get('/employees/centre-list', controller.getCentreList);
+
+router.post('/employees/kamlist', controller.getKamListData);
+
 // // // update
 router.get('/employee-edit/:id', controller.getEmployeeDetailsPage);
 

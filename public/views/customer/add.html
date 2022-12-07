@@ -13,7 +13,7 @@
       <main class="container">
          <h1 class="text-center">Add Customer</h1>
          <div class="text-right">
-            <a href="/customers" class="btn btn-success">Go Back</a>
+            <a href="/customers" class="btn btn-success" id="goBack">Go Back</a>
           </div>
          <div class="form-wrapper">
           <form id="frm1" onsubmit="submitMe();return false;">
@@ -164,25 +164,37 @@
                  </select>
                 </div>    
               </div>
+
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="form-group add-input-wrapper">
-                  <input type="checkbox" value="on" id="chkDisabled" name="chkDisabled" />
-                  <label for="chkDisabled">Check to mark it disabled</label>
-                  
-                  <!-- <div class="img-wrapper">
-                    <img src="../../img/plus.png" alt="add input" class="img-responsive" />
-                  </div> -->
-                </div>    
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <div class="form-group add-input-wrapper">
-                  <label for="cmbChainAccountType">Chain Account Type:</label>
+                  <label for="cmbChainAccountType">Chain Account Type</label>
                   <select id="cmbChainAccountType" class="form-control">
                  </select>
                 </div>    
               </div>
-              
             </div>
+
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group add-input-wrapper">
+                  <input type="checkbox" value="on" id="chkRc" name="chkRc" />
+                  <label for="chkRc">Is Rate Contract Applicable Valid till</label>
+                  <input type="date" value="on" id="endDate" name="endDate" />
+                  <br />
+                  <a href="/add-customer-business" class="add-rc-link">Click here to add Contract Rate</a>
+                </div>      
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group add-input-wrapper">
+                  <input type="checkbox" value="on" id="chkDisabled" name="chkDisabled" />
+                    &nbsp;
+                  <label for="chkDisabled">Check to mark it disabled</label>
+                </div>
+                
+              </div>
+            </div>
+
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

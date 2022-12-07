@@ -10,6 +10,15 @@ exports.listingPage = (req, res, next) => {
     res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/employees/list.html`);
 };
 
+exports.getkamList = (req, res, next) => {
+    res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/employees/kam-list.html`);
+};
+
+
+exports.getCentreList = (req, res, next) => {
+    res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/employees/centre-list.html`);
+};
+
 
 
 exports.getEmployeesList = (req, res, next) => {
@@ -41,6 +50,41 @@ getEmployeesList = (objParam) => {
             })
             .catch(function (err) {
                 //console.log(err);
+            });
+    });
+};
+
+exports.getKamListData = (req, res, next) => {
+      let params = Object.assign(req.params, req.body);
+      getKamListData(params).then(result => {
+          res.status(_STATUSCODE).json(result)
+      })
+  };
+ 
+
+getKamListData = (objParam) => {
+    //console.log('I am Here', objParam);
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    .input("empId", sql.Int, objParam.empId)
+                    .execute("USP_GET_MY_TEAM_MEMBERS")
+                    .then(function (resp) {
+                        console.log(resp)
+                        resolve(resp.recordset);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                console.log(err);
             });
     });
 };

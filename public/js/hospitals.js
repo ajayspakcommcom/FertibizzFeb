@@ -19,6 +19,8 @@ function getCustomerList() {
 function populateDataTable(data) {
     //  console.log("populating data table...");
     // clear the table before populating it with more data
+
+
     $("#customerList").DataTable().clear();
     var length = data.length;
     //  console.log(length)
@@ -41,14 +43,32 @@ function populateDataTable(data) {
                     ${item.City} ${item.PinCode} <br> ${item.stateName} `,
                 item.ChemistMapped,
                 item.ChainStatusName,
-                `<a href="/customer-edit/${item.customerId}">Edit</a> | <a href='javascript:void(0)' onclick='DeleteCustomer(${item.customerId},"${item.CENTRENAME}");return false;' class='${item.customerId}' title='${item.CENTRENAME}'>Delete</a>`
+                isEmployeeCenterList(item)
             ]);
         });
     }
 }
 
+function isEmployeeCenterList(obj) {
+    let path = window.location.pathname.substr(1);
+    if(path == 'customers') {
+        return `<a href="/customer-edit/${obj.customerId}">Edit</a> | <a href='javascript:void(0)' onclick='DeleteCustomer(${obj.customerId},"${obj.CENTRENAME}");return false;' class='${obj.customerId}' title='${obj.CENTRENAME}'>Delete</a>`
+    } else {
+        return `<a href="/customer-edit/${obj.customerId}?editMode=false">Detail</a> <a href="DeleteCustomer(${obj.customerId},"${obj.CENTRENAME}">Approve</a> | <a href='DeleteCustomer(${obj.customerId},"${obj.CENTRENAME}'>Reject</a>`
+    }
+}
+
 
 function getCustomerDetails() {
+
+    if(getQueryStringValue('editMode') == 'false') {
+        $("form :input").attr('disabled','disabled');
+        $('#goBack').attr('href', '/employees/centre-list');
+        setTimeout(() => {
+            $('h1').text('Centre Detail');
+        }, 500);
+    }
+
     getMasterData();
     if (!isEditPage()) {
         return;
@@ -66,7 +86,7 @@ function getCustomerDetails() {
             $('#txtDoctorName').val(customerData.DoctorName)
 
             $('#txtDoctorUniqueCode').val(customerData.DoctorUniqueCode),
-                $('#txtMobile').val(customerData.mobile)
+            $('#txtMobile').val(customerData.mobile)
             $('#txtEmail').val(customerData.email)
             $('#txtCenterName').val(customerData.CENTRENAME)
             $('#txtAddress1').val(customerData.Address1)
@@ -154,8 +174,6 @@ function getQueryStringValue(key) {
     let urlSearchParams = new URLSearchParams(window.location.search);
     console.log(urlSearchParams)
     return urlSearchParams.get(key);
-
-
 }
 
 function validateMe() {

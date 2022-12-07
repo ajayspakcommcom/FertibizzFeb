@@ -7943,3 +7943,20 @@ table.dataTable tbody tr.selected > * {
 .zone-profile b {
   font-family: 'Bold';
 }
+
+.panel-group .panel {
+  margin-bottom: 15px;
+}
+
+.panel-default>.panel-heading+.panel-collapse>.panel-body hr {
+  display: none;
+}
+
+.table-bg {
+  margin-bottom: 0;
+}
+
+.add-rc-link {
+  display: block;
+  margin-top: 15px;
+}

@@ -151,20 +151,6 @@ function cmbValues() {
     $("#cmbDesignation").val($('#txtDesignation').val())
 }
 
-// $('#chkDisable').on('click', function(){
-//     let chk = $(':checkbox');
-//     chk.each(function () { 
-//             chk.checked = !chk.checked; 
-//             if(chk.checked) {
-//                 chk.val('1');
-//             } else {
-//                 chk.val('0');
-//             }
-//     });
-// });
-
-
-
 function validateMe() {
 
     let urlArr = window.location.href.split('/'),

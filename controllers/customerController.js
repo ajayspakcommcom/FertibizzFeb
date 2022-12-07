@@ -10,6 +10,10 @@ exports.getCustomerList = (req, res, next) => {
     res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/customer/list.html`);
 };
 
+exports.addCustomerBusiness = (req, res, next) => {
+    res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/customer/add-business.html`);
+};
+
 
 exports.getCustomerListData = (req, res, next) => {
    // console.log('inside getCustomerListData employee');
