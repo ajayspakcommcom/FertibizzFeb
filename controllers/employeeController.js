@@ -19,8 +19,6 @@ exports.getCentreList = (req, res, next) => {
     res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/employees/centre-list.html`);
 };
 
-
-
 exports.getEmployeesList = (req, res, next) => {
     getEmployeesList(req.body).then((result) => {
         res.status(_STATUSCODE).json(result);

@@ -15,7 +15,7 @@ router.get('/employees/list', controller.getEmployeesList);
 
 
 router.get('/employees/kam-list', controller.getkamList);
-router.get('/employees/centre-list', controller.getCentreList);
+router.get('/employees/centre-list/:empId', controller.getCentreList);
 
 router.post('/employees/kamlist', controller.getKamListData);
 

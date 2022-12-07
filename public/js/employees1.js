@@ -24,7 +24,7 @@ function getKamList() {
                     <td>${data.hoCode}</td>
                     <td>${data.StateName}</td>
                     <td>${data.DOJ}</td>
-                    <td><a href="/sku-edit/${11}" class="btn btn-default">Centre Name</a></td>
+                    <td><a href="/employees/centre-list/${data.empID}" class="btn btn-default">Centre Name</a></td>
                 </tr>
             `)
         });

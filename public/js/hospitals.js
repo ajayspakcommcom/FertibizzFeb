@@ -1,10 +1,13 @@
 function getCustomerList() {
-    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
+    
+    let myKamId = parseInt(getIdFromURL()),
+        userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
         param = {
-            empId: userData.empId,
+            empId: isNaN(myKamId) ? userData.empId : myKamId,
             method: 'getHospitalList'
         };
-
+        
+     
     axios
         .post(_URL._CUSTOMER_LIST, param).then((response) => {
             console.log(response.data)
@@ -19,7 +22,6 @@ function getCustomerList() {
 function populateDataTable(data) {
     //  console.log("populating data table...");
     // clear the table before populating it with more data
-
 
     $("#customerList").DataTable().clear();
     var length = data.length;
