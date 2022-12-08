@@ -56,7 +56,7 @@ function isEmployeeCenterList(obj) {
     if(path == 'customers') {
         return `<a href="/customer-edit/${obj.customerId}">Edit</a> | <a href='javascript:void(0)' onclick='DeleteCustomer(${obj.customerId},"${obj.CENTRENAME}");return false;' class='${obj.customerId}' title='${obj.CENTRENAME}'>Delete</a>`
     } else {
-        return `<a href="/customer-edit/${obj.customerId}?editMode=false">Detail</a> <a href="DeleteCustomer(${obj.customerId},"${obj.CENTRENAME}">Approve</a> | <a href='DeleteCustomer(${obj.customerId},"${obj.CENTRENAME}'>Reject</a>`
+        return `<a href="/customer-edit/${obj.customerId}?editMode=false">View Detail</a>`
     }
 }
 
@@ -68,6 +68,10 @@ function getCustomerDetails() {
         $('#goBack').attr('href', '/employees/centre-list');
         setTimeout(() => {
             $('h1').text('Centre Detail');
+            $('.two-btn-wrapper').hide();
+            $('.add-rc-link').hide();
+            $('.approve-btn-wrapper').removeClass('none');
+            $('.approve-btn-wrapper > button').removeAttr('disabled');
         }, 500);
     }
 

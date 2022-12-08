@@ -7960,3 +7960,16 @@ table.dataTable tbody tr.selected > * {
   display: block;
   margin-top: 15px;
 }
+
+.approve-btn-wrapper.none {
+  display: none;
+}
+
+.approve-btn-wrapper {
+  text-align: right;
+}
+
+.approve-btn-wrapper button {
+  width: 50%;
+  display: inline-block;
+}
