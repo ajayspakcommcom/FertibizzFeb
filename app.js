@@ -6,12 +6,12 @@ const sessions = require('express-session');
 const path = require('path');
 const bodyParser = require('body-parser');
 const { isArray } = require("util");
-const cors = require('cors');
+// const cors = require('cors');
 
-var corsOptions = {
-  origin: 'http://ivf1.spak.agency',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
+// var corsOptions = {
+//   origin: 'http://ivf1.spak.agency',
+//   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+// }
 
 
 const app = express();
@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(bodyParser.raw());
 app.use(cookieParser());
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
  const hospitalsRoutes = require('./routes/hospitals');
  const employeesRoutes = require('./routes/employee');
