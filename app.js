@@ -6,6 +6,7 @@ const sessions = require('express-session');
 const path = require('path');
 const bodyParser = require('body-parser');
 const { isArray } = require("util");
+const cors = require('cors');
 
 const app = express();
 const twoDay = 1000 * 60 * 60 * 48;
@@ -22,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(bodyParser.raw());
 app.use(cookieParser());
-
+app.use(cors);
 
  const hospitalsRoutes = require('./routes/hospitals');
  const employeesRoutes = require('./routes/employee');
