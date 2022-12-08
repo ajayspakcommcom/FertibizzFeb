@@ -216,7 +216,7 @@ getCustomerMasterData = (objParam) => {
                 request
                     .execute("USP_BSV_GET_MASTER_DATA")
                     .then(function (resp) {
-                        console.log('****** fetching the data ******')
+                       // console.log('****** fetching the data ******')
                         resolve(resp.recordsets);
                         dbConn.close();
                     })
@@ -231,3 +231,50 @@ getCustomerMasterData = (objParam) => {
     });
 };
 /************* MASTER MODULE *************/
+
+
+exports.getCustomerContractPage = (req, res, next) => {
+    res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/contract/add.html`);
+};
+
+
+
+
+
+exports.addContractRate = (req, res, next) => {
+    addContractRate(req.body).then(result => {
+        res.status(_STATUSCODE).json(result)
+    })
+};
+
+
+addContractRate = (objParam) => {
+    // console.log('I am Here', objParam);
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    .input("chainAccountTypeId", sql.Int, objParam.chainAccountTypeId)
+                    .input("brandId", sql.Int, objParam.brandId)
+                    .input("brandGroupId", sql.Int, objParam.brandGroupID)
+                    .input("medId", sql.Int, objParam.skuId)
+                    .input("price", sql.Float, objParam.rate)
+                    .execute("USP_INSERT_CUSTOMER_CONTRACTRATE")
+                    .then(function (resp) {
+                        let json = { success: true, msg: 'rate contract added successfully' };
+                        resolve(json);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        //console.log(err);
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                //console.log(err);
+            });
+    });
+};
