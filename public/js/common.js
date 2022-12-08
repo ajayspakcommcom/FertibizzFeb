@@ -1,7 +1,7 @@
 const _SUCCESSFUL_STATUS_CODE = 200;
 const _INVAID_SESSION = 202
 const _FAILURE_STATUS_CODE = 201
-const _ROOT = 'http://localhost:3333'
+const _ROOT = 'http://ivf1.spak.agency'
 
 
 const _URL = {
@@ -27,8 +27,6 @@ const _URL = {
         _EMPLOYEE_HOSPITAL_NEW: '/employee-hospital-new/',
         _EMPLOYEE_HOSPITAL_UN_ASSIGNED: '/employee-hospital-un-assigned',
         _EMPLOYEE_HOSPITAL_UN_ASSIGNED_UPDATE: '/employee-hospital-un-assigned-update'
-        
-
     }
 
 
