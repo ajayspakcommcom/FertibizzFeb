@@ -1,57 +1,59 @@
 <html>
-    <head>
-        <title>IVF : Centre List </title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="/css/app.css" />
-    </head>
+
+<head>
+  <title>IVF : Centre List </title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/app.css" />
+</head>
+
 <body>
-    
-    <nav class="navbar" id="header"></nav>
 
-      <main class="container">
-         <h1 class="text-center">Centre List</h1>
-         <table class="table table-bordered table-bg" id="customerList">
-            <thead>
-              <tr>
-                <th>Is Delete</th>
-                <th>Centre Name</th>
-                <th>Doctor Name</th>
-                <th>Specialty</th>
-                <th>Mobile</th>
-                <th>Email</th>
-                <th>Full Address</th>
-                <th>Chemist Mapped</th>
-                <th>Chain Status</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-      </main>
- 
-      <script src="../../js/jquery.min.js"></script>
-      <script src="../../js/common.js"></script>
-      <script src="../../js/admin.js"></script>
-        <script src="../../js/axios.min.js"></script>
-        <script src="../../js/bootstrap.min.js"></script>
+  <nav class="navbar" id="header"></nav>
 
-        <!--Data Table-->
- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css" />
- <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
- <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" /> -->
- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap.min.js" />
-<!--Data Table-->
-<script src="../../js/hospitals.js"></script>
+  <main class="container">
+    <h1 class="text-center">Centre List</h1>
+    <table class="table table-bordered table-bg" id="customerList">
+      <thead>
+        <tr>
+          <th>Is Delete</th>
+          <th>Centre Name</th>
+          <th>Doctor Name</th>
+          <th>Specialty</th>
+          <th>Mobile</th>
+          <th>Email</th>
+          <th>Full Address</th>
+          <th>Chemist Mapped</th>
+          <th>Chain Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </main>
 
-        <script>
-          $(function() {
-              getCustomerList();
-              selectCustomerRow();
-          });
-          
-          </script>
+  <script src="../../js/jquery.min.js"></script>
+  <script src="../../js/common.js"></script>
+  <script src="../../js/admin.js"></script>
+  <script src="../../js/axios.min.js"></script>
+  <script src="../../js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css" />
+  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+  <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap.min.js" /> -->
+
+  <script src="../../js/hospitals.js"></script>
+
+  <script>
+    $(function () {
+      getCustomerList();
+      selectCustomerRow();
+    });
+
+  </script>
 </body>
+
 </html>
