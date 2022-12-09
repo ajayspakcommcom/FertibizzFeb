@@ -10,7 +10,7 @@ function getCustomerList() {
      
     axios
         .post(_URL._CUSTOMER_LIST, param).then((response) => {
-            console.log(response.data)
+       //     console.log(response.data)
             populateDataTable(response.data);
 
         }).catch((err) => {
@@ -29,7 +29,7 @@ function populateDataTable(data) {
     if (length == 0) {
         $("#customerList").DataTable().clear();
     } else {
-        console.log(data);
+      //  console.log(data);
         var i = 1;
         data.forEach(item => {
             $('#customerList').dataTable().fnAddData([
@@ -334,3 +334,14 @@ function getMyHospitalList() {
             console.log(err);
         });
 }
+
+
+function centerContractAdd() {
+    // let urlArr = window.location.href.split('/'),
+    //     centerId = urlArr[urlArr.length - 1];
+
+    let chainAccountTypeId =  parseInt($('#cmbChainAccountType').val())
+    redirect('/customer-contract-add/'+chainAccountTypeId);
+}
+
+//

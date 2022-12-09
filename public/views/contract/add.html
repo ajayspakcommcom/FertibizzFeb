@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title>IVF : Add Contract </title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/css/app.css" />
+    </head>
+<body>
+    
+  <nav class="navbar" id="header"></nav>
+
+      <main class="container">
+         <h1 class="text-center">Add Contract Rate for Hospital</h1>
+         <div class="text-right"><a href="./hospitals" class="btn btn-success">Go Back</a></div>
+
+         <div class="form-wrapper">
+          <form>
+            <div class="panel-group" id="accordion"></div>
+              
+          
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <div class="two-btn-wrapper">
+                    <button type="reset" class="btn btn-default btn-grad">Reset</button>
+                    <button type="submit" class="btn btn-default btn-grad" onclick="validateMe();return false;">Save</button>
+                  </div>
+                </div>
+              </div>
+
+          
+
+          </form>
+         </div>
+      </main>
+
+      <script src="../../js/jquery.min.js"></script>
+      <script src="../../js/common.js"></script>
+      <script src="../../js/axios.min.js"></script>
+      <script src="../../js/bootstrap.min.js"></script>
+      <script src="../../js/admin.js"></script>
+      <script src="../../js/contract.js"></script>
+      <script>
+        $(function () {
+          // console.log( "ready!" );
+          setupPage();
+        });
+      </script>
+</body>
+</html>

@@ -1,7 +1,8 @@
 const _SUCCESSFUL_STATUS_CODE = 200;
 const _INVAID_SESSION = 202
 const _FAILURE_STATUS_CODE = 201
-const _ROOT = 'http://localhost:3333'
+const _ROOT = 'http://localhost:3333';
+const _SKU_BRANDS = ['FOLIGRAF', 'HUMOG', 'ASPORELIX', 'R-HUCOG', 'FOLICULIN', 'AGOTRIG', 'MIDYDROGESTERONE'];
 
 
 const _URL = {
@@ -157,18 +158,18 @@ function getFirstDayPreviousMonth() {
 
 
 
-$('.col-wrapper').on('click', '.img-wrapper', function(){
-    let $this = $(this);
-    $this.parents('.col-wrapper').append(`
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <div class="form-group add-input-wrapper">
-            <input type="text" class="form-control" id="assistantTxt" name="assistantTxt" placeholder="Ivf Dr Assistant" />
-            <div class="img-wrapper">
-                <img src="../../img/plus.png" alt="add input" class="img-responsive" />
-            </div>
-            </div>    
-        </div>
-    `);
+// $('.col-wrapper').on('click', '.img-wrapper', function(){
+//     let $this = $(this);
+//     $this.parents('.col-wrapper').append(`
+//         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+//             <div class="form-group add-input-wrapper">
+//             <input type="text" class="form-control" id="assistantTxt" name="assistantTxt" placeholder="Ivf Dr Assistant" />
+//             <div class="img-wrapper">
+//                 <img src="../../img/plus.png" alt="add input" class="img-responsive" />
+//             </div>
+//             </div>    
+//         </div>
+//     `);
     
-});
+// });
 

@@ -16,6 +16,10 @@ router.get('/customer-details/:customerId', customerController.getCustomerDetail
 router.get('/master-data', customerController.getMasterData);
 
 
+router.get('/customer-contract-add/:chainAccountTypeId', customerController.getCustomerContractPage);
+router.post('/rate-contract-add/', customerController.addContractRate);
+
+router.get('/contract-details/:chainAccountTypeId', customerController.getContractDetailsById);
 
 
 
