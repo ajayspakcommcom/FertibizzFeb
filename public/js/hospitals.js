@@ -83,7 +83,7 @@ function getCustomerDetails() {
 
     let urlArr = window.location.href.split('/'),
         customerId = urlArr[urlArr.length - 1];
-    console.log(customerId);
+    //console.log(customerId);
     axios
         .get('/customer-details/' + customerId).then((response) => {
             console.log(response.data)
@@ -109,8 +109,15 @@ function getCustomerDetails() {
             $('#hidChainAccountType').val(customerData.SpecialtyId)
             $('#hidVisitCategory').val(customerData.visitId)
 
-
+            
             $('#chkDisabled').prop('checked', customerData.isdisabled);
+            $('#chkRc').prop('checked', (customerData.isContractApplicable === 'YES'));
+            $('#endDate').val(customerData.contractEndDate);
+           if  (customerData.isContractApplicable === 'YES') 
+                enableContractDate()
+
+
+            
 
             setTimeout(cmbValues, 5000);
             // $('#txtVisitCategory').val()
@@ -167,7 +174,7 @@ function DeleteCustomer(id, name, bulkDelete) {
 
         axios
             .post("/customer/delete", param).then((response) => {
-                console.log(response.data.msg)
+                //console.log(response.data.msg)
             }).catch((err) => {
                 console.log(err);
             });
@@ -176,9 +183,9 @@ function DeleteCustomer(id, name, bulkDelete) {
 }
 
 function getQueryStringValue(key) {
-    console.log(window.location)
+    //console.log(window.location)
     let urlSearchParams = new URLSearchParams(window.location.search);
-    console.log(urlSearchParams)
+    //console.log(urlSearchParams)
     return urlSearchParams.get(key);
 }
 
@@ -186,7 +193,7 @@ function validateMe() {
     let urlArr = window.location.href.split('/'),
         hospitalId = urlArr[urlArr.length - 1];
 
-    console.log(hospitalId);
+    //console.log(hospitalId);
     let param = {
         hospitalName: $('#txtHospitalName').val(),
         hospitalregion: $('#txtRegionName').val(),
@@ -196,7 +203,7 @@ function validateMe() {
 
     axios
         .post(URL, param).then((response) => {
-            console.log(response.data[0])
+            //console.log(response.data[0])
             let res = response.data[0];
             if (res.sucess === 'true') {
                 redirect(_URL._hospitalListing);
@@ -237,12 +244,13 @@ function submitMe() {
         chkDisabled: $('#chkDisabled').is(":checked"),
         customerId: isNaN(customerId) ? null : parseInt(customerId),
         chainAccountTypeId: parseInt($('#cmbChainAccountType').val()),
+        isRateContractApplicable: $('#chkRc').is(":checked") ? 5 : 6,
+        contractEndDate:  $('#endDate').val()
     }
-
-    console.log(param)
+    //console.log(param)
     axios
         .post(_URL._CUSTOMER_ADD, param).then((response) => {
-            console.log(response.data[0])
+            //console.log(response.data[0])
             let res = response.data[0];
             if (res.sucess === 'true') {
                 redirect('/customers');
@@ -264,7 +272,7 @@ function getMasterData() {
                 visitTypeList = response.data[2],
                 specialtyList = response.data[3],
                 chainAccountList = response.data[4];
-                console.log(chainAccountList)
+                //console.log(chainAccountList)
             loadComboBox(stateList, 'cmbState', 'stateId', 'stateName');
             loadComboBox(chainList, 'cmbChain', 'chainId', 'Name');
             loadComboBox(visitTypeList, 'cmbVisitCategory', 'VisitID', 'Name');
@@ -344,4 +352,8 @@ function centerContractAdd() {
     redirect('/customer-contract-add/'+chainAccountTypeId);
 }
 
-//
+
+function enableContractDate() {
+    $('#endDate').prop('disabled', !$('#chkRc').is(":checked"));
+
+}

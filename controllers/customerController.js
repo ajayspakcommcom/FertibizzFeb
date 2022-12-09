@@ -222,7 +222,9 @@ exports.addUpdateCustomer = (req, res, next) => {
 
 function addUpdateCustomer( objParam ) {
     // console.log('--------------------------------')
-    // console.log(objParam)
+    // console.log(objParam.customerId)
+    // console.log(objParam.isRateContractApplicable)
+    // console.log(objParam.contractEndDate.toString())
     // console.log('--------------------------------')
     return new Promise((resolve) => {
         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
@@ -250,6 +252,9 @@ function addUpdateCustomer( objParam ) {
                     .input("isDisabled", sql.Bit, (objParam.chkDisabled))
                     .input("chainID", sql.NVarChar, (objParam.cmbChain))
                     .input("chainAccountTypeId", sql.Int, (objParam.chainAccountTypeId))
+                    
+                    .input("isRateContractApplicable", sql.SmallInt, parseInt(objParam.isRateContractApplicable))
+                    .input("contractEndDate", sql.NVarChar, (objParam.contractEndDate.toString()))
                     
                     .execute("USP_ADD_UPDATE_CUSTSOMER")
                     .then(function (resp) {
