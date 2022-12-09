@@ -41,6 +41,7 @@ app.use(cookieParser());
  const businessRoutes = require('./routes/business');
  const competitionRoutes = require('./routes/competition');
  const reportRoutes = require('./routes/report');
+ const accountMappingRoutes = require('./routes/accountMapping');
 
 
 app.use(express.static(path.join(__dirname, "public")));
@@ -55,10 +56,9 @@ app.use(potentialRoutes);
 app.use(businessRoutes);
 app.use(competitionRoutes);
 app.use(reportRoutes);
+app.use(accountMappingRoutes);
 
 //app.use(managerRoutes);
-
-
 
 app.listen(process.env.PORT || 3333, () => {
   console.clear();

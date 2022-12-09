@@ -25,7 +25,7 @@ function getKamList() {
                     <td>${data.StateName}</td>
                     <td>${data.DOJ}</td>
                     <td>
-                        <a href="/employees/centre-list/${data.empID}">Account Mapping Data</a>
+                        <a href="../account-mapping">Account Mapping Data</a>
                         |
                         <a href="/employees/centre-list/${data.empID}">Master Data</a>
                     </td>

@@ -7977,3 +7977,29 @@ table.dataTable tbody tr.selected > * {
 main.small {
   width: 600px;;
 }
+
+ul.inline {
+  padding: 0 0;
+  margin: 0 0;
+  list-style: none;
+}
+
+.account-mapping-btn-ul {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+}
+
+.account-mapping-btn-ul > li {
+  width: 210px;
+}
+
+.account-mapping-btn-ul > li > a {
+  width: 100%;
+  padding: 20px 30px;
+  font-weight: bold;
+}
+
+.account-mapping-wrapper {
+  margin-top: 20%;
+}
