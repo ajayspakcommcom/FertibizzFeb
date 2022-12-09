@@ -8,5 +8,7 @@ const controller = require('../controllers/accountMapping');
 
 router.get('/account-mapping', controller.getAccountMappingPage);
 router.get('/account-mapping/potentials/:empID', controller.getAccountMappingPotentialList);
+router.get('/account-mapping/potential/:empID', controller.getAccountMappingPotentialDetail);
+
 
 module.exports = router;

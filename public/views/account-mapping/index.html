@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>IVF : Account Mapping </title>
+        <title>IVF : Centre List </title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="/css/bootstrap.min.css" />
@@ -8,17 +8,25 @@
     </head>
 <body>
     
-  <nav class="navbar" id="header"></nav>
-
-      <main class="container account-mapping-wrapper">
-         <h1 class="text-center">Account Mapping</h1>
-         <ul class="inline account-mapping-btn-ul">
-            <li><a href="/account-mapping/potentials/2" class="btn btn-default">Potential</a></li>
-            <li><a href="#" class="btn btn-default">Business</a></li>
-            <li><a href="#" class="btn btn-default">Rate Contract</a></li>
-            <li><a href="#" class="btn btn-default">Competition</a></li>
-            <li><a href="#" class="btn btn-default">Track Performance</a></li>
-         </ul>
+    <nav class="navbar" id="header"></nav>
+      <main class="container">
+         <h1 class="text-center">Centre List</h1>
+         <table class="table table-bordered table-bg">
+            <thead>
+              <tr>
+                <th>Centre Name</th>
+                <th>Name of Doctor</th>
+                <th>View Potential</th>
+                <th>View Business</th>
+                <th>View Competition</th>
+                <th>Rate Contract Status</th>
+                <th>View Profile</th>
+              </tr>
+            </thead>
+            <tbody id="centerList">
+                
+            </tbody>
+          </table>
       </main>
 
       <script src="../../js/jquery.min.js"></script>
@@ -26,13 +34,12 @@
         <script src="../../js/axios.min.js"></script>
         <script src="../../js/bootstrap.min.js"></script>
         <script src="../../js/admin.js"></script>
-        <script src="../../js/sku.js"></script>
+        <script src="../../js/account-mapping.js"></script>
         <script>
-          $(function() {
-              getSKUList();
-          });
-          
-          </script>
-
+            $(function() {
+                getMyHospitalList();
+            });
+            
+            </script>
 </body>
 </html>

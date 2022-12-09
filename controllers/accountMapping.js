@@ -12,3 +12,7 @@ exports.getAccountMappingPage = (req, res, next) => {
 exports.getAccountMappingPotentialList = (req, res, next) => {
     res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/account-mapping/potential-list.html`);
 };
+
+exports.getAccountMappingPotentialDetail = (req, res, next) => {
+    res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/account-mapping/view-potential.html`);
+};
