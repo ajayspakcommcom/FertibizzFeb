@@ -47,7 +47,6 @@ exports.addUpdateAchainAccountData = (req, res, next) => {
                     .input("isDisabled", sql.Bit, (objParam.chkDisabled))
                     .execute("USP_ADD_UPDATE_CHAIN_ACCOUNT")
                     .then(function (resp) {
-                        console.log(resp.recordset)
                         resolve(resp.recordset);
                         // let json = { success: true, msg: 'Chain Account deleted successfully' };
                         // resolve(json);
