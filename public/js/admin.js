@@ -14,7 +14,18 @@ function letMeLogin() {
             switch (checkIfValidStatus(response.status)) {
                 case 1:
                     localStorage.setItem("BSV_IVF_Admin_Data", JSON.stringify(response.data.userDetiails));
-                    (document.location.href = _URL._POSTLOGINURL);
+
+                    let userDesignation = JSON.parse(window.localStorage.getItem('BSV_IVF_Admin_Data')).post;
+                    
+                    console.log(userDesignation);
+
+                    if(userDesignation == 'KAM') {
+                        (document.location.href = _URL._POSTLOGINURL);
+                    } else {
+                        _URL._POSTLOGINURL = '/employees/kam-list';
+                        (document.location.href = _URL._POSTLOGINURL);
+                    }
+
                     break;
                 case 2:
                     $('#lblmsg').text(response.data.msg)
