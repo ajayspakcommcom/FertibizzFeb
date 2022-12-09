@@ -1,9 +1,8 @@
 var skuDetails;
 function setupPage() {
-    getContractDetails()
+    getContractDetails();
+    getChainAccountList();
 }
-
-
 
 async function getContractDetails() {
     let urlArr = window.location.href.split('/'),
@@ -33,8 +32,6 @@ async function getContractDetails() {
             <div class="panel-body">
             <div class="form-section"> 
             ${getBrandGroupDetails(skuBrandArr, contractRes)}
-
-
             </div>
             </div>
         </div>
@@ -46,18 +43,12 @@ async function getContractDetails() {
 
     }))
 
-
     // axios
     //     .get('/sku-details/').then((response) => {
     //       //  console.log(response.data)
     //       skuDetails = response.data;
     //         let skus = skuDetails,
     //             html = [];
-
-
-
-
-
     //     }).catch((err) => {
     //         console.log(err);
     //     });
@@ -138,9 +129,6 @@ function getSKUHtml(skuBrandGroups, brandGroup, contractResponse) {
     return html.join('');
 }
 
-
-
-
 function isNumber(evt) {
     evt = (evt) ? evt : window.event;
     var charCode = (evt.which) ? evt.which : evt.keyCode;
@@ -149,7 +137,6 @@ function isNumber(evt) {
     }
     return true;
 }
-
 
 function validateMe() {
 
@@ -195,4 +182,86 @@ function validateMe() {
     redirect('/contracts');
     return false;
 
+}
+
+function getChainAccountList() {
+    axios
+        .get('/account-chain-list').then((response) => {
+            let list = response.data,
+                listArr = [];
+
+            list.forEach(data => {
+                listArr.push(
+                    `<tr>
+                        <td>${data.name}</td>
+                        <td>${data.isDisabled}</td>
+                        <td>
+                            <a href="/customer-contract-add/${data.accountID}">SKU Contract</a>
+                            |
+                            <a href="/customer-contract-add/${data.accountID}">Edit Contract</a>
+                            |
+                            <a href='javascript:void(0)' onclick='DeleteChainAccountData(${data.accountID},"${data.name}");return false;'>Delete Contract</a>
+                        </td>
+                    </tr>
+                `)
+            });
+            $('#skudata').append(listArr.join(''))
+        }).catch((err) => {
+            console.log(err);
+        });
+}
+
+// function validateMe() {
+//     alert('Test');
+//     let txtChainName = $('#txtChainName')
+//         chkDisabled = $('#chkDisabled');
+
+//     if (txtChainName.val() == '') {
+//         alert('Please enter Chain Account Name')
+//         txtChainName.focus();
+//         return false;
+//     } 
+
+//     let urlArr = window.location.href.split('/'),
+//         caId = urlArr[urlArr.length - 1];
+
+//     console.log(caId);
+
+//     let param = {
+//         txtChainName: $('#txtChainName').val(),
+//         caId: isNaN(caId) ? null : parseInt(caId),
+//         chkDisabled: $('#chkDisabled').is(":checked")
+//     }
+//     console.log(param)
+//     URL = isEditPage() ? '/accound-chain-edit/' + caId : '/accound-chain-add'
+
+//     axios
+//         .post(URL, param).then((response) => {
+//             console.log(response.data[0])
+//             let res = response.data[0];
+//             if (res.sucess === 'true') {
+//                 redirect('/contracts');
+//             } else {
+//                 //     $('#lblMsg').text(res.msg);
+//             }
+//         }).catch((err) => {
+//             console.log(err);
+//         });
+
+// }
+
+function DeleteChainAccountData(id, name) {
+    let text = `Are you sure you want to delete "${name}"`; //"Are you sure you want to delete '+  +'!\nEither OK or Cancel.";
+    if (confirm(text) == true) {
+        axios
+            .post("/account-chain/delete/"+ id).then((response) => {
+                //console.log(response.data)
+                alert(response.data.msg)
+                redirect('/contracts');
+            }).catch((err) => {
+                console.log(err);
+            });
+    } else {
+        text = "You canceled!";
+    }
 }

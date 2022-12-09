@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>IVF : Sku List </title>
+        <title>IVF : Rate Contract List </title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="/css/bootstrap.min.css" />
@@ -11,20 +11,17 @@
   <nav class="navbar" id="header"></nav>
 
       <main class="container">
-         <h1 class="text-center">Sku List</h1>
-         <div class="text-right"><a href="./add-sku" class="btn btn-success">New Sku</a></div>
+         <h1 class="text-center">Rate Contract List</h1>
+         <div class="text-right"><a href="./add-chain-account" class="btn btn-success">Add Rate Contract</a></div>
          <table class="table table-bordered table-bg">
             <thead>
               <tr>
-                <th>Brands</th>
-                <th>Brand Groups</th>
-                <th>Sku's</th>
-                <th>Price</th>
+                <th>Name</th>
+                <th>Is Disabled</th>
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody id="skudata">
-            </tbody>
+            <tbody id="skudata"></tbody>
           </table>
       </main>
 
@@ -33,10 +30,10 @@
         <script src="../../js/axios.min.js"></script>
         <script src="../../js/bootstrap.min.js"></script>
         <script src="../../js/admin.js"></script>
-        <script src="../../js/sku.js"></script>
+        <script src="../../js/contract.js"></script>
         <script>
           $(function() {
-              getSKUList();
+            setupPage();
           });
           
           </script>

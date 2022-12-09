@@ -10,8 +10,126 @@ exports.getCustomerList = (req, res, next) => {
     res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/customer/list.html`);
 };
 
+exports.getRCList = (req, res, next) => {
+    res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/contract/rc-list.html`);
+};
+
 exports.addCustomerBusiness = (req, res, next) => {
     res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/customer/add-business.html`);
+};
+
+exports.AddChainAccountData = (req, res, next) => {
+    res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/contract/add.html`);
+};
+
+
+exports.addUpdateAchainAccountData = (req, res, next) => {
+    // console.log('inside update employee');
+     let params = Object.assign(req.params, req.body);
+     addUpdateAchainAccountData(params).then(result => {
+         res.status(_STATUSCODE).json(result)
+     })
+ };
+
+ function addUpdateAchainAccountData( objParam ) {
+    // console.log('--------------------------------')
+    // console.log(objParam)
+    // console.log('--------------------------------')
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    .input("accountID", sql.Int, objParam.caId || null)
+                    .input("name", sql.NVarChar, (objParam.txtChainName))
+                    .input("isDisabled", sql.Bit, (objParam.chkDisabled))
+                    .execute("USP_ADD_UPDATE_CHAIN_ACCOUNT")
+                    .then(function (resp) {
+                        //console.log(resp.recordset)
+                        resolve(resp.recordset);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    });
+};
+
+
+exports.getChailAccountData = (req, res, next) => {
+    // console.log('inside getSKUListData employee');
+      let params = Object.assign(req.params, req.body);
+      getChailAccountData(params).then(result => {
+          res.status(_STATUSCODE).json(result)
+      })
+  };
+ 
+ 
+  getChailAccountData = (objParam) => {
+     //console.log('I am Here', objParam);
+     return new Promise((resolve) => {
+         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+         dbConn
+             .connect()
+             .then(function () {
+                 var request = new sql.Request(dbConn);
+                 request
+                     .execute("USP_GET_CHAIN_ACCOUNT_LIST")
+                     .then(function (resp) {
+                        //  console.log(resp)
+                         resolve(resp.recordset);
+                         dbConn.close();
+                     })
+                     .catch(function (err) {
+                         console.log(err);
+                         dbConn.close();
+                     });
+             })
+             .catch(function (err) {
+                 console.log(err);
+             });
+     });
+ };
+
+ exports.DeleteChainAccountData = (req, res, next) => {
+    DeleteChainAccountData(req.params).then(result => {
+        res.status(_STATUSCODE).json(result)
+    })
+};
+
+
+DeleteChainAccountData = (objParam) => {
+    // console.log('I am Here', objParam);
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    .input("accountId", sql.Int, objParam.accountId)
+                    .execute("USP_DELETE_CHAIN_ACCOUNT")
+                    .then(function (resp) {
+                        let json = { success: true, msg: 'Chain Account deleted successfully' };
+                        resolve(json);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        //console.log(err);
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                //console.log(err);
+            });
+    });
 };
 
 
@@ -22,7 +140,6 @@ exports.getCustomerListData = (req, res, next) => {
          res.status(_STATUSCODE).json(result)
      })
  };
-
 
  getCustomerListData = (objParam) => {
     //console.log('I am Here', objParam);

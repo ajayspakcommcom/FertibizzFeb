@@ -7973,3 +7973,7 @@ table.dataTable tbody tr.selected > * {
   width: 50%;
   display: inline-block;
 }
+
+main.small {
+  width: 600px;;
+}
