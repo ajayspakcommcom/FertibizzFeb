@@ -62,10 +62,6 @@ function addUpdateSku( objParam ) {
 
 
 
-
-
-
-
 exports.getSKUDetailsById = (req, res, next) => {
     // console.log(req.params, '--->')
      getSKUDetailsById(req.params).then((result) => {

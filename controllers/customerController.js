@@ -19,7 +19,7 @@ exports.addCustomerBusiness = (req, res, next) => {
 };
 
 exports.AddChainAccountData = (req, res, next) => {
-    res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/contract/add.html`);
+    res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/contract/add-ac.html`);
 };
 
 
@@ -42,13 +42,15 @@ exports.addUpdateAchainAccountData = (req, res, next) => {
             .then(function () {
                 var request = new sql.Request(dbConn);
                 request
-                    .input("accountID", sql.Int, objParam.caId || null)
+                    .input("accountID", sql.Int, objParam.accountID || null)
                     .input("name", sql.NVarChar, (objParam.txtChainName))
                     .input("isDisabled", sql.Bit, (objParam.chkDisabled))
                     .execute("USP_ADD_UPDATE_CHAIN_ACCOUNT")
                     .then(function (resp) {
-                        //console.log(resp.recordset)
+                        console.log(resp.recordset)
                         resolve(resp.recordset);
+                        // let json = { success: true, msg: 'Chain Account deleted successfully' };
+                        // resolve(json);
                         dbConn.close();
                     })
                     .catch(function (err) {
@@ -61,6 +63,40 @@ exports.addUpdateAchainAccountData = (req, res, next) => {
             });
     });
 };
+
+exports.getChainAccountDetailsById = (req, res, next) => {
+    console.log(req.params, '--->')
+    getChainAccountDetailsById(req.params).then((result) => {
+         res.status(_STATUSCODE).json(result);
+     });
+ };
+ 
+ 
+ getChainAccountDetailsById = (objParam) => {
+     return new Promise((resolve) => {
+         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+         dbConn
+             .connect()
+             .then(function () {
+                 var request = new sql.Request(dbConn);
+                 request
+                     .input("accountId", sql.Int, objParam.accountId)
+                     .execute("USP_GET_CHAIN_ACCOUNT_DETAILS_BY_ID")
+                     .then(function (resp) {
+                        console.log(resp)
+                         resolve(resp.recordset);
+                         dbConn.close();
+                     })
+                     .catch(function (err) {
+                       //  console.log(err);
+                         dbConn.close();
+                     });
+             })
+             .catch(function (err) {
+                 //console.log(err);
+             });
+     });
+ };
 
 
 exports.getChailAccountData = (req, res, next) => {

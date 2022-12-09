@@ -12,6 +12,11 @@ router.get('/add-chain-account', customerController.AddChainAccountData);
 
 router.post('/accound-chain-add', customerController.addUpdateAchainAccountData);
 
+router.get('/account-chain-edit/:accountId', customerController.AddChainAccountData);
+router.get('/account-chain-details/:accountId', customerController.getChainAccountDetailsById);
+
+router.post('/account-chain-edit/:accountId', customerController.addUpdateAchainAccountData);
+
 router.get('/account-chain-list', customerController.getChailAccountData);
 
 router.post('/account-chain/delete/:accountId', customerController.DeleteChainAccountData);

@@ -2,6 +2,7 @@ var skuDetails;
 function setupPage() {
     getContractDetails();
     getChainAccountList();
+    getAccountChainDetails();
 }
 
 async function getContractDetails() {
@@ -198,7 +199,7 @@ function getChainAccountList() {
                         <td>
                             <a href="/customer-contract-add/${data.accountID}">SKU Contract</a>
                             |
-                            <a href="/customer-contract-add/${data.accountID}">Edit Contract</a>
+                            <a href="/account-chain-edit/${data.accountID}">Edit Contract</a>
                             |
                             <a href='javascript:void(0)' onclick='DeleteChainAccountData(${data.accountID},"${data.name}");return false;'>Delete Contract</a>
                         </td>
@@ -211,44 +212,64 @@ function getChainAccountList() {
         });
 }
 
-// function validateMe() {
-//     alert('Test');
-//     let txtChainName = $('#txtChainName')
-//         chkDisabled = $('#chkDisabled');
+function validateAC() {
+    
+    let txtChainName = $('#txtChainName')
+        chkDisabled = $('#chkDisabled');
 
-//     if (txtChainName.val() == '') {
-//         alert('Please enter Chain Account Name')
-//         txtChainName.focus();
-//         return false;
-//     } 
+    if (txtChainName.val() == '') {
+        alert('Please enter Chain Account Name')
+        txtChainName.focus();
+        return false;
+    } 
 
-//     let urlArr = window.location.href.split('/'),
-//         caId = urlArr[urlArr.length - 1];
+    let urlArr = window.location.href.split('/'),
+    accountID = urlArr[urlArr.length - 1];
 
-//     console.log(caId);
+    console.log(accountID);
 
-//     let param = {
-//         txtChainName: $('#txtChainName').val(),
-//         caId: isNaN(caId) ? null : parseInt(caId),
-//         chkDisabled: $('#chkDisabled').is(":checked")
-//     }
-//     console.log(param)
-//     URL = isEditPage() ? '/accound-chain-edit/' + caId : '/accound-chain-add'
+    let param = {
+        txtChainName: $('#txtChainName').val(),
+        accountID: isNaN(accountID) ? null : parseInt(accountID),
+        chkDisabled: $('#chkDisabled').is(":checked")
+    }
+    console.log(param)
+    URL = isEditPage() ? '/account-chain-edit/' + accountID : '/accound-chain-add'
 
-//     axios
-//         .post(URL, param).then((response) => {
-//             console.log(response.data[0])
-//             let res = response.data[0];
-//             if (res.sucess === 'true') {
-//                 redirect('/contracts');
-//             } else {
-//                 //     $('#lblMsg').text(res.msg);
-//             }
-//         }).catch((err) => {
-//             console.log(err);
-//         });
+    axios
+        .post(URL, param).then((response) => {
+            console.log(response.data[0]);
+            let res = response.data[0];
+            if (res.sucess === 'true') {
+                redirect('/contracts');
+            } else {
+                //$('#lblMsg').text(res.msg);
+            }
+        }).catch((err) => {
+            console.log(err);
+        });
 
-// }
+}
+
+function getAccountChainDetails() {
+
+    console.log('ready')
+    if (!isEditPage()) {
+        return;
+    }
+    let urlArr = window.location.href.split('/'),
+    accountId = urlArr[urlArr.length - 1];
+    console.log(accountId);
+    axios
+        .get('/account-chain-details/' + accountId).then((response) => {
+            console.log(response.data)
+            let acData = response.data[0];
+            $('#txtChainName').val(acData.name);
+            $('#chkDisabled').prop('checked', acData.isdisabled);
+        }).catch((err) => {
+            console.log(err);
+        });
+}
 
 function DeleteChainAccountData(id, name) {
     let text = `Are you sure you want to delete "${name}"`; //"Are you sure you want to delete '+  +'!\nEither OK or Cancel.";
