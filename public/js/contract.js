@@ -79,21 +79,7 @@ function getSKUHtml(skuBrandGroups, brandGroup, contractResponse) {
         skuArr = skuBrandGroups.filter(item => {
             return item.groupName === brandGroup.groupName;
 
-        }),
-        skuDetails = contractResponse.filter(sku => {
-            //console.log(sku.medId)
-            skuContract = skuArr.filter(skuAr => {
-                return (skuAr.medid)
-            })
-            if (skuContract.length > 0) {
-                return (sku.medId === skuContract[0].medid)
-            } else {
-                return false;
-            }
-
-        }),
-        contractRate = skuDetails.length > 0 ? skuDetails[0].price : 0;;
-
+        });
     html.push(`<table class="table table-bordered table-bg">
             <thead>
             <tr>
@@ -103,6 +89,11 @@ function getSKUHtml(skuBrandGroups, brandGroup, contractResponse) {
             </thead>
             <tbody>`)
     skuArr.forEach(sku => {
+            let contractRateArr = contractResponse.filter(cr => {
+                return (parseInt(cr.medId) ===  parseInt(sku.medid));
+            }),
+            contractRate = contractRateArr.length > 0 ? contractRateArr[0].price : 0;
+
         let fieldName = `${sku.brandId}_${sku.brandGroupId}_${sku.medid}`
         html.push(`<tr>
                 <td width="25%">
@@ -154,7 +145,7 @@ function validateMe() {
             skuId = sku.medid,
             fieldId = `${sku.brandId}_${sku.brandGroupId}_${sku.medid}`,
             rateContractPrice = $(`#txt_${fieldId}_ContractRate`).val();
-        if (rateContractPrice > 0) {
+        if (rateContractPrice >= 0) {
             param = {
                 brandId: brandId,
                 brandGroupID: brandGroupId,
