@@ -132,8 +132,8 @@ function isNumber(evt) {
 
 function validateMe() {
 
-    console.log('save into database')
-    console.log(skuDetails)
+    //console.log('save into database')
+    //console.log(skuDetails)
 
     let urlArr = window.location.href.split('/'),
         chainAccountTypeId = urlArr[urlArr.length - 1],
@@ -153,7 +153,7 @@ function validateMe() {
                 rate: rateContractPrice,
                 chainAccountTypeId: chainAccountTypeId
             }
-            console.log(param)
+            //console.log(param)
 
             axios
                 .post('/rate-contract-add/', param).then((response) => {
@@ -217,19 +217,19 @@ function validateAC() {
     let urlArr = window.location.href.split('/'),
     accountID = urlArr[urlArr.length - 1];
 
-    console.log(accountID);
+    //console.log(accountID);
 
     let param = {
         txtChainName: $('#txtChainName').val(),
         accountID: isNaN(accountID) ? null : parseInt(accountID),
         chkDisabled: $('#chkDisabled').is(":checked")
     }
-    console.log(param)
+    //console.log(param)
     URL = isEditPage() ? '/account-chain-edit/' + accountID : '/accound-chain-add'
 
     axios
         .post(URL, param).then((response) => {
-            console.log(response.data[0]);
+            //console.log(response.data[0]);
             let res = response.data[0];
             if (res.sucess === 'true') {
                 redirect('/contracts');
@@ -250,10 +250,10 @@ function getAccountChainDetails() {
     }
     let urlArr = window.location.href.split('/'),
     accountId = urlArr[urlArr.length - 1];
-    console.log(accountId);
+    //console.log(accountId);
     axios
         .get('/account-chain-details/' + accountId).then((response) => {
-            console.log(response.data)
+            //console.log(response.data)
             let acData = response.data[0];
             $('#txtChainName').val(acData.name);
             $('#chkDisabled').prop('checked', acData.isdisabled);
