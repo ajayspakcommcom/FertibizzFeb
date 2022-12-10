@@ -1,52 +1,102 @@
 var skuDetails;
 function setupPage() {
+    loadMonthYear();
     getSkuDetails()
 }
 
-function getSkuDetails() {
-    let skuBrands = ['FOLIGRAF', 'HUMOG', 'ASPORELIX', 'R-HUCOG', 'FOLICULIN', 'AGOTRIG', 'MIDYDROGESTERONE'];
-    axios
-        .get('/sku-details/').then((response) => {
-          //  console.log(response.data)
-          skuDetails = response.data;
-            let skus = skuDetails,
-                html = [];
-
-
-            skuBrands.forEach(skuBrand => {
-                var skuBrandArr = skus.filter(item => {
-                    return item.brandName === skuBrand;
-                });
-                //  console.log(skuBrandArr)
-
-                html.push(`   <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#${skuBrand.toLowerCase().replace(/\s/g, '')}">${formatText(skuBrand, 'FirstLetterUPPER')}</a>
-                  </h4>
-                </div>
-                <div id="${skuBrand.toLowerCase().replace(/\s/g, '')}" class="panel-collapse collapse in">
-                  <div class="panel-body">
-                    <div class="form-section"> 
-                    ${getBrandGroupDetails(skuBrandArr)}
-                   
-                    
-                    </div>
-                  </div>
-                </div>
-              </div>`)
-
-            });
-
-            $('#accordion').append(html.join(''))
-
-
-        }).catch((err) => {
-            console.log(err);
-        });
+function loadMonthYear() {
+    const date = new Date();
+    let dt = new Date(date.getFullYear(), date.getMonth() - 1, 1);
+    $('#cmbMonth').val(dt.getMonth() + 1); // our combo box starts with 1
+    $('#cmbYear').val(dt.getFullYear());
+    $('#cmbMonth').prop('disabled', true);
+    $('#cmbYear').prop('disabled', true);
 }
 
-function getBrandGroupDetails(skuBrandGroups) {
+
+async function getSkuDetails() {
+    let skuBrands = ['FOLIGRAF', 'HUMOG', 'ASPORELIX', 'R-HUCOG', 'FOLICULIN', 'AGOTRIG', 'MIDYDROGESTERONE'],
+        hospitalId = new URLSearchParams(window.location.search).get('cid'),
+        chainAccountTypeId = new URLSearchParams(window.location.search).get('chainAccountType');
+    
+    const getAllSKURequest = axios.get("/sku-details/");
+    const getSkuContractDetailsRequest = axios.get('/contract-details/' + chainAccountTypeId);
+    await axios.all([getAllSKURequest, getSkuContractDetailsRequest]).then(axios.spread(function (skuResponse, contractResponse) {
+        //  console.log(skuResponse.data);
+        //console.log(contractResponse.data);
+        skuDetails = skuResponse.data;
+        let skus = skuDetails,
+            contractRes = contractResponse.data,
+            html = [];
+
+        _SKU_BRANDS.forEach(skuBrand => {
+            var skuBrandArr = skus.filter(item => {
+                return item.brandName === skuBrand;
+            });
+
+            html.push(`   <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#${skuBrand.toLowerCase().replace(/\s/g, '')}">${formatText(skuBrand, 'FirstLetterUPPER')}</a>
+            </h4>
+        </div>
+        <div id="${skuBrand.toLowerCase().replace(/\s/g, '')}" class="panel-collapse collapse in">
+            <div class="panel-body">
+            <div class="form-section"> 
+            ${getBrandGroupDetails(skuBrandArr, contractRes)}
+            </div>
+            </div>
+        </div>
+        </div>`)
+
+        });
+
+        $('#accordion').append(html.join(''))
+
+    }))
+    
+    // axios
+    //     .get('/sku-details/').then((response) => {
+    //       //  console.log(response.data)
+    //       skuDetails = response.data;
+    //         let skus = skuDetails,
+    //             html = [];
+
+
+    //         skuBrands.forEach(skuBrand => {
+    //             var skuBrandArr = skus.filter(item => {
+    //                 return item.brandName === skuBrand;
+    //             });
+    //             //  console.log(skuBrandArr)
+
+    //             html.push(`   <div class="panel panel-default">
+    //             <div class="panel-heading">
+    //               <h4 class="panel-title">
+    //                 <a data-toggle="collapse" data-parent="#accordion" href="#${skuBrand.toLowerCase().replace(/\s/g, '')}">${formatText(skuBrand, 'FirstLetterUPPER')}</a>
+    //               </h4>
+    //             </div>
+    //             <div id="${skuBrand.toLowerCase().replace(/\s/g, '')}" class="panel-collapse collapse in">
+    //               <div class="panel-body">
+    //                 <div class="form-section"> 
+    //                 ${getBrandGroupDetails(skuBrandArr)}
+                   
+                    
+    //                 </div>
+    //               </div>
+    //             </div>
+    //           </div>`)
+
+    //         });
+
+    //         $('#accordion').append(html.join(''))
+
+
+    //     }).catch((err) => {
+    //         console.log(err);
+    //     });
+}
+
+function getBrandGroupDetails(skuBrandGroups, contractResponse) {
     let html = []
     _brandGroupArr = [];
     skuBrandGroups.forEach(brandGroup => {
@@ -54,15 +104,13 @@ function getBrandGroupDetails(skuBrandGroups) {
             html.push(`<h5><strong>${brandGroup.groupName}</strong></h5>
             <hr>`);
             _brandGroupArr.push(brandGroup.groupName)
-            html.push(getSKUHtml(skuBrandGroups, brandGroup))
+            html.push(getSKUHtml(skuBrandGroups, brandGroup, contractResponse))
         }
     })
-
-    // console.log(_brandGroupArr)
     return html.join('');
 }
 
-function getSKUHtml(skuBrandGroups, brandGroup) {
+function getSKUHtml(skuBrandGroups, brandGroup, contractResponse) {
     //console.log(skuBrandGroups)
     //console.log(brandGroup)
     let html = [],
@@ -75,26 +123,27 @@ function getSKUHtml(skuBrandGroups, brandGroup) {
             <thead>
             <tr>
                 <th>SKU</th>
-                <th>Rate Contract</th>
-                <th>Unit Sold</th>
-                <th>Business</th>
+                <th width="5%">Price</th>
+                <th width="5%">Unit Sold</th>
+                <th width="5%">Business</th>
             </tr>
             </thead>
             <tbody>`)
     skuArr.forEach(sku => {
+        let contractRateArr = contractResponse.filter(cr => {
+            return (parseInt(cr.medId) ===  parseInt(sku.medid));
+        }),
+        contractRate = contractRateArr.length > 0 ? contractRateArr[0].SkuPrice : 0;
         let fieldName = `${sku.brandId}_${sku.brandGroupId}_${sku.medid}`
         html.push(`<tr>
-                <td>
+                <td width="20%">
                 <span>${sku.medicineName}</span>
                 </td>
                 <td>
                 <div class="form-group">
                     <input type="text" 
                     disabled=true class="form-control business-rate" 
-                    id="txt_${fieldName}_ContractRate" name="txt_${fieldName}_ContractRate" placeholder="00" required="">
-                    <input type="hidden" 
-                    class="form-control business-rate" id="hid_${fieldName}_Price" name="hid_${fieldName}_Price" placeholder="00" value="${sku.Price}">
-
+                    id="txt_${fieldName}_ContractRate" name="txt_${fieldName}_ContractRate" placeholder="00" required="" value= '${contractRate}'>
                 </div>
                 </td>
                 <td>
@@ -135,10 +184,8 @@ function calculateBusiness(obj) {
     let priceField =  obj.getAttribute('priceField'),
         rateContractField = obj.getAttribute('rateContractField'),
         unitSoldBusinessfield = obj.getAttribute('unitSoldBusinessfield')
-        isRateContractApplicable = $('#chkIsContractRateApplicable').is(':checked'), 
-        unitPrice = $('#'+ priceField).val(),
         rateContractPrice = $('#'+ rateContractField).val(),
-        finalPrice = (isRateContractApplicable)? rateContractPrice : unitPrice,
+        finalPrice = rateContractPrice, // (isRateContractApplicable)? rateContractPrice : unitPrice,
         roundOffPrice = Math.round(($('#'+obj.id).val() * finalPrice) * 100) / 100;
         
         $('#'+unitSoldBusinessfield).val(roundOffPrice);

@@ -92,7 +92,7 @@ function getSKUHtml(skuBrandGroups, brandGroup, contractResponse) {
             let contractRateArr = contractResponse.filter(cr => {
                 return (parseInt(cr.medId) ===  parseInt(sku.medid));
             }),
-            contractRate = contractRateArr.length > 0 ? contractRateArr[0].price : 0;
+            contractRate = contractRateArr.length > 0 ? contractRateArr[0].SkuPrice : 0;
 
         let fieldName = `${sku.brandId}_${sku.brandGroupId}_${sku.medid}`
         html.push(`<tr>

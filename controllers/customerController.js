@@ -64,7 +64,7 @@ exports.addUpdateAchainAccountData = (req, res, next) => {
 };
 
 exports.getChainAccountDetailsById = (req, res, next) => {
-    console.log(req.params, '--->')
+    //console.log(req.params, '--->')
     getChainAccountDetailsById(req.params).then((result) => {
          res.status(_STATUSCODE).json(result);
      });
@@ -82,7 +82,7 @@ exports.getChainAccountDetailsById = (req, res, next) => {
                      .input("accountId", sql.Int, objParam.accountId)
                      .execute("USP_GET_CHAIN_ACCOUNT_DETAILS_BY_ID")
                      .then(function (resp) {
-                        console.log(resp)
+                        //console.log(resp)
                          resolve(resp.recordset);
                          dbConn.close();
                      })
