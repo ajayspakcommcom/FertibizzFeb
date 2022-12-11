@@ -19,7 +19,7 @@
     <form>
       <div class="form-wrapper">
           <div class="form-group yearComboBox">
-            <select class="form-control" id="cmbYear">
+            <select class="form-control" id="cmbYear" onchange="getSkuDetails()">
               <option value = '2022-2023'>2022-2023</option>
               <option value = '2023-2024'>2023-2024</option>
               <option value = '2024-2025'>2024-2025</option>
@@ -37,20 +37,20 @@
                   <th  style="text-align:center;" colspan="3">Quarter 4</th>
                 </tr>
                 <tr>
-                  <th width="10%" style="text-decoration: strong;">Brand</th>
-                  <th width="20%" nowrap>Competition Mapping</th>
-                  <th style="text-align:center;">Apr</th>
-                  <th style="text-align:center;">May</th>
-                  <th style="text-align:center;">Jun</th>
-                  <th style="text-align:center;">Jul</th>
-                  <th style="text-align:center;">Aug</th>
-                  <th style="text-align:center;">Sep</th>
-                  <th style="text-align:center;">Oct</th>
-                  <th style="text-align:center;">Nov</th>
-                  <th style="text-align:center;">Dec</th>
-                  <th style="text-align:center;">Jan</th>
-                  <th style="text-align:center;">Feb</th>
-                  <th style="text-align:center;">Mar</th>
+                  <th width="5%" style="text-decoration: strong;">Brand</th>
+                  <th width="10%" nowrap>Competition Mapping</th>
+                  <th style="text-align:center;" width="10%">Apr</th>
+                  <th style="text-align:center;" width="10%">May</th>
+                  <th style="text-align:center;" width="10%">Jun</th>
+                  <th style="text-align:center;" width="10%">Jul</th>
+                  <th style="text-align:center;" width="10%">Aug</th>
+                  <th style="text-align:center;" width="10%">Sep</th>
+                  <th style="text-align:center;" width="10%">Oct</th>
+                  <th style="text-align:center;" width="10%">Nov</th>
+                  <th style="text-align:center;" width="10%">Dec</th>
+                  <th style="text-align:center;" width="10%">Jan</th>
+                  <th style="text-align:center;" width="10%">Feb</th>
+                  <th style="text-align:center;" width="10%">Mar</th>
                 </tr>
               </thead>
               <tbody id="competitorDataTable">

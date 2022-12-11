@@ -97,7 +97,7 @@ function addUpdateCompetitionSkus( objParam ) {
                     
                     .execute("USP_ADD_UPDATE_SKU_COMPETITION")
                     .then(function (resp) {
-                        console.log(resp.recordset)
+                      //  console.log(resp.recordset)
                         resolve(resp.recordset);
                         dbConn.close();
                     })
@@ -111,3 +111,42 @@ function addUpdateCompetitionSkus( objParam ) {
             });
     });
 };
+
+
+//
+
+
+exports.getCompetitionDetailsByCenterId = (req, res, next) => {
+    //console.log(req.params, '--->')
+    getCompetitionDetailsByCenterId(req.params).then((result) => {
+         res.status(_STATUSCODE).json(result);
+     });
+ };
+ 
+ 
+ getCompetitionDetailsByCenterId = (objParam) => {
+     return new Promise((resolve) => {
+         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+         dbConn
+             .connect()
+             .then(function () {
+                 var request = new sql.Request(dbConn);
+                 request
+                     .input("centerId", sql.Int, objParam.centerId)
+                     .input("year", sql.NVarChar, objParam.year)
+                     .execute("USP_GET_SKU_COMPETITION_DETAILS_BY_CENTER")
+                     .then(function (resp) {
+                        //console.log(resp)
+                         resolve(resp.recordset);
+                         dbConn.close();
+                     })
+                     .catch(function (err) {
+                       //  console.log(err);
+                         dbConn.close();
+                     });
+             })
+             .catch(function (err) {
+                 //console.log(err);
+             });
+     });
+ };
