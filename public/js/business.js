@@ -1,4 +1,5 @@
-var skuDetails;
+var skuDetails,
+    isContractApplicableBool = false;
 function setupPage() {
     loadMonthYear();
     getSkuDetails()
@@ -18,7 +19,7 @@ async function getSkuDetails() {
     let skuBrands = ['FOLIGRAF', 'HUMOG', 'ASPORELIX', 'R-HUCOG', 'FOLICULIN', 'AGOTRIG', 'MIDYDROGESTERONE'],
         hospitalId = new URLSearchParams(window.location.search).get('cid'),
         chainAccountTypeId = new URLSearchParams(window.location.search).get('chainAccountType');
-    
+
     const getAllSKURequest = axios.get("/sku-details/");
     const getSkuContractDetailsRequest = axios.get('/contract-details/' + chainAccountTypeId);
     await axios.all([getAllSKURequest, getSkuContractDetailsRequest]).then(axios.spread(function (skuResponse, contractResponse) {
@@ -28,6 +29,10 @@ async function getSkuDetails() {
         let skus = skuDetails,
             contractRes = contractResponse.data,
             html = [];
+        isContractApplicableBool = (contractRes[0].RateType === 'contract Rate');
+
+        //  console.log(isContractApplicableBool) ;
+        //  console.log(contractRes)   ;
 
         _SKU_BRANDS.forEach(skuBrand => {
             var skuBrandArr = skus.filter(item => {
@@ -46,7 +51,9 @@ async function getSkuDetails() {
             ${getBrandGroupDetails(skuBrandArr, contractRes)}
             </div>
             </div>
+            &nbsp;&nbsp;&nbsp;<input type='checkbox' id='chkConfirm_${skuBrand.toLowerCase().replace(/\s/g, '')}' onchange='confirmBrandEntry(this);return false;'>  Confirm you entered ${formatText(skuBrand, 'FirstLetterUPPER')}
         </div>
+       
         </div>`)
 
         });
@@ -54,46 +61,7 @@ async function getSkuDetails() {
         $('#accordion').append(html.join(''))
 
     }))
-    
-    // axios
-    //     .get('/sku-details/').then((response) => {
-    //       //  console.log(response.data)
-    //       skuDetails = response.data;
-    //         let skus = skuDetails,
-    //             html = [];
 
-
-    //         skuBrands.forEach(skuBrand => {
-    //             var skuBrandArr = skus.filter(item => {
-    //                 return item.brandName === skuBrand;
-    //             });
-    //             //  console.log(skuBrandArr)
-
-    //             html.push(`   <div class="panel panel-default">
-    //             <div class="panel-heading">
-    //               <h4 class="panel-title">
-    //                 <a data-toggle="collapse" data-parent="#accordion" href="#${skuBrand.toLowerCase().replace(/\s/g, '')}">${formatText(skuBrand, 'FirstLetterUPPER')}</a>
-    //               </h4>
-    //             </div>
-    //             <div id="${skuBrand.toLowerCase().replace(/\s/g, '')}" class="panel-collapse collapse in">
-    //               <div class="panel-body">
-    //                 <div class="form-section"> 
-    //                 ${getBrandGroupDetails(skuBrandArr)}
-                   
-                    
-    //                 </div>
-    //               </div>
-    //             </div>
-    //           </div>`)
-
-    //         });
-
-    //         $('#accordion').append(html.join(''))
-
-
-    //     }).catch((err) => {
-    //         console.log(err);
-    //     });
 }
 
 function getBrandGroupDetails(skuBrandGroups, contractResponse) {
@@ -131,9 +99,9 @@ function getSKUHtml(skuBrandGroups, brandGroup, contractResponse) {
             <tbody>`)
     skuArr.forEach(sku => {
         let contractRateArr = contractResponse.filter(cr => {
-            return (parseInt(cr.medId) ===  parseInt(sku.medid));
+            return (parseInt(cr.medId) === parseInt(sku.medid));
         }),
-        contractRate = contractRateArr.length > 0 ? contractRateArr[0].SkuPrice : 0;
+            contractRate = contractRateArr.length > 0 ? contractRateArr[0].SkuPrice : 0;
         let fieldName = `${sku.brandId}_${sku.brandGroupId}_${sku.medid}`
         html.push(`<tr>
                 <td width="20%">
@@ -174,36 +142,43 @@ function getSKUHtml(skuBrandGroups, brandGroup, contractResponse) {
 
 
 
-  //  console.log(skuArr);
+    //  console.log(skuArr);
 
     return html.join('');
 }
 
+function confirmBrandEntry(checkbox) {
+    console.log(checkbox.id)
+    let msg = $('#'+checkbox.id).is(":checked") ? 'close the panel': 'dont do anything';
+    console.log(msg)
+}
+
+
 function calculateBusiness(obj) {
-   // console.log(obj)
-    let priceField =  obj.getAttribute('priceField'),
+    // console.log(obj)
+    let priceField = obj.getAttribute('priceField'),
         rateContractField = obj.getAttribute('rateContractField'),
         unitSoldBusinessfield = obj.getAttribute('unitSoldBusinessfield')
-        rateContractPrice = $('#'+ rateContractField).val(),
+    rateContractPrice = $('#' + rateContractField).val(),
         finalPrice = rateContractPrice, // (isRateContractApplicable)? rateContractPrice : unitPrice,
-        roundOffPrice = Math.round(($('#'+obj.id).val() * finalPrice) * 100) / 100;
-        
-        $('#'+unitSoldBusinessfield).val(roundOffPrice);
+        roundOffPrice = Math.round(($('#' + obj.id).val() * finalPrice) * 100) / 100;
 
-        calculateTotal();
-   // console.log(priceField, rateContractField, unitPrice)
+    $('#' + unitSoldBusinessfield).val(roundOffPrice);
+
+    calculateTotal();
+    // console.log(priceField, rateContractField, unitPrice)
 }
 
 function calculateTotal() {
     let skus = skuDetails,
         totalBusiness = 0;
-        skus.forEach(sku => {
-            let unitSoldBusinessfield = `txt_${sku.brandId}_${sku.brandGroupId}_${sku.medid}_unitSoldBusiness`,
-                businessValue = $('#'+unitSoldBusinessfield).val().length > 0 ? parseFloat($('#'+unitSoldBusinessfield).val()) : 0;
-            totalBusiness  = parseFloat(totalBusiness+businessValue)
-        })
-//        console.log(totalBusiness);
-        $('#spnTotalBusinessValue').html(totalBusiness);
+    skus.forEach(sku => {
+        let unitSoldBusinessfield = `txt_${sku.brandId}_${sku.brandGroupId}_${sku.medid}_unitSoldBusiness`,
+            businessValue = $('#' + unitSoldBusinessfield).val().length > 0 ? parseFloat($('#' + unitSoldBusinessfield).val()) : 0;
+        totalBusiness = parseFloat(totalBusiness + businessValue)
+    })
+    //        console.log(totalBusiness);
+    $('#spnTotalBusinessValue').html(totalBusiness);
 }
 
 function isNumber(evt) {
@@ -231,36 +206,35 @@ function validateMe() {
         $('#cmbYear').focus();
         return false;
     }
-    let checkBox = document.getElementById('chkIsContractRateApplicable');
-    
-    if (checkBox.checked && $('#txtContractEndDate').val() === '') {
-        alert('Select contract End date');
-        $('#txtContractEndDate').focus();
-        return false;
-    }
+    // let checkBox = document.getElementById('chkIsContractRateApplicable');
+
+    // if (checkBox.checked && $('#txtContractEndDate').val() === '') {
+    //     alert('Select contract End date');
+    //     $('#txtContractEndDate').focus();
+    //     return false;
+    // }
 
     let skus = skuDetails,
         totalBusiness = 0,
         userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
         hospitalId = new URLSearchParams(window.location.search).get('cid'),
-        empId= parseInt(userData.empId),
-        month= parseInt($('#cmbMonth').val()),
-        year= parseInt($('#cmbYear').val()),
-        isRateContractApplicable = $('#chkIsContractRateApplicable').is(':checked')
-        contractEndDate = $('#txtContractEndDate').val()
+        empId = parseInt(userData.empId),
+        month = parseInt($('#cmbMonth').val()),
+        year = parseInt($('#cmbYear').val());
+    var endPoints = [];
+    skus.forEach(sku => {
+        let brandId = sku.brandId,
+            brandGroupId = sku.brandGroupId,
+            skuId = sku.medid,
+            fieldId = `${sku.brandId}_${sku.brandGroupId}_${sku.medid}`,
+            rateContractPrice = $(`#txt_${fieldId}_ContractRate`).val(),
+            //  unitPrice = $(`#hid_${fieldId}_Price`).val(),
+            unitSold = parseInt($(`#txt_${fieldId}_unitSold`).val()),
+            finalPrice = rateContractPrice; //(isRateContractApplicable)? rateContractPrice : unitPrice
         ;
-        
-        skus.forEach(sku => {
-           let brandId = sku.brandId,
-                brandGroupId = sku.brandGroupId,
-                skuId = sku.medid,
-                fieldId = `${sku.brandId}_${sku.brandGroupId}_${sku.medid}`,
-                rateContractPrice =  $(`#txt_${fieldId}_ContractRate`).val(),
-                unitPrice = $(`#hid_${fieldId}_Price`).val(),
-                unitSold = parseInt($(`#txt_${fieldId}_unitSold`).val()),
-                finalPrice = (isRateContractApplicable)? rateContractPrice : unitPrice
-        ;
-        if (unitSold >0) {
+
+
+        if (unitSold > 0) {
             param = {
                 empId: empId,
                 hospitalId: hospitalId,
@@ -271,28 +245,33 @@ function validateMe() {
                 skuId: skuId,
                 rate: finalPrice,
                 qty: unitSold,
-                isContractApplicable: isRateContractApplicable,
-                contractEndDate: contractEndDate.length > 0? contractEndDate : null,
-                
+                isContractApplicable: isContractApplicableBool
             }
             console.log(param)
-
-                axios
-                .post('/sku-add/', param).then((response) => {
-                    //console.log(response.data[0])
-                    let res = response.data[0];
-                    if (res.sucess === 'true') {
-                        redirect('/hospitals');
-                    } else {
-                        //     $('#lblMsg').text(res.msg);
-                    }
-                }).catch((err) => {
-                    console.log(err);
-                });
-                
+            endPoints.push(param);
+            // axios
+            // .post('/sku-add/', param).then((response) => {
+            //     //console.log(response.data[0])
+            //     let res = response.data[0];
+            //     if (res.sucess === 'true') {
+            //       //  redirect('/hospitals');
+            //     } else {
+            //         //     $('#lblMsg').text(res.msg);
+            //     }
+            // }).catch((err) => {
+            //     console.log(err);
+            // });
         }
-           
+
+    })
+    console.log(endPoints)
+    // Return our response in the allData variable as an array
+    Promise.all(endPoints.map((endpoint) => axios.post('/sku-add/', endpoint))).then(
+        axios.spread((...allData) => {
+            console.log({ allData });
+            redirect('/hospitals');
         })
+    );
     return false;
 
 }

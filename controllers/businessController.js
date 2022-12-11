@@ -25,9 +25,9 @@ exports.addUpdateBusinessTracker = (req, res, next) => {
  
 
 function addUpdateBusinessTracker( objParam ) {
-    console.log('--------------------------------')
-    console.log(objParam)
-    console.log('--------------------------------')
+    // console.log('--------------------------------')
+    // console.log(objParam)
+    // console.log('--------------------------------')
     return new Promise((resolve) => {
         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
         dbConn
@@ -36,25 +36,18 @@ function addUpdateBusinessTracker( objParam ) {
                 var request = new sql.Request(dbConn);
                 request
                     .input("empId", sql.Int, objParam.empId)
-                    .input("hospitalId", sql.Int, objParam.hospitalId)
+                    .input("hospitalId", sql.Int, parseInt(objParam.hospitalId))
                     .input("Month", sql.Int, objParam.month)
                     .input("Year", sql.Int, objParam.year)
-                   
                     .input("brandId", sql.Int, objParam.brandId)
                     .input("brandGroupId", sql.Int, objParam.brandGroupID)
                     .input("skuId", sql.Int, objParam.skuId)
-                    
-                    .input("rate", sql.Float, objParam.rate)
+                    .input("rate", sql.Float, parseFloat(objParam.rate))
                     .input("qty", sql.Int, objParam.qty)
-                   
                     .input("isContractApplicable", sql.Bit, objParam.isContractApplicable)
-                    .input("contractEndDate", sql.SmallDateTime, objParam.contractEndDate)
-                    
-
-
                     .execute("USP_add_update_BUSINESS_TRACKER")
                     .then(function (resp) {
-                        //console.log(resp.recordset)
+                        console.log(resp.recordset)
                         resolve(resp.recordset);
                         dbConn.close();
                     })
