@@ -157,6 +157,12 @@ function getFirstDayPreviousMonth() {
   }
 
 
+  function logMeOut() {
+    localStorage.setItem("userData", null);
+    localStorage.clear();
+    document.location.href = "/";
+}
+
 
 // $('.col-wrapper').on('click', '.img-wrapper', function(){
 //     let $this = $(this);

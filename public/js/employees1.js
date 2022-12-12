@@ -13,20 +13,17 @@ function getKamList() {
         console.log(response.data);
 
         let list = response.data, listArr = [];
+        let indx = 0;
 
-        list.forEach(data => {
+        list.forEach((data) => {
+            indx = indx + 1;
             listArr.push(
                 `<tr>
+                    <td>${indx}</td>
                     <td>${data.firstName}</td>
-                    <td>${data.email}</td>
-                    <td>${data.MobileNumber}</td>
-                    <td>${data.EmpNumber}</td>
-                    <td>${data.hoCode}</td>
-                    <td>${data.StateName}</td>
-                    <td>${data.DOJ}</td>
+                    <td>${`Head Quater`}</td>
+                    <td><a href="../account-mapping">Account Mapping Data</a></td>
                     <td>
-                        <a href="../account-mapping">Account Mapping Data</a>
-                        |
                         <a href="/employees/centre-list/${data.empID}">Master Data</a>
                     </td>
                 </tr>

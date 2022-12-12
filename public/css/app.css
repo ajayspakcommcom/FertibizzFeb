@@ -7918,6 +7918,7 @@ table.dataTable tbody tr.selected > * {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   cursor: pointer;
+  font-size: 16px;
 }
 
 .rbm-wrapper {
@@ -7925,6 +7926,7 @@ table.dataTable tbody tr.selected > * {
   background: #fff;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  font-size: 16px;
 }
 
 .zone-profile b {
@@ -8007,4 +8009,35 @@ ul.inline {
 
 #competitorDataTable input {
   width: 80px;
+}
+
+.performance-heading {
+  display: flex;
+  display: -webkit-flex;
+}
+
+.performance-heading > div:first-child {
+  padding-right: 30px;
+}
+
+.performance-wrapper h3 {
+  font-family: 'Bold';
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.border-b-0 {
+  border-bottom: 0 !important;
+}
+
+.p-0 {
+  padding: 0 0 !important;
+}
+
+.table-m-t-0 {
+  margin-top: 0;
+} 
+
+.performance-main-wrapper {
+  padding-bottom: 20px;
 }

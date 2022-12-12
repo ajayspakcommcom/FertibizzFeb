@@ -56,7 +56,7 @@ function isEmployeeCenterList(obj) {
     if(path == 'customers') {
         return `<a href="/customer-edit/${obj.customerId}">Edit</a> | <a href='javascript:void(0)' onclick='DeleteCustomer(${obj.customerId},"${obj.CENTRENAME}");return false;' class='${obj.customerId}' title='${obj.CENTRENAME}'>Delete</a>`
     } else {
-        return `<a href="/customer-edit/${obj.customerId}?editMode=false">View Detail</a>`
+        return `<a href="/view-performance/${obj.customerId}?editMode=false">View Detail</a>`
     }
 }
 
@@ -332,7 +332,7 @@ function getMyHospitalList() {
                     <td><a href="./add-business?cid=${list.customerId}&chainAccountType=${list.chainAccountTypeId}" class="btn btn-default">Add Business</a></td>
                     <td><a href="./add-competition?cid=${list.customerId}" class="btn btn-default">Competition</a></td>
                     <td>${list.ContractStatus}</td>
-                    <td><a href="#?cid=${list.customerId}" class="btn btn-default">View Profile</a></td>
+                    <td><a href="/view-performance/${list.customerId}" class="btn btn-default">View Profile</a></td>
                 </tr>
                     `)
             });
