@@ -48,8 +48,6 @@ function getPerformanceData() {
                 });
 
             $('#potentialData').append(listArr.join(''));
-            
-
 
         }).catch((err) => {
             console.log(err);
