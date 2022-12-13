@@ -154,4 +154,17 @@ function showDrNameCentreName() {
     $('#centreName').text(params.centreName);
 }
 
+function potentialCal(fId, sId, targetElem) {
+  let firstElem = parseInt($(`#${fId}`).val()), secondElem = parseInt($(`#${sId}`).val()), targetEl = $(`#${targetElem}`);
+  targetEl.val(firstElem - secondElem);
+}
+
+$('input').change(function(e) { 
+    potentialCal('ivfTxt', 'freshTxt', 'frozenTxt');
+    potentialCal('ivfTxt', 'patientTxt', 'donotTxt');
+    potentialCal('ivfTxt', 'agonistTxt', 'antagonistTxt');
+});
+
 showDrNameCentreName();
+DisabledInput('disabled');
+

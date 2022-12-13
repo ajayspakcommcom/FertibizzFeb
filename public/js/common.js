@@ -1,7 +1,7 @@
 const _SUCCESSFUL_STATUS_CODE = 200;
 const _INVAID_SESSION = 202
 const _FAILURE_STATUS_CODE = 201
-const _ROOT = 'http://localhost:3333';
+const _ROOT = 'http://localhost:3333'; //http://localhost:3333
 const _SKU_BRANDS = ['FOLIGRAF', 'HUMOG', 'ASPORELIX', 'R-HUCOG', 'FOLICULIN', 'AGOTRIG', 'MIDYDROGESTERONE'];
 
 
@@ -161,6 +161,10 @@ function getFirstDayPreviousMonth() {
     localStorage.setItem("userData", null);
     localStorage.clear();
     document.location.href = "/";
+}
+
+function DisabledInput(elemClassName){
+    $(`.${elemClassName}`).prop('disabled', true);
 }
 
 

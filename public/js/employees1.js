@@ -15,6 +15,8 @@ function getKamList() {
         let list = response.data, listArr = [];
         let indx = 0;
 
+        console.log('id', list);
+
         list.forEach((data) => {
             indx = indx + 1;
             listArr.push(
@@ -22,7 +24,7 @@ function getKamList() {
                     <td>${indx}</td>
                     <td>${data.firstName}</td>
                     <td>${`Head Quater`}</td>
-                    <td><a href="../account-mapping">Account Mapping Data</a></td>
+                    <td><a href="../account-mapping/${data.empID}">Account Mapping Data</a></td>
                     <td>
                         <a href="/employees/centre-list/${data.empID}">Master Data</a>
                     </td>

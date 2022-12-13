@@ -1,8 +1,13 @@
 function getMyHospitalList() {
-    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
-        param = {
-            empId: userData.empId
-        };
+
+    let urlArr = window.location.href.split('/'),
+        empId = urlArr[urlArr.length - 1];
+        //console.log(empID);
+        
+    let param = {
+        empId: empId
+    };
+
     axios
         .post('/hospitals-list/', param).then((response) => {
             console.log(response.data)

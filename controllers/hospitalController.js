@@ -29,8 +29,6 @@ exports.getHospitalDetailsById = (req, res, next) => {
 };
 
 
-
-
 exports.deleteHospitals = (req, res, next) => {
     deleteHospital(req.body).then(result => {
         console.result;
