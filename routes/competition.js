@@ -8,6 +8,7 @@ router.get('/competitor-sku-details/', competitionController.getCompetitionSkusL
 router.post('/competitor-sku-add/', competitionController.addUpdateCompetitionSkus);
 router.get('/competitor-sku-details/:', competitionController.addUpdateCompetitionSkus);
 router.get('/competitor-sku-details/:year/:centerId', competitionController.getCompetitionDetailsByCenterId);
+router.post('/center-competition-approved/', competitionController.approveCenterCompetition);
 
-
+///center-competition-approved
 module.exports = router;

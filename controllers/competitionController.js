@@ -17,13 +17,13 @@ exports.addCompetition = (req, res, next) => {
 
 exports.getCompetitionSkusListing = (req, res, next) => {
     // console.log('inside update employee');
-     let params = Object.assign(req.params, req.body);
-     getCompetitionSkusListing(params).then(result => {
-         res.status(_STATUSCODE).json(result)
-     })
- };
+    let params = Object.assign(req.params, req.body);
+    getCompetitionSkusListing(params).then(result => {
+        res.status(_STATUSCODE).json(result)
+    })
+};
 
-function getCompetitionSkusListing( objParam ) {
+function getCompetitionSkusListing(objParam) {
     // console.log('--------------------------------')
     // console.log(objParam)
     // console.log('--------------------------------')
@@ -58,15 +58,15 @@ function getCompetitionSkusListing( objParam ) {
 
 exports.addUpdateCompetitionSkus = (req, res, next) => {
     // console.log('inside update employee');
-     let params = Object.assign(req.params, req.body);
-     addUpdateCompetitionSkus(params).then(result => {
-         res.status(_STATUSCODE).json(result)
-     })
- };
+    let params = Object.assign(req.params, req.body);
+    addUpdateCompetitionSkus(params).then(result => {
+        res.status(_STATUSCODE).json(result)
+    })
+};
 
- 
 
-function addUpdateCompetitionSkus( objParam ) {
+
+function addUpdateCompetitionSkus(objParam) {
     // console.log('--------------------------------')
     // console.log(objParam)
     // console.log('--------------------------------')
@@ -94,10 +94,10 @@ function addUpdateCompetitionSkus( objParam ) {
                     .input("jan", sql.Float, objParam.jan)
                     .input("feb", sql.Float, objParam.feb)
                     .input("mar", sql.Float, objParam.mar)
-                    
+
                     .execute("USP_ADD_UPDATE_SKU_COMPETITION")
                     .then(function (resp) {
-                      //  console.log(resp.recordset)
+                        //  console.log(resp.recordset)
                         resolve(resp.recordset);
                         dbConn.close();
                     })
@@ -119,34 +119,76 @@ function addUpdateCompetitionSkus( objParam ) {
 exports.getCompetitionDetailsByCenterId = (req, res, next) => {
     //console.log(req.params, '--->')
     getCompetitionDetailsByCenterId(req.params).then((result) => {
-         res.status(_STATUSCODE).json(result);
-     });
- };
- 
- 
- getCompetitionDetailsByCenterId = (objParam) => {
-     return new Promise((resolve) => {
-         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
-         dbConn
-             .connect()
-             .then(function () {
-                 var request = new sql.Request(dbConn);
-                 request
-                     .input("centerId", sql.Int, objParam.centerId)
-                     .input("year", sql.NVarChar, objParam.year)
-                     .execute("USP_GET_SKU_COMPETITION_DETAILS_BY_CENTER")
-                     .then(function (resp) {
+        res.status(_STATUSCODE).json(result);
+    });
+};
+
+
+getCompetitionDetailsByCenterId = (objParam) => {
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    .input("centerId", sql.Int, objParam.centerId)
+                    .input("year", sql.NVarChar, objParam.year)
+                    .execute("USP_GET_SKU_COMPETITION_DETAILS_BY_CENTER")
+                    .then(function (resp) {
                         //console.log(resp)
-                         resolve(resp.recordset);
-                         dbConn.close();
-                     })
-                     .catch(function (err) {
-                       //  console.log(err);
-                         dbConn.close();
-                     });
-             })
-             .catch(function (err) {
-                 //console.log(err);
-             });
-     });
- };
+                        resolve(resp.recordset);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        //  console.log(err);
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                //console.log(err);
+            });
+    });
+};
+
+
+exports.approveCenterCompetition = (req, res, next) => {
+    // console.log('inside update employee');
+    let params = Object.assign(req.params, req.body);
+    approveCenterCompetition(params).then(result => {
+        res.status(_STATUSCODE).json(result)
+    })
+};
+
+
+
+function approveCenterCompetition(objParam) {
+    // console.log('--------------------------------')
+    // console.log(objParam)
+    // console.log('--------------------------------')
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    .input("hospitalId", sql.Int, objParam.hospitalId)
+                    .input("year", sql.NVarChar, objParam.year)
+                    .input("rbmId", sql.Int, objParam.rbmId)
+                    .execute("USP_APPROVE_CUSTOMER_COMPETITION")
+                    .then(function (resp) {
+                        //console.log(resp.recordset)
+                        resolve(resp.recordset);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    });
+};
