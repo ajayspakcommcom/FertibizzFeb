@@ -10,7 +10,7 @@
     
   <nav class="navbar" id="header"></nav>
 
-      <main class="container">
+      <main class="container-fluid">
          <h1 class="text-center">View Performace</h1>
          <div class="text-right"><a href="../hospitals" class="btn btn-success">Go Back</a></div>
 
@@ -20,12 +20,12 @@
               <div class="zone-head">
                 <div class="text-center zone-manager">
                   <span>Centre Name</span>
-                  <div><b id="centreName">GANGARAM</b></div>
+                  <div><b id="centreName"></b></div>
                 </div>
                 <div class="text-center rbm-wrapper">
                   <div><span>City Name</span> </div>
                   <ul class="rbmm-list">
-                    <li><b id="drName">Maharashtra</b></li>
+                    <li><b id="stateName"></b></li>
                   </ul>
                 </div>
               </div>
@@ -34,16 +34,16 @@
         </div>
 
         <div class="performance-main-wrapper">
-            <div class="form-wrapper performance-wrapper">
+          <div class="form-wrapper performance-wrapper">
               <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <h3>Customer Master Details</h3>
                   <div class="performance-heading">
                     <div>
-                      <strong>Account Name</strong> : Manish@gmail.com
+                      <strong>Account Name</strong> : <span id="emailId"></span>
                     </div>
                     <div>
-                      <strong>Account Type</strong> : National
+                      <strong>Account Type</strong> : <span id="accountTypeId"></span>
                     </div>
                   </div>
                   
@@ -56,28 +56,7 @@
                         <th>Speciality</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <td>MAX PANCHSHEEL</td>
-                        <td>TANYA BUCKSHEE ROHATGI</td>
-                        <td>IVF Dr Core</td>
-                      </tr>
-                      <tr>
-                        <td>MAX PANCHSHEEL</td>
-                        <td>TANYA BUCKSHEE ROHATGI</td>
-                        <td>IVF Dr Core</td>
-                      </tr>
-                      <tr>
-                        <td>MAX PANCHSHEEL</td>
-                        <td>TANYA BUCKSHEE ROHATGI</td>
-                        <td>IVF Dr Core</td>
-                      </tr>
-                      <tr>
-                        <td>MAX PANCHSHEEL</td>
-                        <td>TANYA BUCKSHEE ROHATGI</td>
-                        <td>IVF Dr Core</td>
-                      </tr>
-                    </tbody>
+                    <tbody id="centreData"></tbody>
                   </table>
                 </div>
               </div>
@@ -101,38 +80,7 @@
                       <th>Antagonist cycles</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td>10</td>
-                      <td>9</td>
-                      <td>7</td>
-                      <td>300</td>
-                      <td>400</td>
-                      <td>500</td>
-                      <td>7</td>
-                      <td>0</td>
-                    </tr>
-                    <tr>
-                      <td>10</td>
-                      <td>9</td>
-                      <td>7</td>
-                      <td>300</td>
-                      <td>400</td>
-                      <td>500</td>
-                      <td>7</td>
-                      <td>0</td>
-                    </tr>
-                    <tr>
-                      <td>10</td>
-                      <td>9</td>
-                      <td>7</td>
-                      <td>300</td>
-                      <td>400</td>
-                      <td>500</td>
-                      <td>7</td>
-                      <td>0</td>
-                    </tr>
-                  </tbody>
+                  <tbody id="potentialData"></tbody>
                 </table>
               </div>
             </div>
@@ -414,8 +362,6 @@
             </div>
           </div>
         </div>
-          
-
       </main>
 
       <script src="../../js/jquery.min.js"></script>
@@ -425,7 +371,8 @@
         <script src="../../js/admin.js"></script>
         <script src="../../js/performance.js"></script>
         <script>
-          $(function() {
+          
+          $(document).ready(function(){
             pageSetUp();
           });
           
