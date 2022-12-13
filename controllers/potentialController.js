@@ -105,3 +105,50 @@ function getCenterPotentialDetails( objParam ) {
             });
     });
 };
+
+
+
+//
+
+
+
+exports.approveCenterPotential = (req, res, next) => {
+    // console.log('inside update employee');
+     let params = Object.assign(req.params, req.body);
+     approveCenterPotential(params).then(result => {
+         res.status(_STATUSCODE).json(result)
+     })
+ };
+
+ 
+
+function approveCenterPotential( objParam ) {
+    // console.log('--------------------------------')
+    // console.log(objParam)
+    // console.log('--------------------------------')
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    .input("kamId", sql.Int, objParam.kamId)
+                    .input("hospitalId", sql.Int, objParam.hospitalId)
+                    .input("rbmId", sql.Int, objParam.rbmId)
+                    .execute("USP_APPROVE_CUSTOMER_POTENTIALS")
+                    .then(function (resp) {
+                        //console.log(resp.recordset)
+                        resolve(resp.recordset);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    });
+};

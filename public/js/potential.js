@@ -168,3 +168,35 @@ $('input').change(function(e) {
 showDrNameCentreName();
 DisabledInput('disabled');
 
+function approveMe() {
+    console.log('approved me Clicked');
+
+    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
+    param = {
+        hospitalId: new URLSearchParams(window.location.search).get('cid'),
+        rbmId: parseInt(userData.empId),
+        kamId: 24, // @TODO THIS NEED TO CHANGE
+    }
+
+axios
+    .post('/center-potentials-approved', param).then((response) => {
+     //   console.log(response.data[0])
+        if (response.data.length > 0) {
+            let res = response.data[0];
+            console.log(res);
+            if (res.sucess === 'true')
+                {
+                    redirect('/hospitals');
+                    // @TODO: THIS NEED TO CHANGE
+                }
+        }
+
+    }).catch((err) => {
+        console.log(err);
+    });
+
+    return false;
+
+    
+
+}

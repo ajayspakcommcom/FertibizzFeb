@@ -183,3 +183,7 @@ function DisabledInput(elemClassName){
     
 // });
 
+function enableApproveButton() {
+    console.log('enable button')
+    $('#btnApprove').prop('disabled', !$('#chkApproved').is(":checked"));
+}
