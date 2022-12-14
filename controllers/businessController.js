@@ -144,3 +144,47 @@ function getBusinessTrackerDetails(objParam) {
             });
     });
 };
+
+
+//
+
+
+exports.approveCenterBusinessTracker = (req, res, next) => {
+    // console.log('inside update employee');
+    let params = Object.assign(req.params, req.body);
+    approveCenterBusinessTracker(params).then(result => {
+        res.status(_STATUSCODE).json(result)
+    })
+};
+
+function approveCenterBusinessTracker(objParam) {
+    // console.log('--------------------------------')
+    // console.log(objParam)
+    // console.log('--------------------------------')
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    .input("customerId", sql.Int, parseInt(objParam.centerId))
+                    .input("Month", sql.Int, objParam.month)
+                    .input("Year", sql.Int, objParam.year)
+                    .input("rbmId", sql.Int, objParam.rbmId)
+                    .execute("USP_APPROVE_BUSINESS_TRACKER")
+                    .then(function (resp) {
+                        //console.log(resp.recordset)
+                        resolve(resp.recordset);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    });
+};

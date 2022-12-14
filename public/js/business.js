@@ -22,29 +22,29 @@ async function getSkuDetails() {
         chainAccountTypeId = new URLSearchParams(window.location.search).get('chainAccountType'),
         userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
 
-        if(userData.post.toLowerCase() == 'kam') {
-        } else if(userData.post.toLowerCase() == 'rbm') {
-            $('h1').text('Approve Business');
-            document.title = 'Approve Business';
+    if (userData.post.toLowerCase() == 'kam') {
+    } else if (userData.post.toLowerCase() == 'rbm') {
+        $('h1').text('Approve Business');
+        document.title = 'Approve Business';
 
-        } else {
-            console.log('');
-        }
+    } else {
+        console.log('');
+    }
 
-        let businessTrackerParam = {
-            centerId: hospitalId,
-            month:  $('#cmbMonth').val(),
-            year: $('#cmbYear').val() 
-        }
-        
+    let businessTrackerParam = {
+        centerId: hospitalId,
+        month: $('#cmbMonth').val(),
+        year: $('#cmbYear').val()
+    }
+
 
     const getAllSKURequest = axios.get("/sku-details/");
     const getSkuContractDetailsRequest = axios.get('/contract-details/' + chainAccountTypeId);
     const getBusinessTrackDetails = axios.post('/business-tracker-details/', businessTrackerParam);
     await axios.all([getAllSKURequest, getSkuContractDetailsRequest, getBusinessTrackDetails]).then(axios.spread(function (skuResponse, contractResponse, businessTrackResponse) {
         //  console.log(skuResponse.data);
-        console.log(businessTrackResponse.data);
-        
+        // console.log(businessTrackResponse.data);
+
         skuDetails = skuResponse.data;
         let skus = skuDetails,
             contractRes = contractResponse.data,
@@ -82,7 +82,7 @@ async function getSkuDetails() {
         $('#accordion').append(html.join(''))
 
     }))
-    $('.unitSold').each((x,e) => {
+    $('.unitSold').each((x, e) => {
         $(e).change()
     })
 }
@@ -130,14 +130,14 @@ function getSKUHtml(skuBrandGroups, brandGroup, contractResponse, businessTrackR
             }),
             qty = businessTrackArr.length > 0 ? businessTrackArr[0].qty : 0
             ;
-            contractRate = businessTrackArr.length > 0 ? businessTrackArr[0].rate : contractRate;
+        contractRate = businessTrackArr.length > 0 ? businessTrackArr[0].rate : contractRate;
 
-            // if(businessTrackArr.length > 0)
-            // {
-            //     console.log(businessTrackArr)
-            // }
+        // if(businessTrackArr.length > 0)
+        // {
+        //     console.log(businessTrackArr)
+        // }
         //console.log(sku)
-        
+
 
 
         let fieldName = `${sku.brandId}_${sku.brandGroupId}_${sku.medid}`
@@ -183,7 +183,7 @@ function getSKUHtml(skuBrandGroups, brandGroup, contractResponse, businessTrackR
 
 function confirmBrandEntry(checkbox) {
     console.log(checkbox.id)
-    let msg = $('#'+checkbox.id).is(":checked") ? 'close the panel': 'dont do anything';
+    let msg = $('#' + checkbox.id).is(":checked") ? 'close the panel' : 'dont do anything';
     console.log(msg)
 }
 
@@ -320,4 +320,34 @@ function setRate() {
     } else {
         $('.business-rate').attr("disabled", true);
     }
+}
+
+
+function approveBusinessTracker() {
+    console.log('approved me Clicked business');
+  
+    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
+        param = {
+            centerId: new URLSearchParams(window.location.search).get('cid'),
+            month: $('#cmbMonth').val(),
+            year: $('#cmbYear').val(),
+            rbmId: parseInt(userData.empId),
+        }
+
+    axios
+        .post('/center-business-tracker-approved/', param).then((response) => {
+            //   console.log(response.data[0])
+            if (response.data.length > 0) {
+                let res = response.data[0];
+                console.log(res);
+                if (res.success === 'true') {
+                    redirect(`/account-mapping/${getQueryStringValue('kamId')}`);
+                    // @TODO: THIS NEED TO CHANGE
+                }
+            }
+
+        }).catch((err) => {
+            console.log(err);
+        });
+    return false;
 }
