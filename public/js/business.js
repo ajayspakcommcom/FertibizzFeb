@@ -23,7 +23,6 @@ async function getSkuDetails() {
         userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
 
         if(userData.post.toLowerCase() == 'kam') {
-           console.log('');
         } else if(userData.post.toLowerCase() == 'rbm') {
             $('h1').text('Approve Business');
             document.title = 'Approve Business';
@@ -32,15 +31,25 @@ async function getSkuDetails() {
             console.log('');
         }
 
+        let businessTrackerParam = {
+            centerId: hospitalId,
+            month:  $('#cmbMonth').val(),
+            year: $('#cmbYear').val() 
+        }
+        
+
     const getAllSKURequest = axios.get("/sku-details/");
     const getSkuContractDetailsRequest = axios.get('/contract-details/' + chainAccountTypeId);
-    await axios.all([getAllSKURequest, getSkuContractDetailsRequest]).then(axios.spread(function (skuResponse, contractResponse) {
+    const getBusinessTrackDetails = axios.post('/business-tracker-details/', businessTrackerParam);
+    await axios.all([getAllSKURequest, getSkuContractDetailsRequest, getBusinessTrackDetails]).then(axios.spread(function (skuResponse, contractResponse, businessTrackResponse) {
         //  console.log(skuResponse.data);
-        //console.log(contractResponse.data);
+        console.log(businessTrackResponse.data);
+        
         skuDetails = skuResponse.data;
         let skus = skuDetails,
             contractRes = contractResponse.data,
-            html = [];
+            html = [],
+            businessTrackRes = businessTrackResponse.data;
         isContractApplicableBool = (contractRes[0].RateType === 'contract Rate');
 
         //  console.log(isContractApplicableBool) ;
@@ -60,7 +69,7 @@ async function getSkuDetails() {
         <div id="${skuBrand.toLowerCase().replace(/\s/g, '')}" class="panel-collapse collapse in">
             <div class="panel-body">
             <div class="form-section"> 
-            ${getBrandGroupDetails(skuBrandArr, contractRes)}
+            ${getBrandGroupDetails(skuBrandArr, contractRes, businessTrackRes)}
             </div>
             </div>
             &nbsp;&nbsp;&nbsp;<input type='checkbox' id='chkConfirm_${skuBrand.toLowerCase().replace(/\s/g, '')}' onchange='confirmBrandEntry(this);return false;'>  Confirm you entered ${formatText(skuBrand, 'FirstLetterUPPER')}
@@ -73,10 +82,12 @@ async function getSkuDetails() {
         $('#accordion').append(html.join(''))
 
     }))
-
+    $('.unitSold').each((x,e) => {
+        $(e).change()
+    })
 }
 
-function getBrandGroupDetails(skuBrandGroups, contractResponse) {
+function getBrandGroupDetails(skuBrandGroups, contractResponse, businessTrackRes) {
     let html = []
     _brandGroupArr = [];
     skuBrandGroups.forEach(brandGroup => {
@@ -84,13 +95,13 @@ function getBrandGroupDetails(skuBrandGroups, contractResponse) {
             html.push(`<h5><strong>${brandGroup.groupName}</strong></h5>
             <hr>`);
             _brandGroupArr.push(brandGroup.groupName)
-            html.push(getSKUHtml(skuBrandGroups, brandGroup, contractResponse))
+            html.push(getSKUHtml(skuBrandGroups, brandGroup, contractResponse, businessTrackRes))
         }
     })
     return html.join('');
 }
 
-function getSKUHtml(skuBrandGroups, brandGroup, contractResponse) {
+function getSKUHtml(skuBrandGroups, brandGroup, contractResponse, businessTrackRes) {
     //console.log(skuBrandGroups)
     //console.log(brandGroup)
     let html = [],
@@ -113,7 +124,22 @@ function getSKUHtml(skuBrandGroups, brandGroup, contractResponse) {
         let contractRateArr = contractResponse.filter(cr => {
             return (parseInt(cr.medId) === parseInt(sku.medid));
         }),
-            contractRate = contractRateArr.length > 0 ? contractRateArr[0].SkuPrice : 0;
+            contractRate = contractRateArr.length > 0 ? contractRateArr[0].SkuPrice : 0,
+            businessTrackArr = businessTrackRes.filter(cr => {
+                return (parseInt(cr.skuId) === parseInt(sku.medid));
+            }),
+            qty = businessTrackArr.length > 0 ? businessTrackArr[0].qty : 0
+            ;
+            contractRate = businessTrackArr.length > 0 ? businessTrackArr[0].rate : contractRate;
+
+            // if(businessTrackArr.length > 0)
+            // {
+            //     console.log(businessTrackArr)
+            // }
+        //console.log(sku)
+        
+
+
         let fieldName = `${sku.brandId}_${sku.brandGroupId}_${sku.medid}`
         html.push(`<tr>
                 <td width="20%">
@@ -131,13 +157,13 @@ function getSKUHtml(skuBrandGroups, brandGroup, contractResponse) {
                     <input type="text" 
                         onkeypress="return isNumber(event)"
                         maxLength="2"
-                        class="form-control" 
+                        class="form-control unitSold" 
                         id="txt_${fieldName}_unitSold" 
                         name="txt_${fieldName}_unitSold" 
                         priceField = 'hid_${fieldName}_Price'
                         rateContractField = 'txt_${fieldName}_ContractRate'
                         unitSoldBusinessfield = 'txt_${fieldName}_unitSoldBusiness'
-                        required="" onblur="calculateBusiness(this);">
+                        required="" onblur="calculateBusiness(this);" onchange="calculateBusiness(this);" value='${qty}'>
                 </div>
                 </td>
                 <td>
@@ -147,15 +173,11 @@ function getSKUHtml(skuBrandGroups, brandGroup, contractResponse) {
                         name="txt_${fieldName}_unitSoldBusiness">
                 </div>
                 </td>
-            </tr>`)
+            </tr>`);
     })
     html.push(`</tbody>
         </table>`)
-
-
-
     //  console.log(skuArr);
-
     return html.join('');
 }
 

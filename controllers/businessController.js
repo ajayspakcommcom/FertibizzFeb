@@ -16,15 +16,15 @@ exports.addBusiness = (req, res, next) => {
 
 exports.addUpdateBusinessTracker = (req, res, next) => {
     // console.log('inside update employee');
-     let params = Object.assign(req.params, req.body);
-     addUpdateBusinessTracker(params).then(result => {
-         res.status(_STATUSCODE).json(result)
-     })
- };
+    let params = Object.assign(req.params, req.body);
+    addUpdateBusinessTracker(params).then(result => {
+        res.status(_STATUSCODE).json(result)
+    })
+};
 
- 
 
-function addUpdateBusinessTracker( objParam ) {
+
+function addUpdateBusinessTracker(objParam) {
     // console.log('--------------------------------')
     // console.log(objParam)
     // console.log('--------------------------------')
@@ -66,13 +66,13 @@ function addUpdateBusinessTracker( objParam ) {
 
 exports.getSKUDetails = (req, res, next) => {
     // console.log('inside update employee');
-     let params = Object.assign(req.params, req.body);
-     getSKUDetails(params).then(result => {
-         res.status(_STATUSCODE).json(result)
-     })
- };
+    let params = Object.assign(req.params, req.body);
+    getSKUDetails(params).then(result => {
+        res.status(_STATUSCODE).json(result)
+    })
+};
 
-function getSKUDetails( objParam ) {
+function getSKUDetails(objParam) {
     // console.log('--------------------------------')
     // console.log(objParam)
     // console.log('--------------------------------')
@@ -84,6 +84,51 @@ function getSKUDetails( objParam ) {
                 var request = new sql.Request(dbConn);
                 request
                     .execute("USP_GET_ALL_SKU_BUSINESS_TRACKER")
+                    .then(function (resp) {
+                        //console.log(resp.recordset)
+                        resolve(resp.recordset);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    });
+};
+
+
+//getBusinessTrackerDetails
+
+
+
+
+exports.getBusinessTrackerDetails = (req, res, next) => {
+    // console.log('inside update employee');
+    let params = Object.assign(req.params, req.body);
+    getBusinessTrackerDetails(params).then(result => {
+        res.status(_STATUSCODE).json(result)
+    })
+};
+
+function getBusinessTrackerDetails(objParam) {
+    // console.log('--------------------------------')
+    // console.log(objParam)
+    // console.log('--------------------------------')
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    .input("customerId", sql.Int, parseInt(objParam.centerId))
+                    .input("Month", sql.Int, objParam.month)
+                    .input("Year", sql.Int, objParam.year)
+                    .execute("USP_GET_BUSINESS_TRACKER_DETAILS")
                     .then(function (resp) {
                         //console.log(resp.recordset)
                         resolve(resp.recordset);
