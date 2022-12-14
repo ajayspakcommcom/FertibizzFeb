@@ -33,7 +33,7 @@ function populateDataTable(data) {
         var i = 1;
         data.forEach(item => {
             $('#customerList').dataTable().fnAddData([
-                '<input type="checkbox" value="">',
+                `<input type="checkbox" ${item.IsApproved === 'Yes' ? `Checked`: ''}>`,
                 item.CENTRENAME,
                 item.DoctorName,
                 item.specialtyType,
