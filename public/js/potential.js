@@ -111,15 +111,38 @@ function validateMe() {
 function getPotentialsDetails() {
   //  console.log('get my details')
 
-    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
-        param = {
-            hospitalId: new URLSearchParams(window.location.search).get('cid'),
-            empId: parseInt(userData.empId)
-        }
+    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")), 
+    param = {hospitalId:'', empId:''}, 
+    urlArr = window.location.href.split('/'),
+    empId = urlArr[urlArr.length - 1].slice(-2);
 
+        // param = {
+        //     hospitalId: new URLSearchParams(window.location.search).get('cid'),
+        //     empId: parseInt(userData.empId)
+        // }
+
+    
+    console.log(empId);
+
+ 
+        if(userData.post.toLowerCase() == 'kam') {
+
+            param.hospitalId = new URLSearchParams(window.location.search).get('cid');
+            param.empId = parseInt(userData.empId);
+  
+        } else if(userData.post.toLowerCase() == 'rbm') {
+            param.hospitalId = new URLSearchParams(window.location.search).get('cid');
+            param.empId = parseInt(empId);
+
+        } else {
+            console.log('');
+        }
+        
+
+         
     axios
         .post('/center-potentials-details', param).then((response) => {
-         //   console.log(response.data[0])
+            console.log(response.data[0])
             if (response.data.length > 0) {
                 let res = response.data[0];
                 console.log(res);
@@ -196,7 +219,25 @@ axios
     });
 
     return false;
-
-    
-
 }
+
+
+function showCheckBoxApproveBtn() {
+    console.log('showCheckBoxApproveBtn called');
+    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
+    console.log(userData);
+
+    if(userData.post.toLowerCase() == 'kam') {
+        console.log('ram');
+        $('.hideApproveChk').hide();
+        $('#btnApprove').hide();
+    }
+
+    else if(userData.post.toLowerCase() == 'rbm') {
+        console.log('rbm');
+        $('#resetBtn').hide();
+        $('#saveBtn').hide();
+    }
+}
+
+showCheckBoxApproveBtn();

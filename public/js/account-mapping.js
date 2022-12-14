@@ -19,7 +19,7 @@ function getMyHospitalList() {
                     `<tr>
                     <td>${camelCaseText(list.CENTRENAME)}</td>
                     <td>${camelCaseText(list.DoctorName)}</td>
-                    <td><a href="/account-mapping/potential/1" class="btn btn-default">View Potential</a></td>
+                    <td><a href="/potential-add?cid=${list.customerId}&centreName=${list.CENTRENAME}&drName=${list.DoctorName}&empId=${empId}" class="btn btn-default">View Potential</a></td>
                     <td><a href="#" class="btn btn-default">View Business</a></td>
                     <td><a href="#" class="btn btn-default">View Competition</a></td>
                     <td><a href="#" class="btn btn-default">View Contract</a></td>
