@@ -34,6 +34,8 @@ router.post('/rate-contract-add/', customerController.addContractRate);
 
 router.get('/contract-details/:chainAccountTypeId', customerController.getContractDetailsById);
 
+router.post('/customer-master-data-approved/', customerController.approveCenterMasterData);
+
 
 
 module.exports = router;

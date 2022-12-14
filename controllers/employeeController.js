@@ -72,7 +72,7 @@ getKamListData = (objParam) => {
                     .input("empId", sql.Int, objParam.empId)
                     .execute("USP_GET_MY_TEAM_MEMBERS")
                     .then(function (resp) {
-                        console.log(resp)
+                        //console.log(resp)
                         resolve(resp.recordset);
                         dbConn.close();
                     })

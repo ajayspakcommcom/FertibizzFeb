@@ -471,3 +471,47 @@ exports.getContractDetailsById = (req, res, next) => {
              });
      });
  };
+
+
+ 
+
+
+exports.approveCenterMasterData = (req, res, next) => {
+    // console.log('inside update employee');
+    let params = Object.assign(req.params, req.body);
+    approveCenterMasterData(params).then(result => {
+        res.status(_STATUSCODE).json(result)
+    })
+};
+
+
+
+function approveCenterMasterData(objParam) {
+    // console.log('--------------------------------')
+    // console.log(objParam)
+    // console.log('--------------------------------')
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    .input("customerId", sql.Int, objParam.customerId)
+                    .input("rbmId", sql.Int, objParam.rbmId)
+                    .execute("USP_APPROVE_CUSTOMER_MASTERDATA")
+                    .then(function (resp) {
+                        //console.log(resp.recordset)
+                        resolve(resp.recordset);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    });
+};

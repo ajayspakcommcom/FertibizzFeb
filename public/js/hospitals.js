@@ -56,7 +56,7 @@ function isEmployeeCenterList(obj) {
     if(path == 'customers') {
         return `<a href="/customer-edit/${obj.customerId}">Edit</a> | <a href='javascript:void(0)' onclick='DeleteCustomer(${obj.customerId},"${obj.CENTRENAME}");return false;' class='${obj.customerId}' title='${obj.CENTRENAME}'>Delete</a>`
     } else {
-        return `<a href="/customer-edit/${obj.customerId}?editMode=false">View Detail</a>`
+        return `<a href="/customer-edit/${obj.customerId}?editMode=false&kamId=${parseInt(getIdFromURL())}">View Detail</a>`
     }
 }
 
@@ -65,6 +65,7 @@ function getCustomerDetails() {
 
     if(getQueryStringValue('editMode') == 'false') {
         $("form :input").attr('disabled','disabled');
+        $('#chkApproved').attr('disabled', false);
         $('#endDate').attr('disabled', 'disabled');
         $('#goBack').attr('href', '/employees/centre-list');
         setTimeout(() => {
@@ -72,7 +73,7 @@ function getCustomerDetails() {
             $('.two-btn-wrapper').hide();
             $('.add-rc-link').hide();
             $('.approve-btn-wrapper').removeClass('none');
-            $('.approve-btn-wrapper > button').removeAttr('disabled');
+           // $('.approve-btn-wrapper > button').removeAttr('disabled');
         }, 500);
     }
 
@@ -355,3 +356,31 @@ function enableContractDate() {
     $('#endDate').prop('disabled', !$('#chkRc').is(":checked"));
 
 }
+
+
+
+function approveCenterMasterData() {
+    console.log('approved me Clicked center');
+    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
+    param = {
+        customerId: parseInt(getIdFromURL()),
+        rbmId: parseInt(userData.empId)
+    }
+  axios
+    .post('/customer-master-data-approved/', param).then((response) => {
+     //   console.log(response.data[0])
+        if (response.data.length > 0) {
+            let res = response.data[0];
+            console.log(res);
+            if (res.success === 'true')
+                {
+                    redirect(`/employees/centre-list/${getQueryStringValue('kamId')}`);
+                    // @TODO: THIS NEED TO CHANGE
+                }
+        }
+  
+    }).catch((err) => {
+        console.log(err);
+    });
+    return false;
+  }
