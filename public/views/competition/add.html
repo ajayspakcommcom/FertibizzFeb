@@ -14,7 +14,10 @@
 
   <main class="container-fluid">
     <h1 class="text-center">Add Competition</h1>
-    <div class="text-right"><a href="./hospitals" class="btn btn-success">Go Back</a></div>
+    <div class="text-right">
+      <!-- <a href="./hospitals" class="btn btn-success">Go Back</a> -->
+      <a href="javascript:void(0);" onclick="goBack()" class="btn btn-success">Go Back</a>
+    </div>
 
     <form>
       <div class="form-wrapper">
@@ -58,7 +61,7 @@
         </div>
         <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <div class="form-group add-input-wrapper">
+            <div class="form-group add-input-wrapper hideApproveChk">
               <input type="checkbox" value="on" id="chkApproved" name="chkApproved" onclick="enableApproveButton()" />
               &nbsp;
               <label for="lblChkApproved">Check to Approved the Potential</label>
@@ -70,10 +73,9 @@
           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div class="two-btn-wrapper">
-              <button type="reset" class="btn btn-default btn-grad">Reset</button>
-              <button type="submit" class="btn btn-default btn-grad" onclick="validateMe();return false;">Save</button>
-              <button class="btn btn-default btn-grad" id="btnApprove" disabled="true"
-                onclick="approveMe();return false;">Approve</button>
+              <button type="reset" class="btn btn-default btn-grad" id="resetBtn">Reset</button>
+              <button type="submit" class="btn btn-default btn-grad" onclick="validateMe();return false;" id="saveBtn">Save</button>
+              <button class="btn btn-default btn-grad" id="btnApprove" disabled="true" onclick="approveMe();return false;">Approve</button>
             </div>
           </div>
         </div>

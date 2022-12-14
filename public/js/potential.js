@@ -109,12 +109,15 @@ function validateMe() {
 }
 
 function getPotentialsDetails() {
-  //  console.log('get my details')
+  
+    console.log('getPotentialsDetails');
 
     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")), 
     param = {hospitalId:'', empId:''}, 
     urlArr = window.location.href.split('/'),
     empId = urlArr[urlArr.length - 1].slice(-2);
+
+    
 
         // param = {
         //     hospitalId: new URLSearchParams(window.location.search).get('cid'),
@@ -133,6 +136,8 @@ function getPotentialsDetails() {
         } else if(userData.post.toLowerCase() == 'rbm') {
             param.hospitalId = new URLSearchParams(window.location.search).get('cid');
             param.empId = parseInt(empId);
+            $('h1').text('Approve Potential');
+            document.title = 'Approve Potential';
 
         } else {
             console.log('');
@@ -223,20 +228,18 @@ axios
 
 
 function showCheckBoxApproveBtn() {
-    console.log('showCheckBoxApproveBtn called');
     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
     console.log(userData);
 
     if(userData.post.toLowerCase() == 'kam') {
-        console.log('ram');
         $('.hideApproveChk').hide();
         $('#btnApprove').hide();
     }
 
     else if(userData.post.toLowerCase() == 'rbm') {
-        console.log('rbm');
         $('#resetBtn').hide();
         $('#saveBtn').hide();
+        $('.two-btn-wrapper').addClass('right');
     }
 }
 

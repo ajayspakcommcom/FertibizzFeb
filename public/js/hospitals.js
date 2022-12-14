@@ -56,7 +56,7 @@ function isEmployeeCenterList(obj) {
     if(path == 'customers') {
         return `<a href="/customer-edit/${obj.customerId}">Edit</a> | <a href='javascript:void(0)' onclick='DeleteCustomer(${obj.customerId},"${obj.CENTRENAME}");return false;' class='${obj.customerId}' title='${obj.CENTRENAME}'>Delete</a>`
     } else {
-        return `<a href="/view-performance/${obj.customerId}?editMode=false">View Detail</a>`
+        return `<a href="/customer-edit/${obj.customerId}?editMode=false">View Detail</a>`
     }
 }
 
@@ -65,6 +65,7 @@ function getCustomerDetails() {
 
     if(getQueryStringValue('editMode') == 'false') {
         $("form :input").attr('disabled','disabled');
+        $('#endDate').attr('disabled', 'disabled');
         $('#goBack').attr('href', '/employees/centre-list');
         setTimeout(() => {
             $('h1').text('Centre Detail');
@@ -115,9 +116,6 @@ function getCustomerDetails() {
             $('#endDate').val(customerData.contractEndDate);
            if  (customerData.isContractApplicable === 'YES') 
                 enableContractDate()
-
-
-            
 
             setTimeout(cmbValues, 5000);
             // $('#txtVisitCategory').val()

@@ -18,7 +18,18 @@ function loadMonthYear() {
 
 async function getSkuDetails() {
     let centerId = new URLSearchParams(window.location.search).get('cid'),
-        year = $('#cmbYear').val();
+        year = $('#cmbYear').val(),
+        userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
+
+        if(userData.post.toLowerCase() == 'kam') {
+           console.log('');
+        } else if(userData.post.toLowerCase() == 'rbm') {
+            $('h1').text('Approve Competition');
+            document.title = 'Approve Competition';
+
+        } else {
+            console.log('');
+        }
 
     const getAllSKURequest = axios.get("/competitor-sku-details/");
     const getSkuContractDetailsRequest = axios.get(`/competitor-sku-details/${year}/${centerId}`);
@@ -205,8 +216,6 @@ function isNumber(evt) {
   return true;
 }
 
-
-
 function approveMe() {
   console.log('approved me Clicked competition');
   let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
@@ -234,3 +243,23 @@ axios
   });
   return false;
 }
+
+function showCheckBoxApproveBtn() {
+  let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
+  console.log(userData);
+
+  if(userData.post.toLowerCase() == 'kam') {
+      console.log('ram');
+      $('.hideApproveChk').hide();
+      $('#btnApprove').hide();
+  }
+
+  else if(userData.post.toLowerCase() == 'rbm') {
+      console.log('rbm');
+      $('#resetBtn').hide();
+      $('#saveBtn').hide();
+      $('.two-btn-wrapper').addClass('right');
+  }
+}
+
+showCheckBoxApproveBtn();

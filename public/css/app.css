@@ -7569,6 +7569,10 @@ label {
   margin-top: 20px;
 }
 
+.two-btn-wrapper.right {
+  justify-content: right;
+}
+
 .two-btn-wrapper > button {
   width: 48%;
 }
@@ -7900,7 +7904,7 @@ table.dataTable tbody tr.selected > * {
 .zone-profile {
   display: flex;
   display: -webkit-flex;
-  justify-content: end;
+  justify-content: left;
 }
 
 .zone-head {
@@ -8040,4 +8044,27 @@ ul.inline {
 
 .performance-main-wrapper {
   padding-bottom: 20px;
+}
+
+.dataTables_wrapper {
+  padding: 15px 15px;
+  background-color: #fff;
+  margin-top: 15px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+.dataTables_length, .dataTables_filter {
+  margin-bottom: 6px;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+  margin-top: 10px;
+}
+
+.heading-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
 }

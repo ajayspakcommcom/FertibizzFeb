@@ -16,9 +16,21 @@ function loadMonthYear() {
 
 
 async function getSkuDetails() {
+
     let skuBrands = ['FOLIGRAF', 'HUMOG', 'ASPORELIX', 'R-HUCOG', 'FOLICULIN', 'AGOTRIG', 'MIDYDROGESTERONE'],
         hospitalId = new URLSearchParams(window.location.search).get('cid'),
-        chainAccountTypeId = new URLSearchParams(window.location.search).get('chainAccountType');
+        chainAccountTypeId = new URLSearchParams(window.location.search).get('chainAccountType'),
+        userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
+
+        if(userData.post.toLowerCase() == 'kam') {
+           console.log('');
+        } else if(userData.post.toLowerCase() == 'rbm') {
+            $('h1').text('Approve Business');
+            document.title = 'Approve Business';
+
+        } else {
+            console.log('');
+        }
 
     const getAllSKURequest = axios.get("/sku-details/");
     const getSkuContractDetailsRequest = axios.get('/contract-details/' + chainAccountTypeId);

@@ -182,7 +182,9 @@ function DisabledInput(elemClassName){
 //     `);
 // });
 
-
+function goBack() {
+    window.history.back();
+}
 
 function enableApproveButton() {
     console.log('enable button')
