@@ -351,3 +351,21 @@ function approveBusinessTracker() {
         });
     return false;
 }
+
+function showCheckBoxApproveBtn() {
+    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
+    console.log(userData);
+
+    if(userData.post.toLowerCase() == 'kam') {
+        $('.hideApproveChk').hide();
+        $('#btnApprove').hide();
+    }
+
+    else if(userData.post.toLowerCase() == 'rbm') {
+        $('#resetBtn').hide();
+        $('#saveBtn').hide();
+        $('.two-btn-wrapper').addClass('right');
+    }
+}
+
+showCheckBoxApproveBtn();

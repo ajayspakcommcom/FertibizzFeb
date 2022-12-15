@@ -198,3 +198,35 @@ function getQueryStringValue(key) {
     //console.log(urlSearchParams)
     return urlSearchParams.get(key);
 }
+
+function showNavigationByDesignation() {
+    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
+
+    if (userData != null) {
+        $('#ulLink > li').hide();
+        $('.userLink, .logoutLink').show();
+
+        $('#userName').text(userData.name);
+        $('#userPost').text(userData.post);
+
+        switch (userData.post.toLowerCase()) {
+
+            case 'kam':
+                $('.kamLink').show();
+                break;
+            case 'rbm':
+                $('#logoLink').attr('href', '/employees/kam-list');
+                break;
+            case 'zbm':
+                break;
+            case 'admin':
+                $('.adminLink').show();
+                break;
+        }
+    }
+}
+
+setTimeout(() => {
+    showNavigationByDesignation();    
+}, 2000);
+
