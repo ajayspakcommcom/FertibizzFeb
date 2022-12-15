@@ -10,7 +10,7 @@ function getCustomerList() {
      
     axios
         .post(_URL._CUSTOMER_LIST, param).then((response) => {
-       //     console.log(response.data)
+            console.log(response.data);
             populateDataTable(response.data);
 
         }).catch((err) => {
@@ -56,7 +56,7 @@ function isEmployeeCenterList(obj) {
     if(path == 'customers') {
         return `<a href="/customer-edit/${obj.customerId}">Edit</a> | <a href='javascript:void(0)' onclick='DeleteCustomer(${obj.customerId},"${obj.CENTRENAME}");return false;' class='${obj.customerId}' title='${obj.CENTRENAME}'>Delete</a>`
     } else {
-        return `<a href="/customer-edit/${obj.customerId}?editMode=false&kamId=${parseInt(getIdFromURL())}">View Detail</a>`
+        return `<a href="/customer-edit/${obj.customerId}?editMode=false&kamId=${parseInt(getIdFromURL())}" title="${obj.customerId}">View Detail</a>`
     }
 }
 
@@ -284,6 +284,7 @@ function getMasterData() {
 }
 
 function selectCustomerRow() {
+
     let table = $('#customerList').DataTable();
 
     $('#customerList tbody').on('click', 'tr', function () {
@@ -306,6 +307,22 @@ function bulkCustomerDataDelete() {
         DeleteCustomer(elem[0].className, elem[0].title, true);
     });
     table.rows('.selected').remove().draw(false);
+}
+
+function ApproveDataSingleWay() {
+    
+    let getSelectedElemList = $('table.dataTable tbody tr.selected'),
+        arrIdList = [];
+
+        for(let obj of getSelectedElemList) {
+            arrIdList.push(obj.lastElementChild.lastChild.getAttribute('title'));
+        }
+
+        // approveCenterMasterData
+
+      for(let i = 0; i <= arrIdList.length -1; i++) {
+        approveCenterMasterData(arrIdList[i]);
+      }
 }
 
 
@@ -359,13 +376,14 @@ function enableContractDate() {
 
 
 
-function approveCenterMasterData() {
-    console.log('approved me Clicked center');
+function approveCenterMasterData(cusId = 0) {
+
     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
     param = {
-        customerId: parseInt(getIdFromURL()),
+        customerId: cusId == 0 ? parseInt(getIdFromURL()) : parseInt(cusId),
         rbmId: parseInt(userData.empId)
     }
+
   axios
     .post('/customer-master-data-approved/', param).then((response) => {
      //   console.log(response.data[0])
@@ -374,7 +392,10 @@ function approveCenterMasterData() {
             console.log(res);
             if (res.success === 'true')
                 {
-                    redirect(`/employees/centre-list/${getQueryStringValue('kamId')}`);
+                    if(parseInt(cusId) == 0) {
+                        redirect(`/employees/centre-list/${getQueryStringValue('kamId')}`);
+                    }
+                    
                     // @TODO: THIS NEED TO CHANGE
                 }
         }
