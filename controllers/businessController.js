@@ -47,7 +47,7 @@ function addUpdateBusinessTracker(objParam) {
                     .input("isContractApplicable", sql.Bit, objParam.isContractApplicable)
                     .execute("USP_add_update_BUSINESS_TRACKER")
                     .then(function (resp) {
-                        console.log(resp.recordset)
+                      //  console.log(resp.recordset)
                         resolve(resp.recordset);
                         dbConn.close();
                     })

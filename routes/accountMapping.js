@@ -13,5 +13,9 @@ router.get('/account-mapping/:empId/potential-list', controller.getAccountMappin
 router.post('/account-mapping/:empId/potential-list', controller.getAccountMappingPotentialListData);
 
 
+router.get('/account-mapping/:empId/business-list', controller.getAccountMappingBusinessList);
+router.post('/account-mapping/:empId/business-list', controller.getAccountMappingBusinessListData);
+
+
 
 module.exports = router;
