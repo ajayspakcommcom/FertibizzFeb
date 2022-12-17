@@ -2,8 +2,8 @@ function getMyHospitalList() {
 
     let urlArr = window.location.href.split('/'),
         empId = urlArr[urlArr.length - 1];
-        //console.log(empID);
-        
+    //console.log(empID);
+
     let param = {
         empId: empId
     };
@@ -32,3 +32,78 @@ function getMyHospitalList() {
             console.log(err);
         });
 }
+
+function setupPotentialPage() {
+    console.log('setup account mapping for potentials')
+
+    let urlArr = window.location.href.split('/'),
+        empId = urlArr[urlArr.length - 2];
+    console.log(empId);
+
+    let param = {
+        empId: empId
+    };
+
+    axios
+        .post(`/account-mapping/${empId}/potential-list`, param).then((response) => {
+            console.log(response.data)
+            let lists = response.data,
+                listArr = [],
+                totalSelftCycle = 0,
+                totalDonorCycle = 0,
+                totalAntagonistcycles = 0,
+                totalAgonistCycles = 0,
+                totalIVF = 0,
+                totalIUI = 0,
+                totalIVFFreshPickups = 0,
+                totalIVFFrozenTransfers = 0,
+                percIVF_FrozenTransfers = 0,
+                percIVF_FreshPickups = 0;
+
+            lists.forEach(list => {
+                listArr.push(
+                    `<tr>
+                        <td align='center'><input type='checkbox' /></td>
+                        <td>${camelCaseText(list.CENTRENAME)}</td>
+                        <td>${camelCaseText(list.DoctorName)}</td>
+                        <td align='right'>${list.IUICycle}</td>
+                        <td align='right'>${list.IVFCycle}</td>
+                        <td align='right'>${list.FreshPickUps}</td>
+                        <td align='right'>${list.frozenTransfers}</td>
+                        <td align='right'>${list.SelftCycle}</td>
+                        <td align='right'>${list.DonorCycles}</td>
+                        <td align='right'>${list.AgonistCycles}</td>
+                        <td align='right'>${list.Antagonistcycles}</td>
+                    </tr>
+                `);
+                // reoprt 2
+                totalSelftCycle += parseInt(list.SelftCycle);
+                totalDonorCycle += parseInt(list.DonorCycles);
+
+                // reoprt 3
+                totalAntagonistcycles += parseInt(list.Antagonistcycles)
+                totalAgonistCycles += parseInt(list.AgonistCycles);
+
+
+                // report 1
+                totalIVF += parseInt(list.IVFCycle)
+                totalIUI += parseInt(list.IUICycle)
+                // report 1- sub report
+                totalIVFFreshPickups += parseInt(list.FreshPickUps)
+                totalIVFFrozenTransfers += parseInt(list.frozenTransfers)
+            });
+            $('#potentialData').append(listArr.join(''));
+
+            percIVF_FrozenTransfers = percentage(totalIVFFrozenTransfers,totalIVF);
+            percIVF_FreshPickups = percentage(totalIVFFreshPickups,totalIVF);
+            console.log(totalIVF, totalIUI);
+            potentialChart1(totalIVF, totalIUI, percIVF_FrozenTransfers, percIVF_FreshPickups);
+            potentialChart2(totalSelftCycle, totalDonorCycle);
+
+            potentialChart3(totalAntagonistcycles, totalAgonistCycles)
+
+        }).catch((err) => {
+            console.log(err);
+        });
+}
+

@@ -15,7 +15,13 @@
             <!-- <a href="../employees/kam-list" class="btn btn-success">Go Back</a> -->
             <a href="javascript:void(0);" onclick="goBack()" class="btn btn-success">Go Back</a>
           </div>
-         <table class="table table-bordered table-bg">
+
+          <a id="hrfPotential" href="/account-mapping/24/potentialList">Potential</a>
+          <a id="hrfBusiness" href="#">Business</a>
+          <a id="hrfRateContract" href="#">Rate Contract</a>
+          <a id="hrfCompetition" href="#">Competition</a>
+
+         <!-- <table class="table table-bordered table-bg">
             <thead>
               <tr>
                 <th>Centre Name</th>
@@ -27,7 +33,7 @@
               </tr>
             </thead>
             <tbody id="centerList"></tbody>
-          </table>
+          </table> -->
       </main>
 
       <script src="../../js/jquery.min.js"></script>
@@ -39,6 +45,12 @@
         <script>
             $(function() {
                 getMyHospitalList();
+                let urlArr = window.location.href.split('/'),
+                  empId = urlArr[urlArr.length - 1];
+                $('#hrfPotential').attr('href', `/account-mapping/${empId}/potential-list`)
+                $('#hrfBusiness').attr('href', `/account-mapping/${empId}/business-list`)
+                $('#hrfRateContract').attr('href', `/account-mapping/${empId}/rate-contract-list`)
+                $('#hrfCompetition').attr('href', `/account-mapping/${empId}/competition-list`)
             });
             
             </script>

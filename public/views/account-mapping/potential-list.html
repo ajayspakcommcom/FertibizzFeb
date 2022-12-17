@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>IVF : Potential List </title>
+        <title>IVF : Potential List for Approval </title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="/css/bootstrap.min.css" />
@@ -12,10 +12,24 @@
 
     <main class="container-fluid">
         <h1 class="text-center">Potential List</h1>
-        <div class="text-right"><a href="../../account-mapping" class="btn btn-success">New Sku</a></div>
+        <!-- <div class="text-right"><a href="../../account-mapping" class="btn btn-success">New Sku</a></div> -->
+        <div id="potential_chart1"></div>
+        <div id="potential_chart1_bar" hidden>
+      
+          <div id="potential_chartIVF"></div>
+        </div>
+      
+      
+      
+        <div id="potential_chart2"></div>
+        <div id="potential_chart3"></div>
+ <div class="text-right"><a href="../../account-mapping" class="btn btn-success">Approve Selected</a></div> 
         <table class="table table-bordered table-bg">
             <thead>
                 <tr>
+                    <th>Approve</th>
+                    <th>Center Name</th>
+                    <th>Doctor Name</th>
                     <th>Total no. of IUI cycles</th>
                     <th>Total no. of IVF cycles</th>
                     <th>Fresh pick-ups</th>
@@ -24,65 +38,9 @@
                     <th>Donor cycles</th>
                     <th>Agonist cycles</th>
                     <th>Antagonist cycles</th>
-                    <th>Action</th>
                 </tr>
             </thead>
             <tbody id="potentialData">
-                <tr>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td><a href="/account-mapping/potential/1" class="btn btn-default">View Detail</a></td>
-                </tr>
-                <tr>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td><a href="/account-mapping/potential/1" class="btn btn-default">View Detail</a></td>
-                </tr>
-                <tr>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td><a href="/account-mapping/potential/1" class="btn btn-default">View Detail</a></td>
-                </tr>
-                <tr>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td><a href="/account-mapping/potential/1" class="btn btn-default">View Detail</a></td>
-                </tr>
-                <tr>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td>Lorem Ipsum</td>
-                    <td><a href="/account-mapping/potential/1" class="btn btn-default">View Detail</a></td>
-                </tr>
             </tbody>
         </table>
     </main>
@@ -92,9 +50,14 @@
         <script src="../../js/axios.min.js"></script>
         <script src="../../js/bootstrap.min.js"></script>
         <script src="../../js/admin.js"></script>
+        <script src="../../js/account-mapping.js"></script>
+        <script src="../../js/googlechart.js"></script>
+        <script src="../../js/reports_potential.js"></script>
+
         <script>
           $(function() {
-              
+            google.charts.load('current', { packages: ['corechart', 'bar'] });
+            setupPotentialPage();
           });
           
           </script>

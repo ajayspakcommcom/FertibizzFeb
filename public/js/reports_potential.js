@@ -54,54 +54,7 @@ async function getPotentialData() {
     percIVF_FrozenTransfers = percentage(totalIVFFrozenTransfers,totalIVF);
     percIVF_FreshPickups = percentage(totalIVFFreshPickups,totalIVF);
 
-
-    gdata = google.visualization.arrayToDataTable([
-      ['Task', 'Hours per Day'],
-      ['IUI Cycles', totalIUI],
-      ['IVF Cycles', totalIVF]
-    ]);
-
-    var options = {
-      title: 'IVF / IUI Count',
-      width: 300,
-      is3D: false,
-      legend: { position: 'bottom' },
-      backgroundColor: 'transparent'
-    };
-
-    var chart = new google.visualization.PieChart(document.getElementById('potential_chart1'));
-
-    function selectHandler() {
-      var selectedItem = chart.getSelection()[0];
-
-      if (selectedItem) {
-        var topping = gdata.getValue(selectedItem.row, 0);
-        $('#potential_chart1_bar').attr('hidden', topping === 'IUI Cycles')
-      }
-    }
-    google.visualization.events.addListener(chart, 'select', selectHandler, chart);
-    chart.draw(gdata, options);
-
-
-
-
-    let ivfData = google.visualization.arrayToDataTable([
-      ['Title', 'Fresh Pick Ups (%)', 'Frozen Transfers (%)'],
-      ['Type', percIVF_FreshPickups, percIVF_FrozenTransfers]
-    ]);
-
-    let ivfOptions = {
-      width: 150,
-      height: 200,
-      legend: { position: 'bottom', maxLines: 3 },
-      bar: { groupWidth: '20%' },
-      isStacked: true,
-      title: 'Fresh Pick Ups / Frozen Transfers'
-    };
-
-    let chartIVFDetails = new google.visualization.ColumnChart(document.getElementById('potential_chartIVF'));
-    chartIVFDetails.draw(ivfData, ivfOptions);
-
+    potentialChart1(totalIVF, totalIUI, percIVF_FrozenTransfers, percIVF_FreshPickups);
     potentialChart2(totalSelftCycle, totalDonorCycle);
 
     potentialChart3(totalAntagonistcycles, totalAgonistCycles)
@@ -111,9 +64,65 @@ async function getPotentialData() {
   }));
 }
 
+
+function potentialChart1(totalIVF, totalIUI, percIVF_FrozenTransfers, percIVF_FreshPickups) {
+  //console.log('inside report 2')
+  //console.log(arguments)
+  
+  let gdata = google.visualization.arrayToDataTable([
+    ['Task', 'Hours per Day'],
+    ['IUI Cycles', totalIUI],
+    ['IVF Cycles', totalIVF]
+  ]);
+
+  var options = {
+    title: 'IVF / IUI Count',
+    width: 300,
+    is3D: false,
+    legend: { position: 'bottom' },
+    backgroundColor: 'transparent'
+  }; 
+
+
+  var chart = new google.visualization.PieChart(document.getElementById('potential_chart1'));
+
+  function selectHandler() {
+    var selectedItem = chart.getSelection()[0];
+
+    if (selectedItem) {
+      var topping = gdata.getValue(selectedItem.row, 0);
+      $('#potential_chart1_bar').attr('hidden', topping === 'IUI Cycles')
+    }
+  }
+  google.visualization.events.addListener(chart, 'select', selectHandler, chart);
+  chart.draw(gdata, options);
+
+
+
+  let ivfData = google.visualization.arrayToDataTable([
+    ['Title', 'Fresh Pick Ups (%)', 'Frozen Transfers (%)'],
+    ['Type', percIVF_FreshPickups, percIVF_FrozenTransfers]
+  ]);
+
+  let ivfOptions = {
+    width: 150,
+    height: 200,
+    legend: { position: 'bottom', maxLines: 3 },
+    bar: { groupWidth: '20%' },
+    isStacked: true,
+    title: 'Fresh Pick Ups / Frozen Transfers'
+  };
+
+  let chartIVFDetails = new google.visualization.ColumnChart(document.getElementById('potential_chartIVF'));
+  chartIVFDetails.draw(ivfData, ivfOptions);
+
+ }
+
+
 function potentialChart2(selftCare, donorCycle) {
-// console.log('inside report 2')
-// console.log(arguments)
+ //console.log('inside report 2')
+ //console.log(arguments)
+ 
   var data = google.visualization.arrayToDataTable([
     ['Title', 'Value'],
     ['Self (Patient) Cycles', selftCare],
@@ -143,7 +152,7 @@ function potentialChart3(antagonistCycles, agonistCycles) {
   ]);
 
   var options = {
-    title: 'Potential Chart 3',
+    title: 'Agonist Cycles / Antagonist cycles',
     width: 300,
     is3D: false,
     legend: { position: 'bottom' },
