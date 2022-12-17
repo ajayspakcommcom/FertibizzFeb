@@ -12,17 +12,10 @@
 
       <main class="container-fluid">
          <h1 class="text-center">Add Business</h1>
-         <div class="text-right">
-            <!-- <a href="./hospitals" class="btn btn-success">Go Back</a> -->
-            <a href="javascript:void(0);" onclick="goBack()" class="btn btn-success">Go Back</a>
-          </div>
-
-         <div class="form-wrapper">
-          <form>
-            <div class="row">
-              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+          <div class="custom-table form heading-wrapper">
+            <div class="zone-profile no-centre-dr-name">
+              <div class="month-year-dropdown">
                 <div class="form-group">
-                  <label for="cmbMonth">Select Month</label>
                   <select  id="cmbMonth" class="form-control">
                     <option value="">---- Select Month ----</option>
                     <option value="1">Jan</option>
@@ -38,12 +31,8 @@
                     <option value="11">Nov</option>
                     <option value="12">Dec</option>
                   </select>
-                  
                 </div>
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                 <div class="form-group">
-                  <label for="cmbYear">Select Year</label>
                   <select  id="cmbYear" class="form-control">
                     <option value="">---- Select Year ----</option>                 
                     <option value="2022">2022</option>
@@ -51,9 +40,14 @@
                   </select>
                 </div>
               </div>
-
             </div>
+            <div class="text-right">
+              <a href="javascript:void(0);" onclick="goBack()" class="btn btn-success">Go Back</a>
+            </div>
+          </div>
 
+         <div class="form-wrapper">
+          <form>
             <div class="panel-group" id="accordion"></div>
               <div class="total-business-value">
                 <b>Total Business Value</b> 
@@ -73,8 +67,8 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                   <div class="two-btn-wrapper">
-                    <button type="reset" class="btn btn-default btn-grad">Reset</button>
-                    <button type="submit" class="btn btn-default btn-grad" onclick="validateMe();return false;">Save</button>
+                    <button type="reset" class="btn btn-default btn-grad" id="resetBtn">Reset</button>
+                    <button type="button" class="btn btn-default btn-grad" onclick="validateMe();return false;" id="saveBtn">Submit</button>
                     <button class="btn btn-default btn-grad" id="btnApprove" disabled="true" onclick="approveBusinessTracker();return false;">Approve</button>
                   </div>
                 </div>

@@ -188,9 +188,13 @@ function potentialCal(fId, sId, targetElem) {
 }
 
 $('input').change(function(e) { 
-    potentialCal('ivfTxt', 'freshTxt', 'frozenTxt');
-    potentialCal('ivfTxt', 'patientTxt', 'donotTxt');
-    potentialCal('ivfTxt', 'agonistTxt', 'antagonistTxt');
+    // potentialCal('ivfTxt', 'freshTxt', 'frozenTxt');
+    // potentialCal('ivfTxt', 'patientTxt', 'donotTxt');
+    // potentialCal('ivfTxt', 'agonistTxt', 'antagonistTxt');
+
+    potentialCal('ivfTxt', 'frozenTxt', 'freshTxt');
+    potentialCal('ivfTxt', 'donotTxt', 'patientTxt');
+    potentialCal('ivfTxt', 'antagonistTxt', 'agonistTxt');
 });
 
 showDrNameCentreName();

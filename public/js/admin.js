@@ -1,7 +1,6 @@
 
 
 function letMeLogin() {
-
     let param = {
         method: 'adminLogin',
         username: $('#txtUsername').val(),
@@ -19,9 +18,13 @@ function letMeLogin() {
                     
                     console.log(userDesignation);
 
-                    if(userDesignation == 'KAM') {
+                    if(userDesignation.toLowerCase() == 'kam') {
                         (document.location.href = _URL._POSTLOGINURL);
-                    } else {
+                    } else if(userDesignation.toLowerCase() == 'admin') {
+                        console.log('Admin');
+                        redirect('/dashboard-chart-report');
+                    } 
+                    else {
                         _URL._POSTLOGINURL = '/employees/kam-list';
                         (document.location.href = _URL._POSTLOGINURL);
                     }

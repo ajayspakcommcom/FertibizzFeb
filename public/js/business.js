@@ -66,7 +66,7 @@ async function getSkuDetails() {
             <a data-toggle="collapse" data-parent="#accordion" href="#${skuBrand.toLowerCase().replace(/\s/g, '')}">${formatText(skuBrand, 'FirstLetterUPPER')}</a>
             </h4>
         </div>
-        <div id="${skuBrand.toLowerCase().replace(/\s/g, '')}" class="panel-collapse collapse in">
+        <div id="${skuBrand.toLowerCase().replace(/\s/g, '')}" class="panel-collapse collapse">
             <div class="panel-body">
             <div class="form-section"> 
             ${getBrandGroupDetails(skuBrandArr, contractRes, businessTrackRes)}
@@ -156,7 +156,7 @@ function getSKUHtml(skuBrandGroups, brandGroup, contractResponse, businessTrackR
                 <div class="form-group">
                     <input type="text" 
                         onkeypress="return isNumber(event)"
-                        maxLength="2"
+                        maxLength="3"
                         class="form-control unitSold" 
                         id="txt_${fieldName}_unitSold" 
                         name="txt_${fieldName}_unitSold" 
@@ -183,8 +183,15 @@ function getSKUHtml(skuBrandGroups, brandGroup, contractResponse, businessTrackR
 
 function confirmBrandEntry(checkbox) {
     console.log(checkbox.id)
-    let msg = $('#' + checkbox.id).is(":checked") ? 'close the panel' : 'dont do anything';
-    console.log(msg)
+    let panelId = checkbox.id.toLowerCase().substring(11),
+        msg = $('#' + checkbox.id).is(":checked") ? closePanel(panelId) : 'dont do anything';
+    console.log(msg);
+    //console.log(panelId);
+}
+
+function closePanel(id) {
+   $(`#${id}`).removeClass('in');
+   $(`#${id}`).parent('.panel').find('.panel-heading').addClass('done');
 }
 
 
@@ -351,3 +358,21 @@ function approveBusinessTracker() {
         });
     return false;
 }
+
+function showCheckBoxApproveBtn() {
+    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
+    console.log(userData);
+
+    if(userData.post.toLowerCase() == 'kam') {
+        $('.hideApproveChk').hide();
+        $('#btnApprove').hide();
+    }
+
+    else if(userData.post.toLowerCase() == 'rbm') {
+        $('#resetBtn').hide();
+        $('#saveBtn').hide();
+        $('.two-btn-wrapper').addClass('right');
+    }
+}
+
+showCheckBoxApproveBtn();

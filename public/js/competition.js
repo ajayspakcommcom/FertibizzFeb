@@ -1,7 +1,12 @@
 var competitorSkus;
 function setupPage() {
     loadMonthYear();
-    getSkuDetails()
+    getSkuDetails();
+    showCheckBoxApproveBtn();
+
+    setInterval(() => {
+      showPrevMonthInput();
+    }, 1000);
 }
 
 
@@ -81,62 +86,62 @@ async function getSkuDetails() {
             </td>
             <td>
               <div class="form-group">
-                <input maxlength=4" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_apr" required="" value="${apr}" />
+                <input maxlength=7" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_apr" required="" value="${apr}" title="apr" />
               </div>
             </td>
             <td>
               <div class="form-group">
-              <input maxlength=4" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_may" required="" value="${may}" />
+              <input maxlength=7" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_may" required="" value="${may}" title="may" />
               </div>
             </td>
             <td>
               <div class="form-group">
-              <input maxlength=4" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_jun" required="" value="${jun}" />
+              <input maxlength=7" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_jun" required="" value="${jun}" title="jun" />
               </div>
             </td>
             <td>
               <div class="form-group">
-              <input maxlength=4" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_jul" required="" value="${jul}" />
+              <input maxlength=7" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_jul" required="" value="${jul}" title="jul" />
               </div>
             </td>
             <td>
               <div class="form-group">
-              <input maxlength=4" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_aug" required="" value="${aug}" />
+              <input maxlength=7" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_aug" required="" value="${aug}" title="aug" />
               </div>
             </td>
             <td>
               <div class="form-group">
-              <input maxlength=4" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_sep"  value="${sep}" />
+              <input maxlength=7" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_sep"  value="${sep}" title="sep" />
               </div>
             </td>
             <td>
               <div class="form-group">
-              <input maxlength=4" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_oct"  value="${oct}" />
+              <input maxlength=7" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_oct"  value="${oct}" title="oct" />
               </div>
             </td>
             <td>
               <div class="form-group">
-              <input maxlength=4" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_nov"  value="${nov}" />
+              <input maxlength=7" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_nov"  value="${nov}" title="nov" />
               </div>
             </td>
             <td>
               <div class="form-group">
-              <input maxlength=4" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_dec"  value="${dec}" />
+              <input maxlength=7" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_dec"  value="${dec}" title="dec" />
               </div>
             </td>
             <td>
               <div class="form-group">
-              <input maxlength=4" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_jan"  value="${jan}" />
+              <input maxlength=7" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_jan"  value="${jan}" title="jan" />
               </div>
             </td>
             <td>
               <div class="form-group">
-              <input maxlength=4" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_feb"  value="${feb}" />
+              <input maxlength=7" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_feb"  value="${feb}" title="feb" />
               </div>
             </td>
             <td>
               <div class="form-group">
-              <input maxlength=4" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_mar"  value="${mar}" />
+              <input maxlength=7" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_mar"  value="${mar}" title="mar" />
               </div>
             </td>
           </tr>`)
@@ -203,8 +208,6 @@ function validateMe() {
             redirect('/hospitals');
         })
     );
-
-    
 }
 
 function isNumber(evt) {
@@ -262,4 +265,21 @@ function showCheckBoxApproveBtn() {
   }
 }
 
-showCheckBoxApproveBtn();
+function showLastMonthInput() {
+
+}
+
+function showPrevMonthInput() {
+  $('#competitorDataTable input[type=text]').prop('disabled', true);
+  $(`[title=${getPrevMonth()}]`).prop('disabled', false);
+}
+
+function getPrevMonth() {
+  const monthNames = ["jan", "feb", "mar", "apr", "may", "jun","jul", "aug", "sep", "oct", "nov", "dec"];
+  const date = new Date();
+  return monthNames[date.getMonth() - 1];
+}
+
+
+
+//showCheckBoxApproveBtn();

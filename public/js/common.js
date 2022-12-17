@@ -1,8 +1,8 @@
 const _SUCCESSFUL_STATUS_CODE = 200;
 const _INVAID_SESSION = 202
 const _FAILURE_STATUS_CODE = 201
-//const _ROOT = 'http://ivf1.spak.agency'; //http://localhost:3333
-const _ROOT = 'http://localhost:3333'
+//const _ROOT = 'http://ivf1.spak.agency'; 
+const _ROOT = 'http://localhost:3333';
 const _SKU_BRANDS = ['FOLIGRAF', 'HUMOG', 'ASPORELIX', 'R-HUCOG', 'FOLICULIN', 'AGOTRIG', 'MIDYDROGESTERONE'];
 
 
@@ -127,6 +127,8 @@ function formatText(str, type) {
    
 }
 
+
+
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
@@ -198,3 +200,35 @@ function getQueryStringValue(key) {
     //console.log(urlSearchParams)
     return urlSearchParams.get(key);
 }
+
+function showNavigationByDesignation() {
+    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
+
+    if (userData != null) {
+        $('#ulLink > li').hide();
+        $('.userLink, .logoutLink').show();
+
+        $('#userName').text(userData.name);
+        $('#userPost').text(userData.post);
+
+        switch (userData.post.toLowerCase()) {
+
+            case 'kam':
+                $('.kamLink').show();
+                break;
+            case 'rbm':
+                $('#logoLink').attr('href', '/employees/kam-list');
+                break;
+            case 'zbm':
+                break;
+            case 'admin':
+                $('.adminLink').show();
+                break;
+        }
+    }
+}
+
+setTimeout(() => {
+    showNavigationByDesignation();    
+}, 2000);
+
