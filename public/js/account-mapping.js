@@ -34,19 +34,17 @@ function getMyHospitalList() {
 }
 
 function setupPotentialPage() {
-    console.log('setup account mapping for potentials')
+//    console.log('setup account mapping for potentials')
 
     let urlArr = window.location.href.split('/'),
         empId = urlArr[urlArr.length - 2];
-    console.log(empId);
-
     let param = {
         empId: empId
     };
 
     axios
         .post(`/account-mapping/${empId}/potential-list`, param).then((response) => {
-            console.log(response.data)
+            //console.log(response.data)
             let lists = response.data,
                 listArr = [],
                 totalSelftCycle = 0,
@@ -63,7 +61,7 @@ function setupPotentialPage() {
             lists.forEach(list => {
                 listArr.push(
                     `<tr>
-                        <td align='center'><input type='checkbox' /></td>
+                        <td align='center'><input ${list.isApproved === false? `checked` : ''} type='checkbox' class='chkbox' value='${list.potentialId}'  id=${list.potentialId} /></td>
                         <td>${camelCaseText(list.CENTRENAME)}</td>
                         <td>${camelCaseText(list.DoctorName)}</td>
                         <td align='right'>${list.IUICycle}</td>
@@ -94,8 +92,8 @@ function setupPotentialPage() {
             });
             $('#potentialData').append(listArr.join(''));
 
-            percIVF_FrozenTransfers = percentage(totalIVFFrozenTransfers,totalIVF);
-            percIVF_FreshPickups = percentage(totalIVFFreshPickups,totalIVF);
+            percIVF_FrozenTransfers = percentage(totalIVFFrozenTransfers, totalIVF);
+            percIVF_FreshPickups = percentage(totalIVFFreshPickups, totalIVF);
             console.log(totalIVF, totalIUI);
             potentialChart1(totalIVF, totalIUI, percIVF_FrozenTransfers, percIVF_FreshPickups);
             potentialChart2(totalSelftCycle, totalDonorCycle);
@@ -105,5 +103,25 @@ function setupPotentialPage() {
         }).catch((err) => {
             console.log(err);
         });
+}
+
+function approveListingPotential() {
+    console.log('approve selected Listing');
+    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
+
+    var endPoints = $(".chkbox:checked").map(function () {
+        return {
+            potentialId: parseInt($(this).val()),
+            rbmId: parseInt(userData.empId),
+        };
+    }).get();
+    console.log(endPoints);
+    Promise.all(endPoints.map((endpoint) => axios.post('/center-potentials-approved', endpoint))).then(
+        axios.spread((...allData) => {
+            console.log({ allData });
+          //  redirect('/hospitals');
+        })
+    );
+    return false;
 }
 

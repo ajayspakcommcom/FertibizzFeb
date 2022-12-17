@@ -1,33 +1,36 @@
 <html>
-    <head>
-        <title>IVF : Potential List for Approval </title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="/css/app.css" />
-    </head>
+
+<head>
+    <title>IVF : Potential List for Approval </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/app.css" />
+</head>
+
 <body>
-    
-  <nav class="navbar" id="header"></nav>
+
+    <nav class="navbar" id="header"></nav>
 
     <main class="container-fluid">
         <h1 class="text-center">Potential List</h1>
         <!-- <div class="text-right"><a href="../../account-mapping" class="btn btn-success">New Sku</a></div> -->
         <div id="potential_chart1"></div>
         <div id="potential_chart1_bar" hidden>
-      
-          <div id="potential_chartIVF"></div>
+
+            <div id="potential_chartIVF"></div>
         </div>
-      
-      
-      
+
+
+
         <div id="potential_chart2"></div>
         <div id="potential_chart3"></div>
- <div class="text-right"><a href="../../account-mapping" class="btn btn-success">Approve Selected</a></div> 
+        <div class="text-right"><a href="javascript:void(0);" onclick="approveListingPotential();return false;"
+                class="btn btn-success">Approve Selected</a></div>
         <table class="table table-bordered table-bg">
             <thead>
                 <tr>
-                    <th>Approve</th>
+                    <th>Approve <input type="checkbox" id="selectAll" /></th>
                     <th>Center Name</th>
                     <th>Doctor Name</th>
                     <th>Total no. of IUI cycles</th>
@@ -45,22 +48,27 @@
         </table>
     </main>
 
-      <script src="../../js/jquery.min.js"></script>
-      <script src="../../js/common.js"></script>
-        <script src="../../js/axios.min.js"></script>
-        <script src="../../js/bootstrap.min.js"></script>
-        <script src="../../js/admin.js"></script>
-        <script src="../../js/account-mapping.js"></script>
-        <script src="../../js/googlechart.js"></script>
-        <script src="../../js/reports_potential.js"></script>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/common.js"></script>
+    <script src="../../js/axios.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/admin.js"></script>
+    <script src="../../js/account-mapping.js"></script>
+    <script src="../../js/googlechart.js"></script>
+    <script src="../../js/reports_potential.js"></script>
 
-        <script>
-          $(function() {
+    <script>
+        $(function () {
             google.charts.load('current', { packages: ['corechart', 'bar'] });
             setupPotentialPage();
-          });
-          
-          </script>
+            $('#selectAll').click(function (e) {
+                var table = $(e.target).closest('table');
+                $('td input:checkbox', table).prop('checked', this.checked);
+            });
+        });
+
+    </script>
 
 </body>
+
 </html>

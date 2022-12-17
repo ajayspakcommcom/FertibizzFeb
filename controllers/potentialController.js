@@ -152,3 +152,47 @@ function approveCenterPotential( objParam ) {
             });
     });
 };
+
+
+
+
+
+exports.approveCenterPotentialByPotentialId = (req, res, next) => {
+    // console.log('inside update employee');
+     let params = Object.assign(req.params, req.body);
+     approveCenterPotentialByPotentialId(params).then(result => {
+         res.status(_STATUSCODE).json(result)
+     })
+ };
+
+ 
+
+function approveCenterPotentialByPotentialId( objParam ) {
+    // console.log('--------------------------------')
+    // console.log(objParam)
+    // console.log('--------------------------------')
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    .input("potentialId", sql.Int, objParam.potentialId)
+                    .input("rbmId", sql.Int, objParam.rbmId)
+                    .execute("USP_APPROVE_CUSTOMER_POTENTIALS_BY_POTENTIALID")
+                    .then(function (resp) {
+                        //console.log(resp.recordset)
+                        resolve(resp.recordset);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    });
+};
