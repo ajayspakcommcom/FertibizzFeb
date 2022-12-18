@@ -82,7 +82,7 @@ exports.getAccountMappingBusinessListData = (req, res, next) => {
                       .execute("USP_GET_RBM_BUSINESS_LIST_FOR_APPROVAL")
                       .then(function (resp) {
                          //console.log(resp)
-                          resolve(resp.recordset);
+                          resolve(resp.recordsets);
                           dbConn.close();
                       })
                       .catch(function (err) {

@@ -49,7 +49,7 @@ exports.postApi = (req, res, next) => {
                     success, msg, userDetiails
                 };
                 if (success) {
-                    console.log('send 200')
+                   // console.log('send 200')
                     statusCode = _STATUSCODE;
                 } else {
                     statusCode = 201;
@@ -69,7 +69,7 @@ exports.postApi = (req, res, next) => {
 
 
 userLogin = (objParam) => {
-        console.log('I am Here', objParam);
+     //   console.log('I am Here', objParam);
     return new Promise((resolve) => {
         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
         dbConn

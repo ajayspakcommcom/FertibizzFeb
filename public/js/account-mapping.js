@@ -138,9 +138,8 @@ function setupBusinessPage() {
         axios
         .post(`/account-mapping/${empId}/business-list`, param).then((response) => {
             //console.log(response.data)
-             let lists = response.data,
+             let lists = response.data[0],
                  listArr = [];
-
              lists.forEach(list => {
                 listArr.push(
                     `<tr>
@@ -160,6 +159,11 @@ function setupBusinessPage() {
                 `);
              });
              $('#potentialData').append(listArr.join(''));
+             // generate data for the graph
+            drawBusinessChartWithData(response.data[1]);
+             getAllBusinessReportWithData(response.data[2])
+
+
         }).catch((err) => {
             console.log(err);
         });
