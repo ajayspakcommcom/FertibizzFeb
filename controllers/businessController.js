@@ -188,3 +188,46 @@ function approveCenterBusinessTracker(objParam) {
             });
     });
 };
+
+
+//
+
+
+
+exports.approveCenterBusinessTrackerByHospitalId = (req, res, next) => {
+    // console.log('inside update employee');
+    let params = Object.assign(req.params, req.body);
+    approveCenterBusinessTrackerByHospitalId(params).then(result => {
+        res.status(_STATUSCODE).json(result)
+    })
+};
+
+function approveCenterBusinessTrackerByHospitalId(objParam) {
+    // console.log('--------------------------------')
+    // console.log(objParam)
+    // console.log('--------------------------------')
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    .input("customerId", sql.Int, parseInt(objParam.centerId))
+                    .input("rbmId", sql.Int, objParam.rbmId)
+                    .execute("USP_APPROVE_CUSTOMER_BUSINESS_TRACKER_BY_HOSPITALID")
+                    .then(function (resp) {
+                        //console.log(resp.recordset)
+                        resolve(resp.recordset);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    });
+};
