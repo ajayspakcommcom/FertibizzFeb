@@ -37,13 +37,6 @@ function populateDataTable(data) {
                 item.CENTRENAME,
                 item.DoctorName,
                 item.specialtyType,
-                item.mobile,
-                item.email,
-                `${item.Address1} <br> 
-                    ${item.Address2}<br> 
-                    ${item.LocalArea}<br> 
-                    ${item.City} ${item.PinCode} <br> ${item.stateName} `,
-                item.ChemistMapped,
                 item.ChainStatusName,
                 isEmployeeCenterList(item)
             ]);
@@ -56,7 +49,7 @@ function isEmployeeCenterList(obj) {
     if(path == 'customers') {
         return `<a href="/customer-edit/${obj.customerId}">Edit</a> | <a href='javascript:void(0)' onclick='DeleteCustomer(${obj.customerId},"${obj.CENTRENAME}");return false;' class='${obj.customerId}' title='${obj.CENTRENAME}'>Delete</a>`
     } else {
-        return `<a href="/customer-edit/${obj.customerId}?editMode=false&kamId=${parseInt(getIdFromURL())}" title="${obj.customerId}">View Detail</a>`
+        return `<a href="/customer-edit/${obj.customerId}?editMode=false&kamId=${parseInt(getIdFromURL())}" title="${obj.customerId}">View Profile</a>`
     }
 }
 
