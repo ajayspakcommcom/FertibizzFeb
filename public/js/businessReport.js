@@ -190,7 +190,7 @@ function getAllBusinessReportWithData(data) {
                 bar: { groupWidth: '40%' },
                 isStacked: false,
                 title: brand,
-                hAxis: { textPosition: 'bottom' },
+                hAxis: { textPosition: 'none' },
             };
 
             let chart = new google.visualization.ColumnChart(document.getElementById('business_chart_' + brand));

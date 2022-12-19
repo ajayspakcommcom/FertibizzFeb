@@ -23,7 +23,6 @@ function getKamList() {
                 `<tr>
                     <td>${indx}</td>
                     <td>${data.firstName}</td>
-                    <td>${`Head Quater`}</td>
                     <td><a href="../account-mapping/${data.empID}">Account Mapping Data</a></td>
                     <td>
                         <a href="/employees/centre-list/${data.empID}">Master Data</a>

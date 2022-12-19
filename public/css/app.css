@@ -8110,3 +8110,27 @@ ul.inline {
 .logoutLink img {
   width: 25px;
 }
+
+
+.account-mapping-btn-wrapper {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+}
+
+.account-mapping-btn-wrapper > a {
+  display: inline-block;
+  margin-right: 15px;
+  padding: 25px 50px;
+}
+
+.account-mapping-btn-wrapper > a:last-child {
+  margin-right: 0;
+}
+
+.account-mapping-chart-potential-wrapper {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+}
