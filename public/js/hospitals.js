@@ -1,16 +1,16 @@
 function getCustomerList() {
-    
+
     let myKamId = parseInt(getIdFromURL()),
         userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
         param = {
             empId: isNaN(myKamId) ? userData.empId : myKamId,
             method: 'getHospitalList'
         };
-        
-     
+
+
     axios
         .post(_URL._CUSTOMER_LIST, param).then((response) => {
-            console.log(response.data);
+            //    console.log(response.data);
             populateDataTable(response.data);
 
         }).catch((err) => {
@@ -29,15 +29,20 @@ function populateDataTable(data) {
     if (length == 0) {
         $("#customerList").DataTable().clear();
     } else {
-      //  console.log(data);
+        //  console.log(data);
         var i = 1;
         data.forEach(item => {
             $('#customerList').dataTable().fnAddData([
-                `<input type="checkbox" ${item.IsApproved === 'Yes' ? `Checked`: ''}>`,
+                `<input type="checkbox" ${item.IsApproved === 'Yes' ? `Checked` : ''}>`,
                 item.CENTRENAME,
                 item.DoctorName,
                 item.specialtyType,
+                item.mobile,
+                item.email,
+                `${item.Address1} ${item.Address2} <br> ${item.City}, ${item.stateName} <br>${item.PinCode}`,
+                item.ChemistMapped,
                 item.ChainStatusName,
+
                 isEmployeeCenterList(item)
             ]);
         });
@@ -46,7 +51,7 @@ function populateDataTable(data) {
 
 function isEmployeeCenterList(obj) {
     let path = window.location.pathname.substr(1);
-    if(path == 'customers') {
+    if (path == 'customers') {
         return `<a href="/customer-edit/${obj.customerId}">Edit</a> | <a href='javascript:void(0)' onclick='DeleteCustomer(${obj.customerId},"${obj.CENTRENAME}");return false;' class='${obj.customerId}' title='${obj.CENTRENAME}'>Delete</a>`
     } else {
         return `<a href="/customer-edit/${obj.customerId}?editMode=false&kamId=${parseInt(getIdFromURL())}" title="${obj.customerId}">View Profile</a>`
@@ -56,8 +61,8 @@ function isEmployeeCenterList(obj) {
 
 function getCustomerDetails() {
 
-    if(getQueryStringValue('editMode') == 'false') {
-        $("form :input").attr('disabled','disabled');
+    if (getQueryStringValue('editMode') == 'false') {
+        $("form :input").attr('disabled', 'disabled');
         $('#chkApproved').attr('disabled', false);
         $('#endDate').attr('disabled', 'disabled');
         $('#goBack').attr('href', '/employees/centre-list');
@@ -66,7 +71,7 @@ function getCustomerDetails() {
             $('.two-btn-wrapper').hide();
             $('.add-rc-link').hide();
             $('.approve-btn-wrapper').removeClass('none');
-           // $('.approve-btn-wrapper > button').removeAttr('disabled');
+            // $('.approve-btn-wrapper > button').removeAttr('disabled');
         }, 500);
     }
 
@@ -87,7 +92,7 @@ function getCustomerDetails() {
             $('#txtDoctorName').val(customerData.DoctorName)
 
             $('#txtDoctorUniqueCode').val(customerData.DoctorUniqueCode),
-            $('#txtMobile').val(customerData.mobile)
+                $('#txtMobile').val(customerData.mobile)
             $('#txtEmail').val(customerData.email)
             $('#txtCenterName').val(customerData.CENTRENAME)
             $('#txtAddress1').val(customerData.Address1)
@@ -104,11 +109,11 @@ function getCustomerDetails() {
             $('#hidChainAccountType').val(customerData.SpecialtyId)
             $('#hidVisitCategory').val(customerData.visitId)
 
-            
+
             $('#chkDisabled').prop('checked', customerData.isdisabled);
             $('#chkRc').prop('checked', (customerData.isContractApplicable === 'YES'));
             $('#endDate').val(customerData.contractEndDate);
-           if  (customerData.isContractApplicable === 'YES') 
+            if (customerData.isContractApplicable === 'YES')
                 enableContractDate()
 
             setTimeout(cmbValues, 5000);
@@ -209,11 +214,39 @@ function validateMe() {
         });
 
 }
+function CheckContractRate(obj) {
+
+    $('#chkRc').prop('checked', (parseInt(obj.value) === 0));
+    $('#endDate').val('');
+
+}
 
 
 function submitMe() {
     let urlArr = window.location.href.split('/'),
         customerId = urlArr[urlArr.length - 1];
+
+
+    if (($('#cmbChainAccountType').val()) !== '') {
+        if (!$('#chkRc').is(":checked")) {
+            alert('since you have specified the speical rate list, please select contract rate and select Contract expiry Date')
+            return false;
+        }
+        if ($('#endDate').val() === '') {
+            alert('Select Contract expiry Date')
+            return false;
+        }
+
+        var today = new Date();
+        var endDate = new Date($('#endDate').val());
+
+        if (today > endDate) {
+            // Do something
+            alert('invalid contract expiry date, expiry date should be of future')
+            return false;
+        }
+    }
+
 
     let param = {
         txtCode: $('#txtCode').val(),
@@ -237,7 +270,7 @@ function submitMe() {
         customerId: isNaN(customerId) ? null : parseInt(customerId),
         chainAccountTypeId: parseInt($('#cmbChainAccountType').val()),
         isRateContractApplicable: $('#chkRc').is(":checked") ? 5 : 6,
-        contractEndDate:  $('#endDate').val()
+        contractEndDate: $('#endDate').val()
     }
     //console.log(param)
     axios
@@ -258,13 +291,13 @@ function submitMe() {
 function getMasterData() {
     axios
         .get(`${_URL._MASTER_DATA}`).then((response) => {
-           // console.log(response)
+            // console.log(response)
             let stateList = response.data[0],
                 chainList = response.data[1],
                 visitTypeList = response.data[2],
                 specialtyList = response.data[3],
                 chainAccountList = response.data[4];
-                //console.log(chainAccountList)
+            //console.log(chainAccountList)
             loadComboBox(stateList, 'cmbState', 'stateId', 'stateName');
             loadComboBox(chainList, 'cmbChain', 'chainId', 'Name');
             loadComboBox(visitTypeList, 'cmbVisitCategory', 'VisitID', 'Name');
@@ -303,19 +336,19 @@ function bulkCustomerDataDelete() {
 }
 
 function ApproveDataSingleWay() {
-    
+
     let getSelectedElemList = $('table.dataTable tbody tr.selected'),
         arrIdList = [];
 
-        for(let obj of getSelectedElemList) {
-            arrIdList.push(obj.lastElementChild.lastChild.getAttribute('title'));
-        }
+    for (let obj of getSelectedElemList) {
+        arrIdList.push(obj.lastElementChild.lastChild.getAttribute('title'));
+    }
 
-        // approveCenterMasterData
+    // approveCenterMasterData
 
-      for(let i = 0; i <= arrIdList.length -1; i++) {
+    for (let i = 0; i <= arrIdList.length - 1; i++) {
         approveCenterMasterData(arrIdList[i]);
-      }
+    }
 }
 
 
@@ -357,8 +390,8 @@ function centerContractAdd() {
     // let urlArr = window.location.href.split('/'),
     //     centerId = urlArr[urlArr.length - 1];
 
-    let chainAccountTypeId =  parseInt($('#cmbChainAccountType').val())
-    redirect('/customer-contract-add/'+chainAccountTypeId);
+    let chainAccountTypeId = parseInt($('#cmbChainAccountType').val())
+    redirect('/customer-contract-add/' + chainAccountTypeId);
 }
 
 
@@ -372,29 +405,28 @@ function enableContractDate() {
 function approveCenterMasterData(cusId = 0) {
 
     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
-    param = {
-        customerId: cusId == 0 ? parseInt(getIdFromURL()) : parseInt(cusId),
-        rbmId: parseInt(userData.empId)
-    }
+        param = {
+            customerId: cusId == 0 ? parseInt(getIdFromURL()) : parseInt(cusId),
+            rbmId: parseInt(userData.empId)
+        }
 
-  axios
-    .post('/customer-master-data-approved/', param).then((response) => {
-     //   console.log(response.data[0])
-        if (response.data.length > 0) {
-            let res = response.data[0];
-            console.log(res);
-            if (res.success === 'true')
-                {
-                    if(parseInt(cusId) == 0) {
+    axios
+        .post('/customer-master-data-approved/', param).then((response) => {
+            //   console.log(response.data[0])
+            if (response.data.length > 0) {
+                let res = response.data[0];
+                console.log(res);
+                if (res.success === 'true') {
+                    if (parseInt(cusId) == 0) {
                         redirect(`/employees/centre-list/${getQueryStringValue('kamId')}`);
                     }
-                    
+
                     // @TODO: THIS NEED TO CHANGE
                 }
-        }
-  
-    }).catch((err) => {
-        console.log(err);
-    });
+            }
+
+        }).catch((err) => {
+            console.log(err);
+        });
     return false;
-  }
+}
