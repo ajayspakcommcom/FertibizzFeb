@@ -1,5 +1,4 @@
-var skuDetails,
-    isContractApplicableBool = false;
+var skuDetails, isContractApplicableBool = false;
 function setupPage() {
     loadMonthYear();
     getSkuDetails()
@@ -143,7 +142,7 @@ function getSKUHtml(skuBrandGroups, brandGroup, contractResponse, businessTrackR
         let fieldName = `${sku.brandId}_${sku.brandGroupId}_${sku.medid}`
         html.push(`<tr>
                 <td width="20%">
-                <span>${sku.medicineName}</span>
+                <span class="skuName">${sku.medicineName}</span>
                 </td>
                 <td>
                 <div class="form-group">
@@ -155,7 +154,7 @@ function getSKUHtml(skuBrandGroups, brandGroup, contractResponse, businessTrackR
                 <td>
                 <div class="form-group">
                     <input type="text" 
-                        onkeypress="return isNumber(event)"
+                        onkeypress="return isNumber(event);"
                         maxLength="3"
                         class="form-control unitSold" 
                         id="txt_${fieldName}_unitSold" 
@@ -163,7 +162,7 @@ function getSKUHtml(skuBrandGroups, brandGroup, contractResponse, businessTrackR
                         priceField = 'hid_${fieldName}_Price'
                         rateContractField = 'txt_${fieldName}_ContractRate'
                         unitSoldBusinessfield = 'txt_${fieldName}_unitSoldBusiness'
-                        required="" onblur="calculateBusiness(this);" onchange="calculateBusiness(this);" value='${qty}'>
+                        required="" onblur="calculateBusiness(this);" onchange="calculateBusiness(this);" onfocus="addPrevValueOnFocus(this)" onfocusout="addPrevValueOnFocusOut(this)" value='${qty}'>
                 </div>
                 </td>
                 <td>
@@ -372,6 +371,23 @@ function showCheckBoxApproveBtn() {
         $('#resetBtn').hide();
         $('#saveBtn').hide();
         $('.two-btn-wrapper').addClass('right');
+    }
+}
+
+showDrNameCentreName();
+
+function addPrevValueOnFocus(elem) {
+    if(parseInt(elem.value) == 0) {
+        elem.value = '';
+    } else {
+        elem.value = elem.value;
+    }
+}
+
+function addPrevValueOnFocusOut(elem) {
+    console.log(elem.value);
+    if(elem.value == undefined || elem.value == null || elem.value == '') {
+        elem.value = 0;
     }
 }
 

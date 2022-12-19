@@ -76,14 +76,14 @@
                 </div>   
 
                 <div class="form-group">
+                  <label for="frozenTxt">Frozen Transfers</label>
+                  <input type="number" class="form-control" id="frozenTxt" name="frozenTxt" placeholder="Frozen Transfers" required />
+                </div>  
+                
+                <div class="form-group">
                   <label for="freshTxt">Fresh Pick-ups</label>
                   <input type="number" class="form-control disabled" id="freshTxt" name="freshTxt" placeholder="Fresh pick-ups" required />
                 </div>
-
-                <div class="form-group">
-                  <label for="frozenTxt">Frozen Transfers</label>
-                  <input type="number" class="form-control" id="frozenTxt" name="frozenTxt" placeholder="Frozen Transfers" required />
-                </div>   
 
               </div>
 
@@ -91,23 +91,23 @@
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 
                 <div class="form-group">
+                  <label for="donotTxt">Donor Cycles</label>
+                  <input type="number" class="form-control" id="donotTxt" name="donotTxt" placeholder="Donor cycles" required />
+                </div> 
+                
+                <div class="form-group">
                   <label for="patientTxt">Self (Patient) cycles</label>
                   <input type="number" class="form-control disabled" id="patientTxt" name="patientTxt" placeholder="Self (Patient) cycles" required />
                 </div>
 
                 <div class="form-group">
-                  <label for="donotTxt">Donor Cycles</label>
-                  <input type="number" class="form-control" id="donotTxt" name="donotTxt" placeholder="Donor cycles" required />
-                </div>  
+                  <label for="antagonistTxt">Antagonist Cycles</label>
+                  <input type="number" class="form-control" id="antagonistTxt" name="antagonistTxt" placeholder="Antagonist cycles" required />
+                </div>
 
                 <div class="form-group">
                   <label for="agonistTxt">Agonist Cycles</label>
                   <input type="number" class="form-control disabled" id="agonistTxt" name="agonistTxt" placeholder="Agonist cycles" required />
-                </div>
-
-                <div class="form-group">
-                  <label for="antagonistTxt">Antagonist Cycles</label>
-                  <input type="number" class="form-control" id="antagonistTxt" name="antagonistTxt" placeholder="Antagonist cycles" required />
                 </div>
 
               </div>
@@ -124,14 +124,12 @@
             <div class="row">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <div class="two-btn-wrapper">
+                <div class="two-btn-wrapper two-btn-wrapper-potential">
+                  <button type="button" class="btn btn-default btn-grad" id="undoChanges" onclick="undo()">Undo</button>
                   <button type="reset" class="btn btn-default btn-grad" id="resetBtn">Reset</button>
                   <button type="button" class="btn btn-default btn-grad" onclick="validateMe();return false;" id="saveBtn">Submit</button>
                   <button class="btn btn-default btn-grad" id="btnApprove" disabled="true"  onclick="approveMe();return false;">Approve</button>
                 </div>
-                <!-- <div class="approve-btn-wrapper none">
-                
-                </div> -->
               </div>
             </div>
           </form>

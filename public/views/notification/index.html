@@ -1,0 +1,69 @@
+<html>
+
+<head>
+    <title>IVF : Notification </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/app.css" />
+</head>
+
+<body>
+
+    <nav class="navbar" id="header"></nav>
+    <main class="container-fluid">
+        <h1 class="text-center">Notification</h1>
+
+        <div class="custom-table form heading-wrapper">
+            <div class="pending-heading">
+              <b>3/10 centres were not approved</b>
+            </div>
+            <div class="text-right">
+              <a href="javascript:void(0);" onclick="goBack()" class="btn btn-success">Go Back</a>
+            </div>
+          </div>
+
+        <table class="table table-bordered table-bg">
+            <thead>
+                <tr>
+                    <th>Centre Name</th>
+                    <th>Name of Doctor</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="centerList">
+                <tr>
+                    <td>Gangaram</td>
+                    <td>Abha Majumdar </td>
+                    <td><a href="/potential-add?cid=31&centreName=GANGARAM&drName=ABHA%20MAJUMDAR">Rectify Potential</a></td>
+                </tr>
+                <tr>
+                    <td>Gangaram</td>
+                    <td>Abha Majumdar </td>
+                    <td><a href="/potential-add?cid=31&centreName=GANGARAM&drName=ABHA%20MAJUMDAR">Rectify Potential</a></td>
+                </tr>
+                <tr>
+                    <td>Gangaram</td>
+                    <td>Abha Majumdar </td>
+                    <td><a href="/potential-add?cid=31&centreName=GANGARAM&drName=ABHA%20MAJUMDAR">Rectify Potential</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </main>
+
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/common.js"></script>
+    <script src="../../js/axios.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/admin.js"></script>
+    <script src="../../js/notification.js"></script>
+    <script>
+        $(function () {
+            
+        });
+
+    </script>
+</body>
+
+</html>

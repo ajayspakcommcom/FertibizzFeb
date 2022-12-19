@@ -43,6 +43,7 @@ app.use(cookieParser());
  const reportRoutes = require('./routes/report');
  const accountMappingRoutes = require('./routes/accountMapping');
  const performanceRoutes = require('./routes/performance');
+ const notificationRoutes = require('./routes/notification');
 
 
 app.use(express.static(path.join(__dirname, "public")));
@@ -59,6 +60,7 @@ app.use(competitionRoutes);
 app.use(reportRoutes);
 app.use(accountMappingRoutes);
 app.use(performanceRoutes);
+app.use(notificationRoutes);
 
 //app.use(managerRoutes);
 

@@ -58,6 +58,8 @@ function setupPotentialPage() {
                 percIVF_FrozenTransfers = 0,
                 percIVF_FreshPickups = 0;
 
+                console.log(listArr);
+
             lists.forEach(list => {
                 listArr.push(
                     `<tr>
@@ -90,6 +92,7 @@ function setupPotentialPage() {
                 totalIVFFreshPickups += parseInt(list.FreshPickUps)
                 totalIVFFrozenTransfers += parseInt(list.frozenTransfers)
             });
+
             $('#potentialData').append(listArr.join(''));
 
             percIVF_FrozenTransfers = percentage(totalIVFFrozenTransfers, totalIVF);

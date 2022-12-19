@@ -109,8 +109,7 @@ function validateMe() {
 }
 
 function getPotentialsDetails() {
-  
-    console.log('getPotentialsDetails');
+
 
     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")), 
     param = {hospitalId:'', empId:''}, 
@@ -167,6 +166,7 @@ function getPotentialsDetails() {
                 $('#cmbYear').val(year)
                 //$('#cmbMonth').val(month)
                 getFirstDayPreviousMonth();
+                getFieldData();
             }
 
         }).catch((err) => {
@@ -174,13 +174,13 @@ function getPotentialsDetails() {
         });
 }
 
-function showDrNameCentreName() {
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    const params = Object.fromEntries(urlSearchParams.entries());
-    console.log(params);
-    $('#drName').text(params.drName);
-    $('#centreName').text(params.centreName);
-}
+// function showDrNameCentreName() {
+//     const urlSearchParams = new URLSearchParams(window.location.search);
+//     const params = Object.fromEntries(urlSearchParams.entries());
+//     console.log(params);
+//     $('#drName').text(params.drName);
+//     $('#centreName').text(params.centreName);
+// }
 
 function potentialCal(fId, sId, targetElem) {
   let firstElem = parseInt($(`#${fId}`).val()), secondElem = parseInt($(`#${sId}`).val()), targetEl = $(`#${targetElem}`);
@@ -246,5 +246,40 @@ function showCheckBoxApproveBtn() {
         $('.two-btn-wrapper').addClass('right');
     }
 }
+
+function getFieldData() {
+    let iuiTxt = $('#iuiTxt').val(),
+    ivfTxt =$('#ivfTxt').val(),
+    frozenTxt =$('#frozenTxt').val(),
+    freshTxt = $('#freshTxt').val(),
+    donotTxt = $('#donotTxt').val(),
+    patientTxt = $('#patientTxt').val(),
+    antagonistTxt = $('#antagonistTxt').val(),
+    agonistTxt = $('#agonistTxt').val();
+
+    console.log('iuiTxt', iuiTxt);
+    console.log('ivfTxt', ivfTxt);
+    console.log('frozenTxt', frozenTxt);
+    console.log('freshTxt', freshTxt);
+    console.log('donotTxt', donotTxt);
+    console.log('patientTxt', patientTxt);
+    console.log('antagonistTxt', antagonistTxt);
+    console.log('agonistTxt', agonistTxt);
+    window.localStorage.setItem('potentialDetail', JSON.stringify({'iuiTxt': iuiTxt, 'ivfTxt': ivfTxt, 'frozenTxt': frozenTxt, 'freshTxt': freshTxt, 'donotTxt': donotTxt, 'patientTxt': patientTxt, 'antagonistTxt': antagonistTxt, 'antagonistTxt': antagonistTxt, 'agonistTxt': agonistTxt}));
+}
+
+function undo() {
+    console.log('undo');
+    $('#iuiTxt').val(JSON.parse(window.localStorage.getItem('potentialDetail')).iuiTxt),
+    $('#ivfTxt').val(JSON.parse(window.localStorage.getItem('potentialDetail')).ivfTxt),
+    $('#frozenTxt').val(JSON.parse(window.localStorage.getItem('potentialDetail')).frozenTxt),
+    $('#freshTxt').val(JSON.parse(window.localStorage.getItem('potentialDetail')).freshTxt),
+    $('#donotTxt').val(JSON.parse(window.localStorage.getItem('potentialDetail')).donotTxt),
+    $('#patientTxt').val(JSON.parse(window.localStorage.getItem('potentialDetail')).patientTxt),
+    $('#antagonistTxt').val(JSON.parse(window.localStorage.getItem('potentialDetail')).antagonistTxt),
+    $('#agonistTxt').val(JSON.parse(window.localStorage.getItem('potentialDetail')).agonistTxt);
+}
+
+
 
 showCheckBoxApproveBtn();

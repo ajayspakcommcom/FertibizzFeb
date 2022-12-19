@@ -7932,12 +7932,13 @@ table.dataTable tbody tr.selected > * {
 .zone-manager {
   padding: 8px 15px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 13px;
+  text-align: left;
 }
 
 .rbm-wrapper {
   padding: 8px 15px;
-  font-size: 12px;
+  font-size: 13px;
   text-align: left;
 }
 
@@ -7957,6 +7958,7 @@ table.dataTable tbody tr.selected > * {
 
 .zone-profile b {
   font-family: 'Bold';
+  font-size: 20px;
 }
 
 .panel-group .panel {
@@ -8133,4 +8135,58 @@ ul.inline {
   display: -webkit-flex;
   justify-content: center;
   align-items: center;
+}
+
+.two-btn-wrapper-potential > button {
+  margin-right: 15px;
+}
+
+.two-btn-wrapper-potential > button:nth-child(3) {
+  margin-right: 0;
+}
+
+.skuName {
+  font-size: 15px;
+}
+
+.notification-wrapper {
+  position: relative;
+  display: block;
+}
+
+.notification-wrapper > img {
+  width: 30px;
+}
+
+.noti-wrapper {
+  position: absolute;
+  top: 2px;
+  right: 6px;
+  width: 25px;
+  height: 25px;
+  background-color: #f84f31;
+  color: #fff;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 1px 1px 5px rgb(128 128 128 / 50%);
+  -moz-box-shadow: 1px 1px 5px rgb(128 128 128 / 50%);
+  -webkit-box-shadow: 1px 1px 5px rgb(128 128 128 / 50%);
+}
+
+.table-bg > thead {
+  background-color: #000;
+  color: #fff;
+}
+
+.account-mapping-heading {
+  margin-top: 15%;
+}
+
+.pending-heading {
+  font-weight: bold;
+  font-size: 16px;
 }
