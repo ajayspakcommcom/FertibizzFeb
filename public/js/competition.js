@@ -55,7 +55,8 @@ async function getSkuDetails() {
             dec =  0,
             jan =  0,
             feb =  0,
-            mar =  0;
+            mar =  0,
+            quarter1 = [], quarter2 = [], quarter3 = [], quarter4 = [];
           // console.log(competitorSkus)   ;
           // console.log(contractRes)   ;
 
@@ -78,8 +79,11 @@ async function getSkuDetails() {
               feb =  !isNaN((filterRec[0].Feb)) ? parseFloat(filterRec[0].Feb) : 0;
               mar =  !isNaN((filterRec[0].Mar))  ? parseFloat(filterRec[0].Mar) : 0;
             }
-            console.log(apr); 
-            html.push(` <tr>
+
+
+
+            html.push(` 
+            <tr>
             <td>${skuBrand.brandName}</td>
             <td>
               <span>${skuBrand.name}</span>
@@ -144,11 +148,113 @@ async function getSkuDetails() {
               <input maxlength=7" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_mar"  value="${mar}" title="mar" />
               </div>
             </td>
-          </tr>`)
+          </tr>`);
 
+            quarter1.push(`
+            <tr>
+              <td>${skuBrand.brandName}</td>
+              <td>
+                <span>${skuBrand.name}</span>
+              </td>
+              <td>
+                <div class="form-group">
+                  <input maxlength=7" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_apr" required="" value="${apr}" title="apr" onfocus="addPrevValueOnFocus(this)" onfocusout="addPrevValueOnFocusOut(this)" />
+                </div>
+              </td>
+              <td>
+                <div class="form-group">
+                <input maxlength=7" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_may" required="" value="${may}" title="may" onfocus="addPrevValueOnFocus(this)" onfocusout="addPrevValueOnFocusOut(this)" />
+                </div>
+              </td>
+              <td>
+                <div class="form-group">
+                <input maxlength=7" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_jun" required="" value="${jun}" title="jun" onfocus="addPrevValueOnFocus(this)" onfocusout="addPrevValueOnFocusOut(this)" />
+                </div>
+              </td>
+            </tr>
+            `);
+
+            quarter2.push(`
+            <tr>
+              <td>${skuBrand.brandName}</td>
+              <td>
+                <span>${skuBrand.name}</span>
+              </td>
+              <td>
+                <div class="form-group">
+                  <input maxlength=7" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_jul" required="" value="${jul}" title="jul" onfocus="addPrevValueOnFocus(this)" onfocusout="addPrevValueOnFocusOut(this)" />
+                </div>
+              </td>
+              <td>
+                <div class="form-group">
+                <input maxlength=7" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_aug" required="" value="${aug}" title="aug" onfocus="addPrevValueOnFocus(this)" onfocusout="addPrevValueOnFocusOut(this)" />
+                </div>
+              </td>
+              <td>
+                <div class="form-group">
+                <input maxlength=7" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_sep" required="" value="${sep}" title="sep" onfocus="addPrevValueOnFocus(this)" onfocusout="addPrevValueOnFocusOut(this)" />
+                </div>
+              </td>
+            </tr>
+            `);
+
+            quarter3.push(`
+            <tr>
+              <td>${skuBrand.brandName}</td>
+              <td>
+                <span>${skuBrand.name}</span>
+              </td>
+              <td>
+                <div class="form-group">
+                  <input maxlength=7" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_oct" required="" value="${oct}" title="oct" onfocus="addPrevValueOnFocus(this)" onfocusout="addPrevValueOnFocusOut(this)" />
+                </div>
+              </td>
+              <td>
+                <div class="form-group">
+                <input maxlength=7" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_nov" required="" value="${nov}" title="nov" onfocus="addPrevValueOnFocus(this)" onfocusout="addPrevValueOnFocusOut(this)" />
+                </div>
+              </td>
+              <td>
+                <div class="form-group">
+                <input maxlength=7" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_dec" required="" value="${dec}" title="dec" onfocus="addPrevValueOnFocus(this)" onfocusout="addPrevValueOnFocusOut(this)" />
+                </div>
+              </td>
+            </tr>
+            `);
+
+            quarter4.push(`
+            <tr>
+              <td>${skuBrand.brandName}</td>
+              <td>
+                <span>${skuBrand.name}</span>
+              </td>
+              <td>
+                <div class="form-group">
+                  <input maxlength=7" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_jan" required="" value="${jan}" title="jan" onfocus="addPrevValueOnFocus(this)" onfocusout="addPrevValueOnFocusOut(this)" />
+                </div>
+              </td>
+              <td>
+                <div class="form-group">
+                <input maxlength=7" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_feb" required="" value="${feb}" title="feb" onfocus="addPrevValueOnFocus(this)" onfocusout="addPrevValueOnFocusOut(this)" />
+                </div>
+              </td>
+              <td>
+                <div class="form-group">
+                <input maxlength=7" type="text" onkeypress="return isNumber(event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_mar" required="" value="${mar}" title="mar" onfocus="addPrevValueOnFocus(this)" onfocusout="addPrevValueOnFocusOut(this)" />
+                </div>
+              </td>
+            </tr>
+            `);
         });
 
-        $('#competitorDataTable').append(html.join(''))
+        $('#competitorDataTable').append(html.join(''));
+        $('#quarter1').append(quarter1.join(''));
+        $('#quarter2').append(quarter2.join(''));
+        $('#quarter3').append(quarter3.join(''));
+        $('#quarter4').append(quarter4.join(''));
+        
+        
+
 
     }))
 
@@ -270,7 +376,7 @@ function showLastMonthInput() {
 }
 
 function showPrevMonthInput() {
-  $('#competitorDataTable input[type=text]').prop('disabled', true);
+  $('#accordion input[type=text]').prop('disabled', true);
   $(`[title=${getPrevMonth()}]`).prop('disabled', false);
 }
 

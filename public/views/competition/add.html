@@ -30,14 +30,121 @@
           </select>
         </div>
         <div class="form-section">
-          <div class="table-responsive">
+
+          <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#q1" class="collapsed" aria-expanded="false">Quarter 1</a>
+                </h4>
+              </div>
+              <div id="q1" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                <div class="panel-body">
+                  <div class="form-section">
+                    <table class="table table-bordered table-bg">
+                      <thead>
+                        <tr>
+                          <th>Brand</th>
+                          <th>Competition Mapping</th>
+                          <th>Apr</th>
+                          <th>May</th>
+                          <th>Jun</th>
+                        </tr>
+                      </thead>
+                      <tbody id="quarter1"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#q2" class="collapsed" aria-expanded="false">Quarter 2</a>
+                </h4>
+              </div>
+              <div id="q2" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                <div class="panel-body">
+                  <div class="form-section">
+                    <table class="table table-bordered table-bg">
+                      <thead>
+                        <tr>
+                          <th>Brand</th>
+                          <th>Competition Mapping</th>
+                          <th>Jul</th>
+                          <th>Aug</th>
+                          <th>Sep</th>
+                        </tr>
+                      </thead>
+                      <tbody id="quarter2"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#q3" class="collapsed" aria-expanded="false">Quarter 3</a>
+                </h4>
+              </div>
+              <div id="q3" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                <div class="panel-body">
+                  <div class="form-section">
+                    <table class="table table-bordered table-bg">
+                      <thead>
+                        <tr>
+                          <th>Brand</th>
+                          <th>Competition Mapping</th>
+                          <th>Oct</th>
+                          <th>Nov</th>
+                          <th>Dec</th>
+                        </tr>
+                      </thead>
+                      <tbody id="quarter3"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#q4" class="collapsed" aria-expanded="false">Quarter 4</a>
+                </h4>
+              </div>
+              <div id="q4" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                <div class="panel-body">
+                  <div class="form-section">
+                    <table class="table table-bordered table-bg">
+                      <thead>
+                        <tr>
+                          <th>Brand</th>
+                          <th>Competition Mapping</th>
+                          <th>Jan</th>
+                          <th>Feb</th>
+                          <th>Mar</th>
+                        </tr>
+                      </thead>
+                      <tbody id="quarter4"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-responsive none">
             <table class="table table-bordered table-bg">
               <thead>
                 <tr>
                   <th colspan="2"></th>
-                  <th style="text-align:center; ;" colspan="3">Quarter 1</th>
+                  <th style="text-align:center;" colspan="3">Quarter 1</th>
                   <th style="text-align:center;" colspan="3">Quarter 2</th>
-                  <th style="text-align:center;" colspan="3">Quarter 2</th>
+                  <th style="text-align:center;" colspan="3">Quarter 3</th>
                   <th style="text-align:center;" colspan="3">Quarter 4</th>
                 </tr>
                 <tr>
@@ -61,7 +168,6 @@
             </table>
           </div>
           
-
         </div>
         <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -83,14 +189,8 @@
             </div>
           </div>
         </div>
-
       </div>
-
-
     </form>
-
-
-
   </main>
 
   <script src="../../js/jquery.min.js"></script>

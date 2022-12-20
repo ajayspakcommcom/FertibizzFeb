@@ -236,6 +236,21 @@ function showDrNameCentreName() {
     $('#centreName').text(params.centreName);
 }
 
+function addPrevValueOnFocus(elem) {
+    if(parseInt(elem.value) == 0) {
+        elem.value = '';
+    } else {
+        elem.value = elem.value;
+    }
+}
+
+function addPrevValueOnFocusOut(elem) {
+    console.log(elem.value);
+    if(elem.value == undefined || elem.value == null || elem.value == '') {
+        elem.value = 0;
+    }
+}
+
 setTimeout(() => {
     showNavigationByDesignation();    
 }, 2000);
