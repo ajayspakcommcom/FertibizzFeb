@@ -1,8 +1,8 @@
 const _SUCCESSFUL_STATUS_CODE = 200;
 const _INVAID_SESSION = 202
 const _FAILURE_STATUS_CODE = 201
-const _ROOT = 'http://ivf1.spak.agency'; 
-//const _ROOT = 'http://localhost:3333';
+//const _ROOT = 'http://ivf1.spak.agency'; 
+const _ROOT = 'http://localhost:3333';
 const _SKU_BRANDS = ['FOLIGRAF', 'HUMOG', 'ASPORELIX', 'R-HUCOG', 'FOLICULIN', 'AGOTRIG', 'MIDYDROGESTERONE'];
 
 
@@ -212,12 +212,12 @@ function showNavigationByDesignation() {
         $('#userPost').text(userData.post);
 
         switch (userData.post.toLowerCase()) {
-
             case 'kam':
                 $('.kamLink').show();
                 break;
             case 'rbm':
                 $('#logoLink').attr('href', '/employees/kam-list');
+                $('.rbmLink').show();
                 break;
             case 'zbm':
                 break;

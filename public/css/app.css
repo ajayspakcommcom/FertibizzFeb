@@ -8190,3 +8190,7 @@ ul.inline {
   font-weight: bold;
   font-size: 16px;
 }
+
+.daterangepicker .drp-calendar {
+  max-width: none !important;
+}

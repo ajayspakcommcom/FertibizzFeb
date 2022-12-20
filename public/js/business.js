@@ -49,7 +49,7 @@ async function getSkuDetails() {
             contractRes = contractResponse.data,
             html = [],
             businessTrackRes = businessTrackResponse.data;
-        isContractApplicableBool = (contractRes[0].RateType === 'contract Rate');
+        isContractApplicableBool = true;  //(contractRes[0].RateType === 'contract Rate');
 
         //  console.log(isContractApplicableBool) ;
         //  console.log(contractRes)   ;
