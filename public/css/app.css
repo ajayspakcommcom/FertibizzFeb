@@ -8194,3 +8194,16 @@ ul.inline {
 .daterangepicker .drp-calendar {
   max-width: none !important;
 }
+
+.bread {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bread img {
+  width: 30px;
+  display: inline-block;
+  margin: 0 15px 0 15px;
+}
