@@ -70,7 +70,7 @@ function potentialChart1(totalIVF, totalIUI, percIVF_FrozenTransfers, percIVF_Fr
   //console.log(arguments)
   
   let gdata = google.visualization.arrayToDataTable([
-    ['Task', 'Hours per Day'],
+    ['Task', 'cycle Count'],
     ['IUI Cycles', totalIUI],
     ['IVF Cycles', totalIVF]
   ]);
@@ -84,7 +84,7 @@ function potentialChart1(totalIVF, totalIUI, percIVF_FrozenTransfers, percIVF_Fr
   }; 
 
 
-  var chart = new google.visualization.PieChart(document.getElementById('potential_chart1'));
+  var chart = new google.visualization.ColumnChart(document.getElementById('potential_chart1'));
 
   function selectHandler() {
     var selectedItem = chart.getSelection()[0];
