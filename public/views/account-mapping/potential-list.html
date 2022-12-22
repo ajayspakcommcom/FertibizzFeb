@@ -15,7 +15,7 @@
     <main class="container-fluid">
         <h1 class="text-center account-mapping-heading">
             <div class="bread">
-              <span id="kamName">Pooja Mishra</span> 
+                <span id="kamName"></span>
               <img src="../../img/right-arrow.png" alt="right arrow" class="img-responsive" /> 
               <span>Account Mapping</span>
               <img src="../../img/right-arrow.png" alt="right arrow" class="img-responsive" /> 
@@ -81,14 +81,15 @@
     <script src="../../js/axios.min.js"></script>
     <script src="../../js/bootstrap.min.js"></script>
     <script src="../../js/admin.js"></script>
-    <script src="../../js/account-mapping.js"></script>
     <script src="../../js/googlechart.js"></script>
     <script src="../../js/reports_potential.js"></script>
+    <script src="../../js/account-mapping.js"></script>
 
     <script>
         $(function () {
             google.charts.load('current', { packages: ['corechart', 'bar'] });
             setupPotentialPage();
+            getKamDetails();
             $('#selectAll').click(function (e) {
                 var table = $(e.target).closest('table');
                 $('td input:checkbox', table).prop('checked', this.checked);

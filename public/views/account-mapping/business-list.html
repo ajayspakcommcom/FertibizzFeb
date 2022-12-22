@@ -106,6 +106,7 @@
     <script>
         $(function () {
             google.charts.load('current', { packages: ['corechart', 'bar'] });
+            getKamDetails();
             setupBusinessPage();
             $('#selectAll').click(function (e) {
                 var table = $(e.target).closest('table');

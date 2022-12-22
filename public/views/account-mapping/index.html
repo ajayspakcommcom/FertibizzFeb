@@ -1,48 +1,56 @@
 <html>
-    <head>
-        <title>IVF : Account Mapping </title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="/css/app.css" />
-    </head>
+
+<head>
+  <title>IVF : Account Mapping </title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/css/app.css" />
+</head>
+
 <body>
-    
-    <nav class="navbar" id="header"></nav>
-      <main class="container-fluid">
-         <h1 class="text-center account-mapping-heading">
-          <div class="bread">
-            <span id="kamName">Pooja Mishra</span> <img src="../../img/right-arrow.png" alt="right arrow" class="img-responsive" /> <span>Account Mapping</span>
-          </div>
-         </h1>
-         <!-- <div class="text-right">
+
+  <nav class="navbar" id="header"></nav>
+  <main class="container-fluid">
+    <h1 class="text-center account-mapping-heading">
+      <div class="bread">
+        <span id="kamName"></span> <img src="../../img/right-arrow.png" alt="right arrow" class="img-responsive" />
+        <span>Account Mapping</span>
+      </div>
+    </h1>
+    <!-- <div class="text-right">
             <a href="javascript:void(0);" onclick="goBack()" class="btn btn-success">Go Back</a>
           </div> -->
-          <div class="account-mapping-btn-wrapper">
-            <a class="btn btn-default" id="hrfPotential" href="#">Potential</a>
-            <a class="btn btn-default" id="hrfBusiness" href="#">Business</a>
-            <a class="btn btn-default" id="hrfRateContract" href="#">Rate Contract</a>
-            <a class="btn btn-default" id="hrfCompetition" href="#">Competition</a>
-          </div>
-      </main>
+    <div class="account-mapping-btn-wrapper">
+      <a class="btn btn-default" id="hrfPotential" href="#">Potential</a>
+      <a class="btn btn-default" id="hrfBusiness" href="#">Business</a>
+      <a class="btn btn-default" id="hrfRateContract" href="#">Rate Contract</a>
+      <a class="btn btn-default" id="hrfCompetition" href="#">Competition</a>
+    </div>
+  </main>
 
-      <script src="../../js/jquery.min.js"></script>
-      <script src="../../js/common.js"></script>
-        <script src="../../js/axios.min.js"></script>
-        <script src="../../js/bootstrap.min.js"></script>
-        <script src="../../js/admin.js"></script>
-        <script src="../../js/account-mapping.js"></script>
-        <script>
-            $(function() {
-                getMyHospitalList();
-                let urlArr = window.location.href.split('/'),
-                  empId = urlArr[urlArr.length - 1];
-                $('#hrfPotential').attr('href', `/account-mapping/${empId}/potential-list`)
-                $('#hrfBusiness').attr('href', `/account-mapping/${empId}/business-list`)
-                $('#hrfRateContract').attr('href', `/account-mapping/${empId}/rate-contract-list`)
-                $('#hrfCompetition').attr('href', `/account-mapping/${empId}/competition-list`)
-            });
-            
-            </script>
+  <script src="../../js/jquery.min.js"></script>
+  <script src="../../js/common.js"></script>
+  <script src="../../js/axios.min.js"></script>
+  <script src="../../js/bootstrap.min.js"></script>
+  <script src="../../js/admin.js"></script>
+  <script src="../../js/account-mapping.js"></script>
+  <script>
+    $(function () {
+    //  getMyHospitalList();
+      getKamDetails();
+      let urlArr = window.location.href.split('/'),
+        empId = urlArr[urlArr.length - 1];
+      $('#hrfPotential').attr('href', `/account-mapping/${empId}/potential-list`)
+      $('#hrfBusiness').attr('href', `/account-mapping/${empId}/business-list`)
+      $('#hrfRateContract').attr('href', `/account-mapping/${empId}/rate-contract-list`)
+      $('#hrfCompetition').attr('href', `/account-mapping/${empId}/competition-list`)
+
+     
+    });
+
+
+  </script>
 </body>
+
 </html>

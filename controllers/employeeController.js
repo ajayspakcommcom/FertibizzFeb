@@ -139,13 +139,17 @@ exports.getEmployeeDetailsPage = (req, res, next) => {
 
 
 exports.getEmployeeDetailsById = (req, res, next) => {
+    console.log(req.params)
     getEmployeeDetailsById(req.params).then((result) => {
         res.status(_STATUSCODE).json(result);
     });
 };
 
 
-getEmployeeDetailsById = (objParam) => {
+function getEmployeeDetailsById(objParam) {
+    console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+    console.log(objParam.empId)
+    console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
     return new Promise((resolve) => {
         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
         dbConn
@@ -154,7 +158,7 @@ getEmployeeDetailsById = (objParam) => {
                 var request = new sql.Request(dbConn);
                 request
                     .input("empId", sql.Int, objParam.empId)
-                    .execute("USP_BSVHR_GET_EMPLOYEE_DETAILS_BY_ID")
+                    .execute("USP_GET_EMPLOYEEDETAILS_BY_ID")
                     .then(function (resp) {
                         //console.log(resp)
                         resolve(resp.recordset);
@@ -166,7 +170,7 @@ getEmployeeDetailsById = (objParam) => {
                     });
             })
             .catch(function (err) {
-                //console.log(err);
+                console.log(err);
             });
     });
 };

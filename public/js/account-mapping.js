@@ -1,3 +1,20 @@
+function getKamDetails() {
+    let urlArr = window.location.href.split('/'),
+        flag = isNaN(urlArr[urlArr.length - 1]),
+        empId = flag ? urlArr[urlArr.length - 2] : urlArr[urlArr.length - 1]
+        console.log(flag)
+        console.log(empId)
+    axios
+        .get(`/employee-details/${empId}`).then((response) => {
+            console.log(response.data)
+            let data = response.data[0];
+            $('#kamName').html(formatText(data.firstName))
+            
+
+        }).catch((err) => {
+            console.log(err);
+        });
+}
 function getMyHospitalList() {
 
     let urlArr = window.location.href.split('/'),
