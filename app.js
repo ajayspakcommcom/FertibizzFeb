@@ -20,7 +20,8 @@ const app = express();
 // default options
 app.use(fileUpload({
   useTempFiles : true,
-  tempFileDir : '/tmp/'
+  tempFileDir : '/tmp/',
+  createParentPath: true,
 }));
 const twoDay = 1000 * 60 * 60 * 48;
 console.log(twoDay);
