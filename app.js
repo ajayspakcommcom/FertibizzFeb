@@ -6,6 +6,8 @@ const sessions = require('express-session');
 const path = require('path');
 const bodyParser = require('body-parser');
 const { isArray } = require("util");
+const fileUpload = require('express-fileupload');
+
 // const cors = require('cors');
 
 // var corsOptions = {
@@ -15,6 +17,11 @@ const { isArray } = require("util");
 
 
 const app = express();
+// default options
+app.use(fileUpload({
+  useTempFiles : true,
+  tempFileDir : '/tmp/'
+}));
 const twoDay = 1000 * 60 * 60 * 48;
 console.log(twoDay);
 
