@@ -7,6 +7,7 @@ const querystring = require('node:querystring');
 let _STATUSCODE = 200;
 const _allowedDesignaiton = ['ADMIN'];
 
+
 exports.getRCList = (req, res, next) => {
     res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/rc/index.html`);
 };
@@ -55,13 +56,18 @@ function getRCListData( objParam ) {
 
 
 exports.createRC = (req, res, next) => {
+    var body = req.body;
+    // console.log(body);
+    // const absPath = path.join(__dirname); // <-- absolute path
+    // console.log("Absolute Path: ", absPath);
+
     let myuploadedFile = req.files.fileName;
         sampleFile = myuploadedFile.name;
         myFileName = sampleFile.split('.').join('_' + Date.now() + '.');
         uploadPath = '/public/img/rcfiles/';
-        console.log(uploadPath);
+        console.log(__dirname + 'img/rcfiles'+myFileName);
         //console.log(myuploadedFile.mv())
-        myuploadedFile.mv(__dirname + '/img/rcfiles'+sampleFile, function(err) {
+        myuploadedFile.mv('public/img/rcfiles/'+myFileName, function(err) {
             if (err) {
                 console.log(err)
                 return res.status(500).send(err);
