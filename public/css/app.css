@@ -8207,3 +8207,23 @@ ul.inline {
   display: inline-block;
   margin: 0 15px 0 15px;
 }
+
+.pending-btn-td {
+  padding: 0 0 !important;
+}
+
+.pending-btn-td > div {
+  display: flex;
+  display: -webkit-flex;  
+}
+
+.pending-btn-td > div > a {
+  background-color: red;
+  width: 33.33%;
+  padding: 7px;
+  color: #fff;
+}
+
+.pending-btn-td > div > a.done {
+  background-color: green;
+} 
