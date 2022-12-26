@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <link rel="stylesheet" href="/css/app.css" />
-   
+
 </head>
 
 <body>
@@ -20,7 +20,7 @@
             <a href="javascript:void(0);" onclick="goBack()" class="btn btn-success">Go Back</a>
         </div>
         <div class="form-wrapper">
-            <form id="frm1" onsubmit="validateMe();return false;">
+            <form id="frm1" method='post' encType="multipart/form-data">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="form-group">
@@ -30,19 +30,8 @@
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="form-group">
-                            <label for="cmbBrands">RC SKU Wise</label>
-                            <select class="form-control">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <div class="form-group">
-                            <label for="validityDate">Validity Date</label>
-                            <input type="text" class="form-control" id="validityDate" name="validityDate" placeholder="Validity Date" />
+                            <label for="validityDate">Expirty Date</label>
+                            <input type="text" id="expiryDate" placeholder="dd-mm-yyyy">
                         </div>
                     </div>
                 </div>
@@ -59,7 +48,7 @@
         </div>
     </main>
 
-    <script src="../../js/jquery.min.js"></script>
+
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
@@ -68,14 +57,17 @@
     <script src="../../js/bootstrap.min.js"></script>
     <script src="../../js/admin.js"></script>
     <script src="../../js/rc.js"></script>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script>
-        $(function() {
-            $('input[name="validityDate"]').daterangepicker({
-                "startDate": "12/14/2022",
-                "endDate": "12/20/2022"
-                }, 
-                function(start, end, label) {
-                 console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+
+
+        $(function () {
+            console.log("ready!");
+            $("#expiryDate").datepicker({
+                dateFormat: 'd-M-yy'
             });
         });
     </script>
