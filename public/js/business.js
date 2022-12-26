@@ -218,7 +218,8 @@ function calculateTotal() {
         totalBusiness = parseFloat(totalBusiness + businessValue)
     })
     //console.log(totalBusiness);
-    $('#spnTotalBusinessValue').text(intToString(totalBusiness));
+    //$('#spnTotalBusinessValue').text(intToString(totalBusiness));
+    $('#spnTotalBusinessValue').text(totalBusiness);
 }
 
 function isNumber(evt) {
