@@ -1,6 +1,7 @@
 const { response } = require('express');
 const path = require('path');
 const sql = require('mssql');
+const url = require('url');
 const dbConfig = require('./config');
 let _STATUSCODE = 200;
 
@@ -216,6 +217,47 @@ function approveCenterBusinessTrackerByHospitalId(objParam) {
                     .input("customerId", sql.Int, parseInt(objParam.centerId))
                     .input("rbmId", sql.Int, objParam.rbmId)
                     .execute("USP_APPROVE_CUSTOMER_BUSINESS_TRACKER_BY_HOSPITALID")
+                    .then(function (resp) {
+                        //console.log(resp.recordset)
+                        resolve(resp.recordset);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    });
+};
+
+
+
+exports.approveCenteRateContractByCATId = (req, res, next) => {
+    const queryObject = url.parse(req.url, true).query;
+    let params = Object.assign(req.params, req.body);
+    approveCenteRateContractByCATId(params).then(result => {
+        res.status(_STATUSCODE).json(result)
+    })
+};
+
+function approveCenteRateContractByCATId(objParam) {
+    console.log('--------------------------------')
+    console.log(objParam)
+    console.log('--------------------------------')
+   
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    .input("CATID", sql.Int, parseInt(objParam.accountID))
+                    .input("ZbmId", sql.Int, objParam.zbmId)
+                    .execute("USP_APPROVE_CUSTOMER_RATE_CONTRACT_BY_CATID")
                     .then(function (resp) {
                         //console.log(resp.recordset)
                         resolve(resp.recordset);

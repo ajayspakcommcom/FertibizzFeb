@@ -171,7 +171,7 @@ function validateMe() {
         }
 
     });
-    redirect('/contracts');
+    redirect('/rc-list');
     return false;
 
 }

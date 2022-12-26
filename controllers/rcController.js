@@ -4,6 +4,7 @@ const sql = require('mssql');
 const dbConfig = require('./config');
 const url = require('url');
 const querystring = require('node:querystring');
+const { constants } = require('buffer');
 let _STATUSCODE = 200;
 const _allowedDesignaiton = ['ADMIN'];
 
@@ -24,7 +25,7 @@ exports.getRCListData = (req, res, next) => {
     });
 };
 
-function getRCListData( objParam ) {
+function getRCListData(objParam) {
     // console.log('****************************')
     // console.log(objParam)
     // console.log('****************************')
@@ -56,43 +57,40 @@ function getRCListData( objParam ) {
 
 
 exports.createRC = (req, res, next) => {
-    var body = req.body;
-    // console.log(body);
-    // const absPath = path.join(__dirname); // <-- absolute path
-    // console.log("Absolute Path: ", absPath);
+    let fileName = req.body.hidfileName;
+    if (!req.files || Object.keys(req.files).length === 0) {
 
-    let myuploadedFile = req.files.fileName;
+    } else {
+        let myuploadedFile = req.files.fileName;
         sampleFile = myuploadedFile.name;
-        myFileName = sampleFile.split('.').join('_' + Date.now() + '.');
-        uploadPath = '/public/img/rcfiles/';
-        console.log(__dirname + 'img/rcfiles'+myFileName);
-        //console.log(myuploadedFile.mv())
-        myuploadedFile.mv('public/img/rcfiles/'+myFileName, function(err) {
+        fileName = sampleFile.split('.').join('_' + Date.now() + '.');
+        myuploadedFile.mv('public/img/rcfiles/' + fileName, function (err) {
             if (err) {
-                console.log(err)
+                //   console.log(err)
                 return res.status(500).send(err);
             }
-            res.send('File uploaded!');
         });
-    // createRC1(req).then((result) => {
-    //     res.status(_STATUSCODE).json(result);
-    // });
+    }
+
+
+    createRC1(fileName, req).then((result) => {
+
+        //  res.redirect('/customer-contract-add/'+result[0].outCome);
+        res.redirect('/rc-list')
+    });
 };
 
-function createRC1(req) {
-   // console.clear();
+function createRC1(filename, req) {
+    // console.clear();
     console.log('--------------------------------')
     const queryObject = url.parse(req.url, true).query;
-    // console.log(req.files)
-    // console.log(req.url)
-    // console.log(queryObject.accountid)
-    // console.log(queryObject.custsomerid)
-    //console.log(path.join(__dirname, "public"));
-    
-    console.log('--------------------------------')
-   
-
-    return 'file uploaded successfully';
+    // console.log(filename)
+     console.log(req.body.expiryDate);
+    // console.log(req.body.hidRbmId);
+    // console.log(queryObject.customerAccountId)
+    // console.log(queryObject.CatAccountId)
+    // //console.log(queryObject.custsomerid)
+     console.log('--------------------------------')
 
     return new Promise((resolve) => {
         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
@@ -101,19 +99,23 @@ function createRC1(req) {
             .then(function () {
                 var request = new sql.Request(dbConn);
                 request
-                    .input("parentId", sql.Int, objParam.parentId)
-                    .execute("USP_GET_CENTERLIST_FOR_RBM_V1")
+                    .input("contractDoc", sql.NVarChar, filename)
+                    .input("expiryDate", sql.Date, req.body.expiryDate)
+                    .input("CustomerAccountId", sql.Int, queryObject.customerAccountId)
+                    .input("rbmId", sql.Int, req.body.hidRbmId)
+                    .input("accountId", sql.Int, queryObject.CatAccountId)
+                    .execute("USP_CREATE_RBM_RATE_CONTRACT")
                     .then(function (resp) {
                         resolve(resp.recordset);
                         dbConn.close();
                     })
                     .catch(function (err) {
-                        //console.log(err);
+                        console.log(err);
                         dbConn.close();
                     });
             })
             .catch(function (err) {
-                //console.log(err);
+                console.log(err);
             });
     });
 };

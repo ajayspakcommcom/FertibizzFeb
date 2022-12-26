@@ -414,11 +414,11 @@ addContractRate = (objParam) => {
             .then(function () {
                 var request = new sql.Request(dbConn);
                 request
-                    .input("chainAccountTypeId", sql.Int, objParam.chainAccountTypeId)
+                    .input("chainAccountTypeId", sql.Int, parseInt(objParam.chainAccountTypeId))
                     .input("brandId", sql.Int, objParam.brandId)
                     .input("brandGroupId", sql.Int, objParam.brandGroupID)
                     .input("medId", sql.Int, objParam.skuId)
-                    .input("price", sql.Float, objParam.rate)
+                    .input("price", sql.Float, parseFloat(objParam.rate))
                     .execute("USP_INSERT_CUSTOMER_CONTRACTRATE")
                     .then(function (resp) {
                         let json = { success: true, msg: 'rate contract added successfully' };
@@ -426,12 +426,12 @@ addContractRate = (objParam) => {
                         dbConn.close();
                     })
                     .catch(function (err) {
-                        //console.log(err);
+                        console.log(err);
                         dbConn.close();
                     });
             })
             .catch(function (err) {
-                //console.log(err);
+                console.log(err);
             });
     });
 };

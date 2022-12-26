@@ -147,9 +147,9 @@ exports.getEmployeeDetailsById = (req, res, next) => {
 
 
 function getEmployeeDetailsById(objParam) {
-    console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
-    console.log(objParam.empId)
-    console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+    // console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+    // console.log(objParam.empId)
+    // console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
     return new Promise((resolve) => {
         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
         dbConn

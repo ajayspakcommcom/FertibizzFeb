@@ -96,3 +96,48 @@ exports.getAccountMappingBusinessListData = (req, res, next) => {
       });
   };
  
+
+
+  
+
+exports.getAccountMappingRateContractList = (req, res, next) => {
+    res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/account-mapping/rate-contract-list.html`);
+};
+
+
+
+
+exports.getAccountMappingRateContractListData = (req, res, next) => {
+    // console.log(req.params, '--->')
+     getAccountMappingRateContractListData(req.params).then((result) => {
+          res.status(_STATUSCODE).json(result);
+      });
+  };
+  
+  
+  getAccountMappingRateContractListData = (objParam) => {
+      return new Promise((resolve) => {
+          var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+          dbConn
+              .connect()
+              .then(function () {
+                  var request = new sql.Request(dbConn);
+                  request
+                      .input("parentID", sql.Int, objParam.empId)
+                      .execute("USP_GET_ZBM_RATE_CONTRACT_LIST_FOR_APPROVAL")
+                      .then(function (resp) {
+                         //console.log(resp)
+                          resolve(resp.recordsets);
+                          dbConn.close();
+                      })
+                      .catch(function (err) {
+                        //  console.log(err);
+                          dbConn.close();
+                      });
+              })
+              .catch(function (err) {
+                  //console.log(err);
+              });
+      });
+  };
+
