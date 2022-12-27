@@ -205,7 +205,7 @@ exports.approveCenterBusinessTrackerByHospitalId = (req, res, next) => {
 
 function approveCenterBusinessTrackerByHospitalId(objParam) {
     // console.log('--------------------------------')
-    // console.log(objParam)
+    console.log(objParam)
     // console.log('--------------------------------')
     return new Promise((resolve) => {
         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);

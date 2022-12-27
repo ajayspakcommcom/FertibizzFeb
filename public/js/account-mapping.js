@@ -196,7 +196,8 @@ function approveListingBusiness() {
 
     var endPoints = $(".chkbox:checked").map(function () {
         return {
-            centerId: parseInt($(this).val()),
+            //centerId: parseInt($(this).val()),
+            customerId: parseInt($(this).val()),
             rbmId: parseInt(userData.empId),
         };
     }).get();
@@ -220,16 +221,17 @@ function setupRateContractPage() {
 
         axios
         .post(`/account-mapping/${empId}/rate-contract-list`, param).then((response) => {
-            console.log(response.data[0])
+            console.log('Ram',response.data[0])
             let lists = response.data[0],
             listArr = [];
         lists.forEach(list => {
             listArr.push(
                 ` <tr>
+                <td><input type="checkbox" class="chkbox" value="${list.customerId}" id="${list.customerId}" ${list.isApproved === false ? 'checked' : ''}></td>
                 <td>${formatText(list.accountName)}</td>
                 <td>${formatText(list.CENTRENAME)}</td>
                 <td>${formatText(list.DoctorName)}</td>
-                <td>${formatText(list.RateContractStatus)}</td>
+                <td>${formatText(list.isApproved === false ? 'Approval' : 'Approval Pending' )}</td>
                 <td><a href="/update-rc/?customerAccountId=${list.aid}&customerid=${list.customerId}&CatAccountId=${list.CatAccountId}&rbmid=${empId}"> ${(list.CatAccountId > 0)? `View` : `` }</a>
                 ${(list.SKUDetails === 0 && list.CatAccountId>0) ? `| SKU Price list awaiting`: ``}
                 ${(list.SKUDetails > 0 && list.CatAccountId>0) ? `| <a href='/customer-contract-add/${list.CatAccountId}'>View SKU Price list</a>`: ``}
@@ -264,6 +266,15 @@ function approveRateContract() {
             console.log(err);
         });
      return false;
-
-     
 }
+
+function showApprovalOnZBMLevel() {
+    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
+
+    if(userData.post.toLowerCase() === 'zbm') {
+        $('.showApprove').removeClass('none');
+        $('[type="submit"]').hide();
+    }
+}
+
+showApprovalOnZBMLevel();

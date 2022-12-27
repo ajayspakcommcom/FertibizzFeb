@@ -39,7 +39,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row none showApprove">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                       <div class="form-group add-input-wrapper hideApproveChk">
                         <input type="checkbox" value="on" id="chkApproved" name="chkApproved" onclick="enableApproveButton()" />
@@ -52,10 +52,9 @@
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="two-btn-wrapper">
-                            
                             <button type="reset" class="btn btn-default btn-grad">Reset</button>
                             <button type="submit" class="btn btn-default btn-grad">Save</button>
-                            <button class="btn btn-default btn-grad" id="btnApprove" disabled="true" onclick="approveRateContract();return false;">Approve</button>
+                            <button class="btn btn-default btn-grad none showApprove" id="btnApprove" disabled="true" onclick="approveRateContract();return false;">Approve</button>
                         </div>
                     </div>
                 </div>
