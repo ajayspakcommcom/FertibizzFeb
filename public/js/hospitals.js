@@ -10,9 +10,7 @@ function getCustomerList() {
 
     axios
         .post(_URL._CUSTOMER_LIST, param).then((response) => {
-            //    console.log(response.data);
             populateDataTable(response.data);
-
         }).catch((err) => {
             console.log(err);
         });
@@ -20,20 +18,16 @@ function getCustomerList() {
 
 
 function populateDataTable(data) {
-    //  console.log("populating data table...");
-    // clear the table before populating it with more data
-
     $("#customerList").DataTable().clear();
     var length = data.length;
-    //  console.log(length)
     if (length == 0) {
         $("#customerList").DataTable().clear();
     } else {
-        //  console.log(data);
         var i = 1;
         data.forEach(item => {
             $('#customerList').dataTable().fnAddData([
                 `<input type="checkbox" ${item.IsApproved === 'Yes' ? `Checked` : ''}>`,
+                'Accont Name',
                 item.CENTRENAME,
                 item.DoctorName,
                 item.specialtyType,
@@ -42,7 +36,6 @@ function populateDataTable(data) {
                 `${item.Address1} ${item.Address2} <br> ${item.City}, ${item.stateName} <br>${item.PinCode}`,
                 item.ChemistMapped,
                 item.ChainStatusName,
-
                 isEmployeeCenterList(item)
             ]);
         });
@@ -92,7 +85,7 @@ function getCustomerDetails() {
             $('#txtDoctorName').val(customerData.DoctorName)
 
             $('#txtDoctorUniqueCode').val(customerData.DoctorUniqueCode),
-                $('#txtMobile').val(customerData.mobile)
+            $('#txtMobile').val(customerData.mobile)
             $('#txtEmail').val(customerData.email)
             $('#txtCenterName').val(customerData.CENTRENAME)
             $('#txtAddress1').val(customerData.Address1)
@@ -315,9 +308,6 @@ function selectCustomerRow() {
 
     $('#customerList tbody').on('click', 'tr', function () {
         $(this).toggleClass('selected');
-
-        // console.log($(this));
-        // console.log($(this)[0].classList[1]);
         if ($(this)[0].classList[1] == 'selected') {
             $(this).find('input[type="checkbox"]').attr('checked', true);
         } else {
@@ -344,15 +334,11 @@ function ApproveDataSingleWay() {
         arrIdList.push(obj.lastElementChild.lastChild.getAttribute('title'));
     }
 
-    // approveCenterMasterData
-
     for (let i = 0; i <= arrIdList.length - 1; i++) {
         approveCenterMasterData(arrIdList[i]);
     }
 }
 
-
-/** HOSPITAL LIST */
 
 function getMyHospitalList() {
     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
@@ -361,13 +347,14 @@ function getMyHospitalList() {
         };
     axios
         .post('/hospitals-list/', param).then((response) => {
-            console.log(response.data)
+            console.log('Ram',response.data)
             let lists = response.data,
                 listArr = [];
 
             lists.forEach(list => {
                 listArr.push(
                     `<tr>
+                    <td>Account Name</td>
                     <td>${camelCaseText(list.CENTRENAME)}</td>
                     <td>${camelCaseText(list.DoctorName)}</td>
                     <td><a href="./potential-add?cid=${list.customerId}&centreName=${list.CENTRENAME}&drName=${list.DoctorName}" class="btn btn-default">Add Potential</a></td>

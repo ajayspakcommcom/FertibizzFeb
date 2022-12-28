@@ -33,6 +33,7 @@
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="form-group">
                             <label for="validityDate">Expirty Date</label>
+                            <input type="text" id="startDate" name="startDate" placeholder="dd-mm-yyyy">
                             <input type="text" id="expiryDate" name="expiryDate" placeholder="dd-mm-yyyy">
                             <input type="hidden" id="hidRbmId" name="hidRbmId"/>
                             <input type="hidden" id="hidfileName" name="hidfileName"/>
@@ -86,9 +87,7 @@
             setupRCdetails();
             let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
             $('#hidRbmId').val(userData.empId);
-            $("#expiryDate").datepicker({
-                dateFormat: 'd-M-yy'
-            });
+            $("#expiryDate").datepicker({dateFormat: 'd-M-yy'});
         });
     </script>
 </body>

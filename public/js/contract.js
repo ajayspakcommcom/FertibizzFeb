@@ -105,7 +105,9 @@ function getSKUHtml(skuBrandGroups, brandGroup, contractResponse) {
                     maxlength="2" 
                     onkeypress="return isNumber(event)"
                     class="form-control business-rate" 
-                    id="txt_${fieldName}_ContractRate" name="txt_${fieldName}_ContractRate" placeholder="00" required="" value= ${contractRate}>
+                    id="txt_${fieldName}_ContractRate" name="txt_${fieldName}_ContractRate" placeholder="00" required="" value= ${contractRate}
+                    onfocus="addPrevValueOnFocus(this)" onfocusout="addPrevValueOnFocusOut(this)"
+                    >
                     
                 </div>
                 </td>
