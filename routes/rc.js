@@ -9,6 +9,4 @@ router.get('/update-rc/:custsomerId', controller.getUpRC);
 router.get('/update-rc', controller.getUpRC);
 router.post('/update-rc/', controller.createRC);
 
-
-
 module.exports = router;
