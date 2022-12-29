@@ -11,6 +11,7 @@ const _allowedDesignaiton = ['ADMIN'];
 
 exports.getRCList = (req, res, next) => {
     res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/rc/index.html`);
+    //res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/admin/login.html`);    
 };
 
 exports.getUpRC = (req, res, next) => {
