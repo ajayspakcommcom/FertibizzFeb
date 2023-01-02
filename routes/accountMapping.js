@@ -22,4 +22,8 @@ router.post('/account-mapping/:empId/rate-contract-list', controller.getAccountM
 
 
 
+router.get('/account-mapping/:empId/competition-list', controller.getAccountMappingCompetitiontList);
+router.post('/account-mapping/:empId/competition-list', controller.getAccountMappingCompetitionListData);
+
+
 module.exports = router;

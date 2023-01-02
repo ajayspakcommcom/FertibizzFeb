@@ -278,3 +278,39 @@ function showApprovalOnZBMLevel() {
 }
 
 showApprovalOnZBMLevel();
+
+
+
+function setupCompetitionPage() {
+    let urlArr = window.location.href.split('/'),
+        empId = urlArr[urlArr.length - 2],
+        param = {
+            empId: empId
+        };
+
+        axios
+        .post(`/account-mapping/${empId}/competition-list`, param).then((response) => {
+            //console.log(response.data)
+             let lists = response.data[0],
+                 listArr = [];
+             lists.forEach(list => {
+                listArr.push(
+                    `<tr>
+                        <td align='center'><input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.centerId}'  id=${list.centerId} /></td>
+                        <td>${camelCaseText(list.CENTRENAME)}</td>
+                        <td>${camelCaseText(list.DoctorName)}</td>
+                        <td><a href='/add-competition?cid=${list.centerId}&kamid=${empId}'>View Details</a></td>
+                       
+                    </tr>
+                `);
+             });
+             $('#competitionData').append(listArr.join(''));
+             // generate data for the graph
+            //drawBusinessChartWithData(response.data[1]);
+            // getAllBusinessReportWithData(response.data[2])
+
+
+        }).catch((err) => {
+            console.log(err);
+        });
+}

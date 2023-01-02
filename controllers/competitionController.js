@@ -3,6 +3,9 @@ const path = require('path');
 const sql = require('mssql');
 const dbConfig = require('./config');
 let _STATUSCODE = 200;
+const querystring = require('querystring');
+const url = require('url');
+
 
 
 const _allowedDesignaiton = ['ADMIN'];
@@ -67,9 +70,9 @@ exports.addUpdateCompetitionSkus = (req, res, next) => {
 
 
 function addUpdateCompetitionSkus(objParam) {
-    console.log('--------------------------------')
-    console.log(objParam)
-    console.log('--------------------------------')
+    // console.log('--------------------------------')
+    // console.log(objParam)
+    // console.log('--------------------------------')
     return new Promise((resolve) => {
         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
         dbConn
@@ -147,9 +150,12 @@ getCompetitionDetailsByCenterId = (objParam) => {
 
 exports.approveCenterCompetition = (req, res, next) => {
     // console.log('inside update employee');
+    
     let params = Object.assign(req.params, req.body);
     approveCenterCompetition(params).then(result => {
         res.status(_STATUSCODE).json(result)
+       //console.log(req.params.kamid)
+       //res.redirect(`/account-mapping/${req.params.kamid}/competition-list`)
     })
 };
 
@@ -167,7 +173,8 @@ function approveCenterCompetition(objParam) {
                 var request = new sql.Request(dbConn);
                 request
                     .input("hospitalId", sql.Int, objParam.hospitalId)
-                    .input("year", sql.NVarChar, objParam.year)
+                    .input("month", sql.Int, objParam.month)
+                    .input("year", sql.Int, objParam.year)
                     .input("rbmId", sql.Int, objParam.rbmId)
                     .execute("USP_APPROVE_CUSTOMER_COMPETITION")
                     .then(function (resp) {

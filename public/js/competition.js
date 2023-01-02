@@ -170,7 +170,9 @@ function approveMe() {
     param = {
       hospitalId: new URLSearchParams(window.location.search).get('cid'),
       rbmId: parseInt(userData.empId),
-      year: $('#cmbYear').val() // @TODO THIS NEED TO CHANGE
+      year: $('#cmbYear').val(),
+      month: $('#cmbMonth').val(),
+      kamid : parseInt(getQueryStringValue('kamid'))
     }
 
   axios
@@ -180,7 +182,8 @@ function approveMe() {
         let res = response.data[0];
         console.log(res);
         if (res.sucess === 'true') {
-          redirect('/hospitals');
+          redirect(`account-mapping/${parseInt(getQueryStringValue('kamid'))}/competition-list`);
+          
           // @TODO: THIS NEED TO CHANGE
         }
       }
