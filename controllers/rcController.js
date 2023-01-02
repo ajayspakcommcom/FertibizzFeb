@@ -11,6 +11,7 @@ const _allowedDesignaiton = ['ADMIN'];
 
 exports.getRCList = (req, res, next) => {
     res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/rc/index.html`);
+    //res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/admin/login.html`);    
 };
 
 exports.getUpRC = (req, res, next) => {
@@ -57,6 +58,8 @@ function getRCListData(objParam) {
 
 
 exports.createRC = (req, res, next) => {
+    console.clear();
+    console.log('RC Executed');
     let fileName = req.body.hidfileName;
     if (!req.files || Object.keys(req.files).length === 0) {
 
@@ -85,6 +88,7 @@ function createRC1(filename, req) {
     console.log('--------------------------------')
     const queryObject = url.parse(req.url, true).query;
     // console.log(filename)
+    console.log('RC Object',req.body);
      console.log(req.body.expiryDate);
     // console.log(req.body.hidRbmId);
     // console.log(queryObject.customerAccountId)

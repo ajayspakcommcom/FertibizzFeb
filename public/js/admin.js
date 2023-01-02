@@ -1,7 +1,12 @@
 
 
 function letMeLogin() {
-    let param = {
+
+
+    //console.log(validateAllInput());
+
+    if(validateAllInput()) {
+        let param = {
         method: 'adminLogin',
         username: $('#txtUsername').val(),
         password: $('#txtPassword').val()
@@ -43,6 +48,9 @@ function letMeLogin() {
         }).catch((err) => {
             console.log(err);
         });
+    }
+
+    
 }
 
 

@@ -15,6 +15,14 @@ const fileUpload = require('express-fileupload');
 //   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 // }
 
+// app.use(function (req, res, next) {
+//   res.setHeader(
+//     'Content-Security-Policy',
+//     "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'; frame-src 'self'"
+//   );
+//   next();
+// });
+
 
 const app = express();
 // default options
@@ -53,6 +61,7 @@ app.use(cookieParser());
  const performanceRoutes = require('./routes/performance');
  const notificationRoutes = require('./routes/notification');
  const rcRoutes = require('./routes/rc');
+ const testRoutes = require('./routes/test');
 
 
 app.use(express.static(path.join(__dirname, "public")));
@@ -71,6 +80,8 @@ app.use(accountMappingRoutes);
 app.use(performanceRoutes);
 app.use(notificationRoutes);
 app.use(rcRoutes);
+app.use(testRoutes);
+
 
 //app.use(managerRoutes);
 

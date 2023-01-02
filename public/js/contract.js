@@ -101,12 +101,12 @@ function getSKUHtml(skuBrandGroups, brandGroup, contractResponse) {
                 </td>
                 <td>
                 <div class="form-group">
-                    <input type="text" 
-                    maxlength="2" 
-                    onkeypress="return isNumber(event)"
-                    class="form-control business-rate" 
-                    id="txt_${fieldName}_ContractRate" name="txt_${fieldName}_ContractRate" placeholder="00" required="" value= ${contractRate}>
-                    
+                    <input type="text"                     
+                    class="form-control business-rate"    
+                    maxlength="7"                 
+                    onkeypress="return validateFloatKeyPress(this,event);"
+                    id="txt_${fieldName}_ContractRate" name="txt_${fieldName}_ContractRate" placeholder="00" required="" value= ${contractRate}
+                    onfocus="addPrevValueOnFocus(this)" onfocusout="addPrevValueOnFocusOut(this)">
                 </div>
                 </td>
             </tr>`)
@@ -128,6 +128,34 @@ function isNumber(evt) {
         return false;
     }
     return true;
+}
+
+function validateFloatKeyPress(el, evt) {
+    var charCode = (evt.which) ? evt.which : event.keyCode;
+    var number = el.value.split('.');
+    if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    //just one dot
+    if(number.length>1 && charCode == 46){
+         return false;
+    }
+    //get the carat position
+    var caratPos = getSelectionStart(el);
+    var dotPos = el.value.indexOf(".");
+    if( caratPos > dotPos && dotPos>-1 && (number[1].length > 1)){
+        return false;
+    }
+    return true;
+}
+
+function getSelectionStart(o) {
+	if (o.createTextRange) {
+		var r = document.selection.createRange().duplicate()
+		r.moveEnd('character', o.value.length)
+		if (r.text == '') return o.value.length
+		return o.value.lastIndexOf(r.text)
+	} else return o.selectionStart
 }
 
 function validateMe() {

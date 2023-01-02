@@ -19,7 +19,7 @@ function setupPage() {
                     <td>${formatText(list.CENTRENAME)}</td>
                     <td>${formatText(list.DoctorName)}</td>
                     <td>${formatText(list.RateContractStatus)}</td>
-                    <td><a href="/update-rc/?customerAccountId=${list.aid}&customerid=${list.customerId}&CatAccountId=${list.CatAccountId}"> ${(list.CatAccountId > 0)? `Update` : `Add` }</a>
+                    <td><a href="/update-rc?customerAccountId=${list.aid}&customerid=${list.customerId}&CatAccountId=${list.CatAccountId}"> ${(list.CatAccountId > 0)? `Update` : `Add` }</a>
                     ${(list.SKUDetails === 0 && list.CatAccountId>0) ? `| <a href='/customer-contract-add/${list.CatAccountId}'>Add SKU Price list</a>`: ``}
                     ${(list.SKUDetails > 0 && list.CatAccountId>0) ? `| <a href='/customer-contract-add/${list.CatAccountId}'>Update SKU Price list</a>`: ``}
                     
@@ -35,6 +35,7 @@ function setupPage() {
 }
 
 function validateMe() {
+    debugger;
     console.log(`here`)
     console.log($('#fileName'));
     let config = {

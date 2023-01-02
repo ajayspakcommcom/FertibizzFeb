@@ -3,6 +3,7 @@ const _INVAID_SESSION = 202
 const _FAILURE_STATUS_CODE = 201
 //const _ROOT = 'http://ivf1.spak.agency'; 
 const _ROOT = 'http://localhost:3333';
+//const _ROOT = 'http://critibizz-env.eba-6djymdye.us-east-1.elasticbeanstalk.com';
 const _SKU_BRANDS = ['FOLIGRAF', 'HUMOG', 'ASPORELIX', 'R-HUCOG', 'FOLICULIN', 'AGOTRIG', 'MIDYDROGESTERONE'];
 
 
@@ -277,3 +278,17 @@ function intToString(num) {
     return (num / si[index].v).toFixed(2).replace(/\.0+$|(\.[0-9]*[1-9])0+$/, "$1") + si[index].s;
 }
 
+function validateAllInput() {
+
+    isValid = true;
+
+    $("input").each(function () {
+        var element = $(this);
+        if (element.val() == "") {
+            isValid = false;
+            element.after(`<p class="errorTxt">${element.attr('error')}</p>`);            
+        }
+    });
+
+    return isValid;
+}

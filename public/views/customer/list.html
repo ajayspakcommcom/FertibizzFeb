@@ -5,25 +5,31 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="/css/bootstrap.min.css" />
         <link rel="stylesheet" href="/css/app.css" />
+
+        <style>
+          #customerList_length, #customerList_paginate {
+            display: none;
+          }
+        </style>
+
     </head>
 <body>
     
     <nav class="navbar" id="header"></nav>
 
-
-
       <main class="container-fluid">
-         <h1 class="text-center">Customer List</h1>
+         <h1 class="text-center">Master Data</h1>
          <div class="text-right">
             <a href="./add-customer" class="btn btn-success">New Customer</a>
-            <button id="deleteBtn" class="btn btn-success" onclick="bulkCustomerDataDelete()">Delete Multiple Records</button>
+            <!-- <button id="deleteBtn" class="btn btn-success" onclick="bulkCustomerDataDelete()">Delete Multiple Records</button> -->
           </div>
          <table class="table table-bordered table-bg" id="customerList">
             <thead>
               <tr>
-                <th>Is Delete</th>
+                <th>Is Delete (Select)</th>
+                <th>Account Name</th>
                 <th>Centre Name</th>
-                <th>Doctor Name</th>
+                <th>Customer Name</th>
                 <th>Specialty</th>
                 <th>Mobile</th>
                 <th>Email</th>
@@ -33,9 +39,11 @@
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody>
-            </tbody>
+            <tbody></tbody>
           </table>
+
+         
+
       </main>
  
       <script src="../../js/jquery.min.js"></script>
