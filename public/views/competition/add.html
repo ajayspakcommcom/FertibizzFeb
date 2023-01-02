@@ -22,146 +22,40 @@
     <form>
       <div class="form-wrapper">
         <div class="form-group yearComboBox">
-          <select class="form-control" id="cmbYear" onchange="getSkuDetails()">
-            <option value='2022-2023'>2022-2023</option>
-            <option value='2023-2024'>2023-2024</option>
-            <option value='2024-2025'>2024-2025</option>
-            <option value='2025-2026'>2025-2026</option>
+          <select  id="cmbMonth" class="form-control disabled">
+            <option value="">---- Select Month ----</option>
+            <option value="1">Jan</option>
+            <option value="2">Feb</option>
+            <option value="3">Mar</option>
+            <option value="4">Apr</option>
+            <option value="5">May</option>
+            <option value="6">Jun</option>
+            <option value="7">Jul</option>
+            <option value="8">Aug</option>
+            <option value="9">Sep</option>
+            <option value="10">Oct</option>
+            <option value="11">Nov</option>
+            <option value="12">Dec</option>
+          </select>
+          <select  id="cmbYear" class="form-control disabled">
+            <option value="">---- Select Year ----</option>                 
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
           </select>
         </div>
         <div class="form-section">
 
-          <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#q1" class="collapsed" aria-expanded="false">Quarter 1</a>
-                </h4>
-              </div>
-              <div id="q1" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-                <div class="panel-body">
-                  <div class="form-section">
-                    <table class="table table-bordered table-bg">
-                      <thead>
-                        <tr>
-                          <th>Brand</th>
-                          <th>Competition Mapping</th>
-                          <th>Apr</th>
-                          <th>May</th>
-                          <th>Jun</th>
-                        </tr>
-                      </thead>
-                      <tbody id="quarter1"></tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
+          
 
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#q2" class="collapsed" aria-expanded="false">Quarter 2</a>
-                </h4>
-              </div>
-              <div id="q2" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-                <div class="panel-body">
-                  <div class="form-section">
-                    <table class="table table-bordered table-bg">
-                      <thead>
-                        <tr>
-                          <th>Brand</th>
-                          <th>Competition Mapping</th>
-                          <th>Jul</th>
-                          <th>Aug</th>
-                          <th>Sep</th>
-                        </tr>
-                      </thead>
-                      <tbody id="quarter2"></tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#q3" class="collapsed" aria-expanded="false">Quarter 3</a>
-                </h4>
-              </div>
-              <div id="q3" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-                <div class="panel-body">
-                  <div class="form-section">
-                    <table class="table table-bordered table-bg">
-                      <thead>
-                        <tr>
-                          <th>Brand</th>
-                          <th>Competition Mapping</th>
-                          <th>Oct</th>
-                          <th>Nov</th>
-                          <th>Dec</th>
-                        </tr>
-                      </thead>
-                      <tbody id="quarter3"></tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" data-parent="#accordion" href="#q4" class="collapsed" aria-expanded="false">Quarter 4</a>
-                </h4>
-              </div>
-              <div id="q4" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
-                <div class="panel-body">
-                  <div class="form-section">
-                    <table class="table table-bordered table-bg">
-                      <thead>
-                        <tr>
-                          <th>Brand</th>
-                          <th>Competition Mapping</th>
-                          <th>Jan</th>
-                          <th>Feb</th>
-                          <th>Mar</th>
-                        </tr>
-                      </thead>
-                      <tbody id="quarter4"></tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="table-responsive none">
+          <div class="table-responsive">
             <table class="table table-bordered table-bg">
               <thead>
-                <tr>
-                  <th colspan="2"></th>
-                  <th style="text-align:center;" colspan="3">Quarter 1</th>
-                  <th style="text-align:center;" colspan="3">Quarter 2</th>
-                  <th style="text-align:center;" colspan="3">Quarter 3</th>
-                  <th style="text-align:center;" colspan="3">Quarter 4</th>
-                </tr>
+                
                 <tr>
                   <th width="5%" style="text-decoration: strong;">Brand</th>
                   <th width="10%" nowrap>Competition Mapping</th>
-                  <th style="text-align:center;" width="10%">Apr</th>
-                  <th style="text-align:center;" width="10%">May</th>
-                  <th style="text-align:center;" width="10%">Jun</th>
-                  <th style="text-align:center;" width="10%">Jul</th>
-                  <th style="text-align:center;" width="10%">Aug</th>
-                  <th style="text-align:center;" width="10%">Sep</th>
-                  <th style="text-align:center;" width="10%">Oct</th>
-                  <th style="text-align:center;" width="10%">Nov</th>
-                  <th style="text-align:center;" width="10%">Dec</th>
-                  <th style="text-align:center;" width="10%">Jan</th>
-                  <th style="text-align:center;" width="10%">Feb</th>
-                  <th style="text-align:center;" width="10%">Mar</th>
+                  <th style="text-align:center;" width="10%">Value</th>
+                 
                 </tr>
               </thead>
               <tbody id="competitorDataTable"></tbody>

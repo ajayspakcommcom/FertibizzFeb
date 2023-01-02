@@ -67,9 +67,9 @@ exports.addUpdateCompetitionSkus = (req, res, next) => {
 
 
 function addUpdateCompetitionSkus(objParam) {
-    // console.log('--------------------------------')
-    // console.log(objParam)
-    // console.log('--------------------------------')
+    console.log('--------------------------------')
+    console.log(objParam)
+    console.log('--------------------------------')
     return new Promise((resolve) => {
         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
         dbConn
@@ -81,20 +81,9 @@ function addUpdateCompetitionSkus(objParam) {
                     .input("centerId", sql.Int, parseInt(objParam.centerId))
                     .input("brandId", sql.Int, objParam.brandId)
                     .input("skuId", sql.Int, objParam.skuId)
-                    .input("year", sql.NVarChar, objParam.year)
-                    .input("april", sql.Float, objParam.apr)
-                    .input("may", sql.Float, objParam.may)
-                    .input("jun", sql.Float, objParam.jun)
-                    .input("jul", sql.Float, objParam.jul)
-                    .input("aug", sql.Float, objParam.aug)
-                    .input("sep", sql.Float, objParam.sep)
-                    .input("oct", sql.Float, objParam.oct)
-                    .input("nov", sql.Float, objParam.nov)
-                    .input("dec", sql.Float, objParam.dec)
-                    .input("jan", sql.Float, objParam.jan)
-                    .input("feb", sql.Float, objParam.feb)
-                    .input("mar", sql.Float, objParam.mar)
-
+                    .input("month", sql.Int, parseInt(objParam.month))
+                    .input("year", sql.Int, parseInt(objParam.year))
+                    .input("value", sql.Float, parseFloat(objParam.value))
                     .execute("USP_ADD_UPDATE_SKU_COMPETITION")
                     .then(function (resp) {
                         //  console.log(resp.recordset)
@@ -125,6 +114,9 @@ exports.getCompetitionDetailsByCenterId = (req, res, next) => {
 
 
 getCompetitionDetailsByCenterId = (objParam) => {
+    // console.log('--------------------------------')
+    // console.log(objParam)
+    // console.log('--------------------------------')
     return new Promise((resolve) => {
         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
         dbConn
@@ -133,7 +125,8 @@ getCompetitionDetailsByCenterId = (objParam) => {
                 var request = new sql.Request(dbConn);
                 request
                     .input("centerId", sql.Int, objParam.centerId)
-                    .input("year", sql.NVarChar, objParam.year)
+                    .input("Month", sql.Int, objParam.month)
+                    .input("Year", sql.Int, objParam.year)
                     .execute("USP_GET_SKU_COMPETITION_DETAILS_BY_CENTER")
                     .then(function (resp) {
                         //console.log(resp)
