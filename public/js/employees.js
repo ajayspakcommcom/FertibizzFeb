@@ -14,7 +14,6 @@ function getEmployeeList() {
         });
 }
 
-
 function populateDataTable(data) {
     //  console.log("populating data table...");
     // clear the table before populating it with more data
@@ -52,7 +51,6 @@ function populateDataTable(data) {
         });
     }
 }
-
 
 function DeleteEmployee(id, name) {
     let text = `Are you sure you want to delete "${name}"`; // "Are you sure you want to delete '+  +'!\nEither OK or Cancel.";

@@ -8227,3 +8227,16 @@ ul.inline {
 .pending-btn-td > div > a.done {
   background-color: green;
 } 
+
+#customerList th:nth-child(6), #customerList td:nth-child(6), 
+#customerList th:nth-child(7), #customerList td:nth-child(7), 
+#customerList th:nth-child(8), #customerList td:nth-child(8), 
+#customerList th:nth-child(9), #customerList td:nth-child(9)  
+{
+  display: none;
+}
+
+.errorTxt {
+  color: red;
+  font-size: 12px;
+}
