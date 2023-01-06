@@ -195,8 +195,19 @@ function getPotentialsDetails() {
 // }
 
 function potentialCal(fId, sId, targetElem) {
-  let firstElem = parseInt($(`#${fId}`).val()), secondElem = parseInt($(`#${sId}`).val()), targetEl = $(`#${targetElem}`);
-  targetEl.val(firstElem - secondElem);
+    
+    let firstElem = parseInt($(`#${fId}`).val()), secondElem = parseInt($(`#${sId}`).val()), targetEl = $(`#${targetElem}`);
+    targetEl.val(firstElem - secondElem);
+    
+    if ((firstElem - secondElem) < 0) {        
+        if (targetEl.attr('id') == 'freshTxt') {
+            alert('Fresh pick can not be negative');            
+        } else if (targetEl.attr('id') == 'patientTxt') {
+            alert('Self Patient Cycle can not be negative');            
+        } else if (targetEl.attr('id') == 'agonistTxt') {
+            alert('Agonist Cycles can not be negative');            
+        }
+    } 
 }
 
 $('input').change(function(e) { 
