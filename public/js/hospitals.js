@@ -27,7 +27,7 @@ function populateDataTable(data) {
         data.forEach(item => {
             $('#customerList').dataTable().fnAddData([
                 `<input type="checkbox" ${item.IsApproved === 'Yes' ? `Checked` : ''}>`,
-                'Accont Name',
+                item.accountName,
                 item.CENTRENAME,
                 item.DoctorName,
                 item.specialtyType,
