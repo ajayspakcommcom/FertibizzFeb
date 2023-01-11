@@ -354,7 +354,7 @@ function getMyHospitalList() {
             lists.forEach(list => {
                 listArr.push(
                     `<tr>
-                    <td>Account Name</td>
+                    <td>${camelCaseText(list.accountName)}</td>
                     <td>${camelCaseText(list.CENTRENAME)}</td>
                     <td>${camelCaseText(list.DoctorName)}</td>
                     <td><a href="./potential-add?cid=${list.customerId}&centreName=${list.CENTRENAME}&drName=${list.DoctorName}" class="btn btn-default">Add Potential</a></td>
