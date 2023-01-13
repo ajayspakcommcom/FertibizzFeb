@@ -17,26 +17,30 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-body">
-                <div class="text-center">
-                  <h2 class="project-name">
-                    <img src="img/ivf.png" alt="ivf" class="img-response">
-                  </h2>
-                  <div id="lblmsg"></div>
-                  <form class="login-form" id="frm1" onsubmit="letMeLogin();return false;">
-                    <div class="form-group">
-                      <label for="usr">Username</label>
-                      <input type="text" placeholder="test@bsv.com" name='txtUsername' id='txtUsername' placeholder="username" value="POOJA.MISHRA@bsvgroup.com" class="form-control" error="Email is Required" />
-                    </div>
-      
-                    <div class="form-group">
-                      <label for="pwd">Password</label>
-                      <input type="password" name='txtPassword' id='txtPassword' placeholder="password"  class="form-control" value="BSV@11223344" error="Password is Required" />
-                    </div>
-                      
-                      <div class="login-btn-wrapper">
-                        <button class="btn btn-default btn-grad">Sign In</button>
+                <div>
+                  <img src="../../img/login-left-img.png" alt="left image" class="img-responsive" />
+                </div>
+                <div>
+                  <div>
+                    <h2 class="project-name"><img src="img/ivf.png" alt="ivf" class="img-response"></h2>
+                    <p class="login-txt">Enter your Credentials</p>
+                    <div id="lblmsg"></div>
+                    <form class="login-form" id="frm1" onsubmit="letMeLogin();return false;">
+                      <div class="form-group">                        
+                        <input type="text" placeholder="test@bsv.com" name='txtUsername' id='txtUsername' placeholder="username" value="POOJA.MISHRA@bsvgroup.com" class="form-control" error="Email is Required" />
+                        <!-- <input type="text" placeholder="test@bsv.com" name='txtUsername' id='txtUsername' placeholder="username" value="POOJA.MISHRA@bsvgroup.com" class="form-control" error="Email is Required" /> -->
                       </div>
-                  </form>
+        
+                      <div class="form-group">
+                        <!-- <input type="password" name='txtPassword' id='txtPassword' placeholder="password"  class="form-control" value="BSV@11223344" error="Password is Required" /> -->
+                        <input type="password" name='txtPassword' id='txtPassword' placeholder="......."  class="form-control" value="BSV@11223344" error="Password is Required" />
+                      </div>
+                        
+                        <div class="login-btn-wrapper">
+                          <button class="btn btn-default btn-grad">Sign In</button>
+                        </div>
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>
