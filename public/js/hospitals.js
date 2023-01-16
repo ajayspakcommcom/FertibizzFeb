@@ -26,7 +26,7 @@ function populateDataTable(data) {
         var i = 1;
         data.forEach(item => {
             $('#customerList').dataTable().fnAddData([
-                `<input type="checkbox" ${item.IsApproved === 'Yes' ? `Checked` : ''}>`,
+                // `<input type="checkbox" ${item.IsApproved === 'Yes' ? `Checked` : ''}>`,
                 item.accountName,
                 item.CENTRENAME,
                 item.DoctorName,
@@ -45,7 +45,7 @@ function populateDataTable(data) {
 function isEmployeeCenterList(obj) {
     let path = window.location.pathname.substr(1);
     if (path == 'customers') {
-        return `<a href="/customer-edit/${obj.customerId}">Edit</a> | <a href='javascript:void(0)' onclick='DeleteCustomer(${obj.customerId},"${obj.CENTRENAME}");return false;' class='${obj.customerId}' title='${obj.CENTRENAME}'>Delete</a>`
+        return `<a href="/customer-edit/${obj.customerId}" class="edit-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21,12a1,1,0,0,0-1,1v6a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V5A1,1,0,0,1,5,4h6a1,1,0,0,0,0-2H5A3,3,0,0,0,2,5V19a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V13A1,1,0,0,0,21,12ZM6,12.76V17a1,1,0,0,0,1,1h4.24a1,1,0,0,0,.71-.29l6.92-6.93h0L21.71,8a1,1,0,0,0,0-1.42L17.47,2.29a1,1,0,0,0-1.42,0L13.23,5.12h0L6.29,12.05A1,1,0,0,0,6,12.76ZM16.76,4.41l2.83,2.83L18.17,8.66,15.34,5.83ZM8,13.17l5.93-5.93,2.83,2.83L10.83,16H8Z"/></svg></a> <a href='javascript:void(0)' onclick='DeleteCustomer(${obj.customerId},"${obj.CENTRENAME}");return false;' class='${obj.customerId} delete-icon' title='${obj.CENTRENAME}'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 58.67"><defs><style>.cls-1{fill:#00b4c8;}</style></defs><title>Asset 25</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M61.33,5.33H48V2.67A2.66,2.66,0,0,0,45.33,0H18.67A2.66,2.66,0,0,0,16,2.67V5.33H2.67a2.67,2.67,0,0,0,0,5.34H8v40a8,8,0,0,0,8,8H48a8,8,0,0,0,8-8v-40h5.33a2.67,2.67,0,1,0,0-5.34ZM50.67,50.67A2.67,2.67,0,0,1,48,53.33H16a2.67,2.67,0,0,1-2.67-2.66v-40H50.67Z"/><path class="cls-1" d="M24,45.33a2.67,2.67,0,0,0,2.67-2.66V21.33a2.67,2.67,0,0,0-5.34,0V42.67A2.67,2.67,0,0,0,24,45.33Z"/><path class="cls-1" d="M40,45.33a2.67,2.67,0,0,0,2.67-2.66V21.33a2.67,2.67,0,0,0-5.34,0V42.67A2.67,2.67,0,0,0,40,45.33Z"/></g></g></svg></a>`
     } else {
         return `<a href="/customer-edit/${obj.customerId}?editMode=false&kamId=${parseInt(getIdFromURL())}" title="${obj.customerId}">View Profile</a>`
     }
@@ -422,4 +422,18 @@ function approveCenterMasterData(cusId = 0) {
         });
     return false;
 }
+
+function addNewBtn() {
+    $('#customerList_wrapper').append(`
+        <div class="text-right addNewCustomer">
+            <a href="./add-customer" class="btn btn-default btn-grad">New Customer</a>
+            <!-- <button id="deleteBtn" class="btn btn-success" onclick="bulkCustomerDataDelete()">Delete Multiple Records</button> -->
+        </div>
+    `);
+}
+
+setTimeout(() => {
+    addNewBtn();
+}, 1000);
+
 

@@ -72,7 +72,9 @@ function getAdminDashboardData() {
 }
 
 function loadHeader() {
-    $('#header').load(`${_ROOT}/includes/header.html`);
+    $('.navigation').load(`${_ROOT}/includes/header.html`);
+    $('#right-nav').load(`${_ROOT}/includes/right-nav.html`);
+    //$('#header').load(`${_ROOT}/includes/header.html`);
     // $('#header').load('../includes/header.html');
     // $('#header').load('../../includes/header.html');
 }
