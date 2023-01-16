@@ -7539,6 +7539,24 @@ label {
  
 .login-btn-wrapper {
     display: block;
+    position: relative;
+}
+
+.login-btn-wrapper img {
+  position: absolute;
+  top: 50%;
+  width: 30px;
+  right: calc(50% + 10px);
+  transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  display: none;
+}
+
+.login-btn-wrapper img.show {
+  display: block;
 }
 
 .btn-grad, .navigation-ul li a.active {
@@ -7568,6 +7586,10 @@ label {
     -webkit-transition: all 0.5s ease-in-out;
 }
 
+.btn-grad:focus-within {
+  outline: none;
+}
+
 /* .navigation-ul li a.active {
   padding: 5px 5px;
 } */
@@ -7577,6 +7599,8 @@ label {
   background-image: linear-gradient(to right,#683193 100%, #683193 100%);    
   background-color: #683193;
 }
+
+
 
 .login-btn-wrapper button {
     height: 40px;
@@ -8025,6 +8049,7 @@ table.dataTable tbody tr.selected > * {
 
 .panel-group .panel {
   margin-bottom: 15px;
+  overflow: hidden;
 }
 
 .panel-default>.panel-heading+.panel-collapse>.panel-body hr {
@@ -8081,6 +8106,10 @@ ul.inline {
 
 .account-mapping-wrapper {
   margin-top: 20%;
+}
+
+#competitorDataTable tr td {
+  width: 33.33%;
 }
 
 #competitorDataTable input {
@@ -8473,6 +8502,12 @@ ul.inline {
   overflow: hidden;
 }
 
+.table-data.shadow {
+  box-shadow: 1px 1px 10px rgb(128 128 128 / 50%);
+  -moz-box-shadow: 1px 1px 10px rgb(128 128 128 / 50%);
+  -webkit-box-shadow: 1px 1px 10px rgb(128 128 128 / 50%);
+}
+
 .table-data thead {
   background-image: linear-gradient(to right,#683193 10%, #248ec6 90%);
   color: #fff;
@@ -8549,3 +8584,78 @@ ul.inline {
   height: 40px;
   padding: 10px 15px;
 }
+
+.panel {
+  border-radius: 20px !important;
+  -moz-border-radius: 20px !important;
+  -webkit-border-radius: 20px !important;
+}
+
+.panel-default>.panel-heading {
+  border-top-left-radius: 20px !important;
+  border-top-right-radius: 20px !important;
+  background-image: linear-gradient(to right,#683193 10%, #248ec6 90%);
+  color: #fff;
+}
+
+.panel-body .form-section h5 {
+  margin-top: 0;
+}
+
+.panel-body .form-section table {
+  margin-bottom: 15px;
+}
+
+.panel-body .form-section table:last-child {
+  margin-bottom: 0;
+}
+
+.panel-body .form-section input[type=checkbox] {
+  margin-bottom: 15px;
+}
+
+.add-business-accodian .table-bg > thead {
+  background-color: rgba(36, 142, 198, 0.3);
+  color: #000;
+} 
+
+.add-business-accodian .table-bordered>thead>tr>th {
+  border-bottom-width: 0;
+  border: 1px solid rgba(36, 142, 198, 0.2);
+  font-size: 15px;
+}
+
+.add-business-accodian .table-bordered>tbody>tr>td .skuName {
+  font-size: 14px;
+}
+
+.add-business-accodian input[type=checkbox] {
+  margin-bottom: 15px;
+  margin-left: 5px;
+}
+
+.loader {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.5);
+  display: none;
+}
+
+.loader > img {
+  width: 100px;
+  height: 100px;
+}
+
+.loader.visible {
+  display: flex;
+  display: -webkit-flex;
+}
+

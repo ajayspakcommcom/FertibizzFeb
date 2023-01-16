@@ -8,14 +8,112 @@
   <link rel="stylesheet" href="/css/app.css" />
 </head>
 
-<body>
+<body class="inside-theme">
 
-  <nav class="navbar" id="header"></nav>
+  <div class="theme-wrapper">
+    <div class="navigation"></div>
+    <div class="content">
+      <div class="content-bg">
+        <div class="right-header">
+          <h1>Add Competition</h1>
+          <ul id="right-nav"></ul>
+        </div>
 
+        <div class="right-content">
+          <div class="custom-table form heading-wrapper theme-form">
+            <div class="zone-profile">
+              <div class="month-year-dropdown">
+                <div class="form-group">
+                  <select  id="cmbMonth" class="form-control disabled">
+                    <option value="">---- Select Month ----</option>
+                    <option value="1">Jan</option>
+                    <option value="2">Feb</option>
+                    <option value="3">Mar</option>
+                    <option value="4">Apr</option>
+                    <option value="5">May</option>
+                    <option value="6">Jun</option>
+                    <option value="7">Jul</option>
+                    <option value="8">Aug</option>
+                    <option value="9">Sep</option>
+                    <option value="10">Oct</option>
+                    <option value="11">Nov</option>
+                    <option value="12">Dec</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <select  id="cmbYear" class="form-control disabled">
+                    <option value="">---- Select Year ----</option>                 
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                  </select>
+                </div>
+              </div>
+              <div class="centreName-dr-name-wrapper">
+                <div class="text-center zone-manager">
+                  <span>Centre Name</span>
+                  <div><b id="centreName"></b></div>
+                </div>
+                <div class="text-center rbm-wrapper">
+                  <div><span>Doctor Name</span> </div>
+                  <ul class="rbmm-list">
+                    <li><b id="drName"></b></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="text-right">      
+              <a href="javascript:void(0);" onclick="goBack()" class="btn btn-default btn-grad go-back">Go Back</a>
+            </div>
+          </div>
+          
+          <div class="theme-form">
+            <!-- <div class="table-responsive"> -->
+              <table class="table table-data shadow">
+                <thead>
+                  <tr>
+                    <th>Brand</th>
+                    <th>Competition Mapping</th>
+                    <th>Value</th> 
+                  </tr>
+                </thead>
+                <tbody id="competitorDataTable"></tbody>
+              </table>
+            <!-- </div> -->
+
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group add-input-wrapper hideApproveChk">
+                  <input type="checkbox" value="on" id="chkApproved" name="chkApproved" onclick="enableApproveButton()" />
+                  &nbsp;
+                  <label for="lblChkApproved">Check to Approved the Potential</label>
+                </div>
+              </div>
+            </div>
+    
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="two-btn-wrapper">
+                  <button type="reset" class="btn btn-default btn-grad" id="resetBtn">Reset</button>
+                  <button type="button" class="btn btn-default btn-grad" onclick="validateMe();return false;" id="saveBtn">Submit</button>
+                  <button class="btn btn-default btn-grad" id="btnApprove" disabled="true" onclick="approveMe();return false;">Approve</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+         
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <nav class="navbar" id="header"></nav>
   <main class="container-fluid">
     <h1 class="text-center">Add Competition</h1>
-    <div class="text-right">
-      <!-- <a href="./hospitals" class="btn btn-success">Go Back</a> -->
+    <div class="text-right">      
       <a href="javascript:void(0);" onclick="goBack()" class="btn btn-success">Go Back</a>
     </div>
 
@@ -44,9 +142,6 @@
           </select>
         </div>
         <div class="form-section">
-
-          
-
           <div class="table-responsive">
             <table class="table table-bordered table-bg">
               <thead>
@@ -85,7 +180,7 @@
         </div>
       </div>
     </form>
-  </main>
+  </main> -->
 
   <script src="../../js/jquery.min.js"></script>
   <script src="../../js/common.js"></script>

@@ -5,6 +5,8 @@ function letMeLogin() {
 
     //console.log(validateAllInput());
 
+    $('.login-btn-wrapper img').addClass('show');
+
     if(validateAllInput()) {
         let param = {
         method: 'adminLogin',
@@ -45,6 +47,9 @@ function letMeLogin() {
                 default:
                     break;
             }
+
+            $('.login-btn-wrapper img').removeClass('show');
+
         }).catch((err) => {
             console.log(err);
         });

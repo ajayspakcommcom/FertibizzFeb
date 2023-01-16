@@ -292,3 +292,11 @@ function validateAllInput() {
 
     return isValid;
 }
+
+function isLoaderVisible(isVisible) {
+    if(isVisible == true) {
+        $('.loader').addClass('visible');
+    } else {
+        $('.loader').removeClass('visible');
+    }
+}

@@ -39,6 +39,7 @@ function populateDataTable(data) {
                 isEmployeeCenterList(item)
             ]);
         });
+        isLoaderVisible(false);
     }
 }
 
@@ -341,6 +342,9 @@ function ApproveDataSingleWay() {
 
 
 function getMyHospitalList() {
+
+    isLoaderVisible(true);
+
     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
         param = {
             empId: userData.empId
@@ -370,7 +374,8 @@ function getMyHospitalList() {
 
                     `)
             });
-            $('#centerList').append(listArr.join(''))
+            $('#centerList').append(listArr.join(''));
+            isLoaderVisible(false);
 
         }).catch((err) => {
             console.log(err);
