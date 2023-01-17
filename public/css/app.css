@@ -8734,3 +8734,7 @@ ul.inline {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+#accordion {
+  margin-top: 15px;
+}
