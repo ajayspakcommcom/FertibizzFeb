@@ -8,27 +8,52 @@
   <link rel="stylesheet" href="/css/app.css" />
 </head>
 
-<body>
+<body class="inside-theme">
 
-  <nav class="navbar" id="header"></nav>
+  <div class="theme-wrapper">
+    <div class="navigation"></div>
+    <div class="content">
+      <div class="content-bg">
+        <div class="right-header">
+          <h1>
+            <div class="bread">
+              <span id="kamName"></span><svg xmlns="http://www.w3.org/2000/svg" class="rbm-right-arrow" viewBox="0 0 64 42.67"><defs></defs><title>Asset 47</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M63.22,19.57,44.5.78a2.67,2.67,0,0,0-3.78,3.77L54.79,18.67H2.67a2.67,2.67,0,1,0,0,5.33H55L40.73,38.11a2.67,2.67,0,1,0,3.76,3.78L63.21,23.35a2.67,2.67,0,0,0,0-3.78Z"/></g></g></svg>
+              <span>Account Mapping Approval</span>
+            </div>
+          </h1>
+          <ul id="right-nav"></ul>
+        </div>
+        <div class="right-content flex-center">         
+          <div class="account-mapping-btn-wrapper">
+            <a class="btn btn-default btn-grad" id="hrfPotential" href="#">Potential</a>
+            <a class="btn btn-default btn-grad" id="hrfBusiness" href="#">Business</a>
+            <!-- <a class="btn btn-default" id="hrfRateContract" href="#">Rate Contract</a> -->
+            <a class="btn btn-default btn-grad" id="hrfCompetition" href="#">Competition</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="loader">
+    <img src="../../img/loader.gif" alt="ivf loader" class="img-responsive" />
+  </div>
+
+  <!-- <nav class="navbar" id="header"></nav>
   <main class="container-fluid">
     <h1 class="text-center account-mapping-heading">
       <div class="bread">
         <span id="kamName"></span> <img src="../../img/right-arrow.png" alt="right arrow" class="img-responsive" />
         <span>Account Mapping Approval</span>
       </div>
-    </h1>
-    <!-- <div class="text-right">
-            <a href="javascript:void(0);" onclick="goBack()" class="btn btn-success">Go Back</a>
-          </div> 
-    -->
+    </h1>  
     <div class="account-mapping-btn-wrapper">
       <a class="btn btn-default" id="hrfPotential" href="#">Potential</a>
       <a class="btn btn-default" id="hrfBusiness" href="#">Business</a>
       <a class="btn btn-default" id="hrfRateContract" href="#">Rate Contract</a>
       <a class="btn btn-default" id="hrfCompetition" href="#">Competition</a>
     </div>
-  </main>
+  </main> -->
 
   <script src="../../js/jquery.min.js"></script>
   <script src="../../js/common.js"></script>
@@ -46,8 +71,6 @@
       $('#hrfBusiness').attr('href', `/account-mapping/${empId}/business-list`)
       $('#hrfRateContract').attr('href', `/account-mapping/${empId}/rate-contract-list`)
       $('#hrfCompetition').attr('href', `/account-mapping/${empId}/competition-list`)
-
-     
     });
 
 

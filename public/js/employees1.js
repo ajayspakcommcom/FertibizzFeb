@@ -1,5 +1,7 @@
 function getKamList() {
 
+    isLoaderVisible(true);
+
     let empIdd = JSON.parse(window.localStorage.getItem('BSV_IVF_Admin_Data')).empId;
 
     console.log('Kam List Ready');
@@ -30,7 +32,8 @@ function getKamList() {
                 </tr>
             `)
         });
-        $('#kamData').append(listArr.join(''))
+        $('#kamData').append(listArr.join(''));
+        isLoaderVisible(false);
 
         //let res = response.data[0];
         //console.log(res);

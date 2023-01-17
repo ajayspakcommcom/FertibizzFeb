@@ -8,20 +8,110 @@
     <link rel="stylesheet" href="/css/app.css" />
 </head>
 
-<body>
+<body class="inside-theme">
 
-    <nav class="navbar" id="header"></nav>
+  <div class="theme-wrapper">
+      <div class="navigation"></div>
+      <div class="content">
+        <div class="content-bg">
+          <div class="right-header">
+            <h1>
+              <div class="bread">
+                <span id="kamName"></span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="rbm-right-arrow" viewBox="0 0 64 42.67"><defs></defs><title>Asset 47</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M63.22,19.57,44.5.78a2.67,2.67,0,0,0-3.78,3.77L54.79,18.67H2.67a2.67,2.67,0,1,0,0,5.33H55L40.73,38.11a2.67,2.67,0,1,0,3.76,3.78L63.21,23.35a2.67,2.67,0,0,0,0-3.78Z"/></g></g></svg>
+                <span>Account Mapping</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="rbm-right-arrow" viewBox="0 0 64 42.67"><defs></defs><title>Asset 47</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M63.22,19.57,44.5.78a2.67,2.67,0,0,0-3.78,3.77L54.79,18.67H2.67a2.67,2.67,0,1,0,0,5.33H55L40.73,38.11a2.67,2.67,0,1,0,3.76,3.78L63.21,23.35a2.67,2.67,0,0,0,0-3.78Z"/></g></g></svg>
+                <span>Potential List</span>
+              </div>
+            </h1>
+            <ul id="right-nav"></ul>
+          </div>
+          <div class="right-content">   
+              
+              <div class="theme-form">
 
+                  <div class="text-right">
+                      <a href="javascript:void(0);" onclick="goBack()" class="btn btn-default btn-grad go-back">Go Back</a>
+                  </div>
+
+                  <ul class="nav nav-tabs gradient-tabs">
+                      <li class="active"><a data-toggle="tab" href="#chart">Data in Chart Formate</a></li>
+                      <li><a data-toggle="tab" href="#tabular">Data in Tabular Formate</a></li>
+                    </ul>
+                 
+                  <div class="tab-content">
+                      <div id="chart" class="tab-pane fade in active">
+                        <table>
+                          <tr>
+                            <td>
+                              <div id="business_chart"></div>
+                            </td>
+                            <td>
+                              <div id="business_chart_FOLIGRAF"></div>
+                            </td>
+                            <td>
+                              <div id="business_chart_HUMOG"></div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <div id="business_chart_ASPORELIX"></div>
+                            </td>
+                            <td>
+                              <div id="business_chart_R-HUCOG"></div>
+                            </td>
+                            <td>
+                              <div id="business_chart_FOLICULIN"></div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colspan="3">
+                              <div id="business_chart_MIDYDROGESTERONE"></div>
+                            </td>
+                          </tr>
+                      </table>
+                      </div>
+                      <div id="tabular" class="tab-pane fade">
+                          <div class="text-right">
+                            <div class="text-right"><a href="javascript:void(0);" onclick="approveListingBusiness();return false;" class="btn btn-default btn-grad go-back">Approve Selected</a></div>
+                          </div>
+                          
+                          <table class="table table-data shadow">
+                            <thead>
+                                <tr>
+                                    <th>Approve <input type="checkbox" id="selectAll" /></th>
+                                    <th>Center Name</th>
+                                    <th>Doctor Name</th>
+                                    <th>Foligraf PEN</th>
+                                    <th>Foligraf (LYO/PFS)</th>
+                                    <th>Humog LYO</th>
+                                    <th>Humog LIQ (MD/PFS)</th>
+                                    <th>Asporelix</th>
+                                    <th>R-Hucog</th>
+                                    <th>Foliculin</th>
+                                    <th>Agotrig</th>
+                                    <th>Midydrogesterone</th>
+                                </tr>
+                            </thead>
+                            <tbody id="potentialData">
+                            </tbody>
+                        </table>
+
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="loader">
+      <img src="../../img/loader.gif" alt="ivf loader" class="img-responsive" />
+    </div>
+
+    <!-- <nav class="navbar" id="header"></nav>
     <main class="container-fluid">
         <h1 class="text-center">Business List</h1>
-
-        <!-- <div id="potential_chart1"></div>
-        <div id="potential_chart1_bar" hidden>
-          <div id="potential_chartIVF"></div>
-        </div>
-        <div id="potential_chart2"></div>
-        <div id="potential_chart3"></div> -->
-
         <div class="text-right">
           <a href="javascript:void(0);" onclick="goBack()" class="btn btn-success">Go Back</a>
         </div>
@@ -87,12 +177,8 @@
           </table>
         </div>
     </div>
+    </main> -->
 
-
-
-       
-        
-    </main>
 
     <script src="../../js/jquery.min.js"></script>
     <script src="../../js/common.js"></script>

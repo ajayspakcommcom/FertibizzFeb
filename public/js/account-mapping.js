@@ -1,4 +1,5 @@
 function getKamDetails() {
+    isLoaderVisible(true);
     let urlArr = window.location.href.split('/'),
         flag = isNaN(urlArr[urlArr.length - 1]),
         empId = flag ? urlArr[urlArr.length - 2] : urlArr[urlArr.length - 1]
@@ -9,7 +10,7 @@ function getKamDetails() {
             console.log(response.data)
             let data = response.data[0];
             $('#kamName').html(formatText(data.firstName))
-            
+            isLoaderVisible(false);
 
         }).catch((err) => {
             console.log(err);
@@ -52,7 +53,7 @@ function getMyHospitalList() {
 
 function setupPotentialPage() {
     //    console.log('setup account mapping for potentials')
-
+    isLoaderVisible(true);
     let urlArr = window.location.href.split('/'),
         empId = urlArr[urlArr.length - 2];
     let param = {
@@ -117,8 +118,8 @@ function setupPotentialPage() {
             //console.log(totalIVF, totalIUI);
             potentialChart1(totalIVF, totalIUI, percIVF_FrozenTransfers, percIVF_FreshPickups);
             potentialChart2(totalSelftCycle, totalDonorCycle);
-
-            potentialChart3(totalAntagonistcycles, totalAgonistCycles)
+            potentialChart3(totalAntagonistcycles, totalAgonistCycles);
+            isLoaderVisible(false);
 
         }).catch((err) => {
             console.log(err);
