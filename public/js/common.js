@@ -300,3 +300,11 @@ function isLoaderVisible(isVisible) {
         $('.loader').removeClass('visible');
     }
 }
+
+function isBtnLoaderVisible(isVisible) {
+    if(isVisible == true) {
+        $('.loader-img').addClass('show');
+    } else {
+        $('.loader-img').removeClass('show');
+    }
+}

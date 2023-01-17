@@ -130,7 +130,9 @@
                   <div class="two-btn-wrapper two-btn-wrapper-potential">
                     <button type="button" class="btn btn-default btn-grad" id="undoChanges" onclick="undo()">Undo</button>
                     <button type="reset" class="btn btn-default btn-grad" id="resetBtn">Reset</button>
-                    <button type="button" class="btn btn-default btn-grad" onclick="validateMe();return false;" id="saveBtn">Submit</button>
+                    <button type="button" class="btn btn-default btn-grad loader-btn-wrapper" onclick="validateMe();return false;" id="saveBtn">
+                      <img src="../../img/loader.gif" alt="ivf loader" class="img-responsive loader-img"> Submit
+                    </button>
                     <button class="btn btn-default btn-grad" id="btnApprove" disabled="true"  onclick="approveMe();return false;">Approve</button>
                   </div>
                 </div>
@@ -141,8 +143,11 @@
     </div>
   </div>
 
-    <!-- <nav class="navbar" id="header"></nav>
+  <div class="loader">
+    <img src="../../img/loader.gif" alt="ivf loader" class="img-responsive" />
+  </div>
 
+    <!-- <nav class="navbar" id="header"></nav>
     <main class="container-fluid">
         <h1 class="text-center">Add Potential</h1>
       <div class="custom-table form heading-wrapper">
@@ -194,7 +199,6 @@
         <div class="form-wrapper">
         <form>
           <div class="row">
-          
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
               
               <div class="form-group">
@@ -216,9 +220,7 @@
                 <label for="freshTxt">Fresh Pick-ups</label>
                 <input type="number" class="form-control disabled" id="freshTxt" name="freshTxt" placeholder="Fresh pick-ups" required />
               </div>
-
             </div>
-
 
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 

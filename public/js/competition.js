@@ -22,6 +22,9 @@ function loadMonthYear() {
 
 
 async function getSkuDetails() {
+
+  isLoaderVisible(true);
+
   let centerId = new URLSearchParams(window.location.search).get('cid'),
     year = $('#cmbYear').val(),
     month = $('#cmbMonth').val(),
@@ -71,8 +74,6 @@ async function getSkuDetails() {
         businessValue = !isNaN((filterRec[0].businessValue)) ? parseFloat(filterRec[0].businessValue) : 0;
       }
 
-
-
       html.push(` 
             <tr>
             <td>${skuBrand.brandName}</td>
@@ -84,22 +85,17 @@ async function getSkuDetails() {
                 <input maxlength=7" type="text" onkeypress="return isNumber(this, event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_Value" required="" value="${businessValue}" title="apr" />
               </div>
             </td>
-            
           </tr>`);
-
-
-
     });
-
     $('#competitorDataTable').append(html.join(''));
-
-
-
+    isLoaderVisible(false);
   }))
 
 }
 
 function validateMe() {
+
+  isBtnLoaderVisible(true);
 
   console.log('save into database');
   let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
@@ -133,6 +129,7 @@ function validateMe() {
     axios.spread((...allData) => {
       console.log({ allData });
       redirect('/hospitals');
+      isBtnLoaderVisible(false);
     })
   );
 }

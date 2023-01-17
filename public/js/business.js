@@ -16,6 +16,8 @@ function loadMonthYear() {
 
 async function getSkuDetails() {
 
+    isLoaderVisible(true);
+
     let skuBrands = ['FOLIGRAF', 'HUMOG', 'ASPORELIX', 'R-HUCOG', 'FOLICULIN', 'AGOTRIG', 'MIDYDROGESTERONE'],
         hospitalId = new URLSearchParams(window.location.search).get('cid'),
         chainAccountTypeId = new URLSearchParams(window.location.search).get('chainAccountType'),
@@ -78,7 +80,8 @@ async function getSkuDetails() {
 
         });
 
-        $('#accordion').append(html.join(''))
+        $('#accordion').append(html.join(''));
+        isLoaderVisible(false);
 
     }))
     $('.unitSold').each((x, e) => {
@@ -234,6 +237,8 @@ function isNumber(evt) {
 
 function validateMe() {
 
+    isBtnLoaderVisible(true);
+
     console.log('save into database')
 
     if ($('#cmbMonth').val() === "") {
@@ -310,6 +315,7 @@ function validateMe() {
     Promise.all(endPoints.map((endpoint) => axios.post('/sku-add/', endpoint))).then(
         axios.spread((...allData) => {
             console.log({ allData });
+            isBtnLoaderVisible(false);
             redirect('/hospitals');
         })
     );

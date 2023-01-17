@@ -8659,3 +8659,23 @@ ul.inline {
   display: -webkit-flex;
 }
 
+.loader-btn-wrapper {
+  position: relative;
+}
+
+.loader-btn-wrapper .loader-img {
+  position: absolute;
+  top: 50%;
+  width: 30px;
+  right: calc(50% + 35px);
+  transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  display: none;
+}
+
+.loader-btn-wrapper .loader-img.show {
+  display: block;
+}

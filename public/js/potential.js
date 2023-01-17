@@ -14,6 +14,8 @@ function loadMonthYear() {
 
 function validateMe() {
 
+    isBtnLoaderVisible(true);
+
     if ($('#cmbMonth').val() === "") {
         alert('Month field is empty');
         $('#cmbMonth').focus();
@@ -111,8 +113,9 @@ function validateMe() {
             let res = response.data[0];
             if (res.sucess === 'true') {
                 redirect('/hospitals');
+                isBtnLoaderVisible(false);
             } else {
-                //     $('#lblMsg').text(res.msg);
+                //$('#lblMsg').text(res.msg);
             }
         }).catch((err) => {
             console.log(err);
@@ -122,13 +125,12 @@ function validateMe() {
 
 function getPotentialsDetails() {
 
+    isLoaderVisible(true);
 
     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")), 
     param = {hospitalId:'', empId:''}, 
     urlArr = window.location.href.split('/'),
     empId = urlArr[urlArr.length - 1].slice(-2);
-
-    
 
         // param = {
         //     hospitalId: new URLSearchParams(window.location.search).get('cid'),
@@ -179,6 +181,7 @@ function getPotentialsDetails() {
                 //$('#cmbMonth').val(month)
                 getFirstDayPreviousMonth();
                 getFieldData();
+                isLoaderVisible(false);
             }
 
         }).catch((err) => {
