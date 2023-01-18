@@ -6,7 +6,22 @@ function getCustomerList() {
             empId: isNaN(myKamId) ? userData.empId : myKamId,
             method: 'getHospitalList'
         };
+        
 
+        console.log(userData);
+
+        if(userData.post.toString().toLowerCase() == 'kam') {            
+            setTimeout(() => {
+                if(document.getElementsByClassName('addNewCustomer')[0]) {
+                    document.getElementsByClassName('addNewCustomer')[0].classList.add('hide');
+                }
+
+                if(document.querySelector('#customerList')) {
+                    document.querySelector('#customerList').classList.add('hide-action');
+                }
+
+            }, 1000);
+        }
 
     axios
         .post(_URL._CUSTOMER_LIST, param).then((response) => {
@@ -27,9 +42,9 @@ function populateDataTable(data) {
         data.forEach(item => {
             $('#customerList').dataTable().fnAddData([
                 // `<input type="checkbox" ${item.IsApproved === 'Yes' ? `Checked` : ''}>`,
-                item.accountName,
-                item.CENTRENAME,
-                item.DoctorName,
+                camelCaseText(item.accountName),
+                camelCaseText(item.CENTRENAME),
+                camelCaseText(item.DoctorName),
                 item.specialtyType,
                 item.mobile,
                 item.email,

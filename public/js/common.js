@@ -308,3 +308,4 @@ function isBtnLoaderVisible(isVisible) {
         $('.loader-img').removeClass('show');
     }
 }
+

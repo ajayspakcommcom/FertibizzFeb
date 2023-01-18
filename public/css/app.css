@@ -8150,10 +8150,10 @@ ul.inline {
 .dataTables_wrapper {
   padding: 15px 15px;
   background-color: #fff;
-  margin-top: 15px;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
+  margin-top: 5px;
+  border-radius: 20px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
 }
 
 .dataTables_length, .dataTables_filter {
@@ -8333,6 +8333,7 @@ ul.inline {
   background-color: green;
 } 
 
+#customerList th:nth-child(5), #customerList td:nth-child(5),
 #customerList th:nth-child(6), #customerList td:nth-child(6), 
 #customerList th:nth-child(7), #customerList td:nth-child(7), 
 #customerList th:nth-child(8), #customerList td:nth-child(8), 
@@ -8374,7 +8375,7 @@ ul.inline {
   width: 250px;
   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
-  padding: 15px 15px;
+  padding: 25px 15px 15px 15px;
 }
 
 .inside-theme .theme-wrapper .content {  
@@ -8402,6 +8403,11 @@ ul.inline {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 15px;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 15px 15px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
 }
 
 .inside-theme .theme-wrapper .content .content-bg .right-header h1 {
@@ -8419,8 +8425,12 @@ ul.inline {
 }
 
 .inside-theme .theme-wrapper .content .content-bg .right-header ul li {
-  display: inline-block;
+  /* display: inline-block; */
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
   margin-right: 15px;
+
 }
 
 .inside-theme .theme-wrapper .content .content-bg .right-header ul li:last-child {
@@ -8557,7 +8567,7 @@ ul.inline {
 }
 
 .right-content {
-  height: calc(100% - 50px);
+  height: calc(100% - 60px);
   overflow-y: auto;
 }
 
@@ -8737,4 +8747,67 @@ ul.inline {
 
 #accordion {
   margin-top: 15px;
+}
+
+
+.hide-action th:nth-child(10), .hide-action td:nth-child(10) {
+  display: none;
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.btn-upload {
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+input[type=file]::file-selector-button {
+  border: 2px solid transparent;
+  padding: 0.2em 0.4em;
+  border-radius: 0.2em;
+  background-color: #683193;
+  transition: 1s;
+  outline: 0;
+  color: #fff;
+}
+
+input[type=file] {
+  display: block;
+  margin: 0;
+  /* padding: 8px 10px 10px 10px; */
+  padding: 0 0;
+}
+
+#lblcontractFile {
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.add-back-btn {
+  margin-bottom: 15px;
+}
+
+.add-back-btn a {
+  display: inline-block;
+}
+
+.add-back-btn a:first-child {
+  margin-right: 15px;
 }

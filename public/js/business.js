@@ -64,7 +64,7 @@ async function getSkuDetails() {
             html.push(`   <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-            <a data-toggle="collapse" data-parent="#accordion" href="#${skuBrand.toLowerCase().replace(/\s/g, '')}">${formatText(skuBrand, 'FirstLetterUPPER')}</a>
+                <a data-toggle="collapse" data-parent="#accordion" href="#${skuBrand.toLowerCase().replace(/\s/g, '')}">${formatText(skuBrand, 'FirstLetterUPPER')}</a>                
             </h4>
         </div>
         <div id="${skuBrand.toLowerCase().replace(/\s/g, '')}" class="panel-collapse collapse">
