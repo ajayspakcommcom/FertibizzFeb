@@ -309,3 +309,29 @@ function isBtnLoaderVisible(isVisible) {
     }
 }
 
+function addActiveClassToLink(pos) {
+    const links = $('.navigation-ul > li');
+    if(links[pos]) {
+        links[pos].querySelector('a').classList.add('active');
+    }
+}
+
+function setActiveLink() {    
+    let url = window.location.pathname;
+
+    if(url.includes('hospitals')) {
+        addActiveClassToLink(0);
+    } 
+    else if(url.includes('customers')) { 
+        addActiveClassToLink(1);
+    }
+    else if(url.includes('rc-list')) { 
+        addActiveClassToLink(7);
+    }
+}
+
+setTimeout(() => {
+    setActiveLink();
+}, 4000);
+
+

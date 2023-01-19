@@ -366,7 +366,7 @@ function getMyHospitalList() {
         };
     axios
         .post('/hospitals-list/', param).then((response) => {
-            console.log('Ram',response.data)
+            //console.log('Ram',response.data)
             let lists = response.data,
                 listArr = [];
 

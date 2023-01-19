@@ -8372,14 +8372,14 @@ ul.inline {
 
 .inside-theme .theme-wrapper .navigation {
   background-color: #fff;
-  width: 250px;
+  width: 200px;
   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
   padding: 25px 15px 15px 15px;
 }
 
 .inside-theme .theme-wrapper .content {  
-  width: calc(100% - 250px);
+  width: calc(100% - 200px);
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
   position: relative;
@@ -8466,9 +8466,9 @@ ul.inline {
   margin: 30px 0 0 0;
 }
 
-.navigation-ul li {
+/* .navigation-ul li {
    margin-bottom: 10px;
-}
+} */
 
 .navigation-ul li a {
   display: flex !important;
@@ -8810,4 +8810,8 @@ input[type=file] {
 
 .add-back-btn a:first-child {
   margin-right: 15px;
+}
+
+[src="../../img/ivf.png"] {
+  width: 150px;
 }
