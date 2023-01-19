@@ -330,8 +330,14 @@ function setActiveLink() {
     }
 }
 
+function showYear() {
+    const elem = document.getElementById('showYearId');
+    elem.textContent = new Date().getFullYear();
+}
+
 setTimeout(() => {
     setActiveLink();
+    showYear();
 }, 4000);
 
 

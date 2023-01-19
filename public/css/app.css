@@ -8376,6 +8376,17 @@ ul.inline {
   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
   padding: 25px 15px 15px 15px;
+  position: relative;
+}
+
+.copyright {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  right: 15px;
+  margin-bottom: 0;
+  font-size: 11px;
+  color: grey;
 }
 
 .inside-theme .theme-wrapper .content {  
