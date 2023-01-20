@@ -76,7 +76,7 @@ function setupPotentialPage() {
                 percIVF_FrozenTransfers = 0,
                 percIVF_FreshPickups = 0;
 
-                console.log(listArr);
+                console.log('Potential Approval List',lists);
 
             lists.forEach(list => {
                 listArr.push(

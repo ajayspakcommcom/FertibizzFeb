@@ -7715,6 +7715,7 @@ label {
 
 .hospital-search-wrapper .form-group {
   margin-right: 15px;
+  margin-bottom: 0;
 }
 
 .hospital-search-wrapper .form-group:nth-child(3n+3) {
@@ -7726,16 +7727,21 @@ label {
   border-radius: 5px;
 }
 
-.search-btn-wrapper {
-  text-align: right;
+.search-btn-wrapper {  
+  display: flex;
+  display: -webkit-flex;
 }
 
 .search-btn-wrapper > button {
-  width: 70px;
+  /* width: 70px; */
+  width: 50%;
 }
 
 .search-btn-wrapper > button {
   margin-right: 15px;
+  height: 35px !important;
+  padding: 5px 15px !important;
+  box-shadow: none;
 }
 
 .search-btn-wrapper > button:last-child {
@@ -7768,7 +7774,7 @@ label {
 }
 
 .admin-filter-wrapper {
-  grid-template-columns: auto auto auto auto auto;
+  grid-template-columns: auto auto auto auto auto auto;
 }
 
 
@@ -7782,7 +7788,7 @@ label {
 }
 
 .common-input {
-  display: block;
+    display: block;
     width: 100%;
     height: 34px;
     padding: 6px 12px;
@@ -7800,7 +7806,12 @@ label {
     -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;    
+    border-radius: 10px !important;
+    box-shadow: 1px 1px 5px rgb(128 128 128 / 50%) !important;
+    border: 0 !important;
+    font-family: 'semibold';
+    font-size: 13px;
 }
 
 .sub-heading {
@@ -7886,7 +7897,7 @@ label {
   display: -webkit-flex;
   justify-content: space-around; */
   background: #fff;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
 }
 
 /* .chart-wrapper.no-border div {
@@ -8372,7 +8383,7 @@ ul.inline {
 
 .inside-theme .theme-wrapper .navigation {
   background-color: #fff;
-  width: 200px;
+  width: 230px;
   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
   padding: 25px 15px 15px 15px;
@@ -8390,7 +8401,7 @@ ul.inline {
 }
 
 .inside-theme .theme-wrapper .content {  
-  width: calc(100% - 200px);
+  width: calc(100% - 230px);
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
   position: relative;
@@ -8406,6 +8417,11 @@ ul.inline {
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
   padding: 20px 20px;
+}
+
+.inside-theme .theme-wrapper .content .content-bg.overflow {
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .inside-theme .theme-wrapper .content .content-bg .right-header {
@@ -8483,37 +8499,33 @@ ul.inline {
 
 .navigation-ul li a {
   display: flex !important;
-  display: -webkit-flex !important;
-  justify-content: left !important; 
+  display: -webkit-flex !important;  
   align-items: center !important;
-  height: 40px !important;
-  width: 100%;
-  padding: 0 20px !important;
-  border-radius: 10px;
+  height: 30px !important;  
+  padding: 0 0 !important;  
   height: 50px;
-  width: 100%;
-  text-align: center;
+  width: 100%;  
   text-transform: uppercase;
   transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   -ms-transition: all 0.5s ease-in-out;
   -webkit-transition: all 0.5s ease-in-out;  
-  display: flex;
-  display: -webkit-flex;
-  justify-content: center;
-  align-items: center;
   text-transform: initial;
   background-size: 200% auto;  
   border-radius: 10px;
-  display: block;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;  
   border: 0;
+  text-align: left;
+  justify-content: space-between;
+  font-size: 13px;
 }
 
-.navigation-ul li a:hover {
+/* .navigation-ul li a:hover {
   background-image: linear-gradient(to right,#683193 10%, #248ec6 90%);
   color: #fff;
-}
+} */
 
 .navigation-ul li a:hover svg {
   fill: #fff;
@@ -8825,4 +8837,32 @@ input[type=file] {
 
 [src="../../img/ivf.png"] {
   width: 150px;
+}
+
+.admin-chart-wrapper {
+  position: absolute;
+  top: 135px;
+  left: 0;
+  right: 0;    
+}
+
+.admin-chart-wrapper > div {
+  background-color: transparent;
+}
+
+.admin-chart-wrapper .multi-chart > div {
+  width: auto;
+  margin: auto;
+}
+
+.adminLink .dropdown-menu {
+  border: 0;
+  box-shadow: none;
+  position: relative;
+  width: 100%;
+  padding: 0 15px;
+}
+
+.adminLink .dropdown-menu::after {
+  display: none;
 }
