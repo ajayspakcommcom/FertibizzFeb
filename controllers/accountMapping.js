@@ -35,6 +35,8 @@ exports.getAccountMappingPotentialListData = (req, res, next) => {
  
  
  getAccountMappingPotentialListData = (objParam) => {
+    // console.clear();
+    // console.log('Ram', objParam.empId);
      return new Promise((resolve) => {
          var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
          dbConn

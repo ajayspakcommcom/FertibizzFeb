@@ -336,7 +336,7 @@ function showYear() {
 }
 
 setTimeout(() => {
-    setActiveLink();
+    //setActiveLink();
     showYear();
 }, 4000);
 

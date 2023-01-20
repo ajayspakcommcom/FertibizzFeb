@@ -168,7 +168,7 @@ function DeleteCustomer(id, name, bulkDelete) {
             axios
                 .post("/customer/delete", param).then((response) => {
                     //console.log(response.data)
-                    alert(response.data.msg)
+                    //alert(response.data.msg)
 
                 }).catch((err) => {
                     console.log(err);

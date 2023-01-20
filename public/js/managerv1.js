@@ -93,8 +93,7 @@ function loadTask() {
         method: 'taskList',
         empId: 2,
         showAll: false
-    }
-        ;
+    };
 
     managerLoader.removeClass('none');
     managerBody.addClass('overflow-hidden');
