@@ -315,3 +315,11 @@ function setupCompetitionPage() {
             console.log(err);
         });
 }
+
+function isRcBtnVisible() {
+    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
+    if(userData.post.toLowerCase() == 'zbm')
+     {
+         $('#hrfRateContract').removeClass('hide');
+     }
+}

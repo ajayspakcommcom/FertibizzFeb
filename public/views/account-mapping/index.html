@@ -27,8 +27,8 @@
           <div class="account-mapping-btn-wrapper">
             <a class="btn btn-default btn-grad" id="hrfPotential" href="#">Potential</a>
             <a class="btn btn-default btn-grad" id="hrfBusiness" href="#">Business</a>
-            <!-- <a class="btn btn-default" id="hrfRateContract" href="#">Rate Contract</a> -->
             <a class="btn btn-default btn-grad" id="hrfCompetition" href="#">Competition</a>
+            <a class="btn btn-default btn-grad hide" id="hrfRateContract">Rate Contract</a>
           </div>
         </div>
       </div>
@@ -64,6 +64,7 @@
   <script>
     $(function () {
     //  getMyHospitalList();
+      isRcBtnVisible();
       getKamDetails();
       let urlArr = window.location.href.split('/'),
         empId = urlArr[urlArr.length - 1];

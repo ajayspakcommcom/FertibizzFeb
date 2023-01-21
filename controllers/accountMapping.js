@@ -23,6 +23,7 @@ exports.getAccountMappingPotentialDetail = (req, res, next) => {
     res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/account-mapping/view-potential.html`);
 };
 
+
 //getAccountMappingPotentialListData
 
 
