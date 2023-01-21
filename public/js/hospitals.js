@@ -25,6 +25,7 @@ function getCustomerList() {
 
     axios
         .post(_URL._CUSTOMER_LIST, param).then((response) => {
+            console.log(response.data)
             populateDataTable(response.data);
         }).catch((err) => {
             console.log(err);
@@ -41,7 +42,7 @@ function populateDataTable(data) {
         var i = 1;
         data.forEach(item => {
             $('#customerList').dataTable().fnAddData([
-                // `<input type="checkbox" ${item.IsApproved === 'Yes' ? `Checked` : ''}>`,
+                `<input type="checkbox" ${item.IsApproved === 'Yes' ? `Checked` : ''}>`,
                 camelCaseText(item.accountName),
                 camelCaseText(item.CENTRENAME),
                 camelCaseText(item.DoctorName),
