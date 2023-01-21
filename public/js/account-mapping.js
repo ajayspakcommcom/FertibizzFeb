@@ -81,7 +81,7 @@ function setupPotentialPage() {
             lists.forEach(list => {
                 listArr.push(
                     `<tr>
-                        <td align='center'><input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.potentialId}'  id=${list.potentialId} /></td>
+                        <td><input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.potentialId}'  id=${list.potentialId} /></td>
                         <td>${camelCaseText(list.CENTRENAME)}</td>
                         <td>${camelCaseText(list.DoctorName)}</td>
                         <td align='right'>${list.IUICycle}</td>
@@ -164,7 +164,7 @@ function setupBusinessPage() {
             lists.forEach(list => {
                 listArr.push(
                     `<tr>
-                        <td align='center'><input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.hospitalId}'  id=${list.hospitalId} /></td>
+                        <td><input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.hospitalId}'  id=${list.hospitalId} /></td>
                         <td>${camelCaseText(list.CENTRENAME)}</td>
                         <td>${camelCaseText(list.DoctorName)}</td>
                         <td align='right'>${list.brandGroup1}</td>
@@ -297,7 +297,7 @@ function setupCompetitionPage() {
             lists.forEach(list => {
                 listArr.push(
                     `<tr>
-                        <td align='center'><input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.centerId}_${list.month}_${list.year}'  id=${list.centerId} /></td>
+                        <td><input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.centerId}_${list.month}_${list.year}'  id=${list.centerId} /></td>
                         <td>${camelCaseText(list.CENTRENAME)}</td>
                         <td>${camelCaseText(list.DoctorName)}</td>
                         <td><a href='/add-competition?cid=${list.centerId}&kamid=${empId}'>View Details</a>
