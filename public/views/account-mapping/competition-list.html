@@ -31,16 +31,17 @@
             <div class="theme-form">
 
                 <div class="text-right">
+                  <a href="javascript:void(0);" onclick="approveListingCompetition();return false;"class="btn btn-default btn-grad go-back">Approve Selected</a>
                     <a href="javascript:void(0);" onclick="goBack()" class="btn btn-default btn-grad go-back">Go Back</a>
                 </div>
 
-                <ul class="nav nav-tabs gradient-tabs">
+                <!-- <ul class="nav nav-tabs gradient-tabs">
                     <li class="active"><a data-toggle="tab" href="#chart">Data in Chart Format</a></li>
                     <li><a data-toggle="tab" href="#tabular">Data in Tabular Format</a></li>
-                </ul>
+                </ul> -->
                
                 <div class="tab-content">
-                    <div id="chart" class="tab-pane fade in active">
+                    <div id="chart" class="tab-pane fade">
                       <table>
                         <tr>
                           <td>
@@ -71,10 +72,10 @@
                         </tr>
                     </table>
                     </div>
-                    <div id="tabular" class="tab-pane fade">
-                        <div class="text-right">
+                    <div id="tabular" class="tab-pane fade in active">
+                        <!-- <div class="text-right">
                           <div class="text-right"><a href="javascript:void(0);" onclick="approveListingCompetition();return false;"class="btn btn-default btn-grad go-back">Approve Selected</a></div>
-                        </div>
+                        </div> -->
                         
                         <table class="table table-data shadow">
                           <thead>

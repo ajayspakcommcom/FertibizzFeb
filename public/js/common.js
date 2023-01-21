@@ -202,6 +202,28 @@ function getQueryStringValue(key) {
     return urlSearchParams.get(key);
 }
 
+function showElementByDesignation() {
+    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
+    if (userData != null) { 
+        switch (userData.post.toLowerCase()) {
+            case 'kam':
+                    console.log('Kam Level');
+                break;
+            case 'rbm':
+                $('.addNewCustomer').hide();
+                console.log('Rbm Level');                
+                break;
+            case 'zbm':
+                $('.addNewCustomer').hide();
+                console.log('zbm Level');      
+                break;
+            case 'admin':
+                console.log('Admin Level');      
+                break;
+        }
+    }
+}
+
 function showNavigationByDesignation() {
     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
 
@@ -255,7 +277,8 @@ function addPrevValueOnFocusOut(elem) {
 }
 
 setTimeout(() => {
-    showNavigationByDesignation();    
+    showNavigationByDesignation();   
+    showElementByDesignation(); 
 }, 2000);
 
 function intToString(num) {

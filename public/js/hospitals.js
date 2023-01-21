@@ -5,8 +5,20 @@ function getCustomerList() {
         param = {
             empId: isNaN(myKamId) ? userData.empId : myKamId,
             method: 'getHospitalList'
-        };
+        },
+        urlArr = window.location.href.split('/'),
+        flag = isNaN(urlArr[urlArr.length - 1]),
+        empId = flag ? urlArr[urlArr.length - 2] : urlArr[urlArr.length - 1]
         
+        axios
+        .get(`/employee-details/${empId}`).then((response) => {
+            console.log(response.data)
+            let data = response.data[0];
+            $('#kamName').html(formatText(data.firstName))            
+        }).catch((err) => {
+            console.log(err);
+        });
+
 
         console.log(userData);
 

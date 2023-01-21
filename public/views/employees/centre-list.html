@@ -22,7 +22,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="rbm-right-arrow" viewBox="0 0 64 42.67"><defs></defs><title>Asset 47</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M63.22,19.57,44.5.78a2.67,2.67,0,0,0-3.78,3.77L54.79,18.67H2.67a2.67,2.67,0,1,0,0,5.33H55L40.73,38.11a2.67,2.67,0,1,0,3.76,3.78L63.21,23.35a2.67,2.67,0,0,0,0-3.78Z"/></g></g></svg>
               <span>Account Mapping</span>
               <svg xmlns="http://www.w3.org/2000/svg" class="rbm-right-arrow" viewBox="0 0 64 42.67"><defs></defs><title>Asset 47</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M63.22,19.57,44.5.78a2.67,2.67,0,0,0-3.78,3.77L54.79,18.67H2.67a2.67,2.67,0,1,0,0,5.33H55L40.73,38.11a2.67,2.67,0,1,0,3.76,3.78L63.21,23.35a2.67,2.67,0,0,0,0-3.78Z"/></g></g></svg>
-              <span>Business List</span>
+              <span>Master Data </span>
             </div>
           </h1>
           <ul id="right-nav"></ul>
@@ -32,16 +32,17 @@
             <div class="theme-form">
 
                 <div class="text-right">
-                    <a href="javascript:void(0);" onclick="goBack()" class="btn btn-default btn-grad go-back">Go Back</a>
+                  <a href="javascript:void(0);" class="btn btn-default btn-grad go-back" onclick="ApproveDataSingleWay()">Approve Data List</a>
+                  <a href="javascript:void(0);" onclick="goBack()" class="btn btn-default btn-grad go-back">Go Back</a>
                 </div>
 
-                <ul class="nav nav-tabs gradient-tabs">
-                    <li class="active"><a data-toggle="tab" href="#chart">Data in Chart Format</a></li>
-                    <li><a data-toggle="tab" href="#tabular">Data in Tabular Format</a></li>
-                  </ul>
+                <!-- <ul class="nav nav-tabs gradient-tabs">
+                    <li><a data-toggle="tab" href="#chart">Data in Chart Format</a></li>
+                    <li class="active"><a data-toggle="tab" href="#tabular">Data in Tabular Format</a></li>
+                  </ul> -->
                
                 <div class="tab-content">
-                    <div id="chart" class="tab-pane fade in active">
+                    <div id="chart" class="tab-pane fade">
                       <table>
                         <tr>
                           <td>
@@ -72,10 +73,10 @@
                         </tr>
                     </table>
                     </div>
-                    <div id="tabular" class="tab-pane fade">
-                        <div class="text-right">
-                          <a href="javascript:void(0);" class="btn btn-success" onclick="ApproveDataSingleWay()">Approve Data List</a>
-                        </div>
+                    <div id="tabular" class="tab-pane fade in active">
+                        <!-- <div class="text-right">
+                          <a href="javascript:void(0);" class="btn btn-default btn-grad go-back" onclick="ApproveDataSingleWay()">Approve Data List</a>
+                        </div> -->
                         
                         <table class="table table-data shadow" id="customerList">
                           <thead>
