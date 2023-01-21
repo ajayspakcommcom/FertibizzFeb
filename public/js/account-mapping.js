@@ -291,16 +291,17 @@ function setupCompetitionPage() {
 
         axios
         .post(`/account-mapping/${empId}/competition-list`, param).then((response) => {
-            //console.log(response.data)
+            console.log(response.data[0])
              let lists = response.data[0],
                  listArr = [];
              lists.forEach(list => {
                 listArr.push(
                     `<tr>
-                        <td align='center'><input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.centerId}'  id=${list.centerId} /></td>
+                        <td align='center'><input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.centerId}_${list.month}_${list.year}'  id=${list.centerId} /></td>
                         <td>${camelCaseText(list.CENTRENAME)}</td>
                         <td>${camelCaseText(list.DoctorName)}</td>
-                        <td><a href='/add-competition?cid=${list.centerId}&kamid=${empId}'>View Details</a></td>
+                        <td><a href='/add-competition?cid=${list.centerId}&kamid=${empId}'>View Details</a>
+                        </td>
                        
                     </tr>
                 `);
@@ -322,4 +323,32 @@ function isRcBtnVisible() {
      {
          $('#hrfRateContract').removeClass('hide');
      }
+}
+
+/** COMPETITION LISTING */
+function approveListingCompetition() {
+    
+   //ƒconsole.log('approve selected Listing');
+   let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
+
+   var endPoints = $(".chkbox:checked").map(function () {
+        let month, year, customerId, arr;
+            arr = $(this).val().split('_')
+       return {
+
+           //centerId: parseInt($(this).val()),
+           hospitalId: parseInt(arr[0]),
+           rbmId: parseInt(userData.empId),
+           month: parseInt(arr[1]),
+           year: parseInt(arr[2])
+       };
+   }).get();
+   Promise.all(endPoints.map((endpoint) => axios.post('/center-competition-approved/', endpoint))).then(
+       axios.spread((...allData) => {
+           //console.log({ allData });
+           alert('Approved Sucessfully')
+           //  redirect('/hospitals');
+       })
+   );
+   return false;  
 }
