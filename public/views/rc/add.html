@@ -10,8 +10,68 @@
 
 </head>
 
+    <body class="inside-theme">
 
-     <nav class="navbar" id="header"></nav>
+        <div class="theme-wrapper">
+            <div class="navigation"></div>
+            <div class="content">
+                <div class="content-bg">
+                    <div class="right-header">
+                        <h1>Update RC</h1>
+                        <ul id="right-nav"></ul>
+                    </div>
+
+                    <div class="right-content">
+                        <form id="frm1" method='post' encType="multipart/form-data" autocomplete="off" class="theme-form">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="fileName">Upload Pdf file for RC</label>
+                                        <input type="file" class="form-control" id="fileName" name="fileName" />
+                                        <div id="lblcontractFile"></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="validityDate">Start Date</label>
+                                        <input type="text" id="startDate" name="startDate" placeholder="dd-mm-yyyy" class="form-control">                                                                              
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="validityDate">Expirty Date</label>                                        
+                                        <input type="text" id="expiryDate" name="expiryDate" placeholder="dd-mm-yyyy" class="form-control">
+                                        <input type="hidden" id="hidRbmId" name="hidRbmId"/>
+                                        <input type="hidden" id="hidfileName" name="hidfileName"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row none showApprove">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                  <div class="form-group add-input-wrapper hideApproveChk">
+                                    <input type="checkbox" value="on" id="chkApproved" name="chkApproved" onclick="enableApproveButton()" />
+                                    &nbsp;
+                                    <label for="lblChkApproved">Check to Approved the Rate Contract</label>
+                                  </div>
+                                </div>
+                              </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="two-btn-wrapper">
+                                        <button type="reset" class="btn btn-default btn-grad">Reset</button>
+                                        <button type="submit" class="btn btn-default btn-grad">Save</button>
+                                        <button class="btn btn-default btn-grad none showApprove" id="btnApprove" disabled="true" onclick="approveRateContract();return false;">Approve</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
+     <!-- <nav class="navbar" id="header"></nav>
     <main class="container-fluid">
         <h1 class="text-center">Update RC</h1>
         <div class="text-right">
@@ -58,7 +118,7 @@
                 </div>
             </form>
         </div>
-    </main> 
+    </main>  -->
 
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
