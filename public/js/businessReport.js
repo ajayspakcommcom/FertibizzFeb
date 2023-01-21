@@ -170,7 +170,7 @@ function getAllBusinessReportWithData(data) {
         let brandReport = reportDataItems.filter(item => {
             return item.brandName === brand
         })
-        console.log(brandReport)
+        //console.log(brandReport)
 
         if (brandReport.length > 0) {
 

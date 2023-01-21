@@ -158,7 +158,7 @@ function setupBusinessPage() {
 
         axios
         .post(`/account-mapping/${empId}/business-list`, param).then((response) => {
-            //console.log(response.data)
+            console.log(response.data[0])
              let lists = response.data[0],
                  listArr = [];
              lists.forEach(list => {

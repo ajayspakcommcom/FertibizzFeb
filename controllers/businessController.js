@@ -214,7 +214,7 @@ function approveCenterBusinessTrackerByHospitalId(objParam) {
             .then(function () {
                 var request = new sql.Request(dbConn);
                 request
-                    .input("customerId", sql.Int, parseInt(objParam.centerId))
+                    .input("customerId", sql.Int, parseInt(objParam.customerId))
                     .input("rbmId", sql.Int, objParam.rbmId)
                     .execute("USP_APPROVE_CUSTOMER_BUSINESS_TRACKER_BY_HOSPITALID")
                     .then(function (resp) {
