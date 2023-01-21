@@ -221,6 +221,8 @@ function showNavigationByDesignation() {
                 $('.rbmLink').show();
                 break;
             case 'zbm':
+                $('#logoLink').attr('href', '/employees/kam-list');
+                $('.zbmLink').show();
                 break;
             case 'admin':
                 $('.adminLink').show();
@@ -332,7 +334,9 @@ function setActiveLink() {
 
 function showYear() {
     const elem = document.getElementById('showYearId');
-    elem.textContent = new Date().getFullYear();
+    if(elem) {
+        elem.textContent = new Date().getFullYear();
+    }
 }
 
 setTimeout(() => {
