@@ -12,20 +12,23 @@ function getKamList() {
     axios
     .post('/employees/kamlist', param).then((response) => {
         // console.log(response.data[0])
-        console.log(response.data);
+        //console.log(response.data);
 
         let list = response.data, listArr = [];
         let indx = 0;
 
-        console.log('id', list);
+       // console.log('id', list);
 
         list.forEach((data) => {
+            //console.log(data);
+            let hyperLink = (data.designation === 'RBM') ? 'Account Mapping Data' : `<a href="../account-mapping/${data.empID}">Account Mapping Data</a>`;
+           // console.log(hyperLink)
             indx = indx + 1;
             listArr.push(
                 `<tr>
                     <td>${indx}</td>
                     <td>${data.firstName}</td>
-                    <td><a href="../account-mapping/${data.empID}">Account Mapping Data</a></td>
+                    <td>${hyperLink}</td>
                     <td>
                         <a href="/employees/centre-list/${data.empID}">Master Data</a>
                     </td>
