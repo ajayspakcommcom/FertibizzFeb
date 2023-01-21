@@ -3,8 +3,8 @@ function getKamDetails() {
     let urlArr = window.location.href.split('/'),
         flag = isNaN(urlArr[urlArr.length - 1]),
         empId = flag ? urlArr[urlArr.length - 2] : urlArr[urlArr.length - 1]
-        console.log(flag)
-        console.log(empId)
+    console.log(flag)
+    console.log(empId)
     axios
         .get(`/employee-details/${empId}`).then((response) => {
             console.log(response.data)
@@ -76,7 +76,7 @@ function setupPotentialPage() {
                 percIVF_FrozenTransfers = 0,
                 percIVF_FreshPickups = 0;
 
-                console.log('Potential Approval List',lists);
+            console.log('Potential Approval List', lists);
 
             lists.forEach(list => {
                 listArr.push(
@@ -156,12 +156,12 @@ function setupBusinessPage() {
             empId: empId
         };
 
-        axios
+    axios
         .post(`/account-mapping/${empId}/business-list`, param).then((response) => {
             console.log(response.data[0])
-             let lists = response.data[0],
-                 listArr = [];
-             lists.forEach(list => {
+            let lists = response.data[0],
+                listArr = [];
+            lists.forEach(list => {
                 listArr.push(
                     `<tr>
                         <td align='center'><input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.hospitalId}'  id=${list.hospitalId} /></td>
@@ -178,11 +178,11 @@ function setupBusinessPage() {
                         <td align='right'>${list.brandGroup9}</td>
                     </tr>
                 `);
-             });
-             $('#potentialData').append(listArr.join(''));
-             // generate data for the graph
+            });
+            $('#potentialData').append(listArr.join(''));
+            // generate data for the graph
             drawBusinessChartWithData(response.data[1]);
-             getAllBusinessReportWithData(response.data[2])
+            getAllBusinessReportWithData(response.data[2])
 
 
         }).catch((err) => {
@@ -220,28 +220,28 @@ function setupRateContractPage() {
             empId: empId
         };
 
-        axios
+    axios
         .post(`/account-mapping/${empId}/rate-contract-list`, param).then((response) => {
-            console.log('Ram',response.data[0])
+           // console.log('Ram', response.data[0])
             let lists = response.data[0],
-            listArr = [];
-        lists.forEach(list => {
-            listArr.push(
-                ` <tr>
-                <td><input type="checkbox" class="chkbox" value="${list.customerId}" id="${list.customerId}" ${list.isApproved === false ? 'checked' : ''}></td>
+                listArr = [];
+            lists.forEach(list => {
+                listArr.push(
+                    ` <tr>
+                <td><input type="checkbox" class="chkbox" value="${list.customerId}_${list.aid}" id="${list.customerId}" ${list.RateContractStatus === 'Approved' ? 'checked' : ''}></td>
                 <td>${formatText(list.accountName)}</td>
                 <td>${formatText(list.CENTRENAME)}</td>
                 <td>${formatText(list.DoctorName)}</td>
-                <td>${formatText(list.isApproved === false ? 'Approval' : 'Approval Pending' )}</td>
-                <td><a href="/update-rc/?customerAccountId=${list.aid}&customerid=${list.customerId}&CatAccountId=${list.CatAccountId}&rbmid=${empId}"> ${(list.CatAccountId > 0)? `View` : `` }</a>
-                ${(list.SKUDetails === 0 && list.CatAccountId>0) ? `| SKU Price list awaiting`: ``}
-                ${(list.SKUDetails > 0 && list.CatAccountId>0) ? `| <a href='/customer-contract-add/${list.CatAccountId}'>View SKU Price list</a>`: ``}
+                <td>${formatText(list.RateContractStatus)}</td>
+                <td><a href="/update-rc/?customerAccountId=${list.aid}&customerid=${list.customerId}&CatAccountId=${list.CatAccountId}&rbmid=${empId}"> ${(list.CatAccountId > 0) ? `View` : ``}</a>
+                ${(list.SKUDetails === 0 && list.CatAccountId > 0) ? `| SKU Price list awaiting` : ``}
+                ${(list.SKUDetails > 0 && list.CatAccountId > 0) ? `| <a href='/customer-contract-add/${list.CatAccountId}'>View SKU Price list</a>` : ``}
                 
                 </td>
             </tr>
             `)
-        });
-        $('#centerList').append(listArr.join(''))
+            });
+            $('#centerList').append(listArr.join(''))
             //  // generate data for the graph
             // drawBusinessChartWithData(response.data[1]);
             //  getAllBusinessReportWithData(response.data[2])
@@ -253,26 +253,26 @@ function setupRateContractPage() {
 }
 
 function approveRateContract() {
-     //ƒconsole.log('approve selected Listing');
-     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
+    //ƒconsole.log('approve selected Listing');
+    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
         param = {
             accountID: parseInt(getQueryStringValue('CatAccountId')),
             zbmId: parseInt(userData.empId),
         };
-     axios
+    axios
         .post(`/center-rate-contract-approved`, param).then((response) => {
-            console.log(response.data[0])
+            //console.log(response.data[0])
             redirect(`/account-mapping/${getQueryStringValue('rbmid')}/rate-contract-list`)
         }).catch((err) => {
             console.log(err);
         });
-     return false;
+    return false;
 }
 
 function showApprovalOnZBMLevel() {
     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
 
-    if(userData.post.toLowerCase() === 'zbm') {
+    if (userData.post.toLowerCase() === 'zbm') {
         $('.showApprove').removeClass('none');
         $('[type="submit"]').hide();
     }
@@ -289,12 +289,12 @@ function setupCompetitionPage() {
             empId: empId
         };
 
-        axios
+    axios
         .post(`/account-mapping/${empId}/competition-list`, param).then((response) => {
-            console.log(response.data[0])
-             let lists = response.data[0],
-                 listArr = [];
-             lists.forEach(list => {
+            //console.log(response.data[0])
+            let lists = response.data[0],
+                listArr = [];
+            lists.forEach(list => {
                 listArr.push(
                     `<tr>
                         <td align='center'><input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.centerId}_${list.month}_${list.year}'  id=${list.centerId} /></td>
@@ -305,9 +305,9 @@ function setupCompetitionPage() {
                        
                     </tr>
                 `);
-             });
-             $('#competitionData').append(listArr.join(''));
-             // generate data for the graph
+            });
+            $('#competitionData').append(listArr.join(''));
+            // generate data for the graph
             //drawBusinessChartWithData(response.data[1]);
             // getAllBusinessReportWithData(response.data[2])
 
@@ -319,36 +319,58 @@ function setupCompetitionPage() {
 
 function isRcBtnVisible() {
     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
-    if(userData.post.toLowerCase() == 'zbm')
-     {
-         $('#hrfRateContract').removeClass('hide');
-     }
+    if (userData.post.toLowerCase() == 'zbm') {
+        $('#hrfRateContract').removeClass('hide');
+    }
 }
 
 /** COMPETITION LISTING */
 function approveListingCompetition() {
-    
-   //ƒconsole.log('approve selected Listing');
-   let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
 
-   var endPoints = $(".chkbox:checked").map(function () {
+    //ƒconsole.log('approve selected Listing');
+    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
+
+    var endPoints = $(".chkbox:checked").map(function () {
         let month, year, customerId, arr;
-            arr = $(this).val().split('_')
-       return {
+        arr = $(this).val().split('_')
+        return {
 
-           //centerId: parseInt($(this).val()),
-           hospitalId: parseInt(arr[0]),
-           rbmId: parseInt(userData.empId),
-           month: parseInt(arr[1]),
-           year: parseInt(arr[2])
-       };
-   }).get();
-   Promise.all(endPoints.map((endpoint) => axios.post('/center-competition-approved/', endpoint))).then(
-       axios.spread((...allData) => {
-           //console.log({ allData });
-           alert('Approved Sucessfully')
-           //  redirect('/hospitals');
-       })
-   );
-   return false;  
+            //centerId: parseInt($(this).val()),
+            hospitalId: parseInt(arr[0]),
+            rbmId: parseInt(userData.empId),
+            month: parseInt(arr[1]),
+            year: parseInt(arr[2])
+        };
+    }).get();
+    Promise.all(endPoints.map((endpoint) => axios.post('/center-competition-approved/', endpoint))).then(
+        axios.spread((...allData) => {
+            //console.log({ allData });
+            alert('Approved Sucessfully')
+            //  redirect('/hospitals');
+        })
+    );
+    return false;
+}
+
+
+function approveListingRC() {
+    //ƒconsole.log('approve selected Listing');
+    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
+
+    var endPoints = $(".chkbox:checked").map(function () {
+        let arr;
+        arr = $(this).val().split('_')
+        return {
+            accountID: parseInt(arr[1]),
+            zbmId: parseInt(userData.empId),
+        };
+    }).get();
+    Promise.all(endPoints.map((endpoint) => axios.post('/center-rate-contract-approved', endpoint))).then(
+        axios.spread((...allData) => {
+            //console.log({ allData });
+            alert('Approved Sucessfully')
+            //  redirect('/hospitals');
+        })
+    );
+    return false;
 }

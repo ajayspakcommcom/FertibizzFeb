@@ -21,7 +21,7 @@ function getKamList() {
 
         list.forEach((data) => {
             //console.log(data);
-            let hyperLink = (data.designation === 'RBM') ? 'Account Mapping Data' : `<a href="../account-mapping/${data.empID}">Account Mapping Data</a>`;
+            let hyperLink = (data.designation === 'RBM') ? `<a href="../account-mapping/${data.empID}/rate-contract-list">RC Details</a>` : `<a href="../account-mapping/${data.empID}">Account Mapping Data</a>`;
            // console.log(hyperLink)
             indx = indx + 1;
             listArr.push(
