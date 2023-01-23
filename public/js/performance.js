@@ -1,13 +1,23 @@
 
+let urlArr = window.location.href.split('/'),
+centerId = urlArr[urlArr.length - 1],
+date = new Date(),
+dt = new Date(date.getFullYear(), date.getMonth() - 1, 1);
+
 function pageSetUp() {
-    getPerformanceData();
+    //getPerformanceData();
+    loadMonthYear();
+    getPerformanceData1();
 }
 
-function getPerformanceData() {
-    console.log('ready')
-    let urlArr = window.location.href.split('/'),
-    centerId = urlArr[urlArr.length - 1];
-    console.log(centerId);
+function loadMonthYear() {
+    $('#cmbMonth').val(dt.getMonth() + 1); // our combo box starts with 1
+    $('#cmbYear').val(dt.getFullYear());
+    $('#cmbMonth').prop('disabled', true);
+    $('#cmbYear').prop('disabled', true);
+}
+
+function getPerformanceData() {    
     axios
         .get('/view-performanceData/' + centerId).then((response) => {
             console.log(response.data);
@@ -49,6 +59,17 @@ function getPerformanceData() {
 
             $('#potentialData').append(listArr.join(''));
 
+        }).catch((err) => {
+            console.log(err);
+    });
+}
+
+function getPerformanceData1() {    
+    axios
+        .get(`/view-performanceData/${centerId}/${dt.getMonth() + 1}/${dt.getFullYear()}`).then((response) => {
+            //console.log(response.data);      
+            printCenterDetail(response.data[0][0]);      
+            console.log(response.data[0]);      
         }).catch((err) => {
             console.log(err);
     });

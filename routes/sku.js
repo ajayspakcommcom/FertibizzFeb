@@ -18,5 +18,4 @@ router.get('/sku-details/:skuId', controller.getSKUDetailsById);
 
 router.post('/sku-edit/:skuId', controller.addUpdateSku);
 
-
 module.exports = router;

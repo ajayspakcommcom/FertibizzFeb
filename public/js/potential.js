@@ -9,8 +9,6 @@ function loadMonthYear() {
   }
 
   loadMonthYear();
-  
-
 
 function validateMe() {
 

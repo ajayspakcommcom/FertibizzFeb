@@ -33,8 +33,6 @@ function cmbValues() {
     
 }
 
-
-
 function getMasterData() {
     axios
         .get('/sku/master-data/').then((response) => {

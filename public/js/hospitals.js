@@ -386,9 +386,6 @@ function getMyHospitalList() {
             lists.forEach(list => {
                 listArr.push(
                     `
-                  
-
-
                 <tr>
                 <td>${camelCaseText(list.accountName)}</td>
                 <td>${camelCaseText(list.CENTRENAME)}</td>
