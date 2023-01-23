@@ -228,7 +228,7 @@ function setupRateContractPage() {
             lists.forEach(list => {
                 listArr.push(
                     ` <tr>
-                <td><input type="checkbox" class="chkbox" value="${list.customerId}_${list.aid}" id="${list.customerId}" ${list.RateContractStatus === 'Approved' ? 'checked' : ''}></td>
+                <td><input type="checkbox" class="chkbox" title="${list.RateContractStatus}" value="${list.customerId}_${list.aid}" id="${list.customerId}" ${list.RateContractStatus === 'Approved' ? 'checked' : ''}></td>
                 <td>${formatText(list.accountName)}</td>
                 <td>${formatText(list.CENTRENAME)}</td>
                 <td>${formatText(list.DoctorName)}</td>
@@ -354,6 +354,7 @@ function approveListingCompetition() {
 
 
 function approveListingRC() {
+    
     //ƒconsole.log('approve selected Listing');
     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
 
@@ -361,8 +362,8 @@ function approveListingRC() {
         let arr;
         arr = $(this).val().split('_')
         return {
-            accountID: parseInt(arr[1]),
-            zbmId: parseInt(userData.empId),
+            CATID: parseInt(arr[1]),
+            ZbmId: parseInt(userData.empId),
         };
     }).get();
     Promise.all(endPoints.map((endpoint) => axios.post('/center-rate-contract-approved', endpoint))).then(

@@ -243,7 +243,7 @@ exports.approveCenteRateContractByCATId = (req, res, next) => {
     })
 };
 
-function approveCenteRateContractByCATId(objParam) {
+function approveCenteRateContractByCATId(objParam) {    
     console.log('--------------------------------')
     console.log(objParam)
     console.log('--------------------------------')
@@ -255,8 +255,8 @@ function approveCenteRateContractByCATId(objParam) {
             .then(function () {
                 var request = new sql.Request(dbConn);
                 request
-                    .input("CATID", sql.Int, parseInt(objParam.accountID))
-                    .input("ZbmId", sql.Int, objParam.zbmId)
+                    .input("CATID", sql.Int, parseInt(objParam.CATID))
+                    .input("ZbmId", sql.Int, objParam.ZbmId)
                     .execute("USP_APPROVE_CUSTOMER_RATE_CONTRACT_BY_CATID")
                     .then(function (resp) {
                         //console.log(resp.recordset)
