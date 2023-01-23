@@ -104,6 +104,7 @@ function createRC1(filename, req) {
                 var request = new sql.Request(dbConn);
                 request
                     .input("contractDoc", sql.NVarChar, filename)
+                    .input("startDate", sql.Date, req.body.expiryDate)
                     .input("expiryDate", sql.Date, req.body.expiryDate)
                     .input("CustomerAccountId", sql.Int, queryObject.customerAccountId)
                     .input("rbmId", sql.Int, req.body.hidRbmId)
