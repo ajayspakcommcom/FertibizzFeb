@@ -67,9 +67,53 @@ function getPerformanceData() {
 function getPerformanceData1() {    
     axios
         .get(`/view-performanceData/${centerId}/${dt.getMonth() + 1}/${dt.getFullYear()}`).then((response) => {
-            //console.log(response.data);      
+            
+            console.log(response.data[2]); 
+
+            let demo = response.data[2];
+
+            
+            
+
+            
             printCenterDetail(response.data[0][0]);      
-            console.log(response.data[0]);      
+            
+            let centreData = response.data[0],  
+                potentialData = response.data[1]          
+            listArr = [];
+
+            centreData.forEach(data => {
+                listArr.push(
+                        `<tr>
+                            <td>${data.CENTRENAME}</td>
+                            <td>${data.doctorName}</td>
+                            <td>${data.SpecialtyName}</td>
+                        </tr>
+                    `)
+                });
+
+                $('#customerList').append(listArr.join(''));
+
+                listArr = [];
+
+                potentialData.forEach(data => {
+                    listArr.push(
+                            `<tr>
+                                <td>${data.IUICycle}</td>
+                                <td>${data.IVFCycle}</td>
+                                <td>${data.FreshPickUps}</td>
+                                <td>${data.frozenTransfers}</td>
+                                <td>${data.SelftCycle}</td>
+                                <td>${data.DonorCycles}</td>
+                                <td>${data.AgonistCycles}</td>
+                                <td>${data.Antagonistcycles}</td>
+                            </tr>
+                        `)
+                    });
+    
+                $('#potentialList').append(listArr.join(''));
+
+
         }).catch((err) => {
             console.log(err);
     });

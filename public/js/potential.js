@@ -179,8 +179,8 @@ function getPotentialsDetails() {
                 //$('#cmbMonth').val(month)
                 getFirstDayPreviousMonth();
                 getFieldData();
-                isLoaderVisible(false);
             }
+            isLoaderVisible(false);
 
         }).catch((err) => {
             console.log(err);

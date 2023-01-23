@@ -8867,3 +8867,9 @@ input[type=file] {
 .adminLink .dropdown-menu::after {
   display: none;
 }
+
+.view-profile-wrapper h2 {
+  margin: 0 0 10px 0;
+  font-size: 17px;
+  font-family: 'Bold';
+}
