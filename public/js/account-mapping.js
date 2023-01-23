@@ -228,7 +228,7 @@ function setupRateContractPage() {
             lists.forEach(list => {
                 listArr.push(
                     ` <tr>
-                <td><input type="checkbox" class="chkbox" title="${list.RateContractStatus}" value="${list.customerId}_${list.aid}" id="${list.customerId}" ${list.RateContractStatus === 'Approved' ? 'checked' : ''}></td>
+                <td><input type="checkbox" class="chkbox" title="${list.RateContractStatus}" value="${list.customerId}_${list.CatAccountId}" id="${list.customerId}" ${list.RateContractStatus === 'Approved' ? 'checked' : ''}></td>
                 <td>${formatText(list.accountName)}</td>
                 <td>${formatText(list.CENTRENAME)}</td>
                 <td>${formatText(list.DoctorName)}</td>
