@@ -366,6 +366,8 @@ function ApproveDataSingleWay() {
     for (let i = 0; i <= arrIdList.length - 1; i++) {
         approveCenterMasterData(arrIdList[i]);
     }
+
+    alert('Approved Successfully');
 }
 
 

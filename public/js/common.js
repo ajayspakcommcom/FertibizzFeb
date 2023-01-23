@@ -2,8 +2,8 @@ const _SUCCESSFUL_STATUS_CODE = 200;
 const _INVAID_SESSION = 202
 const _FAILURE_STATUS_CODE = 201
 //const _ROOT = 'http://ivf1.spak.agency'; 
-const _ROOT = 'http://localhost:3333';
-//const _ROOT = 'http://firtibiz-env.eba-m3syxjvp.ap-south-1.elasticbeanstalk.com';
+//const _ROOT = 'http://localhost:3333';
+const _ROOT = 'http://firtibiz-env.eba-m3syxjvp.ap-south-1.elasticbeanstalk.com';
 const _SKU_BRANDS = ['FOLIGRAF', 'HUMOG', 'ASPORELIX', 'R-HUCOG', 'FOLICULIN', 'AGOTRIG', 'MIDYDROGESTERONE'];
 
 
