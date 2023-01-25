@@ -224,6 +224,7 @@ function getPrevMonth() {
   return monthNames[date.getMonth() - 1];
 }
 
+showDrNameCentreName();
 
 
 //showCheckBoxApproveBtn();
