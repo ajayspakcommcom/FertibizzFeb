@@ -7708,7 +7708,7 @@ label {
   border-radius: 20px !important;
   -moz-border-radius: 20px !important;
   -webkit-border-radius: 20px !important;
-  box-shadow: 1px 1px 5px rgb(128 128 128 / 50%) !important;
+  /* box-shadow: 1px 1px 5px rgb(128 128 128 / 50%) !important; */
   border: 0 !important;
   font-family: 'semibold';
   display: inline-block;
@@ -8219,7 +8219,7 @@ ul.inline {
 }
 
 .panel-heading.done {
-  background-image: linear-gradient(to right, #6d3594 10%, #fab92c 90%) !important; 
+  background-image: linear-gradient(to right, #6d3594 10%, #89c541 90%) !important; 
   background: #5cb85c;
   color: #fff;
 }

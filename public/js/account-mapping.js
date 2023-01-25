@@ -283,6 +283,9 @@ showApprovalOnZBMLevel();
 
 
 function setupCompetitionPage() {
+
+    isLoaderVisible(true);
+
     let urlArr = window.location.href.split('/'),
         empId = urlArr[urlArr.length - 2],
         param = {
@@ -311,7 +314,7 @@ function setupCompetitionPage() {
             //drawBusinessChartWithData(response.data[1]);
             // getAllBusinessReportWithData(response.data[2])
 
-
+            isLoaderVisible(false);
         }).catch((err) => {
             console.log(err);
         });

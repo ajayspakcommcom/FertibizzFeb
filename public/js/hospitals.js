@@ -1,5 +1,5 @@
 function getCustomerList() {
-
+    isLoaderVisible(true);
     let myKamId = parseInt(getIdFromURL()),
         userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
         param = {
@@ -37,8 +37,9 @@ function getCustomerList() {
 
     axios
         .post(_URL._CUSTOMER_LIST, param).then((response) => {
-            console.log(response.data)
+            console.log(response.data);
             populateDataTable(response.data);
+            isLoaderVisible(false);
         }).catch((err) => {
             console.log(err);
         });
@@ -67,7 +68,7 @@ function populateDataTable(data) {
                 isEmployeeCenterList(item)
             ]);
         });
-        isLoaderVisible(false);
+        //isLoaderVisible(false);
     }
 }
 
