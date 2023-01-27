@@ -65,8 +65,9 @@ async function getSkuDetails() {
 
             html.push(`   <div class="panel panel-default">
         <div class="panel-heading">
-            <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#${skuBrand.toLowerCase().replace(/\s/g, '')}">${formatText(skuBrand, 'FirstLetterUPPER')}</a>                
+            <h4 class="panel-title businessTotalHeading">
+                <a data-toggle="collapse" data-parent="#accordion" href="#${skuBrand.toLowerCase().replace(/\s/g, '')}">${formatText(skuBrand, 'FirstLetterUPPER')}</a>   
+                <span class="totalBrand"></span>             
             </h4>
         </div>
         <div id="${skuBrand.toLowerCase().replace(/\s/g, '')}" class="panel-collapse collapse">
@@ -94,7 +95,7 @@ async function getSkuDetails() {
 function getBrandGroupDetails(skuBrandGroups, contractResponse, businessTrackRes) {
     let html = []
     _brandGroupArr = [];
-    console.log(skuBrandGroups);
+    //console.log(skuBrandGroups);
     skuBrandGroups.forEach(brandGroup => {
         if (!_brandGroupArr.includes(brandGroup.groupName)) {
             html.push(`<h5><strong>${brandGroup.groupName}</strong></h5>
@@ -173,9 +174,9 @@ function getSKUHtml(skuBrandGroups, brandGroup, contractResponse, businessTrackR
                 </td>
                 <td>
                 <div class="form-group">
-                    <input type="text" disabled=true  class="form-control disabled" 
+                    <input type="text" disabled=true  class="form-control disabled calculatedBus" 
                         id="txt_${fieldName}_unitSoldBusiness" 
-                        name="txt_${fieldName}_unitSoldBusiness">
+                        name="txt_${fieldName}_unitSoldBusiness" value="">
                 </div>
                 </td>
             </tr>`);
@@ -187,10 +188,10 @@ function getSKUHtml(skuBrandGroups, brandGroup, contractResponse, businessTrackR
 }
 
 function confirmBrandEntry(checkbox) {
-    console.log(checkbox.id)
+    //console.log(checkbox.id)
     let panelId = checkbox.id.toLowerCase().substring(11),
         msg = $('#' + checkbox.id).is(":checked") ? closePanel(panelId) : 'dont do anything';
-    console.log(msg);
+    //console.log(msg);
     //console.log(panelId);
 }
 
@@ -200,13 +201,11 @@ function closePanel(id) {
 }
 
 function showBusinessBrandWiseTotal(obj) {
-    let total = 0;
-    let elemArr = [];
-    for(let item of $(obj).parents('.form-section').find('table')) {        
-        console.log($(item).find('tbody > tr > td:last-child')); //.find('div').find('input').val());        
-        elemArr.push(item);
+    let total = 0, calculatedInput = $(obj).parents('.form-section').find('.calculatedBus');
+    for(let item of calculatedInput) {        
+        total += parseFloat(item.value);
     }
-    console.log(elemArr);
+    console.log($(obj).parents('.panel').find('.businessTotalHeading .totalBrand').text(total));
 }
 
 function calculateBusiness(obj) {
@@ -220,7 +219,12 @@ function calculateBusiness(obj) {
     $('#' + unitSoldBusinessfield).val(roundOffPrice);
     
     calculateTotal();
+    calculateBusinessTotal(obj);
     // console.log(priceField, rateContractField, unitPrice)    
+}
+
+function calculateBusinessTotal(fieldId){
+    console.log(fieldId)
 }
 
 function calculateTotal() {
@@ -231,7 +235,9 @@ function calculateTotal() {
         //businessValue = $('#' + unitSoldBusinessfield).val().length > 0 ? parseFloat($('#' + unitSoldBusinessfield).val()) : 0;
         businessValue = $('#' + unitSoldBusinessfield).val() !== undefined ? $('#' + unitSoldBusinessfield).val().length > 0 ? parseFloat($('#' + unitSoldBusinessfield).val()) : 0 : '';
         totalBusiness = parseFloat(totalBusiness + businessValue);
-    })
+    });
+    
+
     //console.log(totalBusiness);
     //$('#spnTotalBusinessValue').text(intToString(totalBusiness));
     $('#spnTotalBusinessValue').text(totalBusiness);
@@ -251,7 +257,7 @@ function validateMe() {
 
     isBtnLoaderVisible(true);
 
-    console.log('save into database')
+    //console.log('save into database')
 
     if ($('#cmbMonth').val() === "") {
         alert('Month field is empty');
@@ -305,7 +311,7 @@ function validateMe() {
                 qty: unitSold,
                 isContractApplicable: isContractApplicableBool
             }
-            console.log(param)
+            //console.log(param)
             endPoints.push(param);
             // axios
             // .post('/sku-add/', param).then((response) => {
@@ -322,11 +328,11 @@ function validateMe() {
         }
 
     })
-    console.log(endPoints)
+    //console.log(endPoints)
     // Return our response in the allData variable as an array
     Promise.all(endPoints.map((endpoint) => axios.post('/sku-add/', endpoint))).then(
         axios.spread((...allData) => {
-            console.log({ allData });
+            //console.log({ allData });
             isBtnLoaderVisible(false);
             redirect('/hospitals');
         })
@@ -339,7 +345,7 @@ $(".disabled").attr("disabled", true);
 
 function setRate() {
     let checkBox = document.getElementById('chkIsContractRateApplicable');
-    console.log(checkBox.checked);
+    //console.log(checkBox.checked);
     if (checkBox.checked) {
         $('.business-rate').attr("disabled", false);
     } else {
@@ -349,7 +355,7 @@ function setRate() {
 
 
 function approveBusinessTracker() {
-    console.log('approved me Clicked business');
+    //console.log('approved me Clicked business');
   
     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
         param = {
@@ -364,7 +370,7 @@ function approveBusinessTracker() {
             //   console.log(response.data[0])
             if (response.data.length > 0) {
                 let res = response.data[0];
-                console.log(res);
+                //console.log(res);
                 if (res.success === 'true') {
                     redirect(`/account-mapping/${getQueryStringValue('kamId')}`);
                     // @TODO: THIS NEED TO CHANGE
@@ -379,7 +385,7 @@ function approveBusinessTracker() {
 
 function showCheckBoxApproveBtn() {
     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
-    console.log(userData);
+    //console.log(userData);
 
     if(userData.post.toLowerCase() == 'kam') {
         $('.hideApproveChk').hide();
