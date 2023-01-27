@@ -82,6 +82,7 @@ function setupPotentialPage() {
                 listArr.push(
                     `<tr>
                         <td><input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.potentialId}'  id=${list.potentialId} /></td>
+                        <td>${(list.accountName) ? camelCaseText(list.accountName) : ''}</td>
                         <td>${camelCaseText(list.CENTRENAME)}</td>
                         <td>${camelCaseText(list.DoctorName)}</td>
                         <td align='right'>${list.IUICycle}</td>
@@ -161,10 +162,11 @@ function setupBusinessPage() {
             console.log(response.data[0])
             let lists = response.data[0],
                 listArr = [];
-            lists.forEach(list => {
+            lists.forEach(list => {                
                 listArr.push(
                     `<tr>
                         <td><input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.hospitalId}'  id=${list.hospitalId} /></td>
+                        <td>${(list.accountName) ? camelCaseText(list.accountName) : ''}</td>
                         <td>${camelCaseText(list.CENTRENAME)}</td>
                         <td>${camelCaseText(list.DoctorName)}</td>
                         <td align='right'>${list.brandGroup1}</td>
@@ -301,6 +303,7 @@ function setupCompetitionPage() {
                 listArr.push(
                     `<tr>
                         <td><input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.centerId}_${list.month}_${list.year}'  id=${list.centerId} /></td>
+                        <td>${(list.accountName) ? camelCaseText(list.accountName) : ''}</td>
                         <td>${camelCaseText(list.CENTRENAME)}</td>
                         <td>${camelCaseText(list.DoctorName)}</td>
                         <td><a href='/add-competition?cid=${list.centerId}&kamid=${empId}'>View Details</a>
