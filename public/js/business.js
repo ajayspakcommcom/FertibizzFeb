@@ -18,7 +18,7 @@ async function getSkuDetails() {
 
     isLoaderVisible(true);
 
-    let skuBrands = ['FOLIGRAF', 'HUMOG', 'ASPORELIX', 'R-HUCOG', 'FOLICULIN', 'AGOTRIG', 'MIDYDROGESTERONE'],
+    let skuBrands = ['FOLIGRAF', 'HUMOG', 'ASPORELIX', 'R-HUCOG', 'FOLICULIN', 'AGOTRIG', 'MIDYDROGEN'],
         hospitalId = new URLSearchParams(window.location.search).get('cid'),
         chainAccountTypeId = new URLSearchParams(window.location.search).get('chainAccountType'),
         userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
@@ -54,7 +54,9 @@ async function getSkuDetails() {
         isContractApplicableBool = true;  //(contractRes[0].RateType === 'contract Rate');
 
         //  console.log(isContractApplicableBool) ;
-        //  console.log(contractRes)   ;
+        //  console.log(contractRes);
+
+     //   console.log(_SKU_BRANDS);
 
         _SKU_BRANDS.forEach(skuBrand => {
             var skuBrandArr = skus.filter(item => {
@@ -92,6 +94,7 @@ async function getSkuDetails() {
 function getBrandGroupDetails(skuBrandGroups, contractResponse, businessTrackRes) {
     let html = []
     _brandGroupArr = [];
+    console.log(skuBrandGroups);
     skuBrandGroups.forEach(brandGroup => {
         if (!_brandGroupArr.includes(brandGroup.groupName)) {
             html.push(`<h5><strong>${brandGroup.groupName}</strong></h5>
@@ -165,7 +168,7 @@ function getSKUHtml(skuBrandGroups, brandGroup, contractResponse, businessTrackR
                         priceField = 'hid_${fieldName}_Price'
                         rateContractField = 'txt_${fieldName}_ContractRate'
                         unitSoldBusinessfield = 'txt_${fieldName}_unitSoldBusiness'
-                        required="" onblur="calculateBusiness(this);" onchange="calculateBusiness(this);" onfocus="addPrevValueOnFocus(this)" onfocusout="addPrevValueOnFocusOut(this)" value='${qty}'>
+                        required="" onblur="calculateBusiness(this);" onchange="calculateBusiness(this); showBusinessBrandWiseTotal(this);" onfocus="addPrevValueOnFocus(this)" onfocusout="addPrevValueOnFocusOut(this)" value='${qty}'>
                 </div>
                 </td>
                 <td>
@@ -196,9 +199,17 @@ function closePanel(id) {
    $(`#${id}`).parent('.panel').find('.panel-heading').addClass('done');
 }
 
+function showBusinessBrandWiseTotal(obj) {
+    let total = 0;
+    let elemArr = [];
+    for(let item of $(obj).parents('.form-section').find('table')) {        
+        console.log($(item).find('tbody > tr > td:last-child')); //.find('div').find('input').val());        
+        elemArr.push(item);
+    }
+    console.log(elemArr);
+}
 
 function calculateBusiness(obj) {
-    // console.log(obj)
     let priceField = obj.getAttribute('priceField'),
         rateContractField = obj.getAttribute('rateContractField'),
         unitSoldBusinessfield = obj.getAttribute('unitSoldBusinessfield')
@@ -207,9 +218,9 @@ function calculateBusiness(obj) {
         roundOffPrice = Math.round(($('#' + obj.id).val() * finalPrice) * 100) / 100;
 
     $('#' + unitSoldBusinessfield).val(roundOffPrice);
-
+    
     calculateTotal();
-    // console.log(priceField, rateContractField, unitPrice)
+    // console.log(priceField, rateContractField, unitPrice)    
 }
 
 function calculateTotal() {
@@ -217,8 +228,9 @@ function calculateTotal() {
         totalBusiness = 0;
     skus.forEach(sku => {
         let unitSoldBusinessfield = `txt_${sku.brandId}_${sku.brandGroupId}_${sku.medid}_unitSoldBusiness`,
-            businessValue = $('#' + unitSoldBusinessfield).val().length > 0 ? parseFloat($('#' + unitSoldBusinessfield).val()) : 0;
-        totalBusiness = parseFloat(totalBusiness + businessValue)
+        //businessValue = $('#' + unitSoldBusinessfield).val().length > 0 ? parseFloat($('#' + unitSoldBusinessfield).val()) : 0;
+        businessValue = $('#' + unitSoldBusinessfield).val() !== undefined ? $('#' + unitSoldBusinessfield).val().length > 0 ? parseFloat($('#' + unitSoldBusinessfield).val()) : 0 : '';
+        totalBusiness = parseFloat(totalBusiness + businessValue);
     })
     //console.log(totalBusiness);
     //$('#spnTotalBusinessValue').text(intToString(totalBusiness));

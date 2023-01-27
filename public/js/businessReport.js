@@ -46,7 +46,7 @@ async function drawBusinessChart() {
 
 async function getAllBusinessReport() {
     let param = {};
-    let brandsArr = ['FOLIGRAF', 'HUMOG', 'ASPORELIX', 'R-HUCOG', 'FOLICULIN', 'AGOTRIG', 'MIDYDROGESTERONE'];
+    let brandsArr = ['FOLIGRAF', 'HUMOG', 'ASPORELIX', 'R-HUCOG', 'FOLICULIN', 'AGOTRIG', 'MIDYDROGEN'];
     const businessReport = axios.post("/report/allbusinessReports", param);
     await axios.all([businessReport]).then(axios.spread(function (res1) {
         // console.log(res1.data);
@@ -101,7 +101,7 @@ async function getAllBusinessReport() {
 function drawBusinessChartWithData(businessTrackerData) {
    
     let reportDataItems = businessTrackerData,
-        brandsArr = ['FOLIGRAF', 'HUMOG', 'ASPORELIX', 'R-HUCOG', 'FOLICULIN', 'AGOTRIG', 'MIDYDROGESTERONE'],
+        brandsArr = ['FOLIGRAF', 'HUMOG', 'ASPORELIX', 'R-HUCOG', 'FOLICULIN', 'AGOTRIG', 'MIDYDROGEN'],
         reaportData = [];
         
     let data = new google.visualization.DataTable();
@@ -162,7 +162,7 @@ function drawBusinessChartWithData(businessTrackerData) {
 
 
 function getAllBusinessReportWithData(data) {
-    let brandsArr = ['FOLIGRAF', 'HUMOG', 'ASPORELIX', 'R-HUCOG', 'FOLICULIN', 'AGOTRIG', 'MIDYDROGESTERONE'],
+    let brandsArr = ['FOLIGRAF', 'HUMOG', 'ASPORELIX', 'R-HUCOG', 'FOLICULIN', 'AGOTRIG', 'MIDYDROGEN'],
         reportDataItems = data;
     
     brandsArr.forEach(brand => {

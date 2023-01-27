@@ -8199,6 +8199,7 @@ ul.inline {
 .month-year-dropdown {
   display: grid;
   grid-template-columns: auto auto;
+  width: 170px;
 }
 
 .month-year-dropdown .form-group {
