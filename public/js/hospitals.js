@@ -41,10 +41,7 @@ function getCustomerList() {
                 if(document.getElementById('customerApproved')) {
                     document.getElementById('customerApproved').classList.add('hide');
                 }
-
-                $('#customerList').addClass('hide-is-approved');
-                
-
+                $('#customerList').addClass('hide-is-approved-rbm-zbm');                
             }, 4000);
         }
 
@@ -75,7 +72,7 @@ function populateDataTable(data) {
                 item.specialtyType,
                 item.mobile,
                 item.email,
-                `${item.Address1} ${item.Address2} <br> ${item.City}, ${item.stateName} <br>${item.PinCode}`,
+                `${item.Address1} ${item.Address2} <br> ${item.City}, ${item.stateName} <br> ${item.PinCode}`,
                 item.ChemistMapped,
                 item.ChainStatusName,
                 isEmployeeCenterList(item)
