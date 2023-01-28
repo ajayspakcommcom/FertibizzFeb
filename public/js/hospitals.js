@@ -33,11 +33,24 @@ function getCustomerList() {
                 }
 
             }, 1000);
+        } 
+
+        if(userData.post.toString().toLowerCase() == 'rbm' || userData.post.toString().toLowerCase() == 'zbm') { 
+            setTimeout(() => {
+
+                if(document.getElementById('customerApproved')) {
+                    document.getElementById('customerApproved').classList.add('hide');
+                }
+
+                $('#customerList').addClass('hide-is-approved');
+                
+
+            }, 4000);
         }
 
     axios
         .post(_URL._CUSTOMER_LIST, param).then((response) => {
-            console.log(response.data);
+            console.log('Customer Data', response.data);            
             populateDataTable(response.data);
             isLoaderVisible(false);
         }).catch((err) => {

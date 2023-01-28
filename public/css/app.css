@@ -8893,3 +8893,11 @@ input[type=file] {
   display: -webkit-flex;
   justify-content: space-between;
 }
+
+.hide-is-approved thead tr th:first-child, .hide-is-approved tbody tr td:first-child {
+  display: none;
+}
+
+#potentialData a, #competitionData a, #centerList a, #kamData a {
+  text-decoration: underline;
+}
