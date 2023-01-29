@@ -48,18 +48,7 @@ async function getSkuDetails() {
     competitorSkus = skuResponse.data;
     let competitionRes = competitionResponse.data,
       html = [],
-      apr = 0,
-      may = 0,
-      jun = 0,
-      jul = 0,
-      aug = 0,
-      sep = 0,
-      oct = 0,
-      nov = 0,
-      dec = 0,
-      jan = 0,
-      feb = 0,
-      mar = 0,
+     
       quarter1 = [], quarter2 = [], quarter3 = [], quarter4 = [];
     // console.log(competitorSkus)   ;
     // console.log(contractRes)   ;
@@ -69,10 +58,13 @@ async function getSkuDetails() {
         return competitor.CompetitionSkuId === skuBrand.competitorId
       });
       //  console.log(filterRec);
-      let businessValue = 0;
+      let businessValue = 0,
+          commentsValue = '';
       if (filterRec.length > 0) {
         businessValue = !isNaN((filterRec[0].businessValue)) ? parseFloat(filterRec[0].businessValue) : 0;
+        commentsValue = filterRec[0].comments ? filterRec[0].comments : '';
       }
+      let commentBox = skuBrand.name.indexOf('Other') > 0 ? `<textarea name="comments_${skuBrand.brandId}_${skuBrand.competitorId}" id="comments_${skuBrand.brandId}_${skuBrand.competitorId}">${commentsValue}</textarea>`: ''
 
       html.push(` 
             <tr>
@@ -85,6 +77,9 @@ async function getSkuDetails() {
                 <input maxlength=7" type="text" onkeypress="return isNumber(this, event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_Value" required="" value="${businessValue}" title="apr" />
               </div>
             </td>
+            <td>
+                ${commentBox}
+          </td>
           </tr>`);
     });
     $('#competitorDataTable').append(html.join(''));
@@ -97,7 +92,7 @@ function validateMe() {
 
   isBtnLoaderVisible(true);
 
-  console.log('save into database');
+  
   let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
     centerId = new URLSearchParams(window.location.search).get('cid'),
     empId = parseInt(userData.empId),
@@ -106,7 +101,9 @@ function validateMe() {
     endPoints = [];
   competitorSkus.forEach(skuBrand => {
     //console.log(skuBrand)
-    value = parseFloat($(`#txt_${skuBrand.brandId}_${skuBrand.competitorId}_Value`).val());
+    let 
+        value = parseFloat($(`#txt_${skuBrand.brandId}_${skuBrand.competitorId}_Value`).val()),
+        comments = $(`#comments_${skuBrand.brandId}_${skuBrand.competitorId}`) ? $(`#comments_${skuBrand.brandId}_${skuBrand.competitorId}`).val(): '';
 
 
     if (value > 0) {
@@ -118,16 +115,17 @@ function validateMe() {
         year: $('#cmbYear').val(),
         month: $('#cmbMonth').val(),
         skuId: parseInt(`${skuBrand.competitorId}`),
+        comments: comments
 
       }
-      //console.log(param)
+    //  console.log(param)
       endPoints.push(param);
     }
 
-  })
+  });
   Promise.all(endPoints.map((endpoint) => axios.post('/competitor-sku-add/', endpoint))).then(
     axios.spread((...allData) => {
-      console.log({ allData });
+     // console.log({ allData });
       redirect('/hospitals');
       isBtnLoaderVisible(false);
     })
@@ -162,7 +160,7 @@ function isNumber(txt, evt) {
 }
 
 function approveMe() {
-  console.log('approved me Clicked competition');
+  //console.log('approved me Clicked competition');
   let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
     param = {
       hospitalId: new URLSearchParams(window.location.search).get('cid'),
@@ -193,16 +191,16 @@ function approveMe() {
 
 function showCheckBoxApproveBtn() {
   let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
-  console.log(userData);
+  //console.log(userData);
 
   if (userData.post.toLowerCase() == 'kam') {
-    console.log('ram');
+    //console.log('ram');
     $('.hideApproveChk').hide();
     $('#btnApprove').hide();
   }
 
   else if (userData.post.toLowerCase() == 'rbm') {
-    console.log('rbm');
+    //console.log('rbm');
     $('#resetBtn').hide();
     $('#saveBtn').hide();
     $('.two-btn-wrapper').addClass('right');

@@ -207,15 +207,15 @@ function showElementByDesignation() {
     if (userData != null) { 
         switch (userData.post.toLowerCase()) {
             case 'kam':
-                    console.log('Kam Level');
+                  //  console.log('Kam Level');
                 break;
             case 'rbm':
                 $('.addNewCustomer').hide();
-                console.log('Rbm Level');                
+                //console.log('Rbm Level');                
                 break;
             case 'zbm':
                 $('.addNewCustomer').hide();
-                console.log('zbm Level');      
+                //console.log('zbm Level');      
                 break;
             case 'admin':
                 console.log('Admin Level');      

@@ -87,6 +87,7 @@ function addUpdateCompetitionSkus(objParam) {
                     .input("month", sql.Int, parseInt(objParam.month))
                     .input("year", sql.Int, parseInt(objParam.year))
                     .input("value", sql.Float, parseFloat(objParam.value))
+                    .input("comments", sql.NText, (objParam.comments))
                     .execute("USP_ADD_UPDATE_SKU_COMPETITION")
                     .then(function (resp) {
                         //  console.log(resp.recordset)
