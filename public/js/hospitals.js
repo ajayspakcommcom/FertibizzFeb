@@ -57,10 +57,15 @@ function getCustomerList() {
 
 
 function populateDataTable(data) {
+
+    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
+
     $("#customerList").DataTable().clear();
+    $("#customerList1").DataTable().clear();
     var length = data.length;
     if (length == 0) {
         $("#customerList").DataTable().clear();
+        $("#customerList1").DataTable().clear();
     } else {
         var i = 1;
         data.forEach(item => {
@@ -77,8 +82,20 @@ function populateDataTable(data) {
                 item.ChainStatusName,
                 isEmployeeCenterList(item)
             ]);
-        });
-        //isLoaderVisible(false);
+        }); 
+        
+        
+        data.forEach(item => {
+            $('#customerList1').dataTable().fnAddData([
+                camelCaseText(item.accountName),
+                camelCaseText(item.CENTRENAME),
+                camelCaseText(item.DoctorName),
+                item.specialtyType,
+                item.VisitType,
+                item.City     
+            ]);
+        }); 
+
     }
 }
 
