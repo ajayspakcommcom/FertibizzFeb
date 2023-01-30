@@ -91,7 +91,6 @@ async function getSkuDetails() {
 function validateMe() {
 
   isBtnLoaderVisible(true);
-
   
   let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
     centerId = new URLSearchParams(window.location.search).get('cid'),
@@ -101,12 +100,10 @@ function validateMe() {
     endPoints = [];
   competitorSkus.forEach(skuBrand => {
     //console.log(skuBrand)
-    let 
-        value = parseFloat($(`#txt_${skuBrand.brandId}_${skuBrand.competitorId}_Value`).val()),
+    let value = parseFloat($(`#txt_${skuBrand.brandId}_${skuBrand.competitorId}_Value`).val()),
         comments = $(`#comments_${skuBrand.brandId}_${skuBrand.competitorId}`) ? $(`#comments_${skuBrand.brandId}_${skuBrand.competitorId}`).val(): '';
 
-
-    if (value > 0) {
+    // if (value > 0) {
       let param = {
         value: !isNaN(value) ? value : 0,
         empId: empId,
@@ -116,11 +113,11 @@ function validateMe() {
         month: $('#cmbMonth').val(),
         skuId: parseInt(`${skuBrand.competitorId}`),
         comments: comments
-
       }
     //  console.log(param)
       endPoints.push(param);
-    }
+      console.log(endPoints);
+    // }
 
   });
   Promise.all(endPoints.map((endpoint) => axios.post('/competitor-sku-add/', endpoint))).then(
