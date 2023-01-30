@@ -68,34 +68,38 @@ function populateDataTable(data) {
         $("#customerList1").DataTable().clear();
     } else {
         var i = 1;
-        data.forEach(item => {
-            $('#customerList').dataTable().fnAddData([
-                `<input type="checkbox" ${item.IsApproved === 'Yes' ? `Checked` : ''}>`,
-                camelCaseText(item.accountName),
-                camelCaseText(item.CENTRENAME),
-                camelCaseText(item.DoctorName),
-                item.specialtyType,
-                item.mobile,
-                item.email,
-                `${item.Address1} ${item.Address2} <br> ${item.City}, ${item.stateName} <br> ${item.PinCode}`,
-                item.ChemistMapped,
-                item.ChainStatusName,
-                isEmployeeCenterList(item)
-            ]);
-        }); 
-        
-        
-        data.forEach(item => {
-            $('#customerList1').dataTable().fnAddData([
-                camelCaseText(item.accountName),
-                camelCaseText(item.CENTRENAME),
-                camelCaseText(item.DoctorName),
-                item.specialtyType,
-                item.VisitType,
-                item.City     
-            ]);
-        }); 
 
+
+        if(userData.post.toLowerCase() != 'rbm' || userData.post.toLowerCase() != 'zbm') {
+            data.forEach(item => {
+                $('#customerList').dataTable().fnAddData([
+                    `<input type="checkbox" ${item.IsApproved === 'Yes' ? `Checked` : ''}>`,
+                    camelCaseText(item.accountName),
+                    camelCaseText(item.CENTRENAME),
+                    camelCaseText(item.DoctorName),
+                    item.specialtyType,
+                    item.mobile,
+                    item.email,
+                    `${item.Address1} ${item.Address2} <br> ${item.City}, ${item.stateName} <br> ${item.PinCode}`,
+                    item.ChemistMapped,
+                    item.ChainStatusName,
+                    isEmployeeCenterList(item)
+                ]);
+            }); 
+        }
+
+        if(userData.post.toLowerCase() == 'rbm' || userData.post.toLowerCase() == 'zbm') {
+            data.forEach(item => {
+                $('#customerList1').dataTable().fnAddData([
+                    camelCaseText(item.accountName),
+                    camelCaseText(item.CENTRENAME),
+                    camelCaseText(item.DoctorName),
+                    item.specialtyType,
+                    item.VisitType,
+                    item.City     
+                ]);
+            });
+        } 
     }
 }
 
