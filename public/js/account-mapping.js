@@ -3,11 +3,11 @@ function getKamDetails() {
     let urlArr = window.location.href.split('/'),
         flag = isNaN(urlArr[urlArr.length - 1]),
         empId = flag ? urlArr[urlArr.length - 2] : urlArr[urlArr.length - 1]
-    console.log(flag)
-    console.log(empId)
+    //console.log(flag)
+    //console.log(empId)
     axios
         .get(`/employee-details/${empId}`).then((response) => {
-            console.log(response.data)
+            //console.log(response.data)
             let data = response.data[0];
             $('#kamName').html(formatText(data.firstName))
             isLoaderVisible(false);
@@ -28,7 +28,7 @@ function getMyHospitalList() {
 
     axios
         .post('/hospitals-list/', param).then((response) => {
-            console.log(response.data)
+            //console.log(response.data)
             let lists = response.data,
                 listArr = [];
 
@@ -76,7 +76,7 @@ function setupPotentialPage() {
                 percIVF_FrozenTransfers = 0,
                 percIVF_FreshPickups = 0;
 
-            console.log('Potential Approval List', lists);
+            //console.log('Potential Approval List', lists);
 
             lists.forEach(list => {
                 listArr.push(
@@ -159,7 +159,7 @@ function setupBusinessPage() {
 
     axios
         .post(`/account-mapping/${empId}/business-list`, param).then((response) => {
-            console.log(response.data[0])
+            //console.log(response.data[0])
             let lists = response.data[0],
                 listArr = [];
             lists.forEach(list => {                
@@ -298,15 +298,23 @@ function setupCompetitionPage() {
         .post(`/account-mapping/${empId}/competition-list`, param).then((response) => {
             //console.log(response.data[0])
             let lists = response.data[0],
-                listArr = [];
+                listArr = []
+               ;
+            
             lists.forEach(list => {
+                //console.log(parseInt(list.isApproved));
+                let chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.centerId}_${list.month}_${list.year}'  id=${list.centerId} />` : ''
                 listArr.push(
                     `<tr>
-                        <td><input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.centerId}_${list.month}_${list.year}'  id=${list.centerId} /></td>
+                        <td>
+                        ${chkbox}
+                        </td>
                         <td>${(list.accountName) ? camelCaseText(list.accountName) : ''}</td>
                         <td>${camelCaseText(list.CENTRENAME)}</td>
                         <td>${camelCaseText(list.DoctorName)}</td>
-                        <td><a href='/add-competition?cid=${list.centerId}&kamid=${empId}'>View Details</a>
+                        <td>${camelCaseText(list.statusText)}</td>
+                        <td><a href='/add-competition?cid=${list.centerId}&kamid=${empId}'>View Details</a></td>
+                        <td><a href='/add-competition?cid=${list.centerId}&kamid=${empId}&mode=reject'>Reject</a>
                         </td>
                        
                     </tr>
@@ -345,7 +353,9 @@ function approveListingCompetition() {
             hospitalId: parseInt(arr[0]),
             rbmId: parseInt(userData.empId),
             month: parseInt(arr[1]),
-            year: parseInt(arr[2])
+            year: parseInt(arr[2]),
+            mode: 0,
+            rejectReason: null
         };
     }).get();
     Promise.all(endPoints.map((endpoint) => axios.post('/center-competition-approved/', endpoint))).then(

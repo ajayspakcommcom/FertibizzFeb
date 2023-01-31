@@ -43,12 +43,12 @@ async function getSkuDetails() {
   const getAllSKURequest = axios.get("/competitor-sku-details/");
   const getSkuContractDetailsRequest = axios.get(`/competitor-sku-details/${month}/${year}/${centerId}`);
   await axios.all([getAllSKURequest, getSkuContractDetailsRequest]).then(axios.spread(function (skuResponse, competitionResponse) {
-   // console.log(skuResponse.data);
+    // console.log(skuResponse.data);
     //console.log(contractResponse.data);
     competitorSkus = skuResponse.data;
     let competitionRes = competitionResponse.data,
       html = [],
-     
+
       quarter1 = [], quarter2 = [], quarter3 = [], quarter4 = [];
     // console.log(competitorSkus)   ;
     // console.log(contractRes)   ;
@@ -59,12 +59,12 @@ async function getSkuDetails() {
       });
       //  console.log(filterRec);
       let businessValue = 0,
-          commentsValue = '';
+        commentsValue = '';
       if (filterRec.length > 0) {
         businessValue = !isNaN((filterRec[0].businessValue)) ? parseFloat(filterRec[0].businessValue) : 0;
         commentsValue = filterRec[0].comments ? filterRec[0].comments : '';
       }
-      let commentBox = skuBrand.name.indexOf('Other') > 0 ? `<textarea name="comments_${skuBrand.brandId}_${skuBrand.competitorId}" id="comments_${skuBrand.brandId}_${skuBrand.competitorId}">${commentsValue}</textarea>`: ''
+      let commentBox = skuBrand.name.indexOf('Other') > 0 ? `<textarea name="comments_${skuBrand.brandId}_${skuBrand.competitorId}" id="comments_${skuBrand.brandId}_${skuBrand.competitorId}">${commentsValue}</textarea>` : ''
 
       html.push(` 
             <tr>
@@ -91,7 +91,7 @@ async function getSkuDetails() {
 function validateMe() {
 
   isBtnLoaderVisible(true);
-  
+
   let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
     centerId = new URLSearchParams(window.location.search).get('cid'),
     empId = parseInt(userData.empId),
@@ -101,28 +101,28 @@ function validateMe() {
   competitorSkus.forEach(skuBrand => {
     //console.log(skuBrand)
     let value = parseFloat($(`#txt_${skuBrand.brandId}_${skuBrand.competitorId}_Value`).val()),
-        comments = $(`#comments_${skuBrand.brandId}_${skuBrand.competitorId}`) ? $(`#comments_${skuBrand.brandId}_${skuBrand.competitorId}`).val(): '';
+      comments = $(`#comments_${skuBrand.brandId}_${skuBrand.competitorId}`) ? $(`#comments_${skuBrand.brandId}_${skuBrand.competitorId}`).val() : '';
 
     // if (value > 0) {
-      let param = {
-        value: !isNaN(value) ? value : 0,
-        empId: empId,
-        brandId: parseInt(`${skuBrand.brandId}`),
-        centerId: parseInt(centerId),
-        year: $('#cmbYear').val(),
-        month: $('#cmbMonth').val(),
-        skuId: parseInt(`${skuBrand.competitorId}`),
-        comments: comments
-      }
+    let param = {
+      value: !isNaN(value) ? value : 0,
+      empId: empId,
+      brandId: parseInt(`${skuBrand.brandId}`),
+      centerId: parseInt(centerId),
+      year: $('#cmbYear').val(),
+      month: $('#cmbMonth').val(),
+      skuId: parseInt(`${skuBrand.competitorId}`),
+      comments: comments
+    }
     //  console.log(param)
-      endPoints.push(param);
-      console.log(endPoints);
+    endPoints.push(param);
+    console.log(endPoints);
     // }
 
   });
   Promise.all(endPoints.map((endpoint) => axios.post('/competitor-sku-add/', endpoint))).then(
     axios.spread((...allData) => {
-     // console.log({ allData });
+      // console.log({ allData });
       redirect('/hospitals');
       isBtnLoaderVisible(false);
     })
@@ -156,15 +156,25 @@ function isNumber(txt, evt) {
   return true;
 }
 
-function approveMe() {
+function approveMe(mode) {
   //console.log('approved me Clicked competition');
+  if (parseInt(mode) === 2) {
+    if ($('#txtAreaRejectReason').val() == '') {
+      alert('Please enter reason to reject')
+      $('#txtAreaRejectReason').focus();
+      return false;
+    }
+  }
+
   let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
     param = {
       hospitalId: new URLSearchParams(window.location.search).get('cid'),
       rbmId: parseInt(userData.empId),
       year: $('#cmbYear').val(),
       month: $('#cmbMonth').val(),
-      kamid : parseInt(getQueryStringValue('kamid'))
+      kamid: parseInt(getQueryStringValue('kamid')),
+      mode: mode,
+      rejectReason: $('#txtAreaRejectReason')? $('#txtAreaRejectReason').val() : ''
     }
 
   axios
@@ -175,7 +185,7 @@ function approveMe() {
         console.log(res);
         if (res.sucess === 'true') {
           redirect(`account-mapping/${parseInt(getQueryStringValue('kamid'))}/competition-list`);
-          
+
           // @TODO: THIS NEED TO CHANGE
         }
       }
@@ -189,18 +199,32 @@ function approveMe() {
 function showCheckBoxApproveBtn() {
   let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
   //console.log(userData);
+  $('.divrejectreason').hide();
+  $('#btnReject').hide();
 
   if (userData.post.toLowerCase() == 'kam') {
     //console.log('ram');
     $('.hideApproveChk').hide();
     $('#btnApprove').hide();
+    $('#divrejectreason').hide();
+
   }
 
   else if (userData.post.toLowerCase() == 'rbm') {
-    //console.log('rbm');
     $('#resetBtn').hide();
     $('#saveBtn').hide();
     $('.two-btn-wrapper').addClass('right');
+    if (getQueryStringValue('mode') === 'reject') {
+      // show reject text box
+      $('.hideApproveChk').hide();
+      $('#btnApprove').hide();
+      $('.divrejectreason').show();
+      $('#btnReject').show();
+    } else {
+      $('#divrejectreason').hide();
+      $('#btnReject').hide();
+    }
+
   }
 }
 

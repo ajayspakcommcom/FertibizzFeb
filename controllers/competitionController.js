@@ -177,6 +177,9 @@ function approveCenterCompetition(objParam) {
                     .input("month", sql.Int, objParam.month)
                     .input("year", sql.Int, objParam.year)
                     .input("rbmId", sql.Int, objParam.rbmId)
+                    .input("mode", sql.SmallInt, objParam.mode)
+                    .input("rejectReason", sql.NVarChar, objParam.rejectReason)
+
                     .execute("USP_APPROVE_CUSTOMER_COMPETITION")
                     .then(function (resp) {
                         //console.log(resp.recordset)
