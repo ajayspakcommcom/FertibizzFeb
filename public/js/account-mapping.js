@@ -79,9 +79,18 @@ function setupPotentialPage() {
             //console.log('Potential Approval List', lists);
 
             lists.forEach(list => {
+                
+                let chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.potentialId}'  id=${list.potentialId} />` : '',
+                    rejectBtn = (parseInt(list.isApproved) === 1) ? `<button type="button " class="btn btn-primary btn-red" data-toggle="modal" 
+                    data-target="#exampleModal" 
+                    data-centername="${camelCaseText(list.CENTRENAME)}" 
+                    data-accountname="${camelCaseText(list.accountName)}" 
+                    data-potenitalid="${list.potentialId}" 
+                    data-drname="${camelCaseText(list.DoctorName)}">Reject</button>` : '';
+
                 listArr.push(
                     `<tr>
-                        <td><input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.potentialId}'  id=${list.potentialId} /></td>
+                        <td>${chkbox}</td>
                         <td>${(list.accountName) ? camelCaseText(list.accountName) : ''}</td>
                         <td>${camelCaseText(list.CENTRENAME)}</td>
                         <td>${camelCaseText(list.DoctorName)}</td>
@@ -93,6 +102,8 @@ function setupPotentialPage() {
                         <td align='right'>${list.DonorCycles}</td>
                         <td align='right'>${list.AgonistCycles}</td>
                         <td align='right'>${list.Antagonistcycles}</td>
+                        <td>${camelCaseText(list.statusText)}</td>
+                        <td align='right'>${rejectBtn} </td>
                     </tr>
                 `);
                 // reoprt 2
@@ -127,21 +138,42 @@ function setupPotentialPage() {
         });
 }
 
-function approveListingPotential() {
-    //ƒconsole.log('approve selected Listing');
-    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
+function approveListingPotential(mode) {
+    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
+        endPoints;
 
-    var endPoints = $(".chkbox:checked").map(function () {
-        return {
-            potentialId: parseInt($(this).val()),
+    if (parseInt(mode) === 2) {
+        if ($('#txtAreaRejectReason').val() == '') {
+          alert('Please enter reason to reject')
+          $('#txtAreaRejectReason').focus();
+          return false;
+        }
+        endPoints = [{
+            potentialId: $('#hidPotentialId').val(),
             rbmId: parseInt(userData.empId),
-        };
-    }).get();
-    //console.log(endPoints);
+            mode: mode,
+            rejectReason: $('#txtAreaRejectReason')? $('#txtAreaRejectReason').val() : ''
+        }];
+
+    } 
+    else {
+        endPoints = $(".chkbox:checked").map(function () {
+            return {
+                potentialId: parseInt($(this).val()),
+                rbmId: parseInt(userData.empId),
+                mode: mode,
+                rejectReason: $('#txtAreaRejectReason')? $('#txtAreaRejectReason').val() : ''
+            };
+        }).get();
+    }
+
+    
     Promise.all(endPoints.map((endpoint) => axios.post('/center-potentials-approved', endpoint))).then(
         axios.spread((...allData) => {
             //console.log({ allData });
-            alert('Approved Sucessfully')
+            $('#exampleModal').modal('hide')
+            alert('Approved Sucessfully');
+            window.top.location = window.top.location;
             //  redirect('/hospitals');
         })
     );

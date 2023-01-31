@@ -180,6 +180,8 @@ function approveCenterPotentialByPotentialId( objParam ) {
                 request
                     .input("potentialId", sql.Int, objParam.potentialId)
                     .input("rbmId", sql.Int, objParam.rbmId)
+                    .input("mode", sql.Int, objParam.mode)
+                    .input("rejectReason", sql.NVarChar, objParam.rejectReason)
                     .execute("USP_APPROVE_CUSTOMER_POTENTIALS_BY_POTENTIALID")
                     .then(function (resp) {
                         //console.log(resp.recordset)

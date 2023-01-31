@@ -139,7 +139,7 @@ exports.getEmployeeDetailsPage = (req, res, next) => {
 
 
 exports.getEmployeeDetailsById = (req, res, next) => {
-    console.log(req.params)
+    //console.log(req.params)
     getEmployeeDetailsById(req.params).then((result) => {
         res.status(_STATUSCODE).json(result);
     });
