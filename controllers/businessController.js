@@ -205,7 +205,7 @@ exports.approveCenterBusinessTrackerByHospitalId = (req, res, next) => {
 
 function approveCenterBusinessTrackerByHospitalId(objParam) {
     // console.log('--------------------------------')
-    console.log(objParam)
+    //console.log(objParam)
     // console.log('--------------------------------')
     return new Promise((resolve) => {
         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
@@ -216,6 +216,8 @@ function approveCenterBusinessTrackerByHospitalId(objParam) {
                 request
                     .input("customerId", sql.Int, parseInt(objParam.customerId))
                     .input("rbmId", sql.Int, objParam.rbmId)
+                    .input("mode", sql.Int, objParam.mode)
+                    .input("rejectReason", sql.NVarChar, objParam.rejectReason)
                     .execute("USP_APPROVE_CUSTOMER_BUSINESS_TRACKER_BY_HOSPITALID")
                     .then(function (resp) {
                         //console.log(resp.recordset)

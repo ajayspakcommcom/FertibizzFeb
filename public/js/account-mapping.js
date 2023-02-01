@@ -194,10 +194,18 @@ function setupBusinessPage() {
             //console.log(response.data[0])
             let lists = response.data[0],
                 listArr = [];
-            lists.forEach(list => {                
+            lists.forEach(list => {   
+                console.log(list)
+                let chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.hospitalId}'  id=${list.hospitalId} />` : '',
+                rejectBtn = (parseInt(list.isApproved) === 1) ? `<button type="button " class="btn btn-primary btn-red" data-toggle="modal" 
+                data-target="#exampleModal" 
+                data-centername="${camelCaseText(list.CENTRENAME)}" 
+                data-accountname="${camelCaseText(list.accountName)}" 
+                data-potenitalid="${list.hospitalId}" 
+                data-drname="${camelCaseText(list.DoctorName)}">Reject</button>` : '';             
                 listArr.push(
                     `<tr>
-                        <td><input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.hospitalId}'  id=${list.hospitalId} /></td>
+                        <td>${chkbox}</td>
                         <td>${(list.accountName) ? camelCaseText(list.accountName) : ''}</td>
                         <td>${camelCaseText(list.CENTRENAME)}</td>
                         <td>${camelCaseText(list.DoctorName)}</td>
@@ -210,6 +218,8 @@ function setupBusinessPage() {
                         <td align='right'>${list.brandGroup7}</td>
                         <td align='right'>${list.brandGroup8}</td>
                         <td align='right'>${list.brandGroup9}</td>
+                        <td>${camelCaseText(list.statusText)}</td>
+                        <td align='right'>${rejectBtn} </td>
                     </tr>
                 `);
             });
@@ -225,22 +235,42 @@ function setupBusinessPage() {
 }
 
 
-function approveListingBusiness() {
+function approveListingBusiness(mode) {
     //ƒconsole.log('approve selected Listing');
-    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
+    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
+        endPoints;
+    if (parseInt(mode) === 2) {
+        if ($('#txtAreaRejectReason').val() == '') {
+            alert('Please enter reason to reject')
+            $('#txtAreaRejectReason').focus();
+            return false;
+          }
+          endPoints = [{
+              customerId: parseInt($('#hidPotentialId').val()),
+              rbmId: parseInt(userData.empId),
+              mode: mode,
+              rejectReason: $('#txtAreaRejectReason')? $('#txtAreaRejectReason').val() : ''
+          }];
+    }
+    else {
+        endPoints = $(".chkbox:checked").map(function () {
+            return {
+                //centerId: parseInt($(this).val()),
+                customerId: parseInt($(this).val()),
+                rbmId: parseInt(userData.empId),
+                mode: mode,
+              rejectReason: $('#txtAreaRejectReason')? $('#txtAreaRejectReason').val() : ''
 
-    var endPoints = $(".chkbox:checked").map(function () {
-        return {
-            //centerId: parseInt($(this).val()),
-            customerId: parseInt($(this).val()),
-            rbmId: parseInt(userData.empId),
-        };
-    }).get();
-    //console.log(endPoints);
+            };
+        }).get();
+    }
+    
     Promise.all(endPoints.map((endpoint) => axios.post('/center-business-tracker-approved', endpoint))).then(
         axios.spread((...allData) => {
             //console.log({ allData });
-            alert('Approved Sucessfully')
+            $('#exampleModal').modal('hide')
+            alert('record updated Sucessfully');
+            window.top.location = window.top.location;
             //  redirect('/hospitals');
         })
     );

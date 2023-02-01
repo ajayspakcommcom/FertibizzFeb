@@ -73,7 +73,7 @@
                       </div>
                       <div id="tabular" class="tab-pane fade">
                           <div class="text-right">
-                            <div class="text-right"><a href="javascript:void(0);" onclick="approveListingBusiness();return false;" class="btn btn-default btn-grad go-back">Approve Selected</a></div>
+                            <div class="text-right"><a href="javascript:void(0);" onclick="approveListingBusiness(0);return false;" class="btn btn-default btn-grad go-back">Approve Selected</a></div>
                           </div>
                           
                           <table class="table table-data shadow">
@@ -92,6 +92,8 @@
                                     <th>Foliculin</th>
                                     <th>Agotrig</th>
                                     <th>MIDYDROGEN</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody id="potentialData">
@@ -109,6 +111,35 @@
     <div class="loader">
       <img src="../../img/loader.gif" alt="ivf loader" class="img-responsive" />
     </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Reject Potential</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <h5 id="divCenterName">Center Name: </h5>
+                    <h5 id="dvAccountName">Account Name: </h5>
+                    <h5 id="dvIVFCore">IVF Core: </h5>
+                    <input type="hidden" id="hidPotentialId" name="hidPotentialId" />
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label"><strong>Reason for reject:</strong></label>
+                        <textarea class="form-control" id="txtAreaRejectReason" maxlength="999" rows="5" cols="50" name="txtAreaRejectReason"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="approveListingBusiness(2);return false;">REJECT</button>
+            </div>
+        </div>
+    </div>
+</div>
 
     <!-- <nav class="navbar" id="header"></nav>
     <main class="container-fluid">
@@ -199,6 +230,18 @@
                 var table = $(e.target).closest('table');
                 $('td input:checkbox', table).prop('checked', this.checked);
             });
+            $('#exampleModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget) // Button that triggered the modal
+                var recipient = button.data('centername') // Extract info from data-* attributes
+                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                var modal = $(this)
+                modal.find('#divCenterName').text('Center Name: ' + button.data('centername'))
+                modal.find('#dvAccountName').text('Account Name ' + button.data('accountname'))
+                modal.find('#dvIVFCore').text('IVF Core ' + button.data('drname'))
+                modal.find('#hidPotentialId').val(button.data('potenitalid'))
+                
+            })
         });
 
     </script>
