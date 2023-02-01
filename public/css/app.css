@@ -7999,7 +7999,8 @@ table.dataTable tbody tr.selected > * {
 }
 
 .custom-table.form {
-  margin: 20px auto;
+  /* margin: 20px auto; */
+  margin: 15px auto;
   z-index: 999;
   background-color: #fff;
   border-radius: 20px;
@@ -8389,19 +8390,44 @@ ul.inline {
 }
 
 .inside-theme .theme-wrapper {
-  width: calc(100% - 80px);
-  height: calc(100% - 80px);  
+  /* width: calc(100% - 80px);
+  height: calc(100% - 80px);   */
+  width: 100%;
+  height: 100%;  
   display: flex;
   display: -webkit-flex;
 }
 
-.inside-theme .theme-wrapper .navigation {
+/* .inside-theme .theme-wrapper .navigation {
   background-color: #fff;
   width: 230px;
   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
   padding: 25px 15px 15px 15px;
   position: relative;
+  display: none;
+} */
+
+.inside-theme .theme-wrapper .navigation {
+  background-color: #fff;
+  width: 230px;
+  padding: 25px 15px 15px 15px;
+  position: relative;  
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 9;
+  border-radius: 0;
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;  
 }
 
 .copyright {
@@ -8415,9 +8441,10 @@ ul.inline {
 }
 
 .inside-theme .theme-wrapper .content {  
-  width: calc(100% - 230px);
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
+  /* width: calc(100% - 230px); */
+  /* border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px; */
+  width: 100%;
   position: relative;
 }
 
@@ -8428,9 +8455,9 @@ ul.inline {
   right: 0;
   bottom: 0;
   left: 0;
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
-  padding: 20px 20px;
+  /* border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px; */
+  padding: 15px 15px;
 }
 
 .inside-theme .theme-wrapper .content .content-bg.overflow {
@@ -8443,7 +8470,8 @@ ul.inline {
   display: -webkit-flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 15px;
+  margin-bottom: 15px !important;
+  margin-bottom: 0;
   background: rgba(255, 255, 255, 0.6);
   padding: 15px 15px;
   border-radius: 15px;
@@ -8604,7 +8632,8 @@ ul.inline {
 }
 
 .right-content {
-  height: calc(100% - 60px);
+  /* height: calc(100% - 60px); */
+  height: calc(100% - 75px);
   overflow-y: auto;
 }
 
@@ -8902,3 +8931,6 @@ input[type=file] {
   text-decoration: underline;
 }
 
+.menu-bar img {
+  width: 22px;
+}
