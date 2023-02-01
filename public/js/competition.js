@@ -103,7 +103,7 @@ function validateMe() {
     let value = parseFloat($(`#txt_${skuBrand.brandId}_${skuBrand.competitorId}_Value`).val()),
       comments = $(`#comments_${skuBrand.brandId}_${skuBrand.competitorId}`) ? $(`#comments_${skuBrand.brandId}_${skuBrand.competitorId}`).val() : '';
 
-    // if (value > 0) {
+    if (value > 0) {
     let param = {
       value: !isNaN(value) ? value : 0,
       empId: empId,
@@ -117,7 +117,7 @@ function validateMe() {
     //  console.log(param)
     endPoints.push(param);
     console.log(endPoints);
-    // }
+    }
 
   });
   Promise.all(endPoints.map((endpoint) => axios.post('/competitor-sku-add/', endpoint))).then(
