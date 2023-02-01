@@ -433,6 +433,9 @@ function getMyHospitalList() {
 
                     `)
             });
+
+            console.log(lists);
+
             $('#centerList').append(listArr.join(''));
             isLoaderVisible(false);
 
