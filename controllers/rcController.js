@@ -58,8 +58,8 @@ function getRCListData(objParam) {
 
 
 exports.createRC = (req, res, next) => {
-    console.clear();
-    console.log('RC Executed');
+    // console.clear();
+    // console.log('RC Executed');
     let fileName = req.body.hidfileName;
     if (!req.files || Object.keys(req.files).length === 0) {
 
@@ -85,16 +85,16 @@ exports.createRC = (req, res, next) => {
 
 function createRC1(filename, req) {
     // console.clear();
-    console.log('--------------------------------')
+    //console.log('--------------------------------')
     const queryObject = url.parse(req.url, true).query;
     // console.log(filename)
-    console.log('RC Object',req.body);
-     console.log(req.body.expiryDate);
+   // console.log('RC Object',req.body);
+   //  console.log(req.body.expiryDate);
     // console.log(req.body.hidRbmId);
     // console.log(queryObject.customerAccountId)
     // console.log(queryObject.CatAccountId)
     // //console.log(queryObject.custsomerid)
-     console.log('--------------------------------')
+   //  console.log('--------------------------------')
 
     return new Promise((resolve) => {
         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
@@ -104,11 +104,11 @@ function createRC1(filename, req) {
                 var request = new sql.Request(dbConn);
                 request
                     .input("contractDoc", sql.NVarChar, filename)
-                    .input("startDate", sql.Date, req.body.expiryDate)
                     .input("expiryDate", sql.Date, req.body.expiryDate)
                     .input("CustomerAccountId", sql.Int, queryObject.customerAccountId)
                     .input("rbmId", sql.Int, req.body.hidRbmId)
                     .input("accountId", sql.Int, queryObject.CatAccountId)
+                    .input("startDate", sql.Date, req.body.startDate)
                     .execute("USP_CREATE_RBM_RATE_CONTRACT")
                     .then(function (resp) {
                         resolve(resp.recordset);
