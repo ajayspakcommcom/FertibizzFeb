@@ -8639,7 +8639,6 @@ ul.inline {
 }
 
 .table-data tbody td svg {
-  fill: #00b4c8;
   width: 22px;
   height: 22px;
   transition: all 0.5s ease-in-out;
@@ -8648,6 +8647,7 @@ ul.inline {
   -ms-transition: all 0.5s ease-in-out;
   -webkit-transition: all 0.5s ease-in-out;
   opacity: 1;
+  fill: #00b4c8;
 }
 
 .table-data tbody td svg:hover {
@@ -8968,4 +8968,27 @@ input[type=file] {
 .close-menu > img {
   display: inline-block;
   width: 25px;
+}
+
+
+.isDataSubmitted {
+  fill: #00b4c8;
+}
+
+.isDataSubmitted.pending {
+  fill: #FFCC00;
+}
+
+.isDataSubmitted.approved {
+  fill: green;
+}
+
+.isDataSubmitted.rejected {
+  fill: red;
+}
+
+.rejected-comment p {
+  color: red;
+  font-weight: bold;
+  font-size: 16px;
 }

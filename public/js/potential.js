@@ -162,6 +162,12 @@ function getPotentialsDetails() {
             if (response.data.length > 0) {
                 let res = response.data[0];
                 console.log(res);
+
+                if(res.rejectComments) {
+                    $('.rejected-comment').removeClass('hide');
+                    $('#rejectedCommentTxt').text(res.rejectComments);
+                }
+
                 $('#iuiTxt').val(res.IUICycle);
                 $('#ivfTxt').val(res.IVFCycle);
                 $('#freshTxt').val(res.FreshPickUps);
