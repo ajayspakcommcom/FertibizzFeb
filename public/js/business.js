@@ -43,8 +43,9 @@ async function getSkuDetails() {
     const getSkuContractDetailsRequest = axios.get('/contract-details/' + chainAccountTypeId);
     const getBusinessTrackDetails = axios.post('/business-tracker-details/', businessTrackerParam);
     await axios.all([getAllSKURequest, getSkuContractDetailsRequest, getBusinessTrackDetails]).then(axios.spread(function (skuResponse, contractResponse, businessTrackResponse) {
-        //  console.log(skuResponse.data);
-        // console.log(businessTrackResponse.data);
+            //console.log(skuResponse.data);
+           // console.log(contractResponse.data);
+           
 
         skuDetails = skuResponse.data;
         let skus = skuDetails,
@@ -56,7 +57,14 @@ async function getSkuDetails() {
         //  console.log(isContractApplicableBool) ;
         //  console.log(contractRes);
 
-     //   console.log(_SKU_BRANDS);
+        if (businessTrackRes.length > 0) {
+            if (businessTrackRes[0] && businessTrackRes[0].rejectComments) {
+              //  console.log(businessTrackRes[0].rejectComments)
+                $('.rejected-comment').removeClass('hide');
+                $('#rejectedBusinessCommentTxt').text(businessTrackRes[0].rejectComments);
+            }
+        }
+        
 
         _SKU_BRANDS.forEach(skuBrand => {
             var skuBrandArr = skus.filter(item => {
@@ -205,7 +213,7 @@ function showBusinessBrandWiseTotal(obj) {
     for(let item of calculatedInput) {        
         total += parseFloat(item.value);
     }
-    console.log($(obj).parents('.panel').find('.businessTotalHeading .totalBrand').text(total));
+   // console.log($(obj).parents('.panel').find('.businessTotalHeading .totalBrand').text(total));
 }
 
 function calculateBusiness(obj) {
@@ -224,7 +232,7 @@ function calculateBusiness(obj) {
 }
 
 function calculateBusinessTotal(fieldId){
-    console.log(fieldId)
+   // console.log(fieldId)
 }
 
 function calculateTotal() {
