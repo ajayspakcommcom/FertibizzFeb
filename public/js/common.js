@@ -367,4 +367,13 @@ setTimeout(() => {
     showYear();
 }, 4000);
 
+function toggleMenu() {
+    $('.menu-overlay').toggleClass('show');
+    $('.inside-theme .theme-wrapper .navigation').toggleClass('show');
+}
+
+
+$('.menu-overlay').on('click', function(){
+    toggleMenu();
+});
 
