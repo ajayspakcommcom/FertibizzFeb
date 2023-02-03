@@ -197,7 +197,7 @@ function setupBusinessPage() {
             lists.forEach(list => {   
                 console.log(list)
                 let chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.hospitalId}'  id=${list.hospitalId} />` : '',
-                rejectBtn = (parseInt(list.isApproved) === 1) ? `<button type="button " class="btn btn-primary btn-red" data-toggle="modal" 
+                rejectBtn = (parseInt(list.isApproved) === 1) ? `<button type="button " class="btn btn-default btn-grad rejected-btn" data-toggle="modal" 
                 data-target="#exampleModal" 
                 data-centername="${camelCaseText(list.CENTRENAME)}" 
                 data-accountname="${camelCaseText(list.accountName)}" 
