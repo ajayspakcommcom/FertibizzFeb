@@ -32,7 +32,7 @@ app.use(fileUpload({
   createParentPath: true,
 }));
 const twoDay = 1000 * 60 * 60 * 48;
-console.log(twoDay);
+//console.log(twoDay);
 
 app.use(sessions({
   secret: "spak5u9rbRWBkWTSmu9kspak",
@@ -85,7 +85,7 @@ app.use(testRoutes);
 
 //app.use(managerRoutes);
 
-app.listen(process.env.PORT || 3333, () => {
+app.listen(80, () => {
   console.clear();
-  console.log("Application listening on port 3333!");
+  console.log("Application listening on port 3333! -->"+ process.env.PORT);
 });
