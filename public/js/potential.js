@@ -121,6 +121,22 @@ function validateMe() {
 
 }
 
+function getMasterData() {
+    axios
+        .get(`/master-data/`).then((response) => {            
+            let visiTypeResult = response.data[2];
+            let htmlElem = [];            
+            for(let item of visiTypeResult) {
+                htmlElem.push(`<option value="${item.VisitID}">${item.Name}</option>`);
+            }
+            
+            $('#comboAccountCategory').html(htmlElem.join(''));
+            
+        }).catch((err) => {
+            console.log(err);
+        });
+}
+
 function getPotentialsDetails() {
 
     isLoaderVisible(true);
@@ -153,9 +169,7 @@ function getPotentialsDetails() {
         } else {
             console.log('');
         }
-        
-
-         
+             
     axios
         .post('/center-potentials-details', param).then((response) => {
             console.log(response.data[0])
@@ -185,6 +199,7 @@ function getPotentialsDetails() {
                 //$('#cmbMonth').val(month)
                 getFirstDayPreviousMonth();
                 getFieldData();
+                getMasterData();
             }
             isLoaderVisible(false);
 
