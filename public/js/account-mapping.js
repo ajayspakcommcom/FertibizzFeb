@@ -17,7 +17,7 @@ function getKamDetails() {
         });
 }
 function getMyHospitalList() {
-
+    isLoaderVisible(true);
     let urlArr = window.location.href.split('/'),
         empId = urlArr[urlArr.length - 1];
     //console.log(empID);
@@ -44,7 +44,8 @@ function getMyHospitalList() {
                 </tr>
                     `)
             });
-            $('#centerList').append(listArr.join(''))
+            $('#centerList').append(listArr.join(''));
+            isLoaderVisible(false);
 
         }).catch((err) => {
             console.log(err);
@@ -283,6 +284,7 @@ function approveListingBusiness(mode) {
 }
 
 function setupRateContractPage() {
+    isLoaderVisible(true)
     let urlArr = window.location.href.split('/'),
         empId = urlArr[urlArr.length - 2],
         param = {
@@ -310,7 +312,8 @@ function setupRateContractPage() {
             </tr>
             `)
             });
-            $('#centerList').append(listArr.join(''))
+            $('#centerList').append(listArr.join(''));
+            isLoaderVisible(false);
             //  // generate data for the graph
             // drawBusinessChartWithData(response.data[1]);
             //  getAllBusinessReportWithData(response.data[2])
