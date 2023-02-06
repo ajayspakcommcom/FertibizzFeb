@@ -79,14 +79,19 @@ function setupPotentialPage() {
             //console.log('Potential Approval List', lists);
 
             lists.forEach(list => {
+
                 
                 let chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.potentialId}'  id=${list.potentialId} />` : '',
-                    rejectBtn = (parseInt(list.isApproved) === 1) ? `<button type="button " class="btn btn-primary btn-red" data-toggle="modal" 
+                    rejectBtn = (parseInt(list.isApproved) === 1) ? `<button type="button " class="btn btn-default btn-grad rejected-btn" data-toggle="modal" 
                     data-target="#exampleModal" 
                     data-centername="${camelCaseText(list.CENTRENAME)}" 
                     data-accountname="${camelCaseText(list.accountName)}" 
                     data-potenitalid="${list.potentialId}" 
                     data-drname="${camelCaseText(list.DoctorName)}">Reject</button>` : '';
+
+                    console.log(list);
+
+                    console.log(parseInt(list.isApproved));
 
                 listArr.push(
                     `<tr>
@@ -102,7 +107,7 @@ function setupPotentialPage() {
                         <td align='right'>${list.DonorCycles}</td>
                         <td align='right'>${list.AgonistCycles}</td>
                         <td align='right'>${list.Antagonistcycles}</td>
-                        <td>${camelCaseText(list.statusText)}</td>
+                        <td> ${list.statusText.toLowerCase() == 'approved' ? approvedRejectedPendingIcon[0] : list.statusText.toLowerCase() == 'pending' ? approvedRejectedPendingIcon[1] : approvedRejectedPendingIcon[2]}</td>
                         <td align='right'>${rejectBtn} </td>
                     </tr>
                 `);
@@ -218,7 +223,7 @@ function setupBusinessPage() {
                         <td align='right'>${list.brandGroup7}</td>
                         <td align='right'>${list.brandGroup8}</td>
                         <td align='right'>${list.brandGroup9}</td>
-                        <td>${camelCaseText(list.statusText)}</td>
+                        <td> ${list.statusText.toLowerCase() == 'approved' ? approvedRejectedPendingIcon[0] : list.statusText.toLowerCase() == 'pending' ? approvedRejectedPendingIcon[1] : approvedRejectedPendingIcon[2]}</td>
                         <td align='right'>${rejectBtn} </td>
                     </tr>
                 `);
@@ -368,15 +373,13 @@ function setupCompetitionPage() {
                 let chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.centerId}_${list.month}_${list.year}'  id=${list.centerId} />` : ''
                 listArr.push(
                     `<tr>
-                        <td>
-                        ${chkbox}
-                        </td>
+                        <td>${chkbox}</td>
                         <td>${(list.accountName) ? camelCaseText(list.accountName) : ''}</td>
                         <td>${camelCaseText(list.CENTRENAME)}</td>
                         <td>${camelCaseText(list.DoctorName)}</td>
-                        <td>${camelCaseText(list.statusText)}</td>
+                        <td> ${list.statusText.toLowerCase() == 'approved' ? approvedRejectedPendingIcon[0] : list.statusText.toLowerCase() == 'pending' ? approvedRejectedPendingIcon[1] : approvedRejectedPendingIcon[2]}</td>
                         <td><a href='/add-competition?cid=${list.centerId}&kamid=${empId}'>View Details</a></td>
-                        <td><a href='/add-competition?cid=${list.centerId}&kamid=${empId}&mode=reject'>Reject</a>
+                        <td><a href='/add-competition?cid=${list.centerId}&kamid=${empId}&mode=reject' class="btn btn-default btn-grad rejected-btn">Reject</a>
                         </td>
                        
                     </tr>

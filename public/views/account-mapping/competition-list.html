@@ -31,8 +31,7 @@
             <div class="theme-form">
 
                 <div class="text-right">
-                  <a href="javascript:void(0);" onclick="approveListingCompetition();return false;"class="btn btn-default btn-grad go-back">Approve Selected</a>
-                    <a href="javascript:void(0);" onclick="goBack()" class="btn btn-default btn-grad go-back">Go Back</a>
+                  <a href="javascript:void(0);" onclick="goBack()" class="btn btn-default btn-grad go-back">Go Back</a>
                 </div>
 
                 <!-- <ul class="nav nav-tabs gradient-tabs">
@@ -73,25 +72,38 @@
                     </table>
                     </div>
                     <div id="tabular" class="tab-pane fade in active">
-                        <!-- <div class="text-right">
+                        <div class="text-right filter-main-wrapper">
                           <div class="text-right"><a href="javascript:void(0);" onclick="approveListingCompetition();return false;"class="btn btn-default btn-grad go-back">Approve Selected</a></div>
-                        </div> -->
+                          <div class="form-group filter-wrapper">                              
+                            <select class="form-control" id="comboAccountCategory">
+                              <option value="All">All</option>
+                              <option value="approved">Approved</option>
+                              <option value="pending">Pending</option>
+                              <option value="rejected">Rejected</option>
+                            </select>
+                            <button onclick="filterData()" class="btn btn-default btn-grad go-back">Filter ata</button>
+                          </div>
+                        </div>
                         
-                        <table class="table table-data shadow">
-                          <thead>
-                            <tr>
-                                <th><input type="checkbox" id="selectAll" /> &nbsp; Approve </th>
-                                <th>Account Name</th>
-                                <th>Center Name</th>
-                                <th>IVF Core</th>
-                                <th>Status</th>
-                                <th>Details</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="competitionData">
-                        </tbody>
-                      </table>
+                        <div class="table-responsive">
+                          <table class="table table-data shadow" id="filterDataByCategoryTable">
+                            <thead>
+                              <tr>
+                                  <th><input type="checkbox" id="selectAll" /> &nbsp; Approve </th>
+                                  <th>Account Name</th>
+                                  <th>Center Name</th>
+                                  <th>IVF Core</th>
+                                  <th>Status</th>
+                                  <th>Details</th>
+                                  <th>Action</th>
+                              </tr>
+                          </thead>
+                          <tbody id="competitionData">
+                          </tbody>
+                        </table>
+                        </div>
+
+                        
 
                     </div>
                 </div>
@@ -188,6 +200,30 @@
                 $('td input:checkbox', table).prop('checked', this.checked);
             });
         });
+
+
+        
+    function filterData() {
+          //debugger;
+          let dropdown, table, rows, cells, empName, filter;
+            dropdown = document.getElementById("comboAccountCategory");
+            table = document.getElementById("filterDataByCategoryTable");
+            rows = table.getElementsByTagName("tr");            
+            filter = dropdown.value;            
+            for (let row of rows) { // `for...of` loops through the NodeList
+                cells = row.getElementsByTagName("td");
+                if (cells) {
+                    empName = cells[4] || null; // gets the 2nd `td` or nothing
+                    // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
+                    if (filter === "All" || !empName || (filter === empName.textContent.toLowerCase())) {
+                        row.style.display = ""; // shows this row                        
+                    }
+                    else {
+                        row.style.display = "none"; // hides this row
+                    }
+                }
+            }
+        }
 
     </script>
 

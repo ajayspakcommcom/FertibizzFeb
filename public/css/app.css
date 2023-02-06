@@ -7964,7 +7964,8 @@ label {
 }
 
 .tab-content {
-  padding: 15px 15px;
+  /* padding: 15px 15px; */
+  padding: 15px 0;
   background: #fff;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -8496,7 +8497,8 @@ ul.inline {
   margin-bottom: 15px !important;
   margin-bottom: 0;
   background: rgba(255, 255, 255, 0.6);
-  padding: 15px 15px;
+  /* padding: 15px 15px; */
+  padding: 15px 30px;
   border-radius: 15px;
   display: flex;
   align-items: center;
@@ -9015,4 +9017,26 @@ input[type=file] {
   background-color: red;
   padding: 0px 15px;
   height: 40px;
+  text-decoration: none !important;
+}
+
+svg.approved, svg.pending, svg.rejected {
+  width: 20px;
+  height: 20px;
+}
+
+svg.approved {
+  stroke: green !important;
+}
+
+svg.approved path {
+  fill: green;
+}
+
+svg.pending .st1 {
+  stroke: #FFCC00;
+}
+
+svg.rejected {
+  fill: red !important;
 }
