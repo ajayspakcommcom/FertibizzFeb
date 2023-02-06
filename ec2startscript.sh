@@ -1,6 +1,6 @@
   {
 	"StartInstances" : [
-		"InstanceId": "dfdasf",
+		"InstanceId": "i-00c503fb9de65688f",
 		"CurrentState": {
 			"Code":0,
 			"Name":"pending"
