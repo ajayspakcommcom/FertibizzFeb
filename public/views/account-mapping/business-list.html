@@ -271,9 +271,10 @@
             for (let row of rows) { // `for...of` loops through the NodeList
                 cells = row.getElementsByTagName("td");
                 if (cells) {
-                    empName = cells[13] || null; // gets the 2nd `td` or nothing
+                    // empName = cells[13] || null; // gets the 2nd `td` or nothing
+                      empName = cells[13] ? cells[13].querySelector('svg').getAttribute('class') : null; // gets the 2nd `td` or nothing    
                     // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
-                    if (filter === "All" || !empName || (filter === empName.textContent.toLowerCase())) {
+                    if (filter === "All" || !empName || (filter === empName.toLowerCase())) {
                         row.style.display = ""; // shows this row                        
                     }
                     else {

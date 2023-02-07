@@ -30,8 +30,7 @@
             
             <div class="theme-form">
 
-                <div class="text-right">
-                  <a href="javascript:void(0);" onclick="approveListingRC();return false;"class="btn btn-default btn-grad go-back">Approve Selected</a>
+                <div class="text-right">                  
                     <a href="javascript:void(0);" onclick="goBack()" class="btn btn-default btn-grad go-back">Go Back</a>
                 </div>
 
@@ -73,12 +72,22 @@
                   </table>
                   </div>
                     <div id="tabular" class="tab-pane fade in active">
-                        <!-- <div class="text-right">
-                          <div class="text-right"><a href="javascript:void(0);" onclick="approveListingRC();return false;"class="btn btn-default btn-grad go-back">Approve Selected</a></div>
-                        </div> -->
+                        
+                      <div class="text-right filter-main-wrapper">
+                        <div class="text-right"><a href="javascript:void(0);" onclick="approveListingRC();return false;" class="btn btn-default btn-grad go-back">Approve Selected</a></div>
+                        <div class="form-group filter-wrapper">                              
+                          <select class="form-control" id="comboAccountCategory">
+                            <option value="All">All</option>
+                            <option value="approved">Approved</option>
+                            <option value="pending">Approval Pending</option>
+                            <option value="rejected">Rejected</option>
+                          </select>
+                          <button onclick="filterData()" class="btn btn-default btn-grad go-back">Filter ata</button>
+                        </div>
+                      </div>
 
                         <div class="table-responsive">
-                          <table class="table table-data shadow">
+                          <table class="table table-data shadow" id="filterDataByCategoryTable">
                             <thead>
                                 <tr>
                                     <th>Approve</th>
@@ -107,72 +116,6 @@
 
   <div class="menu-overlay"></div>
 
-    <!-- <nav class="navbar" id="header"></nav>
-    <main class="container-fluid">
-        <h1 class="text-center">Rate Contract List</h1>
-
-        <div class="text-right">
-          <a href="javascript:void(0);" onclick="goBack()" class="btn btn-success">Go Back</a>
-        </div>
-
-        <ul class="nav nav-tabs">
-          <li class="active"><a data-toggle="tab" href="#chart">Data in Chart Formate</a></li>
-          <li><a data-toggle="tab" href="#tabular">Data in Tabular Formate</a></li>
-      </ul>
-
-      <div class="tab-content">
-        <div id="chart" class="tab-pane fade in active">
-          <table>
-            <tr>
-              <td>
-                <div id="business_chart"></div>
-              </td>
-              <td>
-                <div id="business_chart_FOLIGRAF"></div>
-              </td>
-              <td>
-                <div id="business_chart_HUMOG"></div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div id="business_chart_ASPORELIX"></div>
-              </td>
-              <td>
-                <div id="business_chart_R-HUCOG"></div>
-              </td>
-              <td>
-                <div id="business_chart_FOLICULIN"></div>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="3">
-                <div id="business_chart_MIDYDROGEN"></div>
-              </td>
-            </tr>
-        </table>
-        </div>
-        <div id="tabular" class="tab-pane fade">
-          <div class="text-right"><a href="javascript:void(0);" onclick="approveListingRC();return false;"class="btn btn-success">Approve Selected</a></div>
-          <table class="table table-bordered table-bg">
-            <thead>
-                <tr>
-                    <th>Approve</th>
-                    <th>Account Name</th>
-                    <th>Centre Name</th>
-                    <th>Doctor Name</th>
-                    <th>Rate Contract</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody id="centerList">
-            </tbody>
-        </table>
-        </div>
-    </div>
- 
-    </main> -->
-
     <script src="../../js/jquery.min.js"></script>
     <script src="../../js/common.js"></script>
     <script src="../../js/axios.min.js"></script>
@@ -192,6 +135,29 @@
                 $('td input:checkbox', table).prop('checked', this.checked);
             });
         });
+
+        function filterData() {
+          //debugger;
+          let dropdown, table, rows, cells, empName, filter;
+            dropdown = document.getElementById("comboAccountCategory");
+            table = document.getElementById("filterDataByCategoryTable");
+            rows = table.getElementsByTagName("tr");            
+            filter = dropdown.value;            
+            for (let row of rows) { // `for...of` loops through the NodeList
+                cells = row.getElementsByTagName("td");
+                if (cells) {
+                    //empName = cells[4] || null; // gets the 2nd `td` or nothing
+                    empName = cells[4] ? cells[4].querySelector('svg').getAttribute('class') : null; // gets the 2nd `td` or nothing                    
+                    // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
+                    if (filter === "All" || !empName || (filter === empName.toLowerCase())) {
+                        row.style.display = ""; // shows this row                        
+                    }
+                    else {
+                        row.style.display = "none"; // hides this row
+                    }
+                }
+            }
+        }
 
     </script>
 

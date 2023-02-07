@@ -303,7 +303,7 @@ function setupRateContractPage() {
                 <td>${formatText(list.accountName)}</td>
                 <td>${formatText(list.CENTRENAME)}</td>
                 <td>${formatText(list.DoctorName)}</td>
-                <td>${formatText(list.RateContractStatus)}</td>
+                <td>${list.RateContractStatus.toLowerCase() == 'approved' ? approvedRejectedPendingIcon[0] : list.RateContractStatus.toLowerCase() == 'approval pending' ? approvedRejectedPendingIcon[1] : approvedRejectedPendingIcon[2]}</td>
                 <td><a href="/update-rc/?customerAccountId=${list.aid}&customerid=${list.customerId}&CatAccountId=${list.CatAccountId}&rbmid=${empId}"> ${(list.CatAccountId > 0) ? `View` : ``}</a>
                 ${(list.SKUDetails === 0 && list.CatAccountId > 0) ? `| SKU Price list awaiting` : ``}
                 ${(list.SKUDetails > 0 && list.CatAccountId > 0) ? `| <a href='/customer-contract-add/${list.CatAccountId}'>View SKU Price list</a>` : ``}
