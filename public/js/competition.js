@@ -74,7 +74,7 @@ async function getSkuDetails() {
             </td>
             <td>
               <div class="form-group">
-                <input maxlength=7" type="text" onkeypress="return isNumber(this, event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_Value" required="" value="${businessValue}" title="apr" />
+                <input maxlength=7" type="text" onkeypress="return isNumber(this, event)" class="form-control" id="txt_${skuBrand.brandId}_${skuBrand.competitorId}_Value" required="" value="${businessValue}" onfocus="addPrevValueOnFocus(this)" onfocusout="addPrevValueOnFocusOut(this)" title="apr" />
               </div>
             </td>
             <td>

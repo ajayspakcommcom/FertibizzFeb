@@ -438,7 +438,6 @@ function approveListingCompetition() {
 
 
 function approveListingRC() {
-    
     //ƒconsole.log('approve selected Listing');
     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
 

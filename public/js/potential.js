@@ -12,6 +12,8 @@ function loadMonthYear() {
 
 function validateMe() {
 
+    console.log('Potential Saved');
+
     isBtnLoaderVisible(true);
 
     if ($('#cmbMonth').val() === "") {
@@ -75,6 +77,14 @@ function validateMe() {
         return false;
     }
 
+    if ($('#questionTxt').val() === "") {
+        alert('Please enter the answer');
+        $('#questionTxt').focus();
+        return false;
+    }
+
+    
+
     let pId = new URLSearchParams(window.location.search).get('pid'),
         iuiTxt = $('#iuiTxt').val(),
         ivfTxt = $('#ivfTxt').val(),
@@ -83,7 +93,9 @@ function validateMe() {
         patientTxt = $('#patientTxt').val(),
         donotTxt = $('#donotTxt').val(),
         agonistTxt = $('#agonistTxt').val(),
-        antagonistTxt = $('#antagonistTxt').val();
+        antagonistTxt = $('#antagonistTxt').val(),
+        questionTxt = $('#questionTxt').val(); 
+        
 
 
     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
@@ -129,7 +141,7 @@ function getMasterData() {
             for(let item of visiTypeResult) {
                 htmlElem.push(`<option value="${item.VisitID}">${item.Name}</option>`);
             }
-            
+            console.log(htmlElem);
             $('#comboAccountCategory').html(htmlElem.join(''));
             
         }).catch((err) => {
@@ -140,6 +152,7 @@ function getMasterData() {
 function getPotentialsDetails() {
 
     isLoaderVisible(true);
+    getMasterData();
 
     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")), 
     param = {hospitalId:'', empId:''}, 
@@ -199,7 +212,7 @@ function getPotentialsDetails() {
                 //$('#cmbMonth').val(month)
                 getFirstDayPreviousMonth();
                 getFieldData();
-                getMasterData();
+                
             }
             isLoaderVisible(false);
 

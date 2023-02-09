@@ -1,10 +1,9 @@
 function getKamList() {
-
+    
     isLoaderVisible(true);
 
-    let empIdd = JSON.parse(window.localStorage.getItem('BSV_IVF_Admin_Data')).empId;
+    let empIdd = JSON.parse(window.localStorage.getItem('BSV_IVF_Admin_Data')).empId, userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
 
-    console.log('Kam List Ready');
     let param = {
         empId: empIdd
     }
@@ -36,6 +35,12 @@ function getKamList() {
             `)
         });
         $('#kamData').append(listArr.join(''));
+
+        if(userData.post.toLowerCase() == 'zbm' || userData.post.toLowerCase() == 'rbm') {
+            $('.table-data > thead > tr > th:last-child').hide();
+            $('.table-data > tbody > tr > td:last-child').hide();
+        }
+        
         isLoaderVisible(false);
 
         //let res = response.data[0];

@@ -7700,6 +7700,7 @@ label {
 
 .total-business-value {
   text-align: right;
+  display: none;
 }
 
 .total-business-value > div {  
@@ -9039,4 +9040,11 @@ svg.pending .st1 {
 
 svg.rejected {
   fill: red !important;
+}
+
+.add-business-accodian .table-bg th:nth-child(2), 
+.add-business-accodian .table-bg td:nth-child(2),
+.add-business-accodian .table-bg th:nth-child(4), 
+.add-business-accodian .table-bg td:nth-child(4) {
+  display: none;
 }
