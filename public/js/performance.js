@@ -68,18 +68,11 @@ function getPerformanceData1() {
     axios
         .get(`/view-performanceData/${centerId}/${dt.getMonth() + 1}/${dt.getFullYear()}`).then((response) => {
             
-            console.log(response.data[2]); 
+            console.log(response); 
 
-            let demo = response.data[2];
-
-            
-            
-
-            
             printCenterDetail(response.data[0][0]);      
             
-            let centreData = response.data[0],  
-                potentialData = response.data[1]          
+            let centreData = response.data[0],  potentialData = response.data[1], competitonList = response.data[3], businessData = response.data[4];          
             listArr = [];
 
             centreData.forEach(data => {
@@ -113,6 +106,35 @@ function getPerformanceData1() {
     
                 $('#potentialList').append(listArr.join(''));
 
+
+                listArr = [];
+
+                competitonList.forEach(data => {
+                    listArr.push(
+                            `<tr>
+                                <td>${data.brandName}</td>
+                                <td>${data.groupName}</td>
+                                <td>${data.totalQty}</td>
+                                <td>${data.totalValue}</td>
+                            </tr>
+                        `)
+                    });
+    
+                $('#competitonList').append(listArr.join(''));
+
+
+                listArr = [];
+
+                businessData.forEach(data => {
+                    listArr.push(
+                            `<tr>
+                                <td>${data.brandname}</td>
+                                <td>${data.TotalBusinessValue}</td>
+                            </tr>
+                        `)
+                    });
+
+                    $('#businessList').append(listArr.join(''));
 
         }).catch((err) => {
             console.log(err);
