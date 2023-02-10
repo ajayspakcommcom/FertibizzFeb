@@ -37,8 +37,8 @@ function getKamList() {
         $('#kamData').append(listArr.join(''));
 
         if(userData.post.toLowerCase() == 'zbm' || userData.post.toLowerCase() == 'rbm') {
-            $('.table-data > thead > tr > th:last-child').hide();
-            $('.table-data > tbody > tr > td:last-child').hide();
+            //$('.table-data > thead > tr > th:last-child').hide();
+            //$('.table-data > tbody > tr > td:last-child').hide();
         }
         
         isLoaderVisible(false);
