@@ -41,11 +41,11 @@ function validateMe() {
         return false;
     }
 
-    if ($('#freshTxt').val() === "") {
-        alert('Fresh pick-ups is empty');
-        $('#freshTxt').focus();
-        return false;
-    }
+    // if ($('#freshTxt').val() === "") {
+    //     alert('Fresh pick-ups is empty');
+    //     $('#freshTxt').focus();
+    //     return false;
+    // }
 
     if ($('#frozenTxt').val() === "") {
         alert('Frozen Transfers is empty');
@@ -102,7 +102,7 @@ function validateMe() {
         param = {
             iuiTxt: $('#iuiTxt').val(),
             ivfTxt: $('#ivfTxt').val(),
-            freshTxt: $('#freshTxt').val(),
+            freshTxt: 0, //$('#freshTxt').val(),
             frozenTxt: $('#frozenTxt').val(),
             patientTxt: $('#patientTxt').val(),
             donotTxt: $('#donotTxt').val(),
