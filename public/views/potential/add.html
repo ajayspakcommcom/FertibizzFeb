@@ -107,13 +107,25 @@
                     <select class="form-control" id="comboAccountCategory"></select>
                   </div>
 
-                  <div class="form-group">
-                    <label for="questionTxt">Does the IVF clinic also practice obstetrics & deliver babies in their premises?</label><br />
-                    <input type="checkbox" name="questionChk" value="Yes">
-                    <label >Yes</label> &nbsp;
-                    <input type="checkbox" name="questionChk" value="No">
-                    <label>No</label>
+                  <!-- <div class="form-group question-label">
+                    <p>Stimulation Protocol for IVF?</p>
+                    <input type="checkbox" name="chkStimulation" value="R-FSH"> <label >R-FSH</label> &nbsp;
+                    <input type="checkbox" name="chkStimulation" value="HMG"> <label>HMG</label> &nbsp;
+                    <input type="checkbox" name="chkStimulation" value="Mixed (R-FSH+HMG)"> <label>Mixed (R-FSH+HMG)</label>
                   </div>
+
+                  <div class="form-group question-label">
+                    <p>Downregulation Protocol for IVF?</p>
+                    <input type="checkbox" name="chkDownregulation" value="Antagonist"> <label >Antagonist</label> &nbsp;
+                    <input type="checkbox" name="chkDownregulation" value="Long Agonist"> <label>Long Agonist</label> &nbsp;
+                    <input type="checkbox" name="chkDownregulation" value="Short agonist"> <label>Short agonist</label>
+                  </div>
+
+                  <div class="form-group question-label">
+                    <p>Does the IVF clinic also practice obstetrics & deliver babies in their premises?</p>
+                    <input type="checkbox" name="chkObstetrics" value="Yes"> <label>Yes</label> &nbsp;
+                    <input type="checkbox" name="chkObstetrics" value="No"> <label>No</label>
+                  </div> -->
     
                 </div>
     
@@ -139,6 +151,23 @@
                     <label for="agonistTxt">Agonist Cycles</label>
                     <input type="number" class="form-control disabled" id="agonistTxt" name="agonistTxt" placeholder="Agonist cycles" required />
                   </div>
+
+                  
+                  <!-- <div class="form-group question-label">
+                    <p>Trigger Protocol for IVF?</p>
+                    <input type="checkbox" name="chkTrigger" value="R-HCG"> <label >R-HCG</label> &nbsp;
+                    <input type="checkbox" name="chkTrigger" value="Agonist-Leuprolide"> <label>Agonist-Leuprolide</label> &nbsp;
+                    <input type="checkbox" name="chkTrigger" value="Agonist-Triptorelin"> <label>Agonist-Triptorelin</label> &nbsp;
+                    <input type="checkbox" name="chkTrigger" value="Dual Trigger (R-HCG + Triptorelin)"> <label>Dual Trigger (R-HCG + Triptorelin)</label> &nbsp;
+                    <input type="checkbox" name="chkTrigger" value="Dual Trigger (R-HCG + Leuprolide)"> <label>Dual Trigger (R-HCG + Leuprolide)</label>
+                  </div>
+
+                  <div class="form-group question-label">
+                    <p>Luteal Phase support?</p>
+                    <input type="checkbox" name="chkLuteal" value="Progesterone"> <label >Progesterone</label> &nbsp;
+                    <input type="checkbox" name="chkLuteal" value="Dydrogesterone"> <label>Dydrogesterone</label> &nbsp;
+                    <input type="checkbox" name="chkLuteal" value="Combination (Progesretone+Dydrogesterone)"> <label>Combination (Progesretone+Dydrogesterone)</label> 
+                  </div> -->
 
                 </div>
     
@@ -173,132 +202,7 @@
   <div class="loader">
     <img src="../../img/loader.gif" alt="ivf loader" class="img-responsive" />
   </div>
-
-  <div class="menu-overlay"></div>
-
-    <!-- <nav class="navbar" id="header"></nav>
-    <main class="container-fluid">
-        <h1 class="text-center">Add Potential</h1>
-      <div class="custom-table form heading-wrapper">
-        <div class="zone-profile">
-          <div class="month-year-dropdown">
-            <div class="form-group">
-              <select  id="cmbMonth" class="form-control disabled">
-                <option value="">---- Select Month ----</option>
-                <option value="1">Jan</option>
-                <option value="2">Feb</option>
-                <option value="3">Mar</option>
-                <option value="4">Apr</option>
-                <option value="5">May</option>
-                <option value="6">Jun</option>
-                <option value="7">Jul</option>
-                <option value="8">Aug</option>
-                <option value="9">Sep</option>
-                <option value="10">Oct</option>
-                <option value="11">Nov</option>
-                <option value="12">Dec</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <select  id="cmbYear" class="form-control disabled">
-                <option value="">---- Select Year ----</option>                 
-                <option value="2022">2022</option>
-                <option value="2023">2023</option>
-              </select>
-            </div>
-          </div>
-          <div class="centreName-dr-name-wrapper">
-            <div class="text-center zone-manager">
-              <span>Centre Name</span>
-              <div><b id="centreName"></b></div>
-            </div>
-            <div class="text-center rbm-wrapper">
-              <div><span>Doctor Name</span> </div>
-              <ul class="rbmm-list">
-                <li><b id="drName"></b></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="text-right">
-          <a href="javascript:void(0);" onclick="goBack()" class="btn btn-success">Go Back</a>
-        </div>
-      </div>
-
-        <div class="form-wrapper">
-        <form>
-          <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-              
-              <div class="form-group">
-                <label for="iuiTxt">Total no. of IUI Cycles</label>
-                <input type="number" class="form-control" id="iuiTxt" name="iuiTxt" placeholder="Total no. of IUI cycles" required />
-              </div>
-
-              <div class="form-group">
-                <label for="ivfTxt">Total no. of IVF Cycles</label>
-                <input type="number" class="form-control" id="ivfTxt" name="ivfTxt" placeholder="Total no. of IVF cycles" required />
-              </div>   
-
-              <div class="form-group">
-                <label for="frozenTxt">Frozen Transfers</label>
-                <input type="number" class="form-control" id="frozenTxt" name="frozenTxt" placeholder="Frozen Transfers" required />
-              </div>  
-              
-              <div class="form-group">
-                <label for="freshTxt">Fresh Pick-ups</label>
-                <input type="number" class="form-control disabled" id="freshTxt" name="freshTxt" placeholder="Fresh pick-ups" required />
-              </div>
-            </div>
-
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-
-              <div class="form-group">
-                <label for="donotTxt">Donor Cycles</label>
-                <input type="number" class="form-control" id="donotTxt" name="donotTxt" placeholder="Donor cycles" required />
-              </div> 
-              
-              <div class="form-group">
-                <label for="patientTxt">Self (Patient) cycles</label>
-                <input type="number" class="form-control disabled" id="patientTxt" name="patientTxt" placeholder="Self (Patient) cycles" required />
-              </div>
-
-              <div class="form-group">
-                <label for="antagonistTxt">Antagonist Cycles</label>
-                <input type="number" class="form-control" id="antagonistTxt" name="antagonistTxt" placeholder="Antagonist cycles" required />
-              </div>
-
-              <div class="form-group">
-                <label for="agonistTxt">Agonist Cycles</label>
-                <input type="number" class="form-control disabled" id="agonistTxt" name="agonistTxt" placeholder="Agonist cycles" required />
-              </div>
-
-            </div>
-
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-              <div class="form-group add-input-wrapper hideApproveChk">
-                <input type="checkbox" value="on" id="chkApproved" name="chkApproved" onclick="enableApproveButton()" />
-                  &nbsp;
-                <label for="lblChkApproved">Check to Approved the Potential</label>
-              </div>
-            </div>
-
-          </div>
-          <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"></div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-              <div class="two-btn-wrapper two-btn-wrapper-potential">
-                <button type="button" class="btn btn-default btn-grad" id="undoChanges" onclick="undo()">Undo</button>
-                <button type="reset" class="btn btn-default btn-grad" id="resetBtn">Reset</button>
-                <button type="button" class="btn btn-default btn-grad" onclick="validateMe();return false;" id="saveBtn">Submit</button>
-                <button class="btn btn-default btn-grad" id="btnApprove" disabled="true"  onclick="approveMe();return false;">Approve</button>
-              </div>
-            </div>
-          </div>
-        </form>
-        </div>
-    </main> -->
-
+      <div class="menu-overlay"></div>
       <script src="../../js/jquery.min.js"></script>
       <script src="../../js/common.js"></script>
       <script src="../../js/axios.min.js"></script>
@@ -306,8 +210,7 @@
       <script src="../../js/admin.js"></script>
       <script src="../../js/potential.js"></script>
       <script>
-        $(function () {
-          // console.log( "ready!" );
+        $(function () {          
           getPotentialsDetails();          
         });
       </script>

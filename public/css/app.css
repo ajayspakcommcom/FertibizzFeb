@@ -9048,3 +9048,7 @@ svg.rejected {
 .add-business-accodian .table-bg td:nth-child(4) {
   display: none;
 }
+
+.question-label p {
+  font-weight: bold;
+}

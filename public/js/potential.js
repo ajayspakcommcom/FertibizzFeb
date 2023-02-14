@@ -77,9 +77,9 @@ function validateMe() {
         return false;
     }
 
-    if ($('#questionTxt').val() === "") {
-        alert('Please enter the answer');
-        $('#questionTxt').focus();
+    if ($('#comboAccountCategory').val() === "") {
+        alert('Please select Account category');
+        $('#comboAccountCategory').focus();
         return false;
     }
 
@@ -95,7 +95,6 @@ function validateMe() {
         agonistTxt = $('#agonistTxt').val(),
         antagonistTxt = $('#antagonistTxt').val(),
         questionTxt = $('#questionTxt').val(); 
-        
 
 
     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
@@ -111,10 +110,8 @@ function validateMe() {
             hospitalId: new URLSearchParams(window.location.search).get('cid'),
             month: parseInt($('#cmbMonth').val()),
             year: parseInt($('#cmbYear').val()),
-            empId: parseInt(userData.empId)
+            empId: parseInt(userData.empId)           
         }
-
-    //console.log(param)
 
 
     axios

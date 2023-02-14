@@ -21,7 +21,7 @@ exports.addCenterPotential = (req, res, next) => {
 
 function addCenterPotential( objParam ) {
     // console.log('--------------------------------')
-    // console.log(objParam)
+    console.log('Potential Added')
     // console.log('--------------------------------')
     return new Promise((resolve) => {
         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
