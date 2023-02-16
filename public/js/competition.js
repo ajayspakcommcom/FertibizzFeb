@@ -47,13 +47,14 @@ async function getSkuDetails() {
     //console.log(contractResponse.data);
     competitorSkus = skuResponse.data;
     let competitionRes = competitionResponse.data,
-      html = [],
+      html = [], collapseHtml = [], showCollapseHtml = [], rows  = [],
 
       quarter1 = [], quarter2 = [], quarter3 = [], quarter4 = [];
     // console.log(competitorSkus)   ;
     // console.log(contractRes)   ;
 
     competitorSkus.forEach(skuBrand => {
+
       let filterRec = competitionRes.filter(competitor => {
         return competitor.CompetitionSkuId === skuBrand.competitorId
       });
@@ -64,7 +65,10 @@ async function getSkuDetails() {
         businessValue = !isNaN((filterRec[0].businessValue)) ? parseFloat(filterRec[0].businessValue) : 0;
         commentsValue = filterRec[0].comments ? filterRec[0].comments : '';
       }
-      let commentBox = skuBrand.name.indexOf('Other') > 0 ? `<textarea name="comments_${skuBrand.brandId}_${skuBrand.competitorId}" id="comments_${skuBrand.brandId}_${skuBrand.competitorId}">${commentsValue}</textarea>` : ''
+
+      let commentBox = skuBrand.name.indexOf('Other') > 0 ? `<textarea class="form-control" name="comments_${skuBrand.brandId}_${skuBrand.competitorId}" id="comments_${skuBrand.brandId}_${skuBrand.competitorId}">${commentsValue}</textarea>` : ''
+
+      collapseHtml.push(skuBrand);
 
       html.push(` 
             <tr>
@@ -80,9 +84,83 @@ async function getSkuDetails() {
             <td>
                 ${commentBox}
           </td>
-          </tr>`);
+          </tr>
+          `);
+
+
     });
+
+
+    collapseHtml = groupByKey(collapseHtml, 'brandName');
+    console.log(collapseHtml);
+    
+    for(let item in collapseHtml) {
+      console.log(item);
+      
+
+      for(let obj of collapseHtml[item]) {
+
+        console.log(obj);
+
+        let filterRec = competitionRes.filter(competitor => {
+          return competitor.CompetitionSkuId === obj.competitorId
+        });
+        
+        let businessValue = 0, commentsValue = '';
+
+        if (filterRec.length > 0) {
+          businessValue = !isNaN((filterRec[0].businessValue)) ? parseFloat(filterRec[0].businessValue) : 0;
+          commentsValue = filterRec[0].comments ? filterRec[0].comments : '';
+        }
+
+        let commentBox = obj.name.indexOf('Other') > 0 ? `<textarea class="form-control" name="comments_${obj.brandId}_${obj.competitorId}" id="comments_${obj.brandId}_${obj.competitorId}">${commentsValue}</textarea>` : '';
+
+        rows.push(`
+            <tr>
+              <td>${obj.brandName}</td>
+              <td>${obj.name}</td>
+              <td><input maxlength=7" type="text" onkeypress="return isNumber(this, event)" class="form-control" id="txt_${obj.brandId}_${obj.competitorId}_Value" required="" value="${businessValue}" onfocus="addPrevValueOnFocus(this)" onfocusout="addPrevValueOnFocusOut(this)" title="apr" /></td>
+              <td>${commentBox}</td>
+            </tr>
+        `);
+      }
+
+      showCollapseHtml.push(`<div class="panel panel-default">
+                      <div class="panel-heading">
+                          <h4 class="panel-title businessTotalHeading">
+                              <a data-toggle="collapse" data-parent="#accordion" href="#${item}">${item}</a>
+                              <span class="totalBrand"></span>
+                          </h4>
+                      </div>
+                      <div id="${item}" class="panel-collapse collapse">
+                          <div class="panel-body">
+                              <div class="form-section">    
+                              sdasdasdasd                                                                     
+                                  <table class="table table-bordered table-bg">
+                                      <thead>
+                                          <tr>
+                                              <th>Brand</th>
+                                              <th>Competition Mapping</th>
+                                              <th>Value</th>
+                                              <th>Comments for Other</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          ${rows}
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>                      
+                      </div>
+                  </div>`);
+          rows = [];
+
+    }
+
     $('#competitorDataTable').append(html.join(''));
+    $('#competitionAccordion').append(showCollapseHtml.join(''));
+    removeExtraText();
+
     isLoaderVisible(false);
   }))
 
@@ -244,6 +322,14 @@ function getPrevMonth() {
 }
 
 showDrNameCentreName();
+
+function removeExtraText() {
+  $('.form-section').contents().filter(function() {
+      return this.nodeType == 3; 
+  }).remove();
+}
+
+
 
 
 //showCheckBoxApproveBtn();

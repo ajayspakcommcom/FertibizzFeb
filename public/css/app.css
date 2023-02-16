@@ -8747,22 +8747,22 @@ ul.inline {
   margin-bottom: 15px;
 }
 
-.add-business-accodian .table-bg > thead {
+.add-business-accodian .table-bg > thead, .add-competition-accodian .table-bg > thead {
   background-color: rgba(36, 142, 198, 0.3);
   color: #000;
 } 
 
-.add-business-accodian .table-bordered>thead>tr>th {
+.add-business-accodian .table-bordered>thead>tr>th, .add-competition-accodian .table-bordered>thead>tr>th {
   border-bottom-width: 0;
   border: 1px solid rgba(36, 142, 198, 0.2);
   font-size: 15px;
 }
 
-.add-business-accodian .table-bordered>tbody>tr>td .skuName {
+.add-business-accodian .table-bordered>tbody>tr>td .skuName, .add-competition-accodian .table-bordered>tbody>tr>td .skuName {
   font-size: 14px;
 }
 
-.add-business-accodian input[type=checkbox] {
+.add-business-accodian input[type=checkbox], .add-competition-accodian input[type=checkbox] {
   margin-bottom: 15px;
   margin-left: 5px;
 }

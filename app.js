@@ -62,6 +62,7 @@ app.use(cookieParser());
  const notificationRoutes = require('./routes/notification');
  const rcRoutes = require('./routes/rc');
  const testRoutes = require('./routes/test');
+ const marketInsightRoutes = require('./routes/marketInsight');
 
 
 app.use(express.static(path.join(__dirname, "public")));
@@ -81,6 +82,9 @@ app.use(performanceRoutes);
 app.use(notificationRoutes);
 app.use(rcRoutes);
 app.use(testRoutes);
+app.use(marketInsightRoutes);
+
+
 
 
 //app.use(managerRoutes);
