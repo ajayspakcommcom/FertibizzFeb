@@ -37,7 +37,21 @@ function loadMonthYear() {
     answerFiveDydrogesterone = $('#answerFiveDydrogesterone').val(),
     answerFiveCombination = $('#answerFiveCombination').val();
 
-    console.log(insightId);
+    if((parseInt(answerThreeRFSH) + parseInt(answerThreeHMG)) != 100) {
+        alert('Total of Gonadotropins AVG IU /CYCLE should be equal to 100');  
+        return false;
+    } 
+
+    if((parseInt(answerProgesterone) + parseInt(answerFiveDydrogesterone) + parseInt(answerFiveCombination)) != 100) {
+        alert('Total of Luteal Phase support should be equal to 100');  
+        return false;
+    } 
+
+    if((parseInt(answerFourRHCG) + parseInt(answerFourAgonistL) + parseInt(answerFourAgonistT) + parseInt(answerFourRHCGTriptorelin) + parseInt(answerFourRHCGLeuprolide)) != 100) {
+        alert('Total of Trigger Protocol should be equal to 100');  
+        return false;
+    } 
+
 
     param = {
         insightId : insightId == 'null' ? null : insightId,
