@@ -64,6 +64,7 @@ function loadMonthYear() {
     axios
         .post('/center-market-insight-add/', param).then((response) => {            
             console.log(response);
+            redirect('/hospitals');
         }).catch((err) => {
             console.log(err);
         });
