@@ -76,13 +76,14 @@
                       <div class="text-right filter-main-wrapper">
                         <div class="text-right"><a href="javascript:void(0);" onclick="approveListingRC();return false;" class="btn btn-default btn-grad go-back">Approve Selected</a></div>
                         <div class="form-group filter-wrapper">                              
-                          <select class="form-control" id="comboAccountCategory">
+                          <select class="form-control" id="comboAccountCategory" onchange="filterData()">
+                            <option value="none" selected="" disabled="">Select Status</option>
                             <option value="All">All</option>
                             <option value="approved">Approved</option>
                             <option value="pending">Approval Pending</option>
                             <option value="rejected">Rejected</option>
                           </select>
-                          <button onclick="filterData()" class="btn btn-default btn-grad go-back">Filter ata</button>
+                          <!-- <button onclick="filterData()" class="btn btn-default btn-grad go-back">Filter ata</button> -->
                         </div>
                       </div>
 

@@ -263,8 +263,6 @@ function isNumber(evt) {
 
 function validateMe() {
 
-    isBtnLoaderVisible(true);
-
     //console.log('save into database')
 
     if ($('#cmbMonth').val() === "") {
@@ -278,6 +276,14 @@ function validateMe() {
         $('#cmbYear').focus();
         return false;
     }
+
+    if($("#chkConfirm").is(':checked') == false) {
+        alert('Please click on checkbox to confirm the data');
+        return false;
+    }
+
+    isBtnLoaderVisible(true);
+
     // let checkBox = document.getElementById('chkIsContractRateApplicable');
 
     // if (checkBox.checked && $('#txtContractEndDate').val() === '') {

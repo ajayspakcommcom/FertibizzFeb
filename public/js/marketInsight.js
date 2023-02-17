@@ -37,6 +37,12 @@ function loadMonthYear() {
     answerFiveDydrogesterone = $('#answerFiveDydrogesterone').val(),
     answerFiveCombination = $('#answerFiveCombination').val();
 
+    if(AnswerTwo === '') {
+        alert('Please enter Total No of Fresh stimulation Cycles per month');
+        $('#AnswerTwo').focus();
+        return false;
+    }
+
     if((parseInt(answerThreeRFSH) + parseInt(answerThreeHMG)) != 100) {
         alert('Total of Gonadotropins AVG IU /CYCLE should be equal to 100');  
         return false;
@@ -50,7 +56,12 @@ function loadMonthYear() {
     if((parseInt(answerFourRHCG) + parseInt(answerFourAgonistL) + parseInt(answerFourAgonistT) + parseInt(answerFourRHCGTriptorelin) + parseInt(answerFourRHCGLeuprolide)) != 100) {
         alert('Total of Trigger Protocol should be equal to 100');  
         return false;
-    } 
+    }
+    
+    if($("#chkConfirm").is(':checked') == false) {
+        alert('Please click on checkbox to confirm the data');
+        return false;
+    }
 
 
     param = {
@@ -82,7 +93,6 @@ function loadMonthYear() {
         }).catch((err) => {
             console.log(err);
         });
-
 }
 
 showDrNameCentreName();

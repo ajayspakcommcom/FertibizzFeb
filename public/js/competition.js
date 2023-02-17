@@ -168,6 +168,11 @@ async function getSkuDetails() {
 
 function validateMe() {
 
+  if($("#chkConfirm").is(':checked') == false) {
+    alert('Please click on checkbox to confirm the data');
+    return false;
+  }
+
   isBtnLoaderVisible(true);
 
   let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),

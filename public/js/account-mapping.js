@@ -373,7 +373,17 @@ function setupCompetitionPage() {
             
             lists.forEach(list => {
                 //console.log(parseInt(list.isApproved));
-                let chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.centerId}_${list.month}_${list.year}'  id=${list.centerId} />` : ''
+                let chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.centerId}_${list.month}_${list.year}'  id=${list.centerId} />` : '';
+
+                console.log(list);
+
+                // rejectBtn = (parseInt(list.isApproved) === 1) ? `<button type="button " class="btn btn-default btn-grad rejected-btn" data-toggle="modal" 
+                // data-target="#exampleModal" 
+                // data-centername="${camelCaseText(list.CENTRENAME)}" 
+                // data-accountname="${camelCaseText(list.accountName)}" 
+                // data-potenitalid="${list.centerId}" 
+                // data-drname="${camelCaseText(list.DoctorName)}">Reject</button>` : '';    
+
                 listArr.push(
                     `<tr>
                         <td>${chkbox}</td>
@@ -382,7 +392,8 @@ function setupCompetitionPage() {
                         <td>${camelCaseText(list.DoctorName)}</td>
                         <td> ${list.statusText.toLowerCase() == 'approved' ? approvedRejectedPendingIcon[0] : list.statusText.toLowerCase() == 'pending' ? approvedRejectedPendingIcon[1] : approvedRejectedPendingIcon[2]}</td>
                         <td><a href='/add-competition?cid=${list.centerId}&kamid=${empId}'>View Details</a></td>
-                        <td><a href='/add-competition?cid=${list.centerId}&kamid=${empId}&mode=reject' class="btn btn-default btn-grad rejected-btn">Reject</a>
+                        <td>
+                            ${list.isApproved == 1 ? `<a href='/add-competition?cid=${list.centerId}&kamid=${empId}&mode=reject' class="btn btn-default btn-grad rejected-btn">Reject</a>` : ''} 
                         </td>
                        
                     </tr>

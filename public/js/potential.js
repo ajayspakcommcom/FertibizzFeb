@@ -14,8 +14,6 @@ function validateMe() {
 
     console.log('Potential Saved');
 
-    isBtnLoaderVisible(true);
-
     if ($('#cmbMonth').val() === "") {
         alert('Month field is empty');
         $('#cmbMonth').focus();
@@ -83,7 +81,12 @@ function validateMe() {
         return false;
     }
 
-    
+    if($("#chkConfirm").is(':checked') == false) {
+        alert('Please click on checkbox to confirm the data');
+        return false;
+    }
+
+    isBtnLoaderVisible(true);
 
     let pId = new URLSearchParams(window.location.search).get('pid'),
         iuiTxt = $('#iuiTxt').val(),
