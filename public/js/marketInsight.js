@@ -37,12 +37,14 @@ function loadMonthYear() {
     answerFiveDydrogesterone = $('#answerFiveDydrogesterone').val(),
     answerFiveCombination = $('#answerFiveCombination').val();
 
+    console.log(insightId);
+
     param = {
-        insightId : insightId == 'null' ? 0 : insightId,
+        insightId : insightId == 'null' ? null : insightId,
         empId : empId,
         centreId : centreId,
-        month : month ,   
-        year : year , 
+        month : month,   
+        year : year, 
         answerOne : answerOne == 'yes' ? true : false,
         AnswerTwo : AnswerTwo,
         answerThreeRFSH : answerThreeRFSH,
@@ -72,6 +74,7 @@ showDrNameCentreName();
 
 function getMarketInsightDetails() {
 
+    
     let insightId = new URLSearchParams(window.location.search).get('insightId');
     console.log(insightId);
 

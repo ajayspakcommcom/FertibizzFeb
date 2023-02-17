@@ -29,7 +29,7 @@ exports.addCenterMarketInsight = (req, res, next) => {
             .then(function () {
                 var request = new sql.Request(dbConn);
                 request
-                    .input("insightId", sql.Int, objParam.insightId)
+                    .input("insightId", sql.Int, objParam.insightId || null)
                     .input("empId", sql.Int, objParam.empId)
                     .input("centreId", sql.Int, objParam.centreId)
                     .input("month", sql.Int, objParam.month)
