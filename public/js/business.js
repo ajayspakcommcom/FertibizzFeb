@@ -18,7 +18,7 @@ async function getSkuDetails() {
 
     isLoaderVisible(true);
 
-    let skuBrands = ['FOLIGRAF', 'HUMOG', 'ASPORELIX', 'R-HUCOG', 'FOLICULIN', 'AGOTRIG', 'MIDYDROGEN'],
+    let skuBrands = ['FOLIGRAF', 'HUMOG', 'ASPORELIX', 'R-HUCOG', 'FOLICULIN', 'AGOTRIG', 'MIDYDROGEN', 'SPRIMEO'],
         hospitalId = new URLSearchParams(window.location.search).get('cid'),
         chainAccountTypeId = new URLSearchParams(window.location.search).get('chainAccountType'),
         userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
@@ -43,8 +43,9 @@ async function getSkuDetails() {
     const getSkuContractDetailsRequest = axios.get('/contract-details/' + chainAccountTypeId);
     const getBusinessTrackDetails = axios.post('/business-tracker-details/', businessTrackerParam);
     await axios.all([getAllSKURequest, getSkuContractDetailsRequest, getBusinessTrackDetails]).then(axios.spread(function (skuResponse, contractResponse, businessTrackResponse) {
-            //console.log(skuResponse.data);
-           // console.log(contractResponse.data);
+            
+        console.log(skuResponse.data);
+           //console.log(contractResponse.data);
            
 
         skuDetails = skuResponse.data;
@@ -52,6 +53,7 @@ async function getSkuDetails() {
             contractRes = contractResponse.data,
             html = [],
             businessTrackRes = businessTrackResponse.data;
+
         isContractApplicableBool = true;  //(contractRes[0].RateType === 'contract Rate');
 
         //  console.log(isContractApplicableBool) ;
@@ -65,6 +67,7 @@ async function getSkuDetails() {
             }
         }
         
+        console.log(_SKU_BRANDS);
 
         _SKU_BRANDS.forEach(skuBrand => {
             var skuBrandArr = skus.filter(item => {

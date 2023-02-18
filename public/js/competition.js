@@ -50,8 +50,9 @@ async function getSkuDetails() {
       html = [], collapseHtml = [], showCollapseHtml = [], rows  = [],
 
       quarter1 = [], quarter2 = [], quarter3 = [], quarter4 = [];
-    // console.log(competitorSkus)   ;
-    // console.log(contractRes)   ;
+
+    console.log(competitorSkus);
+    console.log(competitionRes);
 
     competitorSkus.forEach(skuBrand => {
 
@@ -95,12 +96,12 @@ async function getSkuDetails() {
     console.log(collapseHtml);
     
     for(let item in collapseHtml) {
-      console.log(item);
+      //console.log(item);
       
 
       for(let obj of collapseHtml[item]) {
 
-        console.log(obj);
+        //console.log(obj);
 
         let filterRec = competitionRes.filter(competitor => {
           return competitor.CompetitionSkuId === obj.competitorId

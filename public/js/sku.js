@@ -122,6 +122,7 @@ function getSKUList() {
             // console.log(response.data)
             let list = response.data,
                 listArr = [];
+            console.log(list);
 
             list.forEach(data => {
                 listArr.push(
