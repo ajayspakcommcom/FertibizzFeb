@@ -19,7 +19,7 @@ exports.postApi = (req, res, next) => {
     switch (req.body.method) {
         case 'adminLogin':
             userLogin(req.body).then((result) => {
-                let response, success, msg, userDetiails, session, statusCode
+                let response, success, msg, userDetails, session, statusCode
                 
                 if (result.recordset.length > 0) {
                     session = req.session;
@@ -28,14 +28,14 @@ exports.postApi = (req, res, next) => {
                     // if (_allowedDesignaiton.includes(rec.Designation.toUpperCase())) {
                         success = true;
                         msg = 'Login successful'
-                        userDetiails = {
+                        userDetails = {
                             empId: rec.EmpID,
                             name: rec.firstName,
                             post: rec.Designation,
                             lastLogin: rec.lastLoginDate,
                             targetLeft: 4
                         }
-                        session.userDetiails = userDetiails;
+                        session.userDetails = userDetails;
                     // }
                     // else {
                     //     success = false;
@@ -46,7 +46,7 @@ exports.postApi = (req, res, next) => {
                     msg = 'Invalid username or password';
                 }
                 response = {
-                    success, msg, userDetiails
+                    success, msg, userDetails
                 };
                 if (success) {
                    // console.log('send 200')

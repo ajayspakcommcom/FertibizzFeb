@@ -19,7 +19,7 @@ function letMeLogin() {
             console.log(response);
             switch (checkIfValidStatus(response.status)) {
                 case 1:
-                    localStorage.setItem("BSV_IVF_Admin_Data", JSON.stringify(response.data.userDetiails));
+                    localStorage.setItem("BSV_IVF_Admin_Data", JSON.stringify(response.data.userDetails));
 
                     let userDesignation = JSON.parse(window.localStorage.getItem('BSV_IVF_Admin_Data')).post;
                     

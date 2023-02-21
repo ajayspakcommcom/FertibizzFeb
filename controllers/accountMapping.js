@@ -190,13 +190,18 @@ exports.getAccountMappingCompetitiontList = (req, res, next) => {
 
   exports.getAccountMappingCompetitionListData = (req, res, next) => {
     // console.log(req.params, '--->')
-     getAccountMappingCompetitionListData(req.params).then((result) => {
+   // console.log(req.session.userDetails, '--->')
+    let spName = 'USP_GET_COMPETITION_LIST_FOR_RBM'
+    if (req.session.userDetails && req.session.userDetails.post === 'ZBM') {
+       spName = 'USP_GET_COMPETITION_LIST_FOR_ZBM'
+    }
+     getAccountMappingCompetitionListData(req.params, spName).then((result) => {
           res.status(_STATUSCODE).json(result);
       });
   };
   
   
-  getAccountMappingCompetitionListData = (objParam) => {
+  getAccountMappingCompetitionListData = (objParam, storeProc) => {
      //console.log(objParam, '--->')
       
     return new Promise((resolve) => {
@@ -207,7 +212,7 @@ exports.getAccountMappingCompetitiontList = (req, res, next) => {
                   var request = new sql.Request(dbConn);
                   request
                       .input("KamId", sql.Int, objParam.empId)
-                      .execute("USP_GET_COMPETITION_LIST_FOR_RBM")
+                      .execute(storeProc)
                       .then(function (resp) {
                          //console.log(resp)
                           resolve(resp.recordsets);

@@ -425,18 +425,23 @@ function setupCompetitionPage() {
                ;
             
             lists.forEach(list => {
-                //console.log(parseInt(list.isApproved));
-                let chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.centerId}_${list.month}_${list.year}'  id=${list.centerId} />` : '';
-
+               // console.log((list));
+                let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
+                chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.centerId}_${list.month}_${list.year}'  id=${list.centerId} />` : '',
+                rejectBtn = (parseInt(list.isApproved) === 1) ? `<button type="button " class="btn btn-default btn-grad rejected-btn" data-toggle="modal" 
+                data-target="#exampleModal" 
+                data-centername="${camelCaseText(list.CENTRENAME)}" 
+                data-accountname="${camelCaseText(list.accountName)}" 
+                data-centerid="${list.centerId}" 
+                data-month="${list.month}" 
+                data-year="${list.year}" 
+                data-drname="${camelCaseText(list.DoctorName)}">Reject</button>` : ''; 
+               // console.log(rejectBtn)
+                if(userData.post === _POST.ZBM) {
+                    chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.centerId}_${list.month}_${list.year}'  id=${list.centerId} />` : '';
+                }
+                
                 console.log(list);
-
-                // rejectBtn = (parseInt(list.isApproved) === 1) ? `<button type="button " class="btn btn-default btn-grad rejected-btn" data-toggle="modal" 
-                // data-target="#exampleModal" 
-                // data-centername="${camelCaseText(list.CENTRENAME)}" 
-                // data-accountname="${camelCaseText(list.accountName)}" 
-                // data-potenitalid="${list.centerId}" 
-                // data-drname="${camelCaseText(list.DoctorName)}">Reject</button>` : '';    
-
                 listArr.push(
                     `<tr>
                         <td>${chkbox}</td>
@@ -444,15 +449,17 @@ function setupCompetitionPage() {
                         <td>${camelCaseText(list.CENTRENAME)}</td>
                         <td>${camelCaseText(list.DoctorName)}</td>
                         <td> ${list.statusText.toLowerCase() == 'approved' ? approvedRejectedPendingIcon[0] : list.statusText.toLowerCase() == 'pending' ? approvedRejectedPendingIcon[1] : approvedRejectedPendingIcon[2]}</td>
-                        <td><a href='/add-competition?cid=${list.centerId}&kamid=${empId}'>View Details</a></td>
-                        <td>
-                            ${list.isApproved == 1 ? `<a href='/add-competition?cid=${list.centerId}&kamid=${empId}&mode=reject' class="btn btn-default btn-grad rejected-btn">Reject</a>` : ''} 
-                        </td>
-                       
+                        <!--<td>
+                        <a href='/add-competition?cid=${list.centerId}&kamid=${empId}'>View Details</a> 
+                        </td>-->
+                        <td align='right'>${rejectBtn} </td>
                     </tr>
                 `);
             });
             $('#competitionData').append(listArr.join(''));
+            // <td>
+                        //     ${list.isApproved == 1 ? `<a href='/add-competition?cid=${list.centerId}&kamid=${empId}&mode=reject' class="btn btn-default btn-grad rejected-btn">Reject</a>` : ''} 
+                        // </td>
             // generate data for the graph
             //drawBusinessChartWithData(response.data[1]);
             // getAllBusinessReportWithData(response.data[2])
@@ -495,6 +502,7 @@ function approveListingCompetition() {
             //console.log({ allData });
             alert('Approved Sucessfully')
             //  redirect('/hospitals');
+            location.reload();
         })
     );
     return false;
@@ -522,3 +530,47 @@ function approveListingRC() {
     );
     return false;
 }
+
+
+function competitionRejected(mode) {
+    //console.log('approved me Clicked competition');
+    if (parseInt(mode) === 2) {
+      if ($('#txtAreaRejectReason').val() == '') {
+        alert('Please enter reason to reject')
+        $('#txtAreaRejectReason').focus();
+        return false;
+      }
+    }
+  
+    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
+      param = {
+        hospitalId: $('#hidHospitalId').val(),
+        rbmId: parseInt(userData.empId),
+        year: $('#hidYear').val(),
+        month: $('#hidMonth').val(),
+       // kamid: parseInt(getQueryStringValue('kamid')),
+        mode: mode,
+        rejectReason: $('#txtAreaRejectReason')? $('#txtAreaRejectReason').val() : ''
+      }
+
+    axios
+      .post('/center-competition-approved/', param).then((response) => {
+        //   console.log(response.data[0])
+        if (response.data.length > 0) {
+          let res = response.data[0];
+         
+          if (res.success === 'true') {
+            console.log('sssss');
+            // //console.log(`account-mapping/${parseInt(getQueryStringValue('kamid'))}/competition-list`)
+            // redirect(`account-mapping/${parseInt(getQueryStringValue('kamid'))}/competition-list`);
+            location.reload();
+  
+            // @TODO: THIS NEED TO CHANGE
+          }
+        }
+  
+      }).catch((err) => {
+        console.log(err);
+      });
+    return false;
+  }

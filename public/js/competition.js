@@ -51,6 +51,13 @@ async function getSkuDetails() {
 
       quarter1 = [], quarter2 = [], quarter3 = [], quarter4 = [];
 
+      if (competitionRes.length > 0) {
+        if (competitionRes[0] && competitionRes[0].rejectComments) {
+          //  console.log(businessTrackRes[0].rejectComments)
+            $('.rejected-comment').removeClass('hide');
+            $('#rejectedcompetitionCommentTxt').text(competitionRes[0].rejectComments);
+        }
+    }
     console.log(competitorSkus);
     console.log(competitionRes);
 
@@ -200,7 +207,7 @@ function validateMe() {
     }
     //  console.log(param)
     endPoints.push(param);
-    console.log(endPoints);
+    //console.log(endPoints);
     }
 
   });
@@ -241,6 +248,7 @@ function isNumber(txt, evt) {
 }
 
 function approveMe(mode) {
+  debugger;
   //console.log('approved me Clicked competition');
   if (parseInt(mode) === 2) {
     if ($('#txtAreaRejectReason').val() == '') {

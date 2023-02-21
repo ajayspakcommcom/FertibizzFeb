@@ -6,6 +6,12 @@ const _ROOT = window.location.origin;
 //const _ROOT = 'http://firtibiz-env.eba-m3syxjvp.ap-south-1.elasticbeanstalk.com';
 const _SKU_BRANDS = ['FOLIGRAF', 'HUMOG', 'ASPORELIX', 'R-HUCOG', 'FOLICULIN', 'AGOTRIG', 'MIDYDROGEN', 'SPRIMEO'];
 
+const _POST = {
+    ZBM: 'ZBM',
+    RBM: 'RBM',
+    KAM: 'KAM',
+    ADMIN: 'ADMIN'
+};
 
 const _URL = {
         _hospitalListing: '/hospitals',
