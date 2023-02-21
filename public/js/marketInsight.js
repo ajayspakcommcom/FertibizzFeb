@@ -29,6 +29,7 @@ function loadMonthYear() {
     answerThreeRFSH = $('#answerThreeRFSH').val(),
     answerThreeHMG = $('#answerThreeHMG').val(),
     answerFourRHCG = $('#answerFourRHCG').val(),
+    answerFourUHCG = $('#answerFourUHCG').val(),
     answerFourAgonistL = $('#answerFourAgonistL').val(),
     answerFourAgonistT = $('#answerFourAgonistT').val(),
     answerFourRHCGTriptorelin = $('#answerFourRHCGTriptorelin').val(),
@@ -53,10 +54,12 @@ function loadMonthYear() {
         return false;
     } 
 
-    if((parseInt(answerFourRHCG) + parseInt(answerFourAgonistL) + parseInt(answerFourAgonistT) + parseInt(answerFourRHCGTriptorelin) + parseInt(answerFourRHCGLeuprolide)) != 100) {
+    if((parseInt(answerFourRHCG) + parseInt(answerFourUHCG) + parseInt(answerFourAgonistL) + parseInt(answerFourAgonistT) + parseInt(answerFourRHCGTriptorelin) + parseInt(answerFourRHCGLeuprolide)) != 100) {
         alert('Total of Trigger Protocol should be equal to 100');  
         return false;
     }
+
+  
     
     if($("#chkConfirm").is(':checked') == false) {
         alert('Please click on checkbox to confirm the data');
@@ -75,6 +78,7 @@ function loadMonthYear() {
         answerThreeRFSH : answerThreeRFSH,
         answerThreeHMG : answerThreeHMG,
         answerFourRHCG : answerFourRHCG,
+        answerFourUHCG:answerFourUHCG,
         answerFourAgonistL : answerFourAgonistL,
         answerFourAgonistT : answerFourAgonistT,
         answerFourRHCGTriptorelin : answerFourRHCGTriptorelin,
@@ -103,24 +107,25 @@ function getMarketInsightDetails() {
     let insightId = new URLSearchParams(window.location.search).get('insightId');
     console.log(insightId);
 
-    axios
-        .get('/market-insight-detail/' + insightId).then((response) => {
-            console.log(response.data);  
-            let data = response.data;
-            data.answerOne == true ? $("[name=obstetricsRadio]")[0].setAttribute("checked", "checked") : $("[name=obstetricsRadio]")[1].setAttribute("checked", "checked");
-            $('#AnswerTwo').val(data.AnswerTwo);
-            $('#answerThreeRFSH').val(data.answerThreeRFSH);
-            $('#answerThreeHMG').val(data.answerThreeHMG);
-            $('#answerFourRHCG').val(data.answerFourRHCG);
-            $('#answerFourAgonistL').val(data.answerFourAgonistL);
-            $('#answerFourAgonistT').val(data.answerFourAgonistT);
-            $('#answerFourRHCGTriptorelin').val(data.answerFourRHCGTriptorelin);
-            $('#answerFourRHCGLeuprolide').val(data.answerFourRHCGLeuprolide);
-            $('#answerProgesterone').val(data.answerProgesterone);
-            $('#answerFiveDydrogesterone').val(data.answerFiveDydrogesterone);
-            $('#answerFiveCombination').val(data.answerFiveCombination);
+    // axios
+    //     .get('/market-insight-detail/' + insightId).then((response) => {
+    //         console.log(response.data);  
+    //         let data = response.data;
+    //         data.answerOne == true ? $("[name=obstetricsRadio]")[0].setAttribute("checked", "checked") : $("[name=obstetricsRadio]")[1].setAttribute("checked", "checked");
+    //         $('#AnswerTwo').val(data.AnswerTwo);
+    //         $('#answerThreeRFSH').val(data.answerThreeRFSH);
+    //         $('#answerThreeHMG').val(data.answerThreeHMG);
+    //         $('#answerFourRHCG').val(data.answerFourRHCG);
+    //         $('#answerFourUHCG').val(data.answerFourUHCG);
+    //         $('#answerFourAgonistL').val(data.answerFourAgonistL);
+    //         $('#answerFourAgonistT').val(data.answerFourAgonistT);
+    //         $('#answerFourRHCGTriptorelin').val(data.answerFourRHCGTriptorelin);
+    //         $('#answerFourRHCGLeuprolide').val(data.answerFourRHCGLeuprolide);
+    //         $('#answerProgesterone').val(data.answerProgesterone);
+    //         $('#answerFiveDydrogesterone').val(data.answerFiveDydrogesterone);
+    //         $('#answerFiveCombination').val(data.answerFiveCombination);
                       
-        }).catch((err) => {
-            console.log(err);
-        });
+    //     }).catch((err) => {
+    //         console.log(err);
+    //     });
 }
