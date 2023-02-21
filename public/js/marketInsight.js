@@ -104,10 +104,11 @@ showDrNameCentreName();
 function getMarketInsightDetails() {
 
     
-    let insightId = new URLSearchParams(window.location.search).get('insightId');
-    console.log(insightId);
+    // let insightId = new URLSearchParams(window.location.search).get('insightId');
+    // console.log(insightId);
 
-    // axios
+    // if(insightId != null) {
+    //     axios
     //     .get('/market-insight-detail/' + insightId).then((response) => {
     //         console.log(response.data);  
     //         let data = response.data;
@@ -128,4 +129,5 @@ function getMarketInsightDetails() {
     //     }).catch((err) => {
     //         console.log(err);
     //     });
+    //}
 }

@@ -77,22 +77,22 @@ function setupPotentialPage() {
                 percIVF_FrozenTransfers = 0,
                 percIVF_FreshPickups = 0;
 
-            //console.log('Potential Approval List', lists);
+            console.log('Potential Approval List', lists);
 
             lists.forEach(list => {
 
                 
                 let chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.potentialId}'  id=${list.potentialId} />` : '',
-                    rejectBtn = (parseInt(list.isApproved) === 1) ? `<button type="button " class="btn btn-default btn-grad rejected-btn" data-toggle="modal" 
+                    rejectBtn = (parseInt(list.isApproved) === 1) ? `<button type="button" class="btn btn-default btn-grad rejected-btn" data-toggle="modal" 
                     data-target="#exampleModal" 
                     data-centername="${camelCaseText(list.CENTRENAME)}" 
                     data-accountname="${camelCaseText(list.accountName)}" 
                     data-potenitalid="${list.potentialId}" 
                     data-drname="${camelCaseText(list.DoctorName)}">Reject</button>` : '';
 
-                    console.log(list);
+                    //console.log(list);
 
-                    console.log(parseInt(list.isApproved));
+                    //console.log(parseInt(list.isApproved));
 
                 listArr.push(
                     `<tr>
@@ -143,6 +143,59 @@ function setupPotentialPage() {
             console.log(err);
         });
 }
+
+
+function setmarketInsightPage() {
+    isLoaderVisible(true);
+    let urlArr = window.location.href.split('/'),
+        empId = urlArr[urlArr.length - 2];
+    let param = {
+        empId: empId
+    };
+
+    axios
+        .post(`/account-mapping/${empId}/market-insight-list`, param).then((response) => {
+
+            let lists = response.data, listArr = [];
+
+            console.log(lists);
+
+            lists.forEach(list => {
+
+                let chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.insightId}'  id=${list.insightId} />` : '', 
+                    rejectBtn = (parseInt(list.isApproved) === 1) ? `<button type="button" class="btn btn-default btn-grad rejected-btn" data-toggle="modal" data-target="#exampleModal">Reject</button>` : '';
+
+                listArr.push(
+                    `<tr>
+                        <td>${chkbox}</td>
+                        <td>${(list.answerOne)}</td>
+                        <td>${camelCaseText(list.AnswerTwo)}</td>
+                        <td>${camelCaseText(list.answerThreeRFSH)}</td>
+                        <td align='right'>${list.answerThreeHMG}</td>
+                        <td align='right'>${list.answerProgesterone}</td>
+                        <td align='right'>${list.answerFiveDydrogesterone}</td>
+                        <td align='right'>${list.answerFiveCombination}</td>
+                        <td align='right'>${list.answerFourRHCG}</td>
+                        <td align='right'>${list.answerFourAgonistL}</td>
+                        <td align='right'>${list.answerFourAgonistT}</td>
+                        <td align='right'>${list.answerFourRHCGTriptorelin}</td>
+                        <td align='right'>${list.answerFourRHCGLeuprolide}</td>
+                        <td> ${list.statusText.toLowerCase() == 'approved' ? approvedRejectedPendingIcon[0] : list.statusText.toLowerCase() == 'pending' ? approvedRejectedPendingIcon[1] : approvedRejectedPendingIcon[2]}</td>
+                        <td align='right'>${rejectBtn} </td>
+                    </tr>
+                `);
+            });
+
+            console.log(listArr);
+            $('#marketInsightData').append(listArr.join(''));
+
+
+        }).catch((err) => {
+            console.log(err);
+        });
+}
+
+
 
 function approveListingPotential(mode) {
     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
@@ -314,9 +367,9 @@ function setupRateContractPage() {
             });
             $('#centerList').append(listArr.join(''));
             isLoaderVisible(false);
-            //  // generate data for the graph
+            // generate data for the graph
             // drawBusinessChartWithData(response.data[1]);
-            //  getAllBusinessReportWithData(response.data[2])
+            // getAllBusinessReportWithData(response.data[2])
 
 
         }).catch((err) => {

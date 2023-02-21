@@ -40,6 +40,7 @@ exports.addCenterMarketInsight = (req, res, next) => {
                     .input("answerThreeRFSH", sql.NVarChar, (objParam.answerThreeRFSH))
                     .input("answerThreeHMG", sql.NVarChar, (objParam.answerThreeHMG))
                     .input("answerFourRHCG", sql.NVarChar, (objParam.answerFourRHCG))
+                    
                     .input("answerFourAgonistL", sql.NVarChar, (objParam.answerFourAgonistL))
                     .input("answerFourAgonistT", sql.NVarChar, (objParam.answerFourAgonistT))
                     .input("answerFourRHCGTriptorelin", sql.NVarChar, (objParam.answerFourRHCGTriptorelin))
@@ -47,7 +48,8 @@ exports.addCenterMarketInsight = (req, res, next) => {
                     .input("answerProgesterone", sql.NVarChar, (objParam.answerProgesterone))
                     .input("answerFiveDydrogesterone", sql.NVarChar, (objParam.answerFiveDydrogesterone))
                     .input("answerFiveCombination", sql.NVarChar, (objParam.answerFiveCombination))
-
+                    .input("answerFourUHCG", sql.NVarChar, (objParam.answerFourUHCG))
+                    
                     .execute("USP_ADD_UPDATE_MARKET_INSIGHT_BY_KAM")
                     .then(function (resp) {                        
                         console.log('success');
