@@ -163,12 +163,16 @@ function setmarketInsightPage() {
             lists.forEach(list => {
 
                 let chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.insightId}'  id=${list.insightId} />` : '', 
-                    rejectBtn = (parseInt(list.isApproved) === 1) ? `<button type="button" class="btn btn-default btn-grad rejected-btn" data-toggle="modal" data-target="#exampleModal">Reject</button>` : '';
+                    rejectBtn = (parseInt(list.isApproved) === 1) ? `<button type="button" class="btn btn-default btn-grad rejected-btn" data-toggle="modal" data-target="#exampleModal" data-target="#exampleModal" 
+                    data-centername="${camelCaseText(list.CENTRENAME)}" 
+                    data-accountname="${camelCaseText(list.accountName)}" 
+                    data-insightid="${list.insightId}" 
+                    data-drname="${camelCaseText(list.DoctorName)}">Reject</button>` : '';
 
                 listArr.push(
                     `<tr>
                         <td>${chkbox}</td>
-                        <td>${(list.answerOne)}</td>
+                        <td>${(list.answerOne ? 'Yes' : 'No')}</td>
                         <td>${camelCaseText(list.AnswerTwo)}</td>
                         <td>${camelCaseText(list.answerThreeRFSH)}</td>
                         <td align='right'>${list.answerThreeHMG}</td>
@@ -188,6 +192,7 @@ function setmarketInsightPage() {
 
             console.log(listArr);
             $('#marketInsightData').append(listArr.join(''));
+            isLoaderVisible(false);
 
 
         }).catch((err) => {
@@ -236,6 +241,48 @@ function approveListingPotential(mode) {
             //  redirect('/hospitals');
         })
     );
+    return false;
+}
+
+function approveListingMarketInsight(mode) {
+    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")), endPoints;
+
+    if (parseInt(mode) === 2) {
+        if ($('#txtAreaRejectReason').val() == '') {
+          alert('Please enter reason to reject')
+          $('#txtAreaRejectReason').focus();
+          return false;
+        }
+        endPoints = [{
+            insightId: $('#hidInsightId').val(),
+            rbmId: parseInt(userData.empId),
+            mode: mode,
+            rejectReason: $('#txtAreaRejectReason')? $('#txtAreaRejectReason').val() : ''
+        }];
+
+    } 
+    else {
+        endPoints = $(".chkbox:checked").map(function () {
+            return {
+                insightId: parseInt($(this).val()),
+                rbmId: parseInt(userData.empId),
+                mode: mode,
+                rejectReason: $('#txtAreaRejectReason')? $('#txtAreaRejectReason').val() : ''
+            };
+        }).get();
+    }
+
+    
+    Promise.all(endPoints.map((endpoint) => axios.post('/center-market-insight-approved', endpoint))).then(
+        axios.spread((...allData) => {
+            //console.log({ allData });
+            $('#exampleModal').modal('hide')
+            alert('Approved Sucessfully');
+            window.top.location = window.top.location;
+            //  redirect('/hospitals');
+        })
+    );
+
     return false;
 }
 
@@ -448,7 +495,7 @@ function setupCompetitionPage() {
                         <td>${(list.accountName) ? camelCaseText(list.accountName) : ''}</td>
                         <td>${camelCaseText(list.CENTRENAME)}</td>
                         <td>${camelCaseText(list.DoctorName)}</td>
-                        <td> ${list.statusText.toLowerCase() == 'approved' ? approvedRejectedPendingIcon[0] : list.statusText.toLowerCase() == 'pending' ? approvedRejectedPendingIcon[1] : approvedRejectedPendingIcon[2]}</td>
+                        <td> ${list.statusText == null ? approvedRejectedPendingIcon[1] : list.statusText.toLowerCase() == 'approved' ? approvedRejectedPendingIcon[0] : list.statusText.toLowerCase() == 'pending' ? approvedRejectedPendingIcon[1] : approvedRejectedPendingIcon[2]}</td>
                         <!--<td>
                         <a href='/add-competition?cid=${list.centerId}&kamid=${empId}'>View Details</a> 
                         </td>-->

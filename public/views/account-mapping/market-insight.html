@@ -39,7 +39,7 @@
                                     </g>
                                 </g>
                             </svg>
-                            <span>Potential List</span>
+                            <span>Market Insight List</span>
                         </div>
                     </h1>
                     <ul id="right-nav"></ul>
@@ -53,12 +53,12 @@
                         </div>
 
                         <ul class="nav nav-tabs gradient-tabs">
-                            <li class="active"><a data-toggle="tab" href="#chart">Data in Chart Format</a></li>
+                            <!-- <li class="active"><a data-toggle="tab" href="#chart">Data in Chart Format</a></li> -->
                             <li><a data-toggle="tab" href="#tabular">Data in Tabular Format</a></li>
                         </ul>
 
                         <div class="tab-content">
-                            <div id="chart" class="tab-pane fade in active">
+                            <div id="chart" class="tab-pane fade">
                                 <div class="account-mapping-chart-potential-wrapper">
                                     <div>
                                         <div id="potential_chart1"></div>
@@ -74,10 +74,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="tabular" class="tab-pane fade">
+                            <div id="tabular" class="tab-pane fade in active">
 
                                 <div class="text-right filter-main-wrapper">
-                                    <div class="text-right"><a href="javascript:void(0);" onclick="approveListingPotential(0);return false;"
+                                    <div class="text-right"><a href="javascript:void(0);" onclick="approveListingMarketInsight(0);return false;"
                                             class="btn btn-default btn-grad go-back">Approve Selected</a></div>
                                     <div class="form-group filter-wrapper">
                                         <select class="form-control" id="comboAccountCategory" onchange="filterData()">
@@ -136,7 +136,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Reject Potential</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Market Insight</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -146,7 +146,7 @@
                         <h5 id="divCenterName">Center Name: </h5>
                         <h5 id="dvAccountName">Account Name: </h5>
                         <h5 id="dvIVFCore">IVF Core: </h5>
-                        <input type="hidden" id="hidPotentialId" name="hidPotentialId" />
+                        <input type="hidden" id="hidInsightId" name="hidInsightId" />
                         <div class="form-group">
                             <label for="message-text" class="col-form-label"><strong>Reason for reject:</strong></label>
                             <textarea class="form-control" id="txtAreaRejectReason" maxlength="999" rows="5" cols="50" name="txtAreaRejectReason"></textarea>
@@ -155,7 +155,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="approveListingPotential(2);return false;">REJECT</button>
+                    <button type="button" class="btn btn-primary" onclick="approveListingMarketInsight(2);return false;">REJECT</button>
                 </div>
             </div>
         </div>
@@ -192,23 +192,23 @@
                 modal.find('#divCenterName').text('Center Name: ' + button.data('centername'))
                 modal.find('#dvAccountName').text('Account Name ' + button.data('accountname'))
                 modal.find('#dvIVFCore').text('IVF Core ' + button.data('drname'))
-                modal.find('#hidPotentialId').val(button.data('potenitalid'))
+                modal.find('#hidInsightId').val(button.data('insightid'))
                 
             })
         });
 
         function filterData() {
-            //debugger;
+            
           let dropdown, table, rows, cells, empName, filter;
             dropdown = document.getElementById("comboAccountCategory");
             table = document.getElementById("filterDataByCategoryTable");
-            rows = table.getElementsByTagName("tr");            
+            rows = Array.from(table.getElementsByTagName("tr")).slice(1)     
             filter = dropdown.value;            
             for (let row of rows) { // `for...of` loops through the NodeList
                 cells = row.getElementsByTagName("td");
                 if (cells) {
                     // empName = cells[12] || null; // gets the 2nd `td` or nothing
-                    empName = cells[12] ? cells[12].querySelector('svg').getAttribute('class') : null; // gets the 2nd `td` or nothing    
+                    empName = cells[13] ? cells[13].querySelector('svg').getAttribute('class') : null; // gets the 2nd `td` or nothing    
                     // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
                     if (filter === "All" || !empName || (filter === empName.toLowerCase())) {
                         row.style.display = ""; // shows this row                        

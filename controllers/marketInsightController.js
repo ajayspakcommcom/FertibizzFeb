@@ -102,4 +102,44 @@ exports.getCenterMarketInsightById = (req, res, next) => {
      });
  };
 
+ exports.approveCenterMarketInsightByInsightId = (req, res, next) => {
+    // console.log('inside update employee');
+     let params = Object.assign(req.params, req.body);
+     approveCenterMarketInsightByInsightId(params).then(result => {
+         res.status(_STATUSCODE).json(result)
+     })
+ };
+
+ 
+function approveCenterMarketInsightByInsightId( objParam ) {
+    // console.log('--------------------------------')
+    // console.log(objParam)
+    // console.log('--------------------------------')
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    .input("insightId", sql.Int, objParam.insightId)
+                    .input("rbmId", sql.Int, objParam.rbmId)
+                    .input("mode", sql.Int, objParam.mode)
+                    .input("rejectReason", sql.NVarChar, objParam.rejectReason)
+                    .execute("USP_APPROVE_CUSTOMER_MARKET_INSIGHT_BY_RBM")
+                    .then(function (resp) {
+                        //console.log(resp.recordset)
+                        resolve(resp.recordset);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    });
+};
 

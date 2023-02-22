@@ -8767,6 +8767,12 @@ ul.inline {
   margin-left: 5px;
 }
 
+.rejected {
+  color: red;
+  font-weight: bold;
+  font-size: 16px;
+}
+
 .loader {
   position: fixed;
   top: 0;

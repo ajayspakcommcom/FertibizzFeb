@@ -104,30 +104,31 @@ showDrNameCentreName();
 function getMarketInsightDetails() {
 
     
-    // let insightId = new URLSearchParams(window.location.search).get('insightId');
-    // console.log(insightId);
+    let insightId = new URLSearchParams(window.location.search).get('insightId');
+    console.log(insightId);
 
-    // if(insightId != null) {
-    //     axios
-    //     .get('/market-insight-detail/' + insightId).then((response) => {
-    //         console.log(response.data);  
-    //         let data = response.data;
-    //         data.answerOne == true ? $("[name=obstetricsRadio]")[0].setAttribute("checked", "checked") : $("[name=obstetricsRadio]")[1].setAttribute("checked", "checked");
-    //         $('#AnswerTwo').val(data.AnswerTwo);
-    //         $('#answerThreeRFSH').val(data.answerThreeRFSH);
-    //         $('#answerThreeHMG').val(data.answerThreeHMG);
-    //         $('#answerFourRHCG').val(data.answerFourRHCG);
-    //         $('#answerFourUHCG').val(data.answerFourUHCG);
-    //         $('#answerFourAgonistL').val(data.answerFourAgonistL);
-    //         $('#answerFourAgonistT').val(data.answerFourAgonistT);
-    //         $('#answerFourRHCGTriptorelin').val(data.answerFourRHCGTriptorelin);
-    //         $('#answerFourRHCGLeuprolide').val(data.answerFourRHCGLeuprolide);
-    //         $('#answerProgesterone').val(data.answerProgesterone);
-    //         $('#answerFiveDydrogesterone').val(data.answerFiveDydrogesterone);
-    //         $('#answerFiveCombination').val(data.answerFiveCombination);
+    if(insightId != null) {
+        axios
+        .get('/market-insight-detail/' + insightId).then((response) => {
+            console.log(response.data);  
+            let data = response.data;
+            data.answerOne == true ? $("[name=obstetricsRadio]")[0].setAttribute("checked", "checked") : $("[name=obstetricsRadio]")[1].setAttribute("checked", "checked");
+            $('#AnswerTwo').val(data.AnswerTwo);
+            $('#answerThreeRFSH').val(data.answerThreeRFSH);
+            $('#answerThreeHMG').val(data.answerThreeHMG);
+            $('#answerFourRHCG').val(data.answerFourRHCG);
+            $('#answerFourUHCG').val(data.answerFourUHCG);
+            $('#answerFourAgonistL').val(data.answerFourAgonistL);
+            $('#answerFourAgonistT').val(data.answerFourAgonistT);
+            $('#answerFourRHCGTriptorelin').val(data.answerFourRHCGTriptorelin);
+            $('#answerFourRHCGLeuprolide').val(data.answerFourRHCGLeuprolide);
+            $('#answerProgesterone').val(data.answerProgesterone);
+            $('#answerFiveDydrogesterone').val(data.answerFiveDydrogesterone);
+            $('#answerFiveCombination').val(data.answerFiveCombination);
+            $('#rejectedComment b').text(data.rejectComments);
                       
-    //     }).catch((err) => {
-    //         console.log(err);
-    //     });
-    //}
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
 }

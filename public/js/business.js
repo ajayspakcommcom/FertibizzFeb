@@ -45,7 +45,8 @@ async function getSkuDetails() {
     await axios.all([getAllSKURequest, getSkuContractDetailsRequest, getBusinessTrackDetails]).then(axios.spread(function (skuResponse, contractResponse, businessTrackResponse) {
             
         console.log(skuResponse.data);
-           //console.log(contractResponse.data);
+        console.log(contractResponse.data);
+        console.log(businessTrackResponse.data);
            
 
         skuDetails = skuResponse.data;
