@@ -129,6 +129,23 @@ function setupPotentialPage() {
                 totalIVFFrozenTransfers += parseInt(list.frozenTransfers)
             });
 
+
+            listArr.push(`<tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>                      
+                            <td colspan="3" class="total-dr text-right"><b>Total Doctors ${lists.length}</b></td>
+                         </tr>`);
+
+
             $('#potentialData').append(listArr.join(''));
 
             percIVF_FrozenTransfers = percentage(totalIVFFrozenTransfers, totalIVF);
@@ -190,7 +207,23 @@ function setmarketInsightPage() {
                 `);
             });
 
-            console.log(listArr);
+            listArr.push(`<tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>                      
+                            <td></td>                      
+                            <td colspan="3" class="total-dr text-right"><b>Total Doctors ${lists.length}</b></td>
+                         </tr>`);
+
+
             $('#marketInsightData').append(listArr.join(''));
             isLoaderVisible(false);
 
@@ -329,6 +362,23 @@ function setupBusinessPage() {
                     </tr>
                 `);
             });
+
+            listArr.push(`<tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>                      
+                            <td></td>                      
+                            <td colspan="3" class="total-dr text-right"><b>Total Doctors ${lists.length}</b></td>
+                         </tr>`);
+
             $('#potentialData').append(listArr.join(''));
             // generate data for the graph
             drawBusinessChartWithData(response.data[1]);
@@ -503,6 +553,16 @@ function setupCompetitionPage() {
                     </tr>
                 `);
             });
+
+            listArr.push(`<tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>                                             
+                            <td class="total-dr text-right"><b>Total Doctors ${lists.length}</b></td>
+                         </tr>`);
+
             $('#competitionData').append(listArr.join(''));
             // <td>
                         //     ${list.isApproved == 1 ? `<a href='/add-competition?cid=${list.centerId}&kamid=${empId}&mode=reject' class="btn btn-default btn-grad rejected-btn">Reject</a>` : ''} 

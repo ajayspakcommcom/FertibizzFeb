@@ -88,7 +88,7 @@ exports.getCenterMarketInsightById = (req, res, next) => {
                      .input("insightId", sql.Int, objParam.insightId)
                      .execute("USP_LIST_MARKET_INSIGHT_BY_INSIGHTID")
                      .then(function (resp) {                     
-                         resolve(resp.recordset[0]);
+                         resolve(resp.recordsets);
                          dbConn.close();
                      })
                      .catch(function (err) {

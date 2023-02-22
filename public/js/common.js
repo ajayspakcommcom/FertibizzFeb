@@ -183,6 +183,7 @@ function camelCaseText(str) {
     }
 }
 
+
 function getIdFromURL() {
     let urlArr = window.location.href.split('/');
     return urlArr[urlArr.length - 1];

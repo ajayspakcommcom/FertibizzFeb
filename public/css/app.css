@@ -9058,3 +9058,7 @@ svg.rejected {
 .question-label p {
   font-weight: bold;
 }
+
+.total-dr b {
+  font-size: 18px;
+}

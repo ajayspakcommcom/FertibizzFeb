@@ -414,10 +414,12 @@ function getMyHospitalList() {
     axios
         .post('/hospitals-list/', param).then((response) => {
             
-            let lists = response.data,
-                listArr = [];
+            let lists = response.data, listArr = [], uniqueList = [...new Map(lists.map(item => [item['CENTRENAME'], item])).values()];
+            
+            console.log('Origional',lists);
+            console.log('Unique',uniqueList);
 
-            lists.forEach(list => {
+            uniqueList.forEach(list => {
                 listArr.push(
                 `
                 <tr>
@@ -435,7 +437,19 @@ function getMyHospitalList() {
                     `)
             });
 
-            console.log(lists);
+            listArr.push(`<tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="total-dr"><b>Total Doctors ${uniqueList.length}</b></td>
+                         </tr>`);
+
+            //console.log(lists);
 
             $('#centerList').append(listArr.join(''));
             isLoaderVisible(false);

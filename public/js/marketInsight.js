@@ -25,7 +25,7 @@ function loadMonthYear() {
     month = parseInt($('#cmbMonth').val()),
     year = parseInt($('#cmbYear').val()),
     answerOne = $('input[name="obstetricsRadio"]:checked').val(), 
-    AnswerTwo = $('#AnswerTwo').val(),
+    AnswerTwo = 0, //$('#AnswerTwo').val(),
     answerThreeRFSH = $('#answerThreeRFSH').val(),
     answerThreeHMG = $('#answerThreeHMG').val(),
     answerFourRHCG = $('#answerFourRHCG').val(),
@@ -38,11 +38,11 @@ function loadMonthYear() {
     answerFiveDydrogesterone = $('#answerFiveDydrogesterone').val(),
     answerFiveCombination = $('#answerFiveCombination').val();
 
-    if(AnswerTwo === '') {
-        alert('Please enter Total No of Fresh stimulation Cycles per month');
-        $('#AnswerTwo').focus();
-        return false;
-    }
+    // if(AnswerTwo === '') {
+    //     alert('Please enter Total No of Fresh stimulation Cycles per month');
+    //     $('#AnswerTwo').focus();
+    //     return false;
+    // }
 
     if((parseInt(answerThreeRFSH) + parseInt(answerThreeHMG)) != 100) {
         alert('Total of Gonadotropins AVG IU /CYCLE should be equal to 100');  
@@ -105,15 +105,16 @@ function getMarketInsightDetails() {
 
     
     let insightId = new URLSearchParams(window.location.search).get('insightId');
-    console.log(insightId);
+    //console.log(insightId);
 
     if(insightId != null) {
         axios
         .get('/market-insight-detail/' + insightId).then((response) => {
-            console.log(response.data);  
-            let data = response.data;
+            // console.log(response.data);  
+            //console.log(response.data[1][0]);  
+            let data = response.data[0][0], ivfCycle = response.data[1][0].IVFCycle;           
             data.answerOne == true ? $("[name=obstetricsRadio]")[0].setAttribute("checked", "checked") : $("[name=obstetricsRadio]")[1].setAttribute("checked", "checked");
-            $('#AnswerTwo').val(data.AnswerTwo);
+            $('#AnswerTwo').val(ivfCycle);
             $('#answerThreeRFSH').val(data.answerThreeRFSH);
             $('#answerThreeHMG').val(data.answerThreeHMG);
             $('#answerFourRHCG').val(data.answerFourRHCG);
