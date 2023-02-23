@@ -78,72 +78,82 @@ function setupPotentialPage() {
                 percIVF_FreshPickups = 0;
 
             console.log('Potential Approval List', lists);
+            if (lists.length > 0) {
+                let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
+                lists.forEach(list => {
+                    console.log(list);
 
-            lists.forEach(list => {
+                    let chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.potentialId}'  id=${list.potentialId} />` : '',
+                        rejectBtn = (parseInt(list.isApproved) === 1) ? `<button type="button" class="btn btn-default btn-grad rejected-btn" data-toggle="modal" 
+                        data-target="#exampleModal" 
+                        data-centername="${camelCaseText(list.CENTRENAME)}" 
+                        data-accountname="${camelCaseText(list.accountName)}" 
+                        data-potenitalid="${list.potentialId}" 
+                        data-drname="${camelCaseText(list.DoctorName)}">Reject</button>` : '';
 
+                    if (userData.post === _POST.ZBM) {
+                        chkbox = (parseInt(list.ZBMApproved) === 1) ? `<input ${list.ZBMApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.potentialId}'  id=${list.potentialId} />` : '',
+                        rejectBtn = (parseInt(list.ZBMApproved) === 1) ? `<button type="button" class="btn btn-default btn-grad rejected-btn" data-toggle="modal" 
+                        data-target="#exampleModal" 
+                        data-centername="${camelCaseText(list.CENTRENAME)}" 
+                        data-accountname="${camelCaseText(list.accountName)}" 
+                        data-potenitalid="${list.potentialId}" 
+                        data-drname="${camelCaseText(list.DoctorName)}">Reject</button>` : '';
+                    }
+                    listArr.push(
+                        `<tr>
+                            <td>${chkbox}</td>
+                            <td>${(list.accountName) ? camelCaseText(list.accountName) : ''}</td>
+                            <td>${camelCaseText(list.CENTRENAME)}</td>
+                            <td>${camelCaseText(list.DoctorName)}</td>
+                            <td align='right'>${list.IUICycle}</td>
+                            <td align='right'>${list.IVFCycle}</td>
+                            <td align='right'>${list.FreshPickUps}</td>
+                            <td align='right'>${list.frozenTransfers}</td>
+                            <td align='right'>${list.SelftCycle}</td>
+                            <td align='right'>${list.DonorCycles}</td>
+                            <td align='right'>${list.AgonistCycles}</td>
+                            <td align='right'>${list.Antagonistcycles}</td>
+                            <td> ${list.statusText == null ? approvedRejectedPendingIcon[1] : list.statusText.toLowerCase() == 'approved' ? approvedRejectedPendingIcon[0] : list.statusText.toLowerCase() == 'pending' ? approvedRejectedPendingIcon[1] : approvedRejectedPendingIcon[2]}</td>
+                            <td align='right'>${rejectBtn} </td>
+                        </tr>
+                    `);
+                    // reoprt 2
+                    totalSelftCycle += parseInt(list.SelftCycle);
+                    totalDonorCycle += parseInt(list.DonorCycles);
 
-                let chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.potentialId}'  id=${list.potentialId} />` : '',
-                    rejectBtn = (parseInt(list.isApproved) === 1) ? `<button type="button" class="btn btn-default btn-grad rejected-btn" data-toggle="modal" 
-                    data-target="#exampleModal" 
-                    data-centername="${camelCaseText(list.CENTRENAME)}" 
-                    data-accountname="${camelCaseText(list.accountName)}" 
-                    data-potenitalid="${list.potentialId}" 
-                    data-drname="${camelCaseText(list.DoctorName)}">Reject</button>` : '';
-
-                //console.log(list);
-
-                //console.log(parseInt(list.isApproved));
-
-                listArr.push(
-                    `<tr>
-                        <td>${chkbox}</td>
-                        <td>${(list.accountName) ? camelCaseText(list.accountName) : ''}</td>
-                        <td>${camelCaseText(list.CENTRENAME)}</td>
-                        <td>${camelCaseText(list.DoctorName)}</td>
-                        <td align='right'>${list.IUICycle}</td>
-                        <td align='right'>${list.IVFCycle}</td>
-                        <td align='right'>${list.FreshPickUps}</td>
-                        <td align='right'>${list.frozenTransfers}</td>
-                        <td align='right'>${list.SelftCycle}</td>
-                        <td align='right'>${list.DonorCycles}</td>
-                        <td align='right'>${list.AgonistCycles}</td>
-                        <td align='right'>${list.Antagonistcycles}</td>
-                        <td> ${list.statusText.toLowerCase() == 'approved' ? approvedRejectedPendingIcon[0] : list.statusText.toLowerCase() == 'pending' ? approvedRejectedPendingIcon[1] : approvedRejectedPendingIcon[2]}</td>
-                        <td align='right'>${rejectBtn} </td>
-                    </tr>
-                `);
-                // reoprt 2
-                totalSelftCycle += parseInt(list.SelftCycle);
-                totalDonorCycle += parseInt(list.DonorCycles);
-
-                // reoprt 3
-                totalAntagonistcycles += parseInt(list.Antagonistcycles)
-                totalAgonistCycles += parseInt(list.AgonistCycles);
-
-
-                // report 1
-                totalIVF += parseInt(list.IVFCycle)
-                totalIUI += parseInt(list.IUICycle)
-                // report 1- sub report
-                totalIVFFreshPickups += parseInt(list.FreshPickUps)
-                totalIVFFrozenTransfers += parseInt(list.frozenTransfers)
-            });
+                    // reoprt 3
+                    totalAntagonistcycles += parseInt(list.Antagonistcycles)
+                    totalAgonistCycles += parseInt(list.AgonistCycles);
 
 
-            listArr.push(`<tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>                      
-                            <td colspan="3" class="total-dr text-right"><b>Total Doctors ${lists.length}</b></td>
-                         </tr>`);
+                    // report 1
+                    totalIVF += parseInt(list.IVFCycle)
+                    totalIUI += parseInt(list.IUICycle)
+                    // report 1- sub report
+                    totalIVFFreshPickups += parseInt(list.FreshPickUps)
+                    totalIVFFrozenTransfers += parseInt(list.frozenTransfers)
+                });
+                listArr.push(`<tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>                      
+                                <td colspan="3" class="total-dr text-right"><b>Total Doctors ${lists.length}</b></td>
+                             </tr>`);
+            } else {
+                listArr.push(`<tr>
+                <td colspan='14' align='center'> <b>No Record Found</b></td>
+             </tr>`);
+            }
+
 
 
             $('#potentialData').append(listArr.join(''));
@@ -341,13 +351,13 @@ function setupBusinessPage() {
 
     axios
         .post(`/account-mapping/${empId}/business-list`, param).then((response) => {
-          //  console.log(response.data[0])
+            //  console.log(response.data[0])
             let lists = response.data[0],
                 listArr = [];
             if (lists.length > 0) {
 
                 lists.forEach(list => {
-                   // console.log(list)
+                    // console.log(list)
                     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
                         chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.hospitalId}'  id=${list.hospitalId} />` : '',
                         rejectBtn = (parseInt(list.isApproved) === 1) ? `<button type="button " class="btn btn-default btn-grad rejected-btn" data-toggle="modal" 

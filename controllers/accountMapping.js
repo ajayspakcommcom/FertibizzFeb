@@ -31,16 +31,22 @@ exports.getAccountMappingPotentialDetail = (req, res, next) => {
 //getAccountMappingPotentialListData
 
 exports.getAccountMappingPotentialListData = (req, res, next) => {
-   // console.log(req.params, '--->')
-    getAccountMappingPotentialListData(req.params).then((result) => {
+    // console.clear();
+  //  console.log(req.session.userDetails.post, '--->')
+   let spName = 'USP_GET_RBM_POTENTIAL_LIST_FOR_APPROVAL'
+    if (req.session.userDetails && req.session.userDetails.post === 'ZBM') {
+        spName = 'USP_GET_ZBM_POTENTIAL_LIST_FOR_APPROVAL'
+     }
+    getAccountMappingPotentialListData(req.params, spName).then((result) => {
          res.status(_STATUSCODE).json(result);
      });
  };
  
  
- getAccountMappingPotentialListData = (objParam) => {
+ getAccountMappingPotentialListData = (objParam, storeProc) => {
     // console.clear();
     // console.log('Ram', objParam.empId);
+   // console.log(storeProc)
      return new Promise((resolve) => {
          var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
          dbConn
@@ -49,7 +55,7 @@ exports.getAccountMappingPotentialListData = (req, res, next) => {
                  var request = new sql.Request(dbConn);
                  request
                      .input("KamId", sql.Int, objParam.empId)
-                     .execute("USP_GET_RBM_POTENTIAL_LIST_FOR_APPROVAL")
+                     .execute(storeProc)
                      .then(function (resp) {
                         //console.log(resp)
                          resolve(resp.recordset);
