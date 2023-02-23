@@ -307,7 +307,7 @@ function addPrevValueOnFocus(elem) {
 }
 
 function addPrevValueOnFocusOut(elem) {
-    console.log(elem.value);
+    //console.log(elem.value);
     if(elem.value == undefined || elem.value == null || elem.value == '') {
         elem.value = 0;
     }

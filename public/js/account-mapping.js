@@ -341,54 +341,74 @@ function setupBusinessPage() {
 
     axios
         .post(`/account-mapping/${empId}/business-list`, param).then((response) => {
-            //console.log(response.data[0])
+          //  console.log(response.data[0])
             let lists = response.data[0],
                 listArr = [];
-            lists.forEach(list => {
-                console.log(list)
-                let chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.hospitalId}'  id=${list.hospitalId} />` : '',
-                    rejectBtn = (parseInt(list.isApproved) === 1) ? `<button type="button " class="btn btn-default btn-grad rejected-btn" data-toggle="modal" 
-                data-target="#exampleModal" 
-                data-centername="${camelCaseText(list.CENTRENAME)}" 
-                data-accountname="${camelCaseText(list.accountName)}" 
-                data-potenitalid="${list.hospitalId}" 
-                data-drname="${camelCaseText(list.DoctorName)}">Reject</button>` : '';
-                listArr.push(
-                    `<tr>
-                        <td>${chkbox}</td>
-                        <td>${(list.accountName) ? camelCaseText(list.accountName) : ''}</td>
-                        <td>${camelCaseText(list.CENTRENAME)}</td>
-                        <td>${camelCaseText(list.DoctorName)}</td>
-                        <td align='right'>${list.brandGroup1}</td>
-                        <td align='right'>${list.brandGroup2}</td>
-                        <td align='right'>${list.brandGroup3}</td>
-                        <td align='right'>${list.brandGroup4}</td>
-                        <td align='right'>${list.brandGroup5}</td>
-                        <td align='right'>${list.brandGroup6}</td>
-                        <td align='right'>${list.brandGroup7}</td>
-                        <td align='right'>${list.brandGroup8}</td>
-                        <td align='right'>${list.brandGroup9}</td>
-                        <td> ${list.statusText.toLowerCase() == 'approved' ? approvedRejectedPendingIcon[0] : list.statusText.toLowerCase() == 'pending' ? approvedRejectedPendingIcon[1] : approvedRejectedPendingIcon[2]}</td>
-                        <td align='right'>${rejectBtn} </td>
-                    </tr>
-                `);
-            });
+            if (lists.length > 0) {
 
-            listArr.push(`<tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>                      
-                            <td></td>                      
-                            <td colspan="3" class="total-dr text-right"><b>Total Doctors ${lists.length}</b></td>
-                         </tr>`);
+                lists.forEach(list => {
+                   // console.log(list)
+                    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
+                        chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.hospitalId}'  id=${list.hospitalId} />` : '',
+                        rejectBtn = (parseInt(list.isApproved) === 1) ? `<button type="button " class="btn btn-default btn-grad rejected-btn" data-toggle="modal" 
+                    data-target="#exampleModal" 
+                    data-centername="${camelCaseText(list.CENTRENAME)}" 
+                    data-accountname="${camelCaseText(list.accountName)}" 
+                    data-potenitalid="${list.hospitalId}" 
+                    data-drname="${camelCaseText(list.DoctorName)}">Reject</button>` : '';
+
+                    if (userData.post === _POST.ZBM) {
+                        chkbox = (parseInt(list.ZBMApproved) === 1) ? `<input ${list.ZBMApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.hospitalId}'  id=${list.hospitalId} />` : '',
+                            rejectBtn = (parseInt(list.ZBMApproved) === 1) ? `<button type="button " class="btn btn-default btn-grad rejected-btn" data-toggle="modal" 
+                    data-target="#exampleModal" 
+                    data-centername="${camelCaseText(list.CENTRENAME)}" 
+                    data-accountname="${camelCaseText(list.accountName)}" 
+                    data-potenitalid="${list.hospitalId}" 
+                    data-drname="${camelCaseText(list.DoctorName)}">Reject</button>` : '';
+                    }
+                    listArr.push(
+                        `<tr>
+                            <td>${chkbox}</td>
+                            <td>${(list.accountName) ? camelCaseText(list.accountName) : ''}</td>
+                            <td>${camelCaseText(list.CENTRENAME)}</td>
+                            <td>${camelCaseText(list.DoctorName)}</td>
+                            <td align='right'>${list.brandGroup1}</td>
+                            <td align='right'>${list.brandGroup2}</td>
+                            <td align='right'>${list.brandGroup3}</td>
+                            <td align='right'>${list.brandGroup4}</td>
+                            <td align='right'>${list.brandGroup5}</td>
+                            <td align='right'>${list.brandGroup6}</td>
+                            <td align='right'>${list.brandGroup7}</td>
+                            <td align='right'>${list.brandGroup8}</td>
+                            <td align='right'>${list.brandGroup9}</td>
+                            <td> ${list.statusText == null ? approvedRejectedPendingIcon[1] : list.statusText.toLowerCase() == 'approved' ? approvedRejectedPendingIcon[0] : list.statusText.toLowerCase() == 'pending' ? approvedRejectedPendingIcon[1] : approvedRejectedPendingIcon[2]}</td>
+                            <td align='right'>${rejectBtn} </td>
+                        </tr>
+                    `);
+                });
+
+                listArr.push(`<tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>                      
+                                <td></td>                      
+                                <td colspan="3" class="total-dr text-right"><b>Total Doctors ${lists.length}</b></td>
+                             </tr>`);
+            }
+            else {
+                listArr.push(`<tr>
+                <td colspan='14' align='center'> <b>No Record Found</b></td>
+             </tr>`);
+            }
+
 
             $('#potentialData').append(listArr.join(''));
             // generate data for the graph

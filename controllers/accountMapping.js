@@ -67,7 +67,8 @@ exports.getAccountMappingPotentialListData = (req, res, next) => {
  };
 
  exports.getAccountMappingMarketInsightListData = (req, res, next) => {
-    //console.log(req.session.userDetails.post, '--->')
+   // console.clear();
+   // console.log(req.session.userDetails.post, '--->')
     let spName = 'USP_GET_RBM_MarketInsights_LIST_FOR_APPROVAL'
     if (req.session.userDetails && req.session.userDetails.post === 'ZBM') {
         spName = 'USP_GET_ZBM_MarketInsights_LIST_FOR_APPROVAL'
@@ -107,13 +108,19 @@ exports.getAccountMappingPotentialListData = (req, res, next) => {
 
 exports.getAccountMappingBusinessListData = (req, res, next) => {
     // console.log(req.params, '--->')
-     getAccountMappingBusinessListData(req.params).then((result) => {
+  //  console.log(req.session.userDetails.post, '--->')
+     let spName = 'USP_GET_RBM_BUSINESS_LIST_FOR_APPROVAL'
+     if (req.session.userDetails && req.session.userDetails.post === 'ZBM') {
+         spName = 'USP_GET_ZBM_BUSINESS_LIST_FOR_APPROVAL'
+      }
+     getAccountMappingBusinessListData(req.params, spName).then((result) => {
           res.status(_STATUSCODE).json(result);
       });
   };
   
   
-  getAccountMappingBusinessListData = (objParam) => {
+  getAccountMappingBusinessListData = (objParam, storeProc) => {
+    //console.log(storeProc)
       return new Promise((resolve) => {
           var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
           dbConn
@@ -122,7 +129,7 @@ exports.getAccountMappingBusinessListData = (req, res, next) => {
                   var request = new sql.Request(dbConn);
                   request
                       .input("KamId", sql.Int, objParam.empId)
-                      .execute("USP_GET_RBM_BUSINESS_LIST_FOR_APPROVAL")
+                      .execute(storeProc)
                       .then(function (resp) {
                          //console.log(resp)
                           resolve(resp.recordsets);
