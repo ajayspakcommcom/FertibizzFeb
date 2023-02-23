@@ -81,7 +81,7 @@ function setupPotentialPage() {
 
             lists.forEach(list => {
 
-                
+
                 let chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.potentialId}'  id=${list.potentialId} />` : '',
                     rejectBtn = (parseInt(list.isApproved) === 1) ? `<button type="button" class="btn btn-default btn-grad rejected-btn" data-toggle="modal" 
                     data-target="#exampleModal" 
@@ -90,9 +90,9 @@ function setupPotentialPage() {
                     data-potenitalid="${list.potentialId}" 
                     data-drname="${camelCaseText(list.DoctorName)}">Reject</button>` : '';
 
-                    //console.log(list);
+                //console.log(list);
 
-                    //console.log(parseInt(list.isApproved));
+                //console.log(parseInt(list.isApproved));
 
                 listArr.push(
                     `<tr>
@@ -174,54 +174,65 @@ function setmarketInsightPage() {
         .post(`/account-mapping/${empId}/market-insight-list`, param).then((response) => {
 
             let lists = response.data, listArr = [];
+            if (lists.length > 0) {
+                lists.forEach(list => {
+                    let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
+                        chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.insightId}'  id=${list.insightId} />` : '',
+                        rejectBtn = (parseInt(list.isApproved) === 1) ? `<button type="button" class="btn btn-default btn-grad rejected-btn" data-toggle="modal" data-target="#exampleModal" data-target="#exampleModal" 
+                        data-centername="${camelCaseText(list.CENTRENAME)}" 
+                        data-accountname="${camelCaseText(list.accountName)}" 
+                        data-insightid="${list.insightId}" 
+                        data-drname="${camelCaseText(list.DoctorName)}">Reject</button>` : '';
+                    if (userData.post === _POST.ZBM) {
+                        chkbox = (parseInt(list.ZBMApproved) === 1) ? `<input ${list.ZBMApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.insightId}'  id=${list.insightId} />` : ''
+                        rejectBtn = (parseInt(list.ZBMApproved) === 1) ? `<button type="button" class="btn btn-default btn-grad rejected-btn" data-toggle="modal" data-target="#exampleModal" data-target="#exampleModal" 
+                        data-centername="${camelCaseText(list.CENTRENAME)}" 
+                        data-accountname="${camelCaseText(list.accountName)}" 
+                        data-insightid="${list.insightId}" 
+                        data-drname="${camelCaseText(list.DoctorName)}">Reject</button>` : '';
+                    }
+                    listArr.push(
+                        `<tr>
+                            <td>${chkbox}</td>
+                            <td>${(list.answerOne ? 'Yes' : 'No')}</td>
+                            <td>${camelCaseText(list.AnswerTwo)}</td>
+                            <td>${camelCaseText(list.answerThreeRFSH)}</td>
+                            <td align='right'>${list.answerThreeHMG}</td>
+                            <td align='right'>${list.answerProgesterone}</td>
+                            <td align='right'>${list.answerFiveDydrogesterone}</td>
+                            <td align='right'>${list.answerFiveCombination}</td>
+                            <td align='right'>${list.answerFourRHCG}</td>
+                            <td align='right'>${list.answerFourAgonistL}</td>
+                            <td align='right'>${list.answerFourAgonistT}</td>
+                            <td align='right'>${list.answerFourRHCGTriptorelin}</td>
+                            <td align='right'>${list.answerFourRHCGLeuprolide}</td>
+                            <td> ${list.statusText.toLowerCase() == 'approved' ? approvedRejectedPendingIcon[0] : list.statusText.toLowerCase() == 'pending' ? approvedRejectedPendingIcon[1] : approvedRejectedPendingIcon[2]}</td>
+                            <td align='right'>${rejectBtn} </td>
+                        </tr>
+                    `);
+                });
 
-            console.log(lists);
+                listArr.push(`<tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>                      
+                                <td></td>                      
+                                <td colspan="3" class="total-dr text-right"><b>Total Doctors ${lists.length}</b></td>
+                             </tr>`);
+            } else {
+                listArr.push(`<tr>
+                <td colspan='15' align='center'> <b>No Record Found</b></td>
+             </tr>`);
+            }
 
-            lists.forEach(list => {
-
-                let chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.insightId}'  id=${list.insightId} />` : '', 
-                    rejectBtn = (parseInt(list.isApproved) === 1) ? `<button type="button" class="btn btn-default btn-grad rejected-btn" data-toggle="modal" data-target="#exampleModal" data-target="#exampleModal" 
-                    data-centername="${camelCaseText(list.CENTRENAME)}" 
-                    data-accountname="${camelCaseText(list.accountName)}" 
-                    data-insightid="${list.insightId}" 
-                    data-drname="${camelCaseText(list.DoctorName)}">Reject</button>` : '';
-
-                listArr.push(
-                    `<tr>
-                        <td>${chkbox}</td>
-                        <td>${(list.answerOne ? 'Yes' : 'No')}</td>
-                        <td>${camelCaseText(list.AnswerTwo)}</td>
-                        <td>${camelCaseText(list.answerThreeRFSH)}</td>
-                        <td align='right'>${list.answerThreeHMG}</td>
-                        <td align='right'>${list.answerProgesterone}</td>
-                        <td align='right'>${list.answerFiveDydrogesterone}</td>
-                        <td align='right'>${list.answerFiveCombination}</td>
-                        <td align='right'>${list.answerFourRHCG}</td>
-                        <td align='right'>${list.answerFourAgonistL}</td>
-                        <td align='right'>${list.answerFourAgonistT}</td>
-                        <td align='right'>${list.answerFourRHCGTriptorelin}</td>
-                        <td align='right'>${list.answerFourRHCGLeuprolide}</td>
-                        <td> ${list.statusText.toLowerCase() == 'approved' ? approvedRejectedPendingIcon[0] : list.statusText.toLowerCase() == 'pending' ? approvedRejectedPendingIcon[1] : approvedRejectedPendingIcon[2]}</td>
-                        <td align='right'>${rejectBtn} </td>
-                    </tr>
-                `);
-            });
-
-            listArr.push(`<tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>                      
-                            <td></td>                      
-                            <td colspan="3" class="total-dr text-right"><b>Total Doctors ${lists.length}</b></td>
-                         </tr>`);
 
 
             $('#marketInsightData').append(listArr.join(''));
@@ -241,30 +252,30 @@ function approveListingPotential(mode) {
 
     if (parseInt(mode) === 2) {
         if ($('#txtAreaRejectReason').val() == '') {
-          alert('Please enter reason to reject')
-          $('#txtAreaRejectReason').focus();
-          return false;
+            alert('Please enter reason to reject')
+            $('#txtAreaRejectReason').focus();
+            return false;
         }
         endPoints = [{
             potentialId: $('#hidPotentialId').val(),
             rbmId: parseInt(userData.empId),
             mode: mode,
-            rejectReason: $('#txtAreaRejectReason')? $('#txtAreaRejectReason').val() : ''
+            rejectReason: $('#txtAreaRejectReason') ? $('#txtAreaRejectReason').val() : ''
         }];
 
-    } 
+    }
     else {
         endPoints = $(".chkbox:checked").map(function () {
             return {
                 potentialId: parseInt($(this).val()),
                 rbmId: parseInt(userData.empId),
                 mode: mode,
-                rejectReason: $('#txtAreaRejectReason')? $('#txtAreaRejectReason').val() : ''
+                rejectReason: $('#txtAreaRejectReason') ? $('#txtAreaRejectReason').val() : ''
             };
         }).get();
     }
 
-    
+
     Promise.all(endPoints.map((endpoint) => axios.post('/center-potentials-approved', endpoint))).then(
         axios.spread((...allData) => {
             //console.log({ allData });
@@ -282,30 +293,30 @@ function approveListingMarketInsight(mode) {
 
     if (parseInt(mode) === 2) {
         if ($('#txtAreaRejectReason').val() == '') {
-          alert('Please enter reason to reject')
-          $('#txtAreaRejectReason').focus();
-          return false;
+            alert('Please enter reason to reject')
+            $('#txtAreaRejectReason').focus();
+            return false;
         }
         endPoints = [{
             insightId: $('#hidInsightId').val(),
             rbmId: parseInt(userData.empId),
             mode: mode,
-            rejectReason: $('#txtAreaRejectReason')? $('#txtAreaRejectReason').val() : ''
+            rejectReason: $('#txtAreaRejectReason') ? $('#txtAreaRejectReason').val() : ''
         }];
 
-    } 
+    }
     else {
         endPoints = $(".chkbox:checked").map(function () {
             return {
                 insightId: parseInt($(this).val()),
                 rbmId: parseInt(userData.empId),
                 mode: mode,
-                rejectReason: $('#txtAreaRejectReason')? $('#txtAreaRejectReason').val() : ''
+                rejectReason: $('#txtAreaRejectReason') ? $('#txtAreaRejectReason').val() : ''
             };
         }).get();
     }
 
-    
+
     Promise.all(endPoints.map((endpoint) => axios.post('/center-market-insight-approved', endpoint))).then(
         axios.spread((...allData) => {
             //console.log({ allData });
@@ -333,15 +344,15 @@ function setupBusinessPage() {
             //console.log(response.data[0])
             let lists = response.data[0],
                 listArr = [];
-            lists.forEach(list => {   
+            lists.forEach(list => {
                 console.log(list)
                 let chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.hospitalId}'  id=${list.hospitalId} />` : '',
-                rejectBtn = (parseInt(list.isApproved) === 1) ? `<button type="button " class="btn btn-default btn-grad rejected-btn" data-toggle="modal" 
+                    rejectBtn = (parseInt(list.isApproved) === 1) ? `<button type="button " class="btn btn-default btn-grad rejected-btn" data-toggle="modal" 
                 data-target="#exampleModal" 
                 data-centername="${camelCaseText(list.CENTRENAME)}" 
                 data-accountname="${camelCaseText(list.accountName)}" 
                 data-potenitalid="${list.hospitalId}" 
-                data-drname="${camelCaseText(list.DoctorName)}">Reject</button>` : '';             
+                data-drname="${camelCaseText(list.DoctorName)}">Reject</button>` : '';
                 listArr.push(
                     `<tr>
                         <td>${chkbox}</td>
@@ -400,13 +411,13 @@ function approveListingBusiness(mode) {
             alert('Please enter reason to reject')
             $('#txtAreaRejectReason').focus();
             return false;
-          }
-          endPoints = [{
-              customerId: parseInt($('#hidPotentialId').val()),
-              rbmId: parseInt(userData.empId),
-              mode: mode,
-              rejectReason: $('#txtAreaRejectReason')? $('#txtAreaRejectReason').val() : ''
-          }];
+        }
+        endPoints = [{
+            customerId: parseInt($('#hidPotentialId').val()),
+            rbmId: parseInt(userData.empId),
+            mode: mode,
+            rejectReason: $('#txtAreaRejectReason') ? $('#txtAreaRejectReason').val() : ''
+        }];
     }
     else {
         endPoints = $(".chkbox:checked").map(function () {
@@ -415,12 +426,12 @@ function approveListingBusiness(mode) {
                 customerId: parseInt($(this).val()),
                 rbmId: parseInt(userData.empId),
                 mode: mode,
-              rejectReason: $('#txtAreaRejectReason')? $('#txtAreaRejectReason').val() : ''
+                rejectReason: $('#txtAreaRejectReason') ? $('#txtAreaRejectReason').val() : ''
 
             };
         }).get();
     }
-    
+
     Promise.all(endPoints.map((endpoint) => axios.post('/center-business-tracker-approved', endpoint))).then(
         axios.spread((...allData) => {
             //console.log({ allData });
@@ -443,7 +454,7 @@ function setupRateContractPage() {
 
     axios
         .post(`/account-mapping/${empId}/rate-contract-list`, param).then((response) => {
-           // console.log('Ram', response.data[0])
+            // console.log('Ram', response.data[0])
             let lists = response.data[0],
                 listArr = [];
             lists.forEach(list => {
@@ -519,25 +530,25 @@ function setupCompetitionPage() {
             //console.log(response.data[0])
             let lists = response.data[0],
                 listArr = []
-               ;
-            
+                ;
+
             lists.forEach(list => {
-               // console.log((list));
+                // console.log((list));
                 let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
-                chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.centerId}_${list.month}_${list.year}'  id=${list.centerId} />` : '',
-                rejectBtn = (parseInt(list.isApproved) === 1) ? `<button type="button " class="btn btn-default btn-grad rejected-btn" data-toggle="modal" 
+                    chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.centerId}_${list.month}_${list.year}'  id=${list.centerId} />` : '',
+                    rejectBtn = (parseInt(list.isApproved) === 1) ? `<button type="button " class="btn btn-default btn-grad rejected-btn" data-toggle="modal" 
                 data-target="#exampleModal" 
                 data-centername="${camelCaseText(list.CENTRENAME)}" 
                 data-accountname="${camelCaseText(list.accountName)}" 
                 data-centerid="${list.centerId}" 
                 data-month="${list.month}" 
                 data-year="${list.year}" 
-                data-drname="${camelCaseText(list.DoctorName)}">Reject</button>` : ''; 
-               // console.log(rejectBtn)
-                if(userData.post === _POST.ZBM) {
+                data-drname="${camelCaseText(list.DoctorName)}">Reject</button>` : '';
+                // console.log(rejectBtn)
+                if (userData.post === _POST.ZBM) {
                     chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.centerId}_${list.month}_${list.year}'  id=${list.centerId} />` : '';
                 }
-                
+
                 console.log(list);
                 listArr.push(
                     `<tr>
@@ -565,8 +576,8 @@ function setupCompetitionPage() {
 
             $('#competitionData').append(listArr.join(''));
             // <td>
-                        //     ${list.isApproved == 1 ? `<a href='/add-competition?cid=${list.centerId}&kamid=${empId}&mode=reject' class="btn btn-default btn-grad rejected-btn">Reject</a>` : ''} 
-                        // </td>
+            //     ${list.isApproved == 1 ? `<a href='/add-competition?cid=${list.centerId}&kamid=${empId}&mode=reject' class="btn btn-default btn-grad rejected-btn">Reject</a>` : ''} 
+            // </td>
             // generate data for the graph
             //drawBusinessChartWithData(response.data[1]);
             // getAllBusinessReportWithData(response.data[2])
@@ -642,42 +653,42 @@ function approveListingRC() {
 function competitionRejected(mode) {
     //console.log('approved me Clicked competition');
     if (parseInt(mode) === 2) {
-      if ($('#txtAreaRejectReason').val() == '') {
-        alert('Please enter reason to reject')
-        $('#txtAreaRejectReason').focus();
-        return false;
-      }
+        if ($('#txtAreaRejectReason').val() == '') {
+            alert('Please enter reason to reject')
+            $('#txtAreaRejectReason').focus();
+            return false;
+        }
     }
-  
+
     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
-      param = {
-        hospitalId: $('#hidHospitalId').val(),
-        rbmId: parseInt(userData.empId),
-        year: $('#hidYear').val(),
-        month: $('#hidMonth').val(),
-       // kamid: parseInt(getQueryStringValue('kamid')),
-        mode: mode,
-        rejectReason: $('#txtAreaRejectReason')? $('#txtAreaRejectReason').val() : ''
-      }
+        param = {
+            hospitalId: $('#hidHospitalId').val(),
+            rbmId: parseInt(userData.empId),
+            year: $('#hidYear').val(),
+            month: $('#hidMonth').val(),
+            // kamid: parseInt(getQueryStringValue('kamid')),
+            mode: mode,
+            rejectReason: $('#txtAreaRejectReason') ? $('#txtAreaRejectReason').val() : ''
+        }
 
     axios
-      .post('/center-competition-approved/', param).then((response) => {
-        //   console.log(response.data[0])
-        if (response.data.length > 0) {
-          let res = response.data[0];
-         
-          if (res.success === 'true') {
-            console.log('sssss');
-            // //console.log(`account-mapping/${parseInt(getQueryStringValue('kamid'))}/competition-list`)
-            // redirect(`account-mapping/${parseInt(getQueryStringValue('kamid'))}/competition-list`);
-            location.reload();
-  
-            // @TODO: THIS NEED TO CHANGE
-          }
-        }
-  
-      }).catch((err) => {
-        console.log(err);
-      });
+        .post('/center-competition-approved/', param).then((response) => {
+            //   console.log(response.data[0])
+            if (response.data.length > 0) {
+                let res = response.data[0];
+
+                if (res.success === 'true') {
+                    console.log('sssss');
+                    // //console.log(`account-mapping/${parseInt(getQueryStringValue('kamid'))}/competition-list`)
+                    // redirect(`account-mapping/${parseInt(getQueryStringValue('kamid'))}/competition-list`);
+                    location.reload();
+
+                    // @TODO: THIS NEED TO CHANGE
+                }
+            }
+
+        }).catch((err) => {
+            console.log(err);
+        });
     return false;
-  }
+}

@@ -25,7 +25,7 @@ function loadMonthYear() {
     month = parseInt($('#cmbMonth').val()),
     year = parseInt($('#cmbYear').val()),
     answerOne = $('input[name="obstetricsRadio"]:checked').val(), 
-    AnswerTwo = 0, //$('#AnswerTwo').val(),
+    AnswerTwo = '0', //$('#AnswerTwo').val(),
     answerThreeRFSH = $('#answerThreeRFSH').val(),
     answerThreeHMG = $('#answerThreeHMG').val(),
     answerFourRHCG = $('#answerFourRHCG').val(),

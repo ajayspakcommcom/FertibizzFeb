@@ -67,14 +67,18 @@ exports.getAccountMappingPotentialListData = (req, res, next) => {
  };
 
  exports.getAccountMappingMarketInsightListData = (req, res, next) => {
-    // console.log(req.params, '--->')
-    getAccountMappingMarketInsightListData(req.params).then((result) => {
+    //console.log(req.session.userDetails.post, '--->')
+    let spName = 'USP_GET_RBM_MarketInsights_LIST_FOR_APPROVAL'
+    if (req.session.userDetails && req.session.userDetails.post === 'ZBM') {
+        spName = 'USP_GET_ZBM_MarketInsights_LIST_FOR_APPROVAL'
+     }
+    getAccountMappingMarketInsightListData(req.params, spName).then((result) => {
           res.status(_STATUSCODE).json(result);
       });
   };
 
-  getAccountMappingMarketInsightListData = (objParam) => {
-    
+  getAccountMappingMarketInsightListData = (objParam, storeProc) => {
+    //console.log(storeProc)
      return new Promise((resolve) => {
          var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
          dbConn
@@ -83,7 +87,7 @@ exports.getAccountMappingPotentialListData = (req, res, next) => {
                  var request = new sql.Request(dbConn);
                  request
                      .input("KamId", sql.Int, objParam.empId)
-                     .execute("USP_GET_RBM_MarketInsights_LIST_FOR_APPROVAL")
+                     .execute(storeProc)
                      .then(function (resp) {
                         //console.log(resp)
                          resolve(resp.recordset);

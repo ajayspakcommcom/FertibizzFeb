@@ -248,7 +248,6 @@ function isNumber(txt, evt) {
 }
 
 function approveMe(mode) {
-  debugger;
   //console.log('approved me Clicked competition');
   if (parseInt(mode) === 2) {
     if ($('#txtAreaRejectReason').val() == '') {
