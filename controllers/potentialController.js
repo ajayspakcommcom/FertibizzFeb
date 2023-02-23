@@ -43,11 +43,12 @@ function addCenterPotential( objParam ) {
                     .input("Antagonistcycles", sql.Int, objParam.antagonistTxt)
                     .input("Month", sql.Int, objParam.month)
                     .input("Year", sql.Int, objParam.year)
+                    .input("visitID", sql.Int, objParam.visitID)
 
-
+                    
                     .execute("USP_GET_ADD_UPDATE_CENTER_POTENTIAL")
                     .then(function (resp) {
-                        //console.log(resp.recordset)
+                        console.log(resp.recordset);
                         resolve(resp.recordset);
                         dbConn.close();
                     })

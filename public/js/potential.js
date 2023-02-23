@@ -86,6 +86,12 @@ function validateMe() {
         return false;
     }
 
+    if($("#comboAccountCategory").val() == "") {
+        alert('Please select visit type');
+        return false;
+    }
+
+ 
     isBtnLoaderVisible(true);
 
     let pId = new URLSearchParams(window.location.search).get('pid'),
@@ -98,6 +104,7 @@ function validateMe() {
         agonistTxt = $('#agonistTxt').val(),
         antagonistTxt = $('#antagonistTxt').val(),
         questionTxt = $('#questionTxt').val(); 
+        visitID = $("#comboAccountCategory").val()
 
 
     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
@@ -113,8 +120,11 @@ function validateMe() {
             hospitalId: new URLSearchParams(window.location.search).get('cid'),
             month: parseInt($('#cmbMonth').val()),
             year: parseInt($('#cmbYear').val()),
-            empId: parseInt(userData.empId)           
+            empId: parseInt(userData.empId),
+            visitID: parseInt($("#comboAccountCategory").val())           
         }
+
+        
 
 
     axios
@@ -140,8 +150,7 @@ function getMasterData() {
             let htmlElem = [];            
             for(let item of visiTypeResult) {
                 htmlElem.push(`<option value="${item.VisitID}">${item.Name}</option>`);
-            }
-            console.log(htmlElem);
+            }            
             $('#comboAccountCategory').html(htmlElem.join(''));
             
         }).catch((err) => {
@@ -150,7 +159,7 @@ function getMasterData() {
 }
 
 function getPotentialsDetails() {
-
+    
     isLoaderVisible(true);
     getMasterData();
 
@@ -159,14 +168,10 @@ function getPotentialsDetails() {
     urlArr = window.location.href.split('/'),
     empId = urlArr[urlArr.length - 1].slice(-2);
 
-        // param = {
-        //     hospitalId: new URLSearchParams(window.location.search).get('cid'),
-        //     empId: parseInt(userData.empId)
-        // }
-
-    
-    console.log(empId);
-
+    // param = {
+    //     hospitalId: new URLSearchParams(window.location.search).get('cid'),
+    //     empId: parseInt(userData.empId)
+    // }
  
         if(userData.post.toLowerCase() == 'kam') {
 
@@ -185,8 +190,8 @@ function getPotentialsDetails() {
              
     axios
         .post('/center-potentials-details', param).then((response) => {
-            console.log(response.data[0])
             if (response.data.length > 0) {
+
                 let res = response.data[0];
                 console.log(res);
 
@@ -195,14 +200,16 @@ function getPotentialsDetails() {
                     $('#rejectedCommentTxt').text(res.rejectComments);
                 }
 
-                $('#iuiTxt').val(res.IUICycle);
-                $('#ivfTxt').val(res.IVFCycle);
-                $('#freshTxt').val(res.FreshPickUps);
-                $('#frozenTxt').val(res.frozenTransfers);
-                $('#patientTxt').val(res.SelftCycle);
-                $('#donotTxt').val(res.DonorCycles);
-                $('#agonistTxt').val(res.AgonistCycles);
-                $('#antagonistTxt').val(res.Antagonistcycles);
+                // ajay modified 23-02-2023
+                // $('#iuiTxt').val(res.IUICycle);
+                // $('#ivfTxt').val(res.IVFCycle);
+                // $('#freshTxt').val(res.FreshPickUps);
+                // $('#frozenTxt').val(res.frozenTransfers);
+                // $('#patientTxt').val(res.SelftCycle);
+                // $('#donotTxt').val(res.DonorCycles);
+                // $('#agonistTxt').val(res.AgonistCycles);
+                // $('#antagonistTxt').val(res.Antagonistcycles);
+                // $('#comboAccountCategory').val(res.visitID);
 
                 let potentialEnteredFor = res.PotentialEnteredFor,
                     arr = potentialEnteredFor.split('-'),
@@ -212,6 +219,18 @@ function getPotentialsDetails() {
                 //$('#cmbMonth').val(month)
                 getFirstDayPreviousMonth();
                 getFieldData();
+
+                // ajay modified 23-02-2023
+                $('#iuiTxt').val(res.IUICycle);
+                $('#ivfTxt').val(res.IVFCycle);
+                $('#freshTxt').val(res.FreshPickUps);
+                $('#frozenTxt').val(res.frozenTransfers);
+                $('#patientTxt').val(res.SelftCycle);
+                $('#donotTxt').val(res.DonorCycles);
+                $('#agonistTxt').val(res.AgonistCycles);
+                $('#antagonistTxt').val(res.Antagonistcycles);
+                $('#comboAccountCategory').val(res.visitID);
+                
                 
             }
             isLoaderVisible(false);
@@ -291,8 +310,7 @@ axios
 
 function showCheckBoxApproveBtn() {
     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
-    console.log(userData);
-
+    
     if(userData.post.toLowerCase() == 'kam') {
         $('.hideApproveChk').hide();
         $('#btnApprove').hide();
@@ -314,16 +332,9 @@ function getFieldData() {
     patientTxt = $('#patientTxt').val(),
     antagonistTxt = $('#antagonistTxt').val(),
     agonistTxt = $('#agonistTxt').val();
+    visitID = $('#comboAccountCategory').val();
 
-    console.log('iuiTxt', iuiTxt);
-    console.log('ivfTxt', ivfTxt);
-    console.log('frozenTxt', frozenTxt);
-    console.log('freshTxt', freshTxt);
-    console.log('donotTxt', donotTxt);
-    console.log('patientTxt', patientTxt);
-    console.log('antagonistTxt', antagonistTxt);
-    console.log('agonistTxt', agonistTxt);
-    window.localStorage.setItem('potentialDetail', JSON.stringify({'iuiTxt': iuiTxt, 'ivfTxt': ivfTxt, 'frozenTxt': frozenTxt, 'freshTxt': freshTxt, 'donotTxt': donotTxt, 'patientTxt': patientTxt, 'antagonistTxt': antagonistTxt, 'antagonistTxt': antagonistTxt, 'agonistTxt': agonistTxt}));
+    window.localStorage.setItem('potentialDetail', JSON.stringify({'iuiTxt': iuiTxt, 'ivfTxt': ivfTxt, 'frozenTxt': frozenTxt, 'freshTxt': freshTxt, 'donotTxt': donotTxt, 'patientTxt': patientTxt, 'antagonistTxt': antagonistTxt, 'antagonistTxt': antagonistTxt, 'agonistTxt': agonistTxt, 'visitID': visitID}));
 }
 
 function undo() {
@@ -337,7 +348,6 @@ function undo() {
     $('#antagonistTxt').val(JSON.parse(window.localStorage.getItem('potentialDetail')).antagonistTxt),
     $('#agonistTxt').val(JSON.parse(window.localStorage.getItem('potentialDetail')).agonistTxt);
 }
-
 
 
 showCheckBoxApproveBtn();

@@ -293,8 +293,7 @@ function showNavigationByDesignation() {
 
 function showDrNameCentreName() {
     const urlSearchParams = new URLSearchParams(window.location.search);
-    const params = Object.fromEntries(urlSearchParams.entries());
-    console.log(params);
+    const params = Object.fromEntries(urlSearchParams.entries());    
     $('#drName').text(params.drName);
     $('#centreName').text(params.centreName);
 }
