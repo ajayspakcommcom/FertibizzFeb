@@ -157,7 +157,7 @@ async function getSkuDetails() {
                                           ${rows}
                                       </tbody>
                                   </table>
-                                  <input type='checkbox' class="competition-checked" onclick="compChk(this)">Confirm you entered 
+                                  <input type='checkbox' class="competition-checked" onclick="compChk(this)"> &nbsb; <span>Confirm you entered ${item}</span>
                               </div>
                           </div>                      
                       </div>
