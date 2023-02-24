@@ -143,7 +143,7 @@ async function getSkuDetails() {
                       <div id="${item}" class="panel-collapse collapse">
                           <div class="panel-body">
                               <div class="form-section">    
-                              sdasdasdasd                                                                     
+                              
                                   <table class="table table-bordered table-bg">
                                       <thead>
                                           <tr>
@@ -157,12 +157,12 @@ async function getSkuDetails() {
                                           ${rows}
                                       </tbody>
                                   </table>
+                                  <input type='checkbox' class="competition-checked" onclick="compChk(this)">Confirm you entered 
                               </div>
                           </div>                      
                       </div>
                   </div>`);
           rows = [];
-
     }
 
     $('#competitorDataTable').append(html.join(''));
@@ -172,6 +172,13 @@ async function getSkuDetails() {
     isLoaderVisible(false);
   }))
 
+}
+
+function compChk(elem) {
+  console.log(elem);
+  console.log($(elem));
+  $(elem).parents('.panel-default').find('.panel-heading').addClass('done');
+  $(elem).parents('.panel-default').find('.panel-collapse').removeClass('in');
 }
 
 function validateMe() {

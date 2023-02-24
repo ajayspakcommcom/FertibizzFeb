@@ -78,11 +78,12 @@ function setupPotentialPage() {
                 percIVF_FreshPickups = 0;
 
             console.log('Potential Approval List', lists);
+            console.log('Potential Approval List', lists);
 
             if (lists.length > 0) {
                 let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
                 lists.forEach(list => {
-                    console.log(list);
+                    //console.log(list);
 
                     let chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.potentialId}'  id=${list.potentialId} />` : '',
                         rejectBtn = (parseInt(list.isApproved) === 1) ? `<button type="button" class="btn btn-default btn-grad rejected-btn" data-toggle="modal" 
