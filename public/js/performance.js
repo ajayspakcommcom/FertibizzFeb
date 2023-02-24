@@ -18,6 +18,7 @@ function loadMonthYear() {
 }
 
 function getPerformanceData() {
+
     axios
         .get('/view-performanceData/' + centerId).then((response) => {
             console.log(response.data);
@@ -65,6 +66,9 @@ function getPerformanceData() {
 }
 
 function getPerformanceData1() {
+
+    isLoaderVisible(true);
+
     axios
         .get(`/view-performanceData/${centerId}/${dt.getMonth() + 1}/${dt.getFullYear()}`).then((response) => {
 
@@ -170,6 +174,7 @@ function getPerformanceData1() {
             }
 
             $('#businessList').append(listArr.join(''));
+            isLoaderVisible(false);
 
         }).catch((err) => {
             console.log(err);

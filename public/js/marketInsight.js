@@ -13,6 +13,8 @@ function loadMonthYear() {
 
   function validateMe() {
 
+    isBtnLoaderVisible(true);
+
     console.log('Market Insight Saved');
 
     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
@@ -102,10 +104,10 @@ showDrNameCentreName();
 
 function getMarketInsightDetails() {
 
-    //debugger;
+    isLoaderVisible(true);
+    
     let insightId = new URLSearchParams(window.location.search).get('insightId');
-    //console.log(insightId);
-
+    
     // if(insightId != null) {
         axios
         .get('/market-insight-detail/' + insightId).then((response) => {
@@ -127,6 +129,7 @@ function getMarketInsightDetails() {
             $('#answerFiveDydrogesterone').val(data.answerFiveDydrogesterone);
             $('#answerFiveCombination').val(data.answerFiveCombination);
             $('#rejectedComment b').text(data.rejectComments);
+            isLoaderVisible(false);
                       
         }).catch((err) => {
             console.log(err);
