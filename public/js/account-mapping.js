@@ -78,6 +78,7 @@ function setupPotentialPage() {
                 percIVF_FreshPickups = 0;
 
             console.log('Potential Approval List', lists);
+
             if (lists.length > 0) {
                 let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
                 lists.forEach(list => {
@@ -184,6 +185,7 @@ function setmarketInsightPage() {
         .post(`/account-mapping/${empId}/market-insight-list`, param).then((response) => {
 
             let lists = response.data, listArr = [];
+            console.log(lists);
             if (lists.length > 0) {
                 lists.forEach(list => {
                     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
@@ -201,6 +203,7 @@ function setmarketInsightPage() {
                         data-insightid="${list.insightId}" 
                         data-drname="${camelCaseText(list.DoctorName)}">Reject</button>` : '';
                     }
+
                     listArr.push(
                         `<tr>
                             <td>${chkbox}</td>
@@ -216,7 +219,7 @@ function setmarketInsightPage() {
                             <td align='right'>${list.answerFourAgonistT}</td>
                             <td align='right'>${list.answerFourRHCGTriptorelin}</td>
                             <td align='right'>${list.answerFourRHCGLeuprolide}</td>
-                            <td> ${list.statusText.toLowerCase() == 'approved' ? approvedRejectedPendingIcon[0] : list.statusText.toLowerCase() == 'pending' ? approvedRejectedPendingIcon[1] : approvedRejectedPendingIcon[2]}</td>
+                            <td> ${list.statusText == null ? approvedRejectedPendingIcon[1] : (list.statusText.toLowerCase() == 'approved' ? approvedRejectedPendingIcon[0] : list.statusText.toLowerCase() == 'pending' ? approvedRejectedPendingIcon[1] : approvedRejectedPendingIcon[2])}</td>
                             <td align='right'>${rejectBtn} </td>
                         </tr>
                     `);
@@ -559,8 +562,9 @@ function setupCompetitionPage() {
         .post(`/account-mapping/${empId}/competition-list`, param).then((response) => {
             //console.log(response.data[0])
             let lists = response.data[0],
-                listArr = []
-                ;
+                listArr = [];
+
+                console.log(lists);
 
             lists.forEach(list => {
                 // console.log((list));
@@ -579,7 +583,6 @@ function setupCompetitionPage() {
                     chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.centerId}_${list.month}_${list.year}'  id=${list.centerId} />` : '';
                 }
 
-                console.log(list);
                 listArr.push(
                     `<tr>
                         <td>${chkbox}</td>

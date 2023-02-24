@@ -1,8 +1,8 @@
 
 let urlArr = window.location.href.split('/'),
-centerId = urlArr[urlArr.length - 1],
-date = new Date(),
-dt = new Date(date.getFullYear(), date.getMonth() - 1, 1);
+    centerId = urlArr[urlArr.length - 1],
+    date = new Date(),
+    dt = new Date(date.getFullYear(), date.getMonth() - 1, 1);
 
 function pageSetUp() {
     //getPerformanceData();
@@ -17,26 +17,26 @@ function loadMonthYear() {
     $('#cmbYear').prop('disabled', true);
 }
 
-function getPerformanceData() {    
+function getPerformanceData() {
     axios
         .get('/view-performanceData/' + centerId).then((response) => {
             console.log(response.data);
-            
+
             printCenterDetail(response.data[0][0]);
 
             let centreData = response.data[0],
                 potentialData = response.data[1],
                 listArr = [];
 
-                centreData.forEach(data => {
+            centreData.forEach(data => {
                 listArr.push(
-                        `<tr>
+                    `<tr>
                             <td>${data.CENTRENAME}</td>
                             <td>${data.doctorName}</td>
                             <td>${data.SpecialtyName}</td>
                         </tr>
                     `)
-                });
+            });
 
             $('#centreData').append(listArr.join(''));
 
@@ -44,7 +44,7 @@ function getPerformanceData() {
 
             potentialData.forEach(data => {
                 listArr.push(
-                        `<tr>
+                    `<tr>
                             <td>${data.IUICycle}</td>
                             <td>${data.IVFCycle}</td>
                             <td>${data.FreshPickUps}</td>
@@ -55,90 +55,125 @@ function getPerformanceData() {
                             <td>${data.Antagonistcycles}</td>
                         </tr>
                     `)
-                });
+            });
 
             $('#potentialData').append(listArr.join(''));
 
         }).catch((err) => {
             console.log(err);
-    });
+        });
 }
 
-function getPerformanceData1() {    
+function getPerformanceData1() {
     axios
         .get(`/view-performanceData/${centerId}/${dt.getMonth() + 1}/${dt.getFullYear()}`).then((response) => {
-            
-            console.log(response); 
 
-            printCenterDetail(response.data[0][0]);      
-            
-            let centreData = response.data[0],  potentialData = response.data[1], competitonList = response.data[3], businessData = response.data[4];          
+            console.log(response);
+
+            printCenterDetail(response.data[0][0]);
+
+            let centreData = response.data[0], potentialData = response.data[1], competitonList = response.data[3], businessData = response.data[4];
             listArr = [];
 
-            centreData.forEach(data => {
-                listArr.push(
-                        `<tr>
-                            <td>${data.CENTRENAME}</td>
-                            <td>${data.doctorName}</td>
-                            <td>${data.SpecialtyName}</td>
-                        </tr>
-                    `)
+            if (centreData.length > 0) {
+                centreData.forEach(data => {
+                    listArr.push(
+                        `<tr>                            
+                                <td>${data.doctorName}</td>
+                                <td>${data.SpecialtyName}</td>
+                            </tr>
+                        `)
                 });
+            } else {
+                listArr.push(`
+                    <tr>
+                        <td colspan="2"><p class="text-center m-b-0">No Data found</p></td>
+                    </tr>
+                `);
+            }
 
-                $('#customerList').append(listArr.join(''));
 
-                listArr = [];
 
+            $('#customerList').append(listArr.join(''));
+
+            listArr = [];
+
+
+            if (potentialData.length > 0) {
                 potentialData.forEach(data => {
                     listArr.push(
-                            `<tr>
-                                <td>${data.IUICycle}</td>
-                                <td>${data.IVFCycle}</td>
-                                <td>${data.FreshPickUps}</td>
-                                <td>${data.frozenTransfers}</td>
-                                <td>${data.SelftCycle}</td>
-                                <td>${data.DonorCycles}</td>
-                                <td>${data.AgonistCycles}</td>
-                                <td>${data.Antagonistcycles}</td>
-                            </tr>
-                        `)
-                    });
-    
-                $('#potentialList').append(listArr.join(''));
+                        `<tr>
+                        <td>${data.IUICycle}</td>
+                        <td>${data.IVFCycle}</td>
+                        <td>${data.FreshPickUps}</td>
+                        <td>${data.frozenTransfers}</td>
+                        <td>${data.SelftCycle}</td>
+                        <td>${data.DonorCycles}</td>
+                        <td>${data.AgonistCycles}</td>
+                        <td>${data.Antagonistcycles}</td>
+                    </tr>
+                    `)
+                });
+            } else {
+                listArr.push(
+                    `<tr>
+                        <td colspan="8"><p class="text-center m-b-0">No Data found</p></td>                      
+                    </tr>
+                `);
+            }
 
 
-                listArr = [];
+            $('#potentialList').append(listArr.join(''));
 
+            listArr = [];
+
+            if (competitonList.length > 0) {
                 competitonList.forEach(data => {
                     listArr.push(
-                            `<tr>
-                                <td>${data.brandName}</td>
-                                <td>${data.groupName}</td>
-                                <td>${data.totalQty}</td>
-                                <td>${data.totalValue}</td>
-                            </tr>
-                        `)
-                    });
-    
-                $('#competitonList').append(listArr.join(''));
+                        `<tr>
+                                    <td>${data.brandName}</td>
+                                    <td>${data.groupName}</td>
+                                    <td>${data.totalQty}</td>
+                                    <td>${data.totalValue}</td>
+                                </tr>
+                            `)
+                });
+            } else {
+                listArr.push(
+                    `<tr>
+                        <td colspan="4"><p class="text-center m-b-0">No Data found</p></td>
+                    </tr>
+                    `)
+            }
 
 
-                listArr = [];
 
+            $('#competitonList').append(listArr.join(''));
+
+            listArr = [];
+
+            if (businessData.length > 0) {
                 businessData.forEach(data => {
                     listArr.push(
-                            `<tr>
-                                <td>${data.brandname}</td>
-                                <td>${data.TotalBusinessValue}</td>
-                            </tr>
-                        `)
-                    });
+                        `<tr>
+                                    <td>${data.brandname}</td>
+                                    <td>${data.TotalBusinessValue}</td>
+                                </tr>
+                            `)
+                });
+            } else {
+                listArr.push(
+                    `<tr>
+                            <td colspan="2"><p class="text-center m-b-0">No Data found</p></td>                                
+                        </tr>
+                    `)
+            }
 
-                    $('#businessList').append(listArr.join(''));
+            $('#businessList').append(listArr.join(''));
 
         }).catch((err) => {
             console.log(err);
-    });
+        });
 }
 
 function printCenterDetail(data) {

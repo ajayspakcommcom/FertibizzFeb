@@ -11,7 +11,6 @@ function loadMonthYear() {
 
   loadMonthYear();
 
-
   function validateMe() {
 
     console.log('Market Insight Saved');
@@ -103,17 +102,18 @@ showDrNameCentreName();
 
 function getMarketInsightDetails() {
 
-    
+    //debugger;
     let insightId = new URLSearchParams(window.location.search).get('insightId');
     //console.log(insightId);
 
-    if(insightId != null) {
+    // if(insightId != null) {
         axios
         .get('/market-insight-detail/' + insightId).then((response) => {
-            // console.log(response.data);  
-            //console.log(response.data[1][0]);  
+
+            console.log(response);  
+            
             let data = response.data[0][0], ivfCycle = response.data[1][0].IVFCycle;           
-            data.answerOne == true ? $("[name=obstetricsRadio]")[0].setAttribute("checked", "checked") : $("[name=obstetricsRadio]")[1].setAttribute("checked", "checked");
+            data.answerOne == true ? $("[name=obstetricsRadio]")[0].setAttribute("checked", "checked") : $("[name=obstetricsRadio]")[1].setAttribute("checked", "checked");            
             $('#AnswerTwo').val(ivfCycle);
             $('#answerThreeRFSH').val(data.answerThreeRFSH);
             $('#answerThreeHMG').val(data.answerThreeHMG);
@@ -131,5 +131,5 @@ function getMarketInsightDetails() {
         }).catch((err) => {
             console.log(err);
         });
-    }
+    // }
 }
