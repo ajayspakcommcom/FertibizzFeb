@@ -47,16 +47,16 @@ async function getSkuDetails() {
     //console.log(contractResponse.data);
     competitorSkus = skuResponse.data;
     let competitionRes = competitionResponse.data,
-      html = [], collapseHtml = [], showCollapseHtml = [], rows  = [],
+      html = [], collapseHtml = [], showCollapseHtml = [], rows = [],
 
       quarter1 = [], quarter2 = [], quarter3 = [], quarter4 = [];
 
-      if (competitionRes.length > 0) {
-        if (competitionRes[0] && competitionRes[0].rejectComments) {
-          //  console.log(businessTrackRes[0].rejectComments)
-            $('.rejected-comment').removeClass('hide');
-            $('#rejectedcompetitionCommentTxt').text(competitionRes[0].rejectComments);
-        }
+    if (competitionRes.length > 0) {
+      if (competitionRes[0] && competitionRes[0].rejectComments) {
+        //  console.log(businessTrackRes[0].rejectComments)
+        $('.rejected-comment').removeClass('hide');
+        $('#rejectedcompetitionCommentTxt').text(competitionRes[0].rejectComments);
+      }
     }
     console.log(competitorSkus);
     console.log(competitionRes);
@@ -101,19 +101,19 @@ async function getSkuDetails() {
 
     collapseHtml = groupByKey(collapseHtml, 'brandName');
     console.log(collapseHtml);
-    
-    for(let item in collapseHtml) {
-      //console.log(item);
-      
 
-      for(let obj of collapseHtml[item]) {
+    for (let item in collapseHtml) {
+      //console.log(item);
+
+
+      for (let obj of collapseHtml[item]) {
 
         //console.log(obj);
 
         let filterRec = competitionRes.filter(competitor => {
           return competitor.CompetitionSkuId === obj.competitorId
         });
-        
+
         let businessValue = 0, commentsValue = '';
 
         if (filterRec.length > 0) {
@@ -162,7 +162,7 @@ async function getSkuDetails() {
                           </div>                      
                       </div>
                   </div>`);
-          rows = [];
+      rows = [];
     }
 
     $('#competitorDataTable').append(html.join(''));
@@ -183,7 +183,7 @@ function compChk(elem) {
 
 function validateMe() {
 
-  if($("#chkConfirm").is(':checked') == false) {
+  if ($("#chkConfirm").is(':checked') == false) {
     alert('Please click on checkbox to confirm the data');
     return false;
   }
@@ -202,19 +202,19 @@ function validateMe() {
       comments = $(`#comments_${skuBrand.brandId}_${skuBrand.competitorId}`) ? $(`#comments_${skuBrand.brandId}_${skuBrand.competitorId}`).val() : '';
 
     if (value > 0) {
-    let param = {
-      value: !isNaN(value) ? value : 0,
-      empId: empId,
-      brandId: parseInt(`${skuBrand.brandId}`),
-      centerId: parseInt(centerId),
-      year: $('#cmbYear').val(),
-      month: $('#cmbMonth').val(),
-      skuId: parseInt(`${skuBrand.competitorId}`),
-      comments: comments
-    }
-    //  console.log(param)
-    endPoints.push(param);
-    //console.log(endPoints);
+      let param = {
+        value: !isNaN(value) ? value : 0,
+        empId: empId,
+        brandId: parseInt(`${skuBrand.brandId}`),
+        centerId: parseInt(centerId),
+        year: $('#cmbYear').val(),
+        month: $('#cmbMonth').val(),
+        skuId: parseInt(`${skuBrand.competitorId}`),
+        comments: comments
+      }
+      //  console.log(param)
+      endPoints.push(param);
+      //console.log(endPoints);
     }
 
   });
@@ -272,7 +272,7 @@ function approveMe(mode) {
       month: $('#cmbMonth').val(),
       kamid: parseInt(getQueryStringValue('kamid')),
       mode: mode,
-      rejectReason: $('#txtAreaRejectReason')? $('#txtAreaRejectReason').val() : ''
+      rejectReason: $('#txtAreaRejectReason') ? $('#txtAreaRejectReason').val() : ''
     }
 
   axios
@@ -344,8 +344,8 @@ function getPrevMonth() {
 showDrNameCentreName();
 
 function removeExtraText() {
-  $('.form-section').contents().filter(function() {
-      return this.nodeType == 3; 
+  $('.form-section').contents().filter(function () {
+    return this.nodeType == 3;
   }).remove();
 }
 
