@@ -107,6 +107,7 @@
                                                 <th>Dydrogesterone</th>
                                                 <th>Combination</th>
                                                 <th>RHCG</th>
+                                                <th>UHCG</th>
                                                 <th>Agonist-Leuprolide</th>
                                                 <th>Agonist-Triptorelin</th>
                                                 <th>Dual Trigger (R-HCG + Triptorelin)</th>
@@ -211,7 +212,7 @@
                 cells = row.getElementsByTagName("td");
                 if (cells) {
                     // empName = cells[12] || null; // gets the 2nd `td` or nothing
-                    empName = cells[16] ? cells[16].querySelector('svg').getAttribute('class') : null; // gets the 2nd `td` or nothing    
+                    empName = cells[17] ? cells[17].querySelector('svg').getAttribute('class') : null; // gets the 2nd `td` or nothing    
                     // if the filter is set to 'All', or this is the header row, or 2nd `td` text matches filter
                     if (filter === "All" || !empName || (filter === empName.toLowerCase())) {
                         row.style.display = ""; // shows this row                        

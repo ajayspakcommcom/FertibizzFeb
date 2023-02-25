@@ -221,6 +221,7 @@ function setmarketInsightPage() {
                             <td align='right'>${list.answerFiveDydrogesterone}</td>
                             <td align='right'>${list.answerFiveCombination}</td>
                             <td align='right'>${list.answerFourRHCG}</td>
+                            <td align='right'>${list.answerFourUHCG}</td>
                             <td align='right'>${list.answerFourAgonistL}</td>
                             <td align='right'>${list.answerFourAgonistT}</td>
                             <td align='right'>${list.answerFourRHCGTriptorelin}</td>
