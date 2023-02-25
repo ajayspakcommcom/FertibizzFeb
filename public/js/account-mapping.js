@@ -208,6 +208,11 @@ function setmarketInsightPage() {
                     listArr.push(
                         `<tr>
                             <td>${chkbox}</td>
+
+                            <td>${list.accountName}</td>
+                            <td>${list.CENTRENAME}</td>
+                            <td>${list.DoctorName}</td>
+
                             <td>${(list.answerOne ? 'Yes' : 'No')}</td>
                             <td>${camelCaseText(list.AnswerTwo)}</td>
                             <td>${camelCaseText(list.answerThreeRFSH)}</td>
@@ -227,6 +232,9 @@ function setmarketInsightPage() {
                 });
 
                 listArr.push(`<tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -591,10 +599,8 @@ function setupCompetitionPage() {
                         <td>${camelCaseText(list.CENTRENAME)}</td>
                         <td>${camelCaseText(list.DoctorName)}</td>
                         <td> ${list.statusText == null ? approvedRejectedPendingIcon[1] : list.statusText.toLowerCase() == 'approved' ? approvedRejectedPendingIcon[0] : list.statusText.toLowerCase() == 'pending' ? approvedRejectedPendingIcon[1] : approvedRejectedPendingIcon[2]}</td>
-                        <!--<td>
-                        <a href='/add-competition?cid=${list.centerId}&kamid=${empId}'>View Details</a> 
-                        </td>-->
-                        <td align='right'>${rejectBtn} </td>
+                        <td><a href='/add-competition?cid=${list.centerId}&kamid=${empId}'>View Details</a> </td>
+                        <!--<td align='right'>${rejectBtn} </td>-->
                     </tr>
                 `);
             });

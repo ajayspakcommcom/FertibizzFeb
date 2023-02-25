@@ -23,12 +23,20 @@ function loadMonthYear() {
 
 async function getSkuDetails() {
 
+  console.log('competition');
   isLoaderVisible(true);
 
   let centerId = new URLSearchParams(window.location.search).get('cid'),
     year = $('#cmbYear').val(),
     month = $('#cmbMonth').val(),
     userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
+
+    console.log(userData);
+
+    if(userData.post.toLowerCase() != 'kam') {
+      $('.confirmchk').hide();
+      $('#rejectedcompetitionCommentTxt').hide();
+    }
 
   if (userData.post.toLowerCase() == 'kam') {
     console.log('');
