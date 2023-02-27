@@ -629,8 +629,8 @@ function setupCompetitionPage() {
                             <td></td>                                                                
                             <td class="total-dr text-right" colspan="3"><b>Total Doctors ${lists.length}</b></td>
                          </tr>`);
-
             $('#competitionData').append(listArr.join(''));
+
             // <td>
             //     ${list.isApproved == 1 ? `<a href='/add-competition?cid=${list.centerId}&kamid=${empId}&mode=reject' class="btn btn-default btn-grad rejected-btn">Reject</a>` : ''} 
             // </td>
