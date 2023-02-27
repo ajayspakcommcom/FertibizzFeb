@@ -405,6 +405,7 @@ function setupBusinessPage() {
                             <td align='right'>${list.brandGroup7}</td>
                             <td align='right'>${list.brandGroup8}</td>
                             <td align='right'>${list.brandGroup9}</td>
+                            <td align='right'>${list.brandGroup10}</td>
                             <td> ${list.statusText == null ? approvedRejectedPendingIcon[1] : list.statusText.toLowerCase() == 'approved' ? approvedRejectedPendingIcon[0] : list.statusText.toLowerCase() == 'pending' ? approvedRejectedPendingIcon[1] : approvedRejectedPendingIcon[2]}</td>
                             <td align='right'>${rejectBtn} </td>
                         </tr>
@@ -632,7 +633,7 @@ function setupCompetitionPage() {
             $('#competitionData').append(listArr.join(''));
 
             // <td>
-            //     ${list.isApproved == 1 ? `<a href='/add-competition?cid=${list.centerId}&kamid=${empId}&mode=reject' class="btn btn-default btn-grad rejected-btn">Reject</a>` : ''} 
+            //    ${list.isApproved == 1 ? `<a href='/add-competition?cid=${list.centerId}&kamid=${empId}&mode=reject' class="btn btn-default btn-grad rejected-btn">Reject</a>` : ''} 
             // </td>
             // generate data for the graph
             //drawBusinessChartWithData(response.data[1]);

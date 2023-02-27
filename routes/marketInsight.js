@@ -17,7 +17,8 @@ const controller = require('../controllers/marketInsightController');
 
 router.get('/market-insight-add', controller.addMarketInsight);
 router.post('/center-market-insight-add', controller.addCenterMarketInsight);
-router.get('/market-insight-detail/:insightId', controller.getCenterMarketInsightById);
+// router.get('/market-insight-detail/:insightId', controller.getCenterMarketInsightById);
+router.get('/market-insight-detail/:insightId/:centerId', controller.getCenterMarketInsightById);
 router.post('/center-market-insight-approved', controller.approveCenterMarketInsightByInsightId);
 
 // router.post('/sku-edit/:skuId', controller.addUpdateSku);

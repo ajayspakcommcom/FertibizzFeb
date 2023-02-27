@@ -10,15 +10,15 @@ exports.addMarketInsight = (req, res, next) => {
 };
 
 
-exports.addCenterMarketInsight = (req, res, next) => {    
-     let params = Object.assign(req.params, req.body);
-     addCenterMarketInsight(params).then(result => {
-         res.status(_STATUSCODE).json(result)
-     })
- };
+exports.addCenterMarketInsight = (req, res, next) => {
+    let params = Object.assign(req.params, req.body);
+    addCenterMarketInsight(params).then(result => {
+        res.status(_STATUSCODE).json(result)
+    })
+};
 
 
- function addCenterMarketInsight( objParam ) {
+function addCenterMarketInsight(objParam) {
     // console.log('--------------------------------')
     console.log('Insight Added Added')
     // console.log('--------------------------------')
@@ -40,7 +40,7 @@ exports.addCenterMarketInsight = (req, res, next) => {
                     .input("answerThreeRFSH", sql.NVarChar, (objParam.answerThreeRFSH))
                     .input("answerThreeHMG", sql.NVarChar, (objParam.answerThreeHMG))
                     .input("answerFourRHCG", sql.NVarChar, (objParam.answerFourRHCG))
-                    
+
                     .input("answerFourAgonistL", sql.NVarChar, (objParam.answerFourAgonistL))
                     .input("answerFourAgonistT", sql.NVarChar, (objParam.answerFourAgonistT))
                     .input("answerFourRHCGTriptorelin", sql.NVarChar, (objParam.answerFourRHCGTriptorelin))
@@ -49,9 +49,9 @@ exports.addCenterMarketInsight = (req, res, next) => {
                     .input("answerFiveDydrogesterone", sql.NVarChar, (objParam.answerFiveDydrogesterone))
                     .input("answerFiveCombination", sql.NVarChar, (objParam.answerFiveCombination))
                     .input("answerFourUHCG", sql.NVarChar, (objParam.answerFourUHCG))
-                    
+
                     .execute("USP_ADD_UPDATE_MARKET_INSIGHT_BY_KAM")
-                    .then(function (resp) {                        
+                    .then(function (resp) {
                         console.log('success');
                         resolve(resp.recordset);
                         dbConn.close();
@@ -70,48 +70,49 @@ exports.addCenterMarketInsight = (req, res, next) => {
 
 
 exports.getCenterMarketInsightById = (req, res, next) => {
-    // console.log(req.params, '--->')
+    console.log(req.params, '--->')
     getCenterMarketInsightById(req.params).then((result) => {
-         res.status(_STATUSCODE).json(result);
-     });
- };
- 
- 
- getCenterMarketInsightById = (objParam) => {
-     return new Promise((resolve) => {
-         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
-         dbConn
-             .connect()
-             .then(function () {
-                 var request = new sql.Request(dbConn);
-                 request
-                     .input("insightId", sql.Int, objParam.insightId)
-                     .execute("USP_LIST_MARKET_INSIGHT_BY_INSIGHTID")
-                     .then(function (resp) {                     
-                         resolve(resp.recordsets);
-                         dbConn.close();
-                     })
-                     .catch(function (err) {
+        res.status(_STATUSCODE).json(result);
+    });
+};
+
+
+getCenterMarketInsightById = (objParam) => {
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    .input("insightId", sql.Int, objParam.insightId == 'null' ? null : objParam.insightId)
+                    .input("centerId", sql.Int, objParam.centerId)
+                    .execute("USP_LIST_MARKET_INSIGHT_BY_INSIGHTID")
+                    .then(function (resp) {
+                        resolve(resp.recordsets);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
                         console.log(err);
-                         dbConn.close();
-                     });
-             })
-             .catch(function (err) {
-                 //console.log(err);
-             });
-     });
- };
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                //console.log(err);
+            });
+    });
+};
 
- exports.approveCenterMarketInsightByInsightId = (req, res, next) => {
+exports.approveCenterMarketInsightByInsightId = (req, res, next) => {
     // console.log('inside update employee');
-     let params = Object.assign(req.params, req.body);
-     approveCenterMarketInsightByInsightId(params).then(result => {
-         res.status(_STATUSCODE).json(result)
-     })
- };
+    let params = Object.assign(req.params, req.body);
+    approveCenterMarketInsightByInsightId(params).then(result => {
+        res.status(_STATUSCODE).json(result)
+    })
+};
 
- 
-function approveCenterMarketInsightByInsightId( objParam ) {
+
+function approveCenterMarketInsightByInsightId(objParam) {
     // console.log('--------------------------------')
     // console.log(objParam)
     // console.log('--------------------------------')

@@ -107,33 +107,45 @@ function getMarketInsightDetails() {
 
     isLoaderVisible(true);
 
-    // let ivfCycle;
-    // $('#AnswerTwo').val(ivfCycle);
+    let insightId = new URLSearchParams(window.location.search).get('insightId'),
+        centerId = new URLSearchParams(window.location.search).get('centreId'), params;
 
-    let insightId = new URLSearchParams(window.location.search).get('insightId');
+    params = {
+        insightId: insightId,
+        centerId: centerId
+    };
+
+
+
 
     // if(insightId != null) {
     axios
-        .get('/market-insight-detail/' + insightId).then((response) => {
+        //.get('/market-insight-detail/' + insightId).then((response) => {
+        .get('/market-insight-detail/' + params.insightId + '/' + params.centerId).then((response) => {
 
             console.log(response);
 
             let data = response.data[0][0], ivfCycle = response.data[1][0].IVFCycle;
-            data.answerOne == true ? $("[name=obstetricsRadio]")[0].setAttribute("checked", "checked") : $("[name=obstetricsRadio]")[1].setAttribute("checked", "checked");
+
             $('#AnswerTwo').val(ivfCycle);
-            $('#answerThreeRFSH').val(data.answerThreeRFSH);
-            $('#answerThreeHMG').val(data.answerThreeHMG);
-            $('#answerFourRHCG').val(data.answerFourRHCG);
-            $('#answerFourUHCG').val(data.answerFourUHCG);
-            $('#answerFourAgonistL').val(data.answerFourAgonistL);
-            $('#answerFourAgonistT').val(data.answerFourAgonistT);
-            $('#answerFourRHCGTriptorelin').val(data.answerFourRHCGTriptorelin);
-            $('#answerFourRHCGLeuprolide').val(data.answerFourRHCGLeuprolide);
-            $('#answerProgesterone').val(data.answerProgesterone);
-            $('#answerFiveDydrogesterone').val(data.answerFiveDydrogesterone);
-            $('#answerFiveCombination').val(data.answerFiveCombination);
-            $('#rejectedComment b').text(data.rejectComments);
-            isLoaderVisible(false);
+            console.log(data);
+            if (data) {
+                data.answerOne == true ? $("[name=obstetricsRadio]")[0].setAttribute("checked", "checked") : $("[name=obstetricsRadio]")[1].setAttribute("checked", "checked");
+                $('#AnswerTwo').val(ivfCycle);
+                $('#answerThreeRFSH').val(data.answerThreeRFSH);
+                $('#answerThreeHMG').val(data.answerThreeHMG);
+                $('#answerFourRHCG').val(data.answerFourRHCG);
+                $('#answerFourUHCG').val(data.answerFourUHCG);
+                $('#answerFourAgonistL').val(data.answerFourAgonistL);
+                $('#answerFourAgonistT').val(data.answerFourAgonistT);
+                $('#answerFourRHCGTriptorelin').val(data.answerFourRHCGTriptorelin);
+                $('#answerFourRHCGLeuprolide').val(data.answerFourRHCGLeuprolide);
+                $('#answerProgesterone').val(data.answerProgesterone);
+                $('#answerFiveDydrogesterone').val(data.answerFiveDydrogesterone);
+                $('#answerFiveCombination').val(data.answerFiveCombination);
+                $('#rejectedComment b').text(data.rejectComments);
+                isLoaderVisible(false);
+            }
 
         }).catch((err) => {
             console.log(err);
