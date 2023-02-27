@@ -8217,6 +8217,30 @@ h1 {
   font-size: 40px;
 }
 
+.competition-rbm-zbm thead tr th:nth-child(5),
+.competition-rbm-zbm tbody tr td:nth-child(5),
+.competition-rbm-zbm thead tr th:nth-child(6),
+.competition-rbm-zbm tbody tr td:nth-child(6),
+.competition-rbm-zbm thead tr th:nth-child(7),
+.competition-rbm-zbm tbody tr td:nth-child(7),
+.competition-rbm-zbm thead tr th:nth-child(8),
+.competition-rbm-zbm tbody tr td:nth-child(8),
+.competition-rbm-zbm thead tr th:nth-child(9),
+.competition-rbm-zbm tbody tr td:nth-child(9),
+.competition-rbm-zbm thead tr th:nth-child(10),
+.competition-rbm-zbm tbody tr td:nth-child(10) {
+  min-width: 300px;
+  width: 300px;
+}
+
+.comp-sku {
+  margin-bottom: 5px;
+}
+
+.comp-sku:last-child {
+  margin-bottom: 0;
+}
+
 @keyframes waviy {
 
   0%,

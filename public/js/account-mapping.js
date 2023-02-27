@@ -646,11 +646,10 @@ function setupCompetitionPage() {
 
 function getCompetitorSku(brandList, centerId, brandName) {
     let filterData = brandList.filter(x => x.centerId == centerId && x.brandName == brandName), html = [];
-
     for (let item of filterData) {
         html.push(`
-            <div><b>${item.name} : </b><span>${item.businessValue}</span></div>
-        `)
+                <div class="comp-sku"><span>${item.name} : </span><b>${item.businessValue}</b></div>
+            `);
     }
     return html.join('');
 }
