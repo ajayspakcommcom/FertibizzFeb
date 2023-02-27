@@ -95,7 +95,7 @@ function setupPotentialPage() {
 
                     if (userData.post === _POST.ZBM) {
                         chkbox = (parseInt(list.ZBMApproved) === 1) ? `<input ${list.ZBMApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.potentialId}'  id=${list.potentialId} />` : '',
-                        rejectBtn = (parseInt(list.ZBMApproved) === 1) ? `<button type="button" class="btn btn-default btn-grad rejected-btn" data-toggle="modal" 
+                            rejectBtn = (parseInt(list.ZBMApproved) === 1) ? `<button type="button" class="btn btn-default btn-grad rejected-btn" data-toggle="modal" 
                         data-target="#exampleModal" 
                         data-centername="${camelCaseText(list.CENTRENAME)}" 
                         data-accountname="${camelCaseText(list.accountName)}" 
@@ -248,6 +248,7 @@ function setmarketInsightPage() {
                                 <td></td>
                                 <td></td>                      
                                 <td></td>                      
+                                <td></td>                      
                                 <td colspan="3" class="total-dr text-right"><b>Total Doctors ${lists.length}</b></td>
                              </tr>`);
             } else {
@@ -368,7 +369,7 @@ function setupBusinessPage() {
             let lists = response.data[0],
                 listArr = [];
             if (lists.length > 0) {
-
+                console.log(lists);
                 lists.forEach(list => {
                     // console.log(list)
                     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
@@ -570,11 +571,10 @@ function setupCompetitionPage() {
 
     axios
         .post(`/account-mapping/${empId}/competition-list`, param).then((response) => {
-            //console.log(response.data[0])
+            //console.log(response.data)
             let lists = response.data[0],
+                brandList = response.data[1],
                 listArr = [];
-
-                console.log(lists);
 
             lists.forEach(list => {
                 // console.log((list));
@@ -593,15 +593,26 @@ function setupCompetitionPage() {
                     chkbox = (parseInt(list.isApproved) === 1) ? `<input ${list.isApproved === false ? `checked` : ''} type='checkbox' class='chkbox' value='${list.centerId}_${list.month}_${list.year}'  id=${list.centerId} />` : '';
                 }
 
+                //console.log(list);
+                //console.log(list.DoctorName);
+                //console.log(brandList.filter(x => x.centerId == list.centerId));
+                //console.log(getCompetitorSku(brandList, list.centerId));
+
                 listArr.push(
                     `<tr>
                         <td>${chkbox}</td>
                         <td>${(list.accountName) ? camelCaseText(list.accountName) : ''}</td>
                         <td>${camelCaseText(list.CENTRENAME)}</td>
                         <td>${camelCaseText(list.DoctorName)}</td>
+                        <td>${getCompetitorSku(brandList, list.centerId, 'FOLIGRAF')}</td>
+                        <td>${getCompetitorSku(brandList, list.centerId, 'HUMOG')}</td>
+                        <td>${getCompetitorSku(brandList, list.centerId, 'ASPORELIX')}</td>
+                        <td>${getCompetitorSku(brandList, list.centerId, 'R-HUCOG')}</td>
+                        <td>${getCompetitorSku(brandList, list.centerId, 'AGOTRIG')}</td>
+                        <td>${getCompetitorSku(brandList, list.centerId, 'MIDYDROGEN')}</td>
                         <td> ${list.statusText == null ? approvedRejectedPendingIcon[1] : list.statusText.toLowerCase() == 'approved' ? approvedRejectedPendingIcon[0] : list.statusText.toLowerCase() == 'pending' ? approvedRejectedPendingIcon[1] : approvedRejectedPendingIcon[2]}</td>
-                        <td><a href='/add-competition?cid=${list.centerId}&kamid=${empId}'>View Details</a> </td>
-                        <!--<td align='right'>${rejectBtn} </td>-->
+                        <!--<td><a href='/add-competition?cid=${list.centerId}&kamid=${empId}'>View Details</a> </td>-->
+                        <td align='right'>${rejectBtn} </td>
                     </tr>
                 `);
             });
@@ -611,8 +622,12 @@ function setupCompetitionPage() {
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>                                             
-                            <td class="total-dr text-right"><b>Total Doctors ${lists.length}</b></td>
+                            <td></td>    
+                            <td></td>
+                            <td></td>
+                            <td></td>                                                                
+                            <td></td>                                                                
+                            <td class="total-dr text-right" colspan="3"><b>Total Doctors ${lists.length}</b></td>
                          </tr>`);
 
             $('#competitionData').append(listArr.join(''));
@@ -627,6 +642,17 @@ function setupCompetitionPage() {
         }).catch((err) => {
             console.log(err);
         });
+}
+
+function getCompetitorSku(brandList, centerId, brandName) {
+    let filterData = brandList.filter(x => x.centerId == centerId && x.brandName == brandName), html = [];
+
+    for (let item of filterData) {
+        html.push(`
+            <div><b>${item.name} : </b><span>${item.businessValue}</span></div>
+        `)
+    }
+    return html.join('');
 }
 
 function isRcBtnVisible() {

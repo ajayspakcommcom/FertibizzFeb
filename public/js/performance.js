@@ -79,22 +79,25 @@ function getPerformanceData1() {
             let centreData = response.data[0], potentialData = response.data[1], competitonList = response.data[3], businessData = response.data[4];
             listArr = [];
 
-            if (centreData.length > 0) {
-                centreData.forEach(data => {
-                    listArr.push(
-                        `<tr>                            
+            if (centreData) {
+                if (centreData.length > 0) {
+                    centreData.forEach(data => {
+                        listArr.push(
+                            `<tr>                            
                                 <td>${data.doctorName}</td>
                                 <td>${data.SpecialtyName}</td>
                             </tr>
                         `)
-                });
-            } else {
-                listArr.push(`
+                    });
+                } else {
+                    listArr.push(`
                     <tr>
                         <td colspan="2"><p class="text-center m-b-0">No Data found</p></td>
                     </tr>
                 `);
+                }
             }
+
 
 
 
@@ -103,10 +106,11 @@ function getPerformanceData1() {
             listArr = [];
 
 
-            if (potentialData.length > 0) {
-                potentialData.forEach(data => {
-                    listArr.push(
-                        `<tr>
+            if (potentialData) {
+                if (potentialData.length > 0) {
+                    potentialData.forEach(data => {
+                        listArr.push(
+                            `<tr>
                         <td>${data.IUICycle}</td>
                         <td>${data.IVFCycle}</td>
                         <td>${data.FreshPickUps}</td>
@@ -117,62 +121,69 @@ function getPerformanceData1() {
                         <td>${data.Antagonistcycles}</td>
                     </tr>
                     `)
-                });
-            } else {
-                listArr.push(
-                    `<tr>
+                    });
+                } else {
+                    listArr.push(
+                        `<tr>
                         <td colspan="8"><p class="text-center m-b-0">No Data found</p></td>                      
                     </tr>
                 `);
+                }
             }
+
 
 
             $('#potentialList').append(listArr.join(''));
 
             listArr = [];
 
-            if (competitonList.length > 0) {
-                competitonList.forEach(data => {
-                    listArr.push(
-                        `<tr>
+            if (competitonList) {
+                if (competitonList.length > 0) {
+                    competitonList.forEach(data => {
+                        listArr.push(
+                            `<tr>
                                     <td>${data.brandName}</td>
                                     <td>${data.groupName}</td>
                                     <td>${data.totalQty}</td>
                                     <td>${data.totalValue}</td>
                                 </tr>
                             `)
-                });
-            } else {
-                listArr.push(
-                    `<tr>
+                    });
+                } else {
+                    listArr.push(
+                        `<tr>
                         <td colspan="4"><p class="text-center m-b-0">No Data found</p></td>
                     </tr>
                     `)
+                }
             }
-
-
 
             $('#competitonList').append(listArr.join(''));
 
             listArr = [];
 
-            if (businessData.length > 0) {
-                businessData.forEach(data => {
-                    listArr.push(
-                        `<tr>
+
+
+            if (businessData) {
+                if (businessData.length > 0) {
+                    businessData.forEach(data => {
+                        listArr.push(
+                            `<tr>
                                     <td>${data.brandname}</td>
                                     <td>${data.TotalBusinessValue}</td>
                                 </tr>
                             `)
-                });
-            } else {
-                listArr.push(
-                    `<tr>
+                    });
+                } else {
+                    listArr.push(
+                        `<tr>
                             <td colspan="2"><p class="text-center m-b-0">No Data found</p></td>                                
                         </tr>
                     `)
+                }
             }
 
+            $('#rcStatus').text(new URLSearchParams(window.location.search).get('isRc'));
             $('#businessList').append(listArr.join(''));
             isLoaderVisible(false);
 

@@ -49,7 +49,8 @@
                     <div class="theme-form">
 
                         <div class="text-right">
-                            <a href="javascript:void(0);" onclick="goBack()" class="btn btn-default btn-grad go-back">GoBack</a>
+                            <a href="javascript:void(0);" onclick="goBack()"
+                                class="btn btn-default btn-grad go-back">GoBack</a>
                         </div>
 
                         <ul class="nav nav-tabs gradient-tabs">
@@ -77,7 +78,8 @@
                             <div id="tabular" class="tab-pane fade in active">
 
                                 <div class="text-right filter-main-wrapper">
-                                    <div class="text-right"><a href="javascript:void(0);" onclick="approveListingMarketInsight(0);return false;"
+                                    <div class="text-right"><a href="javascript:void(0);"
+                                            onclick="approveListingMarketInsight(0);return false;"
                                             class="btn btn-default btn-grad go-back">Approve Selected</a></div>
                                     <div class="form-group filter-wrapper">
                                         <select class="form-control" id="comboAccountCategory" onchange="filterData()">
@@ -90,7 +92,7 @@
                                         <!-- <button onclick="filterData()" class="btn btn-default btn-grad go-back">Filter ata</button> -->
                                     </div>
                                 </div>
-                                
+
                                 <div class="table-responsive">
                                     <table class="table table-data shadow" id="filterDataByCategoryTable">
                                         <thead>
@@ -100,7 +102,7 @@
                                                 <th>Centre Name</th>
                                                 <th>Ivf Core</th>
                                                 <th>Practice Obstetrics</th>
-                                                <th>Fresh stimulation Cycles</th>
+                                                <th>Fresh Stimulated Cycles</th>
                                                 <th>RFSH</th>
                                                 <th>HMG</th>
                                                 <th>Progesterone</th>
@@ -153,13 +155,15 @@
                         <input type="hidden" id="hidInsightId" name="hidInsightId" />
                         <div class="form-group">
                             <label for="message-text" class="col-form-label"><strong>Reason for reject:</strong></label>
-                            <textarea class="form-control" id="txtAreaRejectReason" maxlength="999" rows="5" cols="50" name="txtAreaRejectReason"></textarea>
+                            <textarea class="form-control" id="txtAreaRejectReason" maxlength="999" rows="5" cols="50"
+                                name="txtAreaRejectReason"></textarea>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="approveListingMarketInsight(2);return false;">REJECT</button>
+                    <button type="button" class="btn btn-primary"
+                        onclick="approveListingMarketInsight(2);return false;">REJECT</button>
                 </div>
             </div>
         </div>
@@ -180,7 +184,7 @@
             google.charts.load('current', { packages: ['corechart', 'bar'] });
             setmarketInsightPage();
             getKamDetails();
-            
+
             $('#selectAll').click(function (e) {
                 var table = $(e.target).closest('table');
                 $('td input:checkbox', table).prop('checked', this.checked);
@@ -197,17 +201,17 @@
                 modal.find('#dvAccountName').text('Account Name ' + button.data('accountname'))
                 modal.find('#dvIVFCore').text('IVF Core ' + button.data('drname'))
                 modal.find('#hidInsightId').val(button.data('insightid'))
-                
+
             })
         });
 
         function filterData() {
-            
-          let dropdown, table, rows, cells, empName, filter;
+
+            let dropdown, table, rows, cells, empName, filter;
             dropdown = document.getElementById("comboAccountCategory");
             table = document.getElementById("filterDataByCategoryTable");
-            rows = Array.from(table.getElementsByTagName("tr")).slice(1)     
-            filter = dropdown.value;            
+            rows = Array.from(table.getElementsByTagName("tr")).slice(1)
+            filter = dropdown.value;
             for (let row of rows) { // `for...of` loops through the NodeList
                 cells = row.getElementsByTagName("td");
                 if (cells) {
