@@ -8241,6 +8241,15 @@ h1 {
   margin-bottom: 0;
 }
 
+.hospital-table th:nth-child(8),
+.hospital-table td:nth-child(8) {
+  display: none;
+}
+
+.table>thead>tr>th {
+  white-space: nowrap;
+}
+
 @keyframes waviy {
 
   0%,
