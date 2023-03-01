@@ -27,8 +27,8 @@ const fileUpload = require('express-fileupload');
 const app = express();
 // default options
 app.use(fileUpload({
-  useTempFiles : true,
-  tempFileDir : '/tmp/',
+  useTempFiles: true,
+  tempFileDir: '/tmp/',
   createParentPath: true,
 }));
 const twoDay = 1000 * 60 * 60 * 48;
@@ -47,22 +47,22 @@ app.use(bodyParser.raw());
 app.use(cookieParser());
 // app.use(cors(corsOptions));
 
- const hospitalsRoutes = require('./routes/hospitals');
- const employeesRoutes = require('./routes/employee');
- const adminRoutes = require('./routes/admin');
- const hierarchyRoutes = require('./routes/hierarchy');
- const customerRoutes = require('./routes/customer');
- const skuRoutes = require('./routes/sku');
- const potentialRoutes = require('./routes/potentail');
- const businessRoutes = require('./routes/business');
- const competitionRoutes = require('./routes/competition');
- const reportRoutes = require('./routes/report');
- const accountMappingRoutes = require('./routes/accountMapping');
- const performanceRoutes = require('./routes/performance');
- const notificationRoutes = require('./routes/notification');
- const rcRoutes = require('./routes/rc');
- const testRoutes = require('./routes/test');
- const marketInsightRoutes = require('./routes/marketInsight');
+const hospitalsRoutes = require('./routes/hospitals');
+const employeesRoutes = require('./routes/employee');
+const adminRoutes = require('./routes/admin');
+const hierarchyRoutes = require('./routes/hierarchy');
+const customerRoutes = require('./routes/customer');
+const skuRoutes = require('./routes/sku');
+const potentialRoutes = require('./routes/potentail');
+const businessRoutes = require('./routes/business');
+const competitionRoutes = require('./routes/competition');
+const reportRoutes = require('./routes/report');
+const accountMappingRoutes = require('./routes/accountMapping');
+const performanceRoutes = require('./routes/performance');
+const notificationRoutes = require('./routes/notification');
+const rcRoutes = require('./routes/rc');
+const testRoutes = require('./routes/test');
+const marketInsightRoutes = require('./routes/marketInsight');
 
 
 app.use(express.static(path.join(__dirname, "public")));
@@ -90,7 +90,7 @@ app.use(marketInsightRoutes);
 //app.use(managerRoutes);
 
 //app.listen(process.env.PORT || 3333, () => {
-app.listen(process.env.PORT || 3333, () => {
+app.listen(process.env.PORT || 3004, () => {
   console.clear();
   console.log("Application listening on port 3333!");
 });
