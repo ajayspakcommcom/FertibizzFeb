@@ -110,11 +110,11 @@ function setupPotentialPage() {
                             <td>${camelCaseText(list.DoctorName)}</td>
                             <td align='right'>${list.IUICycle}</td>
                             <td align='right'>${list.IVFCycle}</td>
-                            <td align='right'>${list.FreshPickUps}</td>
+                            <!--<td align='right'>${list.FreshPickUps}</td>-->
                             <td align='right'>${list.frozenTransfers}</td>
-                            <td align='right'>${list.SelftCycle}</td>
+                            <!--<td align='right'>${list.SelftCycle}</td>-->
                             <td align='right'>${list.DonorCycles}</td>
-                            <td align='right'>${list.AgonistCycles}</td>
+                            <!--<td align='right'>${list.AgonistCycles}</td>-->
                             <td align='right'>${list.Antagonistcycles}</td>
                             <td> ${list.statusText == null ? approvedRejectedPendingIcon[1] : list.statusText.toLowerCase() == 'approved' ? approvedRejectedPendingIcon[0] : list.statusText.toLowerCase() == 'pending' ? approvedRejectedPendingIcon[1] : approvedRejectedPendingIcon[2]}</td>
                             <td align='right'>${rejectBtn} </td>
@@ -144,10 +144,7 @@ function setupPotentialPage() {
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>                      
+                                <td></td>                                                  
                                 <td colspan="3" class="total-dr text-right"><b>Total Doctors ${lists.length}</b></td>
                              </tr>`);
             } else {

@@ -415,7 +415,7 @@ function getMyHospitalList() {
         .post('/hospitals-list/', param).then((response) => {
 
             let lists = response.data, listArr = [], uniqueList = [...new Map(lists.map(item => [item['CENTRENAME'], item])).values()];
-
+            uniqueList = lists;
             console.log('Origional', lists);
             console.log('Unique', uniqueList);
 

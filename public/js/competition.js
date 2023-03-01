@@ -13,7 +13,7 @@ function setupPage() {
 
 function loadMonthYear() {
   const date = new Date();
-  let dt = new Date(date.getFullYear(), date.getMonth() - 1, 1);
+  let dt = new Date(date.getFullYear(), date.getMonth() - 2, 1);
   $('#cmbMonth').val(dt.getMonth() + 1); // our combo box starts with 1
   $('#cmbYear').val(dt.getFullYear());
   $('#cmbMonth').prop('disabled', true);
@@ -31,12 +31,12 @@ async function getSkuDetails() {
     month = $('#cmbMonth').val(),
     userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
 
-    console.log(userData);
+  console.log(userData);
 
-    if(userData.post.toLowerCase() != 'kam') {
-      $('.confirmchk').hide();
-      $('#rejectedcompetitionCommentTxt').hide();
-    }
+  if (userData.post.toLowerCase() != 'kam') {
+    $('.confirmchk').hide();
+    $('#rejectedcompetitionCommentTxt').hide();
+  }
 
   if (userData.post.toLowerCase() == 'kam') {
     console.log('');

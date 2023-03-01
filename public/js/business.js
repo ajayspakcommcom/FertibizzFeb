@@ -6,7 +6,7 @@ function setupPage() {
 
 function loadMonthYear() {
     const date = new Date();
-    let dt = new Date(date.getFullYear(), date.getMonth() - 1, 1);
+    let dt = new Date(date.getFullYear(), date.getMonth() - 2, 1);
     $('#cmbMonth').val(dt.getMonth() + 1); // our combo box starts with 1
     $('#cmbYear').val(dt.getFullYear());
     $('#cmbMonth').prop('disabled', true);
@@ -43,11 +43,11 @@ async function getSkuDetails() {
     const getSkuContractDetailsRequest = axios.get('/contract-details/' + chainAccountTypeId);
     const getBusinessTrackDetails = axios.post('/business-tracker-details/', businessTrackerParam);
     await axios.all([getAllSKURequest, getSkuContractDetailsRequest, getBusinessTrackDetails]).then(axios.spread(function (skuResponse, contractResponse, businessTrackResponse) {
-            
+
         console.log(skuResponse.data);
         console.log(contractResponse.data);
         console.log(businessTrackResponse.data);
-           
+
 
         skuDetails = skuResponse.data;
         let skus = skuDetails,
@@ -62,12 +62,12 @@ async function getSkuDetails() {
 
         if (businessTrackRes.length > 0) {
             if (businessTrackRes[0] && businessTrackRes[0].rejectComments) {
-              //  console.log(businessTrackRes[0].rejectComments)
+                //  console.log(businessTrackRes[0].rejectComments)
                 $('.rejected-comment').removeClass('hide');
                 $('#rejectedBusinessCommentTxt').text(businessTrackRes[0].rejectComments);
             }
         }
-        
+
         console.log(_SKU_BRANDS);
 
         _SKU_BRANDS.forEach(skuBrand => {
@@ -208,16 +208,16 @@ function confirmBrandEntry(checkbox) {
 }
 
 function closePanel(id) {
-   $(`#${id}`).removeClass('in');
-   $(`#${id}`).parent('.panel').find('.panel-heading').addClass('done');
+    $(`#${id}`).removeClass('in');
+    $(`#${id}`).parent('.panel').find('.panel-heading').addClass('done');
 }
 
 function showBusinessBrandWiseTotal(obj) {
     let total = 0, calculatedInput = $(obj).parents('.form-section').find('.calculatedBus');
-    for(let item of calculatedInput) {        
+    for (let item of calculatedInput) {
         total += parseFloat(item.value);
     }
-   // console.log($(obj).parents('.panel').find('.businessTotalHeading .totalBrand').text(total));
+    // console.log($(obj).parents('.panel').find('.businessTotalHeading .totalBrand').text(total));
 }
 
 function calculateBusiness(obj) {
@@ -229,14 +229,14 @@ function calculateBusiness(obj) {
         roundOffPrice = Math.round(($('#' + obj.id).val() * finalPrice) * 100) / 100;
 
     $('#' + unitSoldBusinessfield).val(roundOffPrice);
-    
+
     calculateTotal();
     calculateBusinessTotal(obj);
     // console.log(priceField, rateContractField, unitPrice)    
 }
 
-function calculateBusinessTotal(fieldId){
-   // console.log(fieldId)
+function calculateBusinessTotal(fieldId) {
+    // console.log(fieldId)
 }
 
 function calculateTotal() {
@@ -244,11 +244,11 @@ function calculateTotal() {
         totalBusiness = 0;
     skus.forEach(sku => {
         let unitSoldBusinessfield = `txt_${sku.brandId}_${sku.brandGroupId}_${sku.medid}_unitSoldBusiness`,
-        //businessValue = $('#' + unitSoldBusinessfield).val().length > 0 ? parseFloat($('#' + unitSoldBusinessfield).val()) : 0;
-        businessValue = $('#' + unitSoldBusinessfield).val() !== undefined ? $('#' + unitSoldBusinessfield).val().length > 0 ? parseFloat($('#' + unitSoldBusinessfield).val()) : 0 : '';
+            //businessValue = $('#' + unitSoldBusinessfield).val().length > 0 ? parseFloat($('#' + unitSoldBusinessfield).val()) : 0;
+            businessValue = $('#' + unitSoldBusinessfield).val() !== undefined ? $('#' + unitSoldBusinessfield).val().length > 0 ? parseFloat($('#' + unitSoldBusinessfield).val()) : 0 : '';
         totalBusiness = parseFloat(totalBusiness + businessValue);
     });
-    
+
 
     //console.log(totalBusiness);
     //$('#spnTotalBusinessValue').text(intToString(totalBusiness));
@@ -281,7 +281,7 @@ function validateMe() {
         return false;
     }
 
-    if($("#chkConfirm").is(':checked') == false) {
+    if ($("#chkConfirm").is(':checked') == false) {
         alert('Please click on checkbox to confirm the data');
         return false;
     }
@@ -374,7 +374,7 @@ function setRate() {
 
 function approveBusinessTracker() {
     //console.log('approved me Clicked business');
-  
+
     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data")),
         param = {
             centerId: new URLSearchParams(window.location.search).get('cid'),
@@ -405,12 +405,12 @@ function showCheckBoxApproveBtn() {
     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
     //console.log(userData);
 
-    if(userData.post.toLowerCase() == 'kam') {
+    if (userData.post.toLowerCase() == 'kam') {
         $('.hideApproveChk').hide();
         $('#btnApprove').hide();
     }
 
-    else if(userData.post.toLowerCase() == 'rbm') {
+    else if (userData.post.toLowerCase() == 'rbm') {
         $('#resetBtn').hide();
         $('#saveBtn').hide();
         $('.two-btn-wrapper').addClass('right');
