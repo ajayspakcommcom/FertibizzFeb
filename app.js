@@ -90,7 +90,7 @@ app.use(marketInsightRoutes);
 //app.use(managerRoutes);
 
 //app.listen(process.env.PORT || 3333, () => {
-app.listen(process.env.PORT || 3004, () => {
+app.listen(process.env.PORT || 3333, () => {
   console.clear();
   console.log("Application listening on port 3333!");
 });
