@@ -2,7 +2,7 @@
 let urlArr = window.location.href.split('/'),
     centerId = urlArr[urlArr.length - 1],
     date = new Date(),
-    dt = new Date(date.getFullYear(), date.getMonth() - 1, 1);
+    dt = new Date(date.getFullYear(), date.getMonth() - 2, 1);
 
 function pageSetUp() {
     //getPerformanceData();
