@@ -174,7 +174,7 @@ function getSKUHtml(skuBrandGroups, brandGroup, contractResponse, businessTrackR
                 <div class="form-group">
                     <input type="text" 
                         onkeypress="return isNumber(event);"
-                        maxLength="3"
+                        maxLength="6"
                         class="form-control unitSold" 
                         id="txt_${fieldName}_unitSold" 
                         name="txt_${fieldName}_unitSold" 
