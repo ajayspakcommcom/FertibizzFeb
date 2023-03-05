@@ -9854,6 +9854,15 @@ input[type=file] {
   text-decoration: none !important;
 }
 
+.hospital-table th:last-child, .hospital-table td:last-child {
+  display: none;
+}
+
+.hospital-table td.total-dr {
+  display: table-cell;
+  text-align: right;
+}
+
 svg.approved,
 svg.pending,
 svg.rejected {

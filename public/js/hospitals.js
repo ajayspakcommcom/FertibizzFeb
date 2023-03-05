@@ -444,8 +444,8 @@ function getMyHospitalList() {
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
+                            <!--<td></td>
+                            <td></td>-->
                             <td class="total-dr"><b>Total Doctors ${uniqueList.length}</b></td>
                          </tr>`);
 
