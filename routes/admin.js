@@ -5,9 +5,9 @@ const adminController = require('../controllers/adminController');
 
 router.get('/', adminController.getAdmin);
 
- //router.post('/admin/dashboard', adminController.postApi);
+//router.post('/admin/dashboard', adminController.postApi);
 
- router.get('/dashboard', adminController.getDashboard);
+router.get('/dashboard', adminController.getDashboard);
 
 router.post('/admin/api', adminController.postApi);
 

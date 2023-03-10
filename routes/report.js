@@ -16,5 +16,11 @@ router.post('/report/businessReport', reportController.getBusinessReport);
 router.post('/report/allbusinessReports', reportController.getAllBusinessReport);
 
 
+//Ajay
+router.get('/potential-report1', reportController.getPotentialData1);
+//Ajay
+
+
+
 
 module.exports = router;

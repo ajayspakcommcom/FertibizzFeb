@@ -14,29 +14,29 @@ const _POST = {
 };
 
 const _URL = {
-        _hospitalListing: '/hospitals',
-        _POSTLOGINURL:  '/hospitals',
-        _HOSPITAL_UPDATE:'/hospitals-update/',
-        _CUSTOMER_ADD:'/add-customer/',
-        _CUSTOMER_LIST: '/customer/list',
-        _EMPLOYEE_DELETE: '/employee-delete',
-        _EMPLOYEE_EDIT: '/employee-edit/',
-        _EMPLOYEE_DETAILS: '/employee-details/',
-        _MASTER_DATA: '/master-data/',
-        _EMPLOYEE_UPDATE:'/employee-update/',
-        _EMPLOYEE_ADD:'/employee-add',
-        _CUSTOMER:'/customers',
-        _EMPLOYEE_HERARCHY: '/employee-hierarchy/',
-        _EMPLOYEE_HERARCHY_EMP_AND_PARENT: '/employee-hierarchy-details/',
-        _EMPLOYEE_HERARCHY_MGR_LIST: '/employee-hierarchy-mgr-list/',
-        _EMPLOYEE_HERARCHY_EMP_MGR_UPDATE: '/employee-hierarchy-mgr-update/',
-        _EMPLOYEE_HOSPITAL: '/employee-hospital/',
-        _EMPLOYEE_HOSPITAL_LIST: '/employee-hospital-list/',
-        _EMPLOYEE_HOSPITAL_EDIT: '/employee-hospital-edit/',
-        _EMPLOYEE_HOSPITAL_NEW: '/employee-hospital-new/',
-        _EMPLOYEE_HOSPITAL_UN_ASSIGNED: '/employee-hospital-un-assigned',
-        _EMPLOYEE_HOSPITAL_UN_ASSIGNED_UPDATE: '/employee-hospital-un-assigned-update'
-    }
+    _hospitalListing: '/hospitals',
+    _POSTLOGINURL: '/hospitals',
+    _HOSPITAL_UPDATE: '/hospitals-update/',
+    _CUSTOMER_ADD: '/add-customer/',
+    _CUSTOMER_LIST: '/customer/list',
+    _EMPLOYEE_DELETE: '/employee-delete',
+    _EMPLOYEE_EDIT: '/employee-edit/',
+    _EMPLOYEE_DETAILS: '/employee-details/',
+    _MASTER_DATA: '/master-data/',
+    _EMPLOYEE_UPDATE: '/employee-update/',
+    _EMPLOYEE_ADD: '/employee-add',
+    _CUSTOMER: '/customers',
+    _EMPLOYEE_HERARCHY: '/employee-hierarchy/',
+    _EMPLOYEE_HERARCHY_EMP_AND_PARENT: '/employee-hierarchy-details/',
+    _EMPLOYEE_HERARCHY_MGR_LIST: '/employee-hierarchy-mgr-list/',
+    _EMPLOYEE_HERARCHY_EMP_MGR_UPDATE: '/employee-hierarchy-mgr-update/',
+    _EMPLOYEE_HOSPITAL: '/employee-hospital/',
+    _EMPLOYEE_HOSPITAL_LIST: '/employee-hospital-list/',
+    _EMPLOYEE_HOSPITAL_EDIT: '/employee-hospital-edit/',
+    _EMPLOYEE_HOSPITAL_NEW: '/employee-hospital-new/',
+    _EMPLOYEE_HOSPITAL_UN_ASSIGNED: '/employee-hospital-un-assigned',
+    _EMPLOYEE_HOSPITAL_UN_ASSIGNED_UPDATE: '/employee-hospital-un-assigned-update'
+}
 
 const approvedRejectedPendingIcon = [`<svg class="approved" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 20 20" version="1.1">
                                         <title>check_circle_outline</title>
@@ -91,7 +91,7 @@ function redirect(url) {
     document.location.href = url;
 }
 
-function isEditPage(){
+function isEditPage() {
     return (location.pathname.indexOf('add') < 0)
 
 }
@@ -102,28 +102,28 @@ function loadComboBox(data, dropdown, displayValue, displayText, optionTextAlong
 
     let selectHeader = '';
 
-    switch(dropdown) {
+    switch (dropdown) {
         case 'cmbHosp':
             selectHeader = 'Select Hospital';
-        break;
+            break;
         case 'cmbRegion':
             selectHeader = 'Select State';
-        break;
+            break;
         case 'cmbBrandList':
             selectHeader = 'Select Brand';
-        break;
+            break;
         case 'cmbKam':
             selectHeader = 'Select KAM';
-        break;
+            break;
         case 'cmbRBM':
             selectHeader = 'Select RBM';
-        break;
+            break;
         case 'cmbZBM':
             selectHeader = 'Select ZBM';
-        break;
+            break;
         case 'cmbBrands':
             selectHeader = 'Select Brands';
-        break;
+            break;
 
         default:
             selectHeader = '----Select----';
@@ -151,26 +151,26 @@ function loadComboBox(data, dropdown, displayValue, displayText, optionTextAlong
 
 function formatText(str, type) {
     //console.log('text format -->' + type)
-    switch(type) {
+    switch (type) {
         case 'UPPER':
             return str.toUpperCase()
-        break;
+            break;
         case 'FirstLetterUPPER':
             return capitalizeFirstLetter(str.toLowerCase());
-        break;
+            break;
         default:
             return camelCaseText(str)
             break;
     }
-   
+
 }
 
 
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-  
+}
+
 
 function camelCaseText(str) {
     if (str) {
@@ -196,16 +196,16 @@ function getFirstDayPreviousMonth() {
     $('#cmbYear').val(dt.getFullYear());
     //$('#cmbMonth').attr('disabled', 'disabled');
     $('#cmbYear').attr('disabled', 'disabled');
-  }
+}
 
 
-  function logMeOut() {
+function logMeOut() {
     localStorage.setItem("userData", null);
     localStorage.clear();
     document.location.href = "/";
 }
 
-function DisabledInput(elemClassName){
+function DisabledInput(elemClassName) {
     $(`.${elemClassName}`).prop('disabled', true);
 }
 
@@ -242,10 +242,10 @@ function getQueryStringValue(key) {
 
 function showElementByDesignation() {
     let userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
-    if (userData != null) { 
+    if (userData != null) {
         switch (userData.post.toLowerCase()) {
             case 'kam':
-                  //  console.log('Kam Level');
+                //  console.log('Kam Level');
                 break;
             case 'rbm':
                 $('.addNewCustomer').hide();
@@ -256,7 +256,7 @@ function showElementByDesignation() {
                 //console.log('zbm Level');      
                 break;
             case 'admin':
-                console.log('Admin Level');      
+                console.log('Admin Level');
                 break;
         }
     }
@@ -293,13 +293,13 @@ function showNavigationByDesignation() {
 
 function showDrNameCentreName() {
     const urlSearchParams = new URLSearchParams(window.location.search);
-    const params = Object.fromEntries(urlSearchParams.entries());    
+    const params = Object.fromEntries(urlSearchParams.entries());
     $('#drName').text(params.drName);
     $('#centreName').text(params.centreName);
 }
 
 function addPrevValueOnFocus(elem) {
-    if(parseInt(elem.value) == 0) {
+    if (parseInt(elem.value) == 0) {
         elem.value = '';
     } else {
         elem.value = elem.value;
@@ -308,14 +308,14 @@ function addPrevValueOnFocus(elem) {
 
 function addPrevValueOnFocusOut(elem) {
     //console.log(elem.value);
-    if(elem.value == undefined || elem.value == null || elem.value == '') {
+    if (elem.value == undefined || elem.value == null || elem.value == '') {
         elem.value = 0;
     }
 }
 
 setTimeout(() => {
-    showNavigationByDesignation();   
-    showElementByDesignation(); 
+    showNavigationByDesignation();
+    showElementByDesignation();
 }, 2000);
 
 function intToString(num) {
@@ -324,13 +324,13 @@ function intToString(num) {
         return num;
     }
     let si = [
-      {v: 1E3, s: "K"},
-      {v: 1E6, s: "M"},
-      {v: 1E9, s: "B"},
-      {v: 1E12, s: "T"},
-      {v: 1E15, s: "P"},
-      {v: 1E18, s: "E"}
-      ];
+        { v: 1E3, s: "K" },
+        { v: 1E6, s: "M" },
+        { v: 1E9, s: "B" },
+        { v: 1E12, s: "T" },
+        { v: 1E15, s: "P" },
+        { v: 1E18, s: "E" }
+    ];
     let index;
     for (index = si.length - 1; index > 0; index--) {
         if (num >= si[index].v) {
@@ -348,7 +348,7 @@ function validateAllInput() {
         var element = $(this);
         if (element.val() == "") {
             isValid = false;
-            element.after(`<p class="errorTxt">${element.attr('error')}</p>`);            
+            element.after(`<p class="errorTxt">${element.attr('error')}</p>`);
         }
     });
 
@@ -356,7 +356,7 @@ function validateAllInput() {
 }
 
 function isLoaderVisible(isVisible) {
-    if(isVisible == true) {
+    if (isVisible == true) {
         $('.loader').addClass('visible');
     } else {
         $('.loader').removeClass('visible');
@@ -364,7 +364,7 @@ function isLoaderVisible(isVisible) {
 }
 
 function isBtnLoaderVisible(isVisible) {
-    if(isVisible == true) {
+    if (isVisible == true) {
         $('.loader-img').addClass('show');
     } else {
         $('.loader-img').removeClass('show');
@@ -373,28 +373,28 @@ function isBtnLoaderVisible(isVisible) {
 
 function addActiveClassToLink(pos) {
     const links = $('.navigation-ul > li');
-    if(links[pos]) {
+    if (links[pos]) {
         links[pos].querySelector('a').classList.add('active');
     }
 }
 
-function setActiveLink() {    
+function setActiveLink() {
     let url = window.location.pathname;
 
-    if(url.includes('hospitals')) {
+    if (url.includes('hospitals')) {
         addActiveClassToLink(0);
-    } 
-    else if(url.includes('customers')) { 
+    }
+    else if (url.includes('customers')) {
         addActiveClassToLink(1);
     }
-    else if(url.includes('rc-list')) { 
+    else if (url.includes('rc-list')) {
         addActiveClassToLink(7);
     }
 }
 
 function showYear() {
     const elem = document.getElementById('showYearId');
-    if(elem) {
+    if (elem) {
         elem.textContent = new Date().getFullYear();
     }
 }
@@ -410,17 +410,17 @@ function toggleMenu() {
 }
 
 
-$('.menu-overlay').on('click', function(){
+$('.menu-overlay').on('click', function () {
     toggleMenu();
 });
 
 
 function groupByKey(array, key) {
     return array
-      .reduce((hash, obj) => {
-        if(obj[key] === undefined) return hash; 
-        return Object.assign(hash, { [obj[key]]:( hash[obj[key]] || [] ).concat(obj)})
-      }, {})
- }
+        .reduce((hash, obj) => {
+            if (obj[key] === undefined) return hash;
+            return Object.assign(hash, { [obj[key]]: (hash[obj[key]] || []).concat(obj) })
+        }, {})
+}
 
 
