@@ -116,6 +116,4 @@ function filterData(e) {
 
     $('.selectedMonth').text($("#monthCombo option:selected").text());
 
-
-
 }
