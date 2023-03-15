@@ -18,6 +18,8 @@ router.post('/report/allbusinessReports', reportController.getAllBusinessReport)
 
 //Ajay
 router.get('/potential-report1', reportController.getPotentialData1);
+router.post('/potential-report-iui-cycle-categary', reportController.getPotentialIuiCycleCategory);
+router.post('/potential-report-ivf-cycle-categary', reportController.getPotentialIvfCycleCategory);
 //Ajay
 
 

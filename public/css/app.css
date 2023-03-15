@@ -9854,7 +9854,8 @@ input[type=file] {
   text-decoration: none !important;
 }
 
-.hospital-table th:last-child, .hospital-table td:last-child {
+.hospital-table th:last-child,
+.hospital-table td:last-child {
   display: none;
 }
 
@@ -9899,4 +9900,41 @@ svg.rejected {
 
 .total-dr b {
   font-size: 18px;
+}
+
+.report-wrapper {
+  padding: 0 15px;
+}
+
+.report-wrapper .table {
+
+  margin-bottom: 0;
+  border-radius: 10px;
+}
+
+.iui-cycle-report,
+.ivf-cycle-report {
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  background-color: #fff;
+  padding: 15px 15px;
+}
+
+.iui-cycle-report h3,
+.ivf-cycle-report h3 {
+  margin: 0 0 15px 0;
+  font-size: 18px;
+}
+
+.iui-cycle-report.none,
+.ivf-cycle-report.none {
+  display: none;
+}
+
+.iui-cycle-report.show,
+.ivf-cycle-report.show {
+  display: block;
+  margin-bottom: 20px;
 }

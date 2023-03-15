@@ -73,7 +73,71 @@ getPotentialData1 = (objParam) => {
     });
 };
 
+exports.getPotentialIuiCycleCategory = (req, res, next) => {
+    getPotentialIuiCycleCategory(req.body).then((result) => {
+        res.status(200).json(result);
+    });
+};
 
+getPotentialIuiCycleCategory = (objParam) => {
+    console.log(objParam);
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    .input("empId", sql.Int, parseInt(objParam.empId))
+                    .input("month", sql.Int, parseInt(objParam.month))
+                    .input("Year", sql.Int, parseInt(objParam.Year))
+                    .execute("USP_IUI_CYCLE_CATEGORY")
+                    .then(function (resp) {
+                        resolve(resp.recordset);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    });
+};
+
+exports.getPotentialIvfCycleCategory = (req, res, next) => {
+    getPotentialIvfCycleCategory(req.body).then((result) => {
+        res.status(200).json(result);
+    });
+};
+
+getPotentialIvfCycleCategory = (objParam) => {
+    console.log(objParam);
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    .input("empId", sql.Int, parseInt(objParam.empId))
+                    .input("month", sql.Int, parseInt(objParam.month))
+                    .input("Year", sql.Int, parseInt(objParam.Year))
+                    .execute("USP_IVF_CYCLE_CATEGORY")
+                    .then(function (resp) {
+                        resolve(resp.recordset);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    });
+};
 
 getPotentialData = (objParam) => {
     //console.log('I am Here', objParam);
@@ -105,9 +169,6 @@ getPotentialData = (objParam) => {
             });
     });
 };
-
-
-
 
 
 exports.getRateContractData = (req, res, next) => {

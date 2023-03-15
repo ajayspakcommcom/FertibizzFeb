@@ -13,6 +13,29 @@ const _POST = {
     ADMIN: 'ADMIN'
 };
 
+const _MONTHS = [
+    { id: 1, text: 'Jan' },
+    { id: 2, text: 'Feb' },
+    { id: 3, text: 'Mar' },
+    { id: 4, text: 'Apr' },
+    { id: 5, text: 'May' },
+    { id: 6, text: 'Jun' },
+    { id: 7, text: 'Jul' },
+    { id: 8, text: 'Aug' },
+    { id: 9, text: 'Sep' },
+    { id: 10, text: 'Oct' },
+    { id: 11, text: 'Nov' },
+    { id: 12, text: 'Dec' }
+];
+
+function setMonth(elemById) {
+    let htmlElemt = [`<option value="none" selected disabled hidden>Select Month</option>`];
+    for (let item of _MONTHS) {
+        htmlElemt.push(`<option value="${item.id}">${item.text}</option>`);
+    }
+    $(`#${elemById}`).html(htmlElemt)
+}
+
 const _URL = {
     _hospitalListing: '/hospitals',
     _POSTLOGINURL: '/hospitals',

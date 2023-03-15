@@ -11,15 +11,14 @@ exports.addPotential = (req, res, next) => {
 
 exports.addCenterPotential = (req, res, next) => {
     // console.log('inside update employee');
-     let params = Object.assign(req.params, req.body);
-     addCenterPotential(params).then(result => {
-         res.status(_STATUSCODE).json(result)
-     })
- };
+    let params = Object.assign(req.params, req.body);
+    addCenterPotential(params).then(result => {
+        res.status(_STATUSCODE).json(result)
+    })
+};
 
- 
 
-function addCenterPotential( objParam ) {
+function addCenterPotential(objParam) {
     // console.log('--------------------------------')
     console.log('Potential Added')
     // console.log('--------------------------------')
@@ -35,7 +34,7 @@ function addCenterPotential( objParam ) {
                     .input("IUICycle", sql.Int, objParam.iuiTxt)
                     .input("IVFCycle", sql.Int, (objParam.ivfTxt))
                     .input("FreshPickUps", sql.Int, (objParam.freshTxt))
-                    
+
                     .input("SelftCycle", sql.Int, objParam.patientTxt)
                     .input("DonorCycles", sql.Int, objParam.donotTxt)
                     .input("AgonistCycles", sql.Int, objParam.agonistTxt)
@@ -45,7 +44,7 @@ function addCenterPotential( objParam ) {
                     .input("Year", sql.Int, objParam.year)
                     .input("visitID", sql.Int, objParam.visitID)
 
-                    
+
                     .execute("USP_GET_ADD_UPDATE_CENTER_POTENTIAL")
                     .then(function (resp) {
                         console.log(resp.recordset);
@@ -69,15 +68,15 @@ function addCenterPotential( objParam ) {
 
 exports.getCenterPotentialDetails = (req, res, next) => {
     // console.log('inside update employee');
-     let params = Object.assign(req.params, req.body);
-     getCenterPotentialDetails(params).then(result => {
-         res.status(_STATUSCODE).json(result)
-     })
- };
+    let params = Object.assign(req.params, req.body);
+    getCenterPotentialDetails(params).then(result => {
+        res.status(_STATUSCODE).json(result)
+    })
+};
 
- 
 
-function getCenterPotentialDetails( objParam ) {
+
+function getCenterPotentialDetails(objParam) {
     // console.log('--------------------------------')
     // console.log(objParam)
     // console.log('--------------------------------')
@@ -115,15 +114,15 @@ function getCenterPotentialDetails( objParam ) {
 
 exports.approveCenterPotential = (req, res, next) => {
     // console.log('inside update employee');
-     let params = Object.assign(req.params, req.body);
-     approveCenterPotential(params).then(result => {
-         res.status(_STATUSCODE).json(result)
-     })
- };
+    let params = Object.assign(req.params, req.body);
+    approveCenterPotential(params).then(result => {
+        res.status(_STATUSCODE).json(result)
+    })
+};
 
- 
 
-function approveCenterPotential( objParam ) {
+
+function approveCenterPotential(objParam) {
     // console.log('--------------------------------')
     // console.log(objParam)
     // console.log('--------------------------------')
@@ -160,15 +159,15 @@ function approveCenterPotential( objParam ) {
 
 exports.approveCenterPotentialByPotentialId = (req, res, next) => {
     // console.log('inside update employee');
-     let params = Object.assign(req.params, req.body);
-     approveCenterPotentialByPotentialId(params).then(result => {
-         res.status(_STATUSCODE).json(result)
-     })
- };
+    let params = Object.assign(req.params, req.body);
+    approveCenterPotentialByPotentialId(params).then(result => {
+        res.status(_STATUSCODE).json(result)
+    })
+};
 
- 
 
-function approveCenterPotentialByPotentialId( objParam ) {
+
+function approveCenterPotentialByPotentialId(objParam) {
     // console.log('--------------------------------')
     // console.log(objParam)
     // console.log('--------------------------------')

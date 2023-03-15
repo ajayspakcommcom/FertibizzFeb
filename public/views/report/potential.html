@@ -23,6 +23,14 @@
         <div class="right-content">
           <form>
             <div class="hospital-search-wrapper admin-filter-wrapper">
+
+              <div class="form-group">
+                <select class="form-control" id="yearCombo">
+                  <option value="none" selected disabled hidden>Select Year</option>
+                  <option value="2023">2023</option>
+                </select>
+              </div>
+
               <div class="form-group">
                 <select class="form-control" id="monthCombo">
                   <option value="none" selected disabled hidden>Select Month</option>
@@ -34,13 +42,13 @@
                 </select>
               </div>
               <div class="form-group">
-                <select class="form-control" id="zbmCombo" onchange="setDesignationFilters(event, 'zbm')"></select>
+                <select class="form-control" id="zbmCombo" onchange="selectedZbm(event)"></select>
               </div>
               <div class="form-group">
-                <select class="form-control" id="rbmCombo" onchange="setDesignationFilters(event, 'rbm')"></select>
+                <select class="form-control" id="rbmCombo" onchange="selectedRbm(event)"></select>
               </div>
               <div class="form-group">
-                <select class="form-control" id="kamCombo" onchange="setDesignationFilters(event, 'kam')"></select>
+                <select class="form-control" id="kamCombo" onchange="selectedKam(event)"></select>
               </div>
               <!-- <div class="form-group">
                 <select class="form-control" id="centerCombo">
@@ -54,15 +62,44 @@
               </div> -->
               <div class="search-btn-wrapper">
                 <button type="reset" class="btn btn-default btn-grad go-back">Reset</button>
-                <button type="submit" class="btn btn-default btn-grad go-back">Filter</button>
+                <button type="button" class="btn btn-default btn-grad go-back"
+                  onclick="filterData(event)">Filter</button>
               </div>
 
             </div>
 
           </form>
 
-          <div class="container admin-chart-wrapper">
-            <h1>Content</h1>
+          <div class="report-wrapper admin-chart-wrapper">
+
+            <div class="table-responsive">
+              <div class="iui-cycle-report none">
+                <h3>IUI Cycles</h3>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Category</th>
+                      <th>Month (<b class="selectedMonth"></b>)</th>
+                    </tr>
+                  </thead>
+                  <tbody id="iuiData"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <div class="ivf-cycle-report none">
+                <h3>IVF Cycles </h3>
+                <table class="table table-bordered">
+                  <tr>
+                    <th>Category</th>
+                    <th>Month (<b class="selectedMonth"></b>)</th>
+                  </tr>
+                  <tbody id="ivfData"></tbody>
+                </table>
+              </div>
+            </div>
+
           </div>
 
         </div>
