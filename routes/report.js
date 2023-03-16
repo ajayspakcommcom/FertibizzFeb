@@ -17,9 +17,17 @@ router.post('/report/allbusinessReports', reportController.getAllBusinessReport)
 
 
 //Ajay
-router.get('/potential-report1', reportController.getPotentialData1);
+// router.get('/report', reportController.potentialReport);
+router.get('/potential-report-data', reportController.getPotentialReport);
+router.get('/hosp-count-brand-wise', reportController.hospCountBrandWise);
+router.get('/top-15-business-records', reportController.top15BusinessRecords);
+
 router.post('/potential-report-iui-cycle-categary', reportController.getPotentialIuiCycleCategory);
 router.post('/potential-report-ivf-cycle-categary', reportController.getPotentialIvfCycleCategory);
+router.post('/hosp-count-brand-wise', reportController.getHospCountBrandWise);
+router.post('/top-15-business-records', reportController.getTop15BusinessRecords);
+
+
 //Ajay
 
 

@@ -386,6 +386,18 @@ function isLoaderVisible(isVisible) {
     }
 }
 
+function currentYearSelected(elemById) {
+    const date = new Date();
+    let year = date.getFullYear();
+    $(`#${elemById} option[value="${year}"]`).attr("selected", true);
+}
+
+function setPrevMonth(elemById) {
+    const date = new Date();
+    let month = date.getMonth();
+    $(`#${elemById} option[value="${month}"]`).attr("selected", true);
+}
+
 function isBtnLoaderVisible(isVisible) {
     if (isVisible == true) {
         $('.loader-img').addClass('show');

@@ -17,6 +17,14 @@ exports.potentialReport = (req, res, next) => {
     res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/report/potential.html`);
 };
 
+exports.hospCountBrandWise = (req, res, next) => {
+    res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/report/Hospital-count.html`);
+};
+
+exports.top15BusinessRecords = (req, res, next) => {
+    res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/report/top-15-business-records.html`);
+};
+
 exports.rateWithProductReport = (req, res, next) => {
     res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/report/rates-with-products.html`);
 };
@@ -33,24 +41,27 @@ exports.dataReport = (req, res, next) => {
 //     res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/report/dashboard.html`);
 // };
 
+exports.report = (req, res, next) => {
+    res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/report/report.html`);
+};
+
 exports.dashboardChartReport = (req, res, next) => {
     res.sendFile(`${path.dirname(process.mainModule.filename)}/public/views/report/chart.html`);
 };
 
 exports.getPotentialData = (req, res, next) => {
-    // console.log('i am here');
     getPotentialData(req.body).then((result) => {
         res.status(200).json(result);
     });
 };
 
-exports.getPotentialData1 = (req, res, next) => {
-    getPotentialData1(req.body).then((result) => {
+exports.getPotentialReport = (req, res, next) => {
+    getPotentialReport(req.body).then((result) => {
         res.status(200).json(result);
     });
 };
 
-getPotentialData1 = (objParam) => {
+getPotentialReport = (objParam) => {
     return new Promise((resolve) => {
         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
         dbConn
@@ -125,6 +136,72 @@ getPotentialIvfCycleCategory = (objParam) => {
                     .input("month", sql.Int, parseInt(objParam.month))
                     .input("Year", sql.Int, parseInt(objParam.Year))
                     .execute("USP_IVF_CYCLE_CATEGORY")
+                    .then(function (resp) {
+                        resolve(resp.recordset);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    });
+};
+
+exports.getHospCountBrandWise = (req, res, next) => {
+    getHospCountBrandWise(req.body).then((result) => {
+        res.status(200).json(result);
+    });
+};
+
+getHospCountBrandWise = (objParam) => {
+    console.log(objParam);
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    .input("empId", sql.Int, parseInt(objParam.empId))
+                    .input("month", sql.Int, parseInt(objParam.month))
+                    .input("Year", sql.Int, parseInt(objParam.Year))
+                    .execute("USP_REPORT_HospitalCount_brandWise")
+                    .then(function (resp) {
+                        resolve(resp.recordset);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    });
+};
+
+exports.getTop15BusinessRecords = (req, res, next) => {
+    getTop15BusinessRecords(req.body).then((result) => {
+        res.status(200).json(result);
+    });
+};
+
+getTop15BusinessRecords = (objParam) => {
+    console.log(objParam);
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    .input("empId", sql.Int, parseInt(objParam.empId))
+                    .input("month", sql.Int, parseInt(objParam.month))
+                    .input("Year", sql.Int, parseInt(objParam.Year))
+                    .execute("USP_REPORT_TOP_15_ACCOUNTS")
                     .then(function (resp) {
                         resolve(resp.recordset);
                         dbConn.close();

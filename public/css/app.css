@@ -9913,7 +9913,9 @@ svg.rejected {
 }
 
 .iui-cycle-report,
-.ivf-cycle-report {
+.ivf-cycle-report,
+.hosp-count-report,
+.top-15-report {
   border-radius: 10px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
@@ -9923,18 +9925,24 @@ svg.rejected {
 }
 
 .iui-cycle-report h3,
-.ivf-cycle-report h3 {
+.ivf-cycle-report h3,
+.hosp-count-report h3,
+.top-15-report h3 {
   margin: 0 0 15px 0;
   font-size: 18px;
 }
 
 .iui-cycle-report.none,
-.ivf-cycle-report.none {
+.ivf-cycle-report.none,
+.hosp-count-report.none,
+.top-15-report.none {
   display: none;
 }
 
 .iui-cycle-report.show,
-.ivf-cycle-report.show {
+.ivf-cycle-report.show,
+.hosp-count-report.show,
+.top-15-report.show {
   display: block;
   margin-bottom: 20px;
 }

@@ -1,0 +1,35 @@
+<form>
+    <div class="hospital-search-wrapper admin-filter-wrapper">
+        <div class="form-group">
+            <select class="form-control" id="monthCombo">
+                <option value="none" selected disabled hidden>Select Month</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <select class="form-control" id="yearCombo">
+                <option value="none" selected disabled hidden>Select Year</option>
+                <option value="2023">2023</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <select class="form-control" id="zbmCombo" onchange="selectedZbm(event)"></select>
+        </div>
+
+        <div class="form-group">
+            <select class="form-control" id="rbmCombo" onchange="selectedRbm(event)"></select>
+        </div>
+        <div class="form-group">
+            <select class="form-control" id="kamCombo" onchange="selectedKam(event)"></select>
+        </div>
+        <div class="search-btn-wrapper">
+            <button type="button" class="btn btn-default btn-grad go-back" onclick="filterData(event)">Filter</button>
+            <button type="reset" class="btn btn-default btn-grad go-back">Reset</button>
+        </div>
+    </div>
+</form>
+
+<script>
+    setMonth('monthCombo');
+</script>

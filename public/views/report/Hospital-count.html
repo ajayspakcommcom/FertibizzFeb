@@ -1,7 +1,7 @@
 <html>
 
 <head>
-  <title>FERTIBIZ : Report </title>
+  <title>FERTIBIZ : Hospital count Brand Wise Report </title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" type="text/css" href="/css/daterangepicker.css" />
@@ -16,39 +16,31 @@
     <div class="content">
       <div class="content-bg overflow">
         <div class="right-header">
-          <h1>Potential Cycle Bucket Range</h1>
+          <h1>Hospital count Brand Wise Report</h1>
           <ul id="right-nav"></ul>
         </div>
 
         <div class="right-content">
           <div id="filterData"></div>
 
+
           <div class="report-wrapper admin-chart-wrapper">
 
             <div class="table-responsive">
-              <div class="iui-cycle-report none">
-                <h3>IUI Cycles</h3>
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>Category</th>
-                      <th>Month (<b class="selectedMonth"></b>)</th>
-                    </tr>
-                  </thead>
-                  <tbody id="iuiData"></tbody>
-                </table>
-              </div>
-            </div>
-
-            <div class="table-responsive">
-              <div class="ivf-cycle-report none">
-                <h3>IVF Cycles </h3>
+              <div class="hosp-count-report none">
+                <h3>Hospital Count Brand Wise </h3>
                 <table class="table table-bordered">
                   <tr>
-                    <th>Category</th>
-                    <th>Month (<b class="selectedMonth"></b>)</th>
+                    <th>FOLIGRAF</th>
+                    <th>HUMOG</th>
+                    <th>ASPORELIX</th>
+                    <th>R-HUCOG</th>
+                    <th>FOLICULIN</th>
+                    <th>AGOTRIG</th>
+                    <th>MIDYDROGEN</th>
+                    <th>SPRIMEO</th>
                   </tr>
-                  <tbody id="ivfData"></tbody>
+                  <tbody id="hosp-count"></tbody>
                 </table>
               </div>
             </div>
@@ -79,7 +71,7 @@
   <script src="../../js/bootstrap.min.js"></script>
   <script src="../../js/admin.js"></script>
   <script src="../../js/filter.js"></script>
-  <script src="../../js/potential-report.js"></script>
+  <script src="../../js/hosp-count.js"></script>
   <script>
     $(function () {
       getReports();

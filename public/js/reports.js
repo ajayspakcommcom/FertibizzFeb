@@ -1,13 +1,13 @@
 
 let designationWiseData = [], _empId = null;
 
-function getPotentialPage() {
+function getReports() {
     getDesignationWiseData();
 }
 
 function getDesignationWiseData() {
     axios
-        .get('/potential-report1').then((response) => {
+        .get('/potential-report-data').then((response) => {
             designationWiseData = response.data;
             setDesignationFilters(null, null);
         }).catch((err) => {
@@ -15,7 +15,7 @@ function getDesignationWiseData() {
         });
 }
 
-setMonth('monthCombo');
+//setMonth('monthCombo');
 
 function setDesignationFilters() {
 
@@ -80,6 +80,7 @@ function filterData(e) {
         Year: $('#yearCombo').val()
     }
 
+
     axios
         .post('/potential-report-iui-cycle-categary', param).then((response) => {
             let resultGroup = groupByKey(response.data, 'Cycle'), showHtml = [], total = 0;
@@ -89,7 +90,7 @@ function filterData(e) {
                 total += parseInt(resultGroup[key].length);
             }
             showHtml.push(`<tr><td>Total</td> <td><b>${total}</b></td></tr>`);
-            $('#iuiData').html(showHtml);
+            $('#iuiData').html(showHtml.join(''));
             $('.iui-cycle-report').addClass('show').removeClass('none');
 
 
@@ -107,12 +108,55 @@ function filterData(e) {
                 total += parseInt(resultGroup[key].length);
             }
             showHtml.push(`<tr><td>Total</td> <td><b>${total}</b></td></tr>`);
-            $('#ivfData').html(showHtml);
+            $('#ivfData').html(showHtml.join(''));
             $('.ivf-cycle-report').addClass('show').removeClass('none');
 
         }).catch((err) => {
             console.log(err);
         });
+
+    axios
+        .post('/hosp-count-brand-wise', param).then((response) => {
+            let showHtml = [];
+
+            for (let item of response.data) {
+                showHtml.push(`<tr>
+                    <td>${item.AGOTRIG}</td>
+                    <td>${item.ASPORELIX}</td>
+                    <td>${item.FOLICULIN}</td>
+                    <td>${item.FOLIGRAF}</td>
+                    <td>${item.HUMOG}</td>
+                    <td>${item.MIDYDROGEN}</td>
+                    <td>${item['R-HUCOG']}</td>
+                    <td>${item.SPRIMEO}</td>
+                </tr>`);
+            }
+            $('#hosp-count').html(showHtml.join(''));
+
+        }).catch((err) => {
+            console.log(err);
+        });
+
+
+    axios
+        .post('/top-15-business-records', param).then((response) => {
+            let showHtml = [];
+            for (let item of response.data) {
+                showHtml.push(`<tr>
+                    <td>${item.accountName}</td>
+                    <td>${item.CENTRENAME}</td>
+                    <td>${item.DoctorName}</td>
+                    <td>${item.City}</td>
+                    <td>${item.StateName}</td>
+                    <td>${item.QtyOrdered}</td>          
+                </tr>`);
+            }
+            $('#top-15-b-records').html(showHtml.join(''));
+
+        }).catch((err) => {
+            console.log(err);
+        });
+
 
     $('.selectedMonth').text($("#monthCombo option:selected").text());
 

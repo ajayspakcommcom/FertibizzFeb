@@ -1,7 +1,7 @@
 <html>
 
 <head>
-  <title>FERTIBIZ : Report </title>
+  <title>FERTIBIZ : Top 15 Business Records</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" type="text/css" href="/css/daterangepicker.css" />
@@ -16,39 +16,29 @@
     <div class="content">
       <div class="content-bg overflow">
         <div class="right-header">
-          <h1>Potential Cycle Bucket Range</h1>
+          <h1>Top 15 Business Records</h1>
           <ul id="right-nav"></ul>
         </div>
 
         <div class="right-content">
+
           <div id="filterData"></div>
 
           <div class="report-wrapper admin-chart-wrapper">
 
             <div class="table-responsive">
-              <div class="iui-cycle-report none">
-                <h3>IUI Cycles</h3>
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>Category</th>
-                      <th>Month (<b class="selectedMonth"></b>)</th>
-                    </tr>
-                  </thead>
-                  <tbody id="iuiData"></tbody>
-                </table>
-              </div>
-            </div>
-
-            <div class="table-responsive">
-              <div class="ivf-cycle-report none">
-                <h3>IVF Cycles </h3>
+              <div class="top-15-report none">
+                <h3>Top 15 Business Records </h3>
                 <table class="table table-bordered">
                   <tr>
-                    <th>Category</th>
-                    <th>Month (<b class="selectedMonth"></b>)</th>
+                    <th>Account Name</th>
+                    <th>Centre Name</th>
+                    <th>Doctor Name</th>
+                    <th>City Name</th>
+                    <th>State Name</th>
+                    <th>Quantity Ordered</th>
                   </tr>
-                  <tbody id="ivfData"></tbody>
+                  <tbody id="top-15-b-records"></tbody>
                 </table>
               </div>
             </div>
@@ -79,7 +69,7 @@
   <script src="../../js/bootstrap.min.js"></script>
   <script src="../../js/admin.js"></script>
   <script src="../../js/filter.js"></script>
-  <script src="../../js/potential-report.js"></script>
+  <script src="../../js/reports15.js"></script>
   <script>
     $(function () {
       getReports();
