@@ -9915,7 +9915,8 @@ svg.rejected {
 .iui-cycle-report,
 .ivf-cycle-report,
 .hosp-count-report,
-.top-15-report {
+.top-15-report,
+.trigger-protocol-report {
   border-radius: 10px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
@@ -9927,7 +9928,8 @@ svg.rejected {
 .iui-cycle-report h3,
 .ivf-cycle-report h3,
 .hosp-count-report h3,
-.top-15-report h3 {
+.top-15-report h3,
+.trigger-protocol-report h3 {
   margin: 0 0 15px 0;
   font-size: 18px;
 }
@@ -9935,14 +9937,20 @@ svg.rejected {
 .iui-cycle-report.none,
 .ivf-cycle-report.none,
 .hosp-count-report.none,
-.top-15-report.none {
+.top-15-report.none,
+.trigger-protocol-report.none {
   display: none;
 }
 
 .iui-cycle-report.show,
 .ivf-cycle-report.show,
 .hosp-count-report.show,
-.top-15-report.show {
+.top-15-report.show,
+.trigger-protocol-report.show {
   display: block;
   margin-bottom: 20px;
+}
+
+.mi-pie-chart-wrapper {
+  display: flex;
 }

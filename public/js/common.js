@@ -458,4 +458,48 @@ function groupByKey(array, key) {
         }, {})
 }
 
+function renderPieChart(elemById, title, arrData) {
+    var data = google.visualization.arrayToDataTable([
+        ['Task', `${title}`],
+        ...arrData
+    ]);
+
+    var options = {
+        title: title,
+        is3D: true,
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById(elemById));
+    chart.draw(data, options);
+}
+
+function renderBarchar(elemById, mTitle, hTitle, vTitle, arrData) {
+
+    var data = new google.visualization.DataTable();
+    var data = google.visualization.arrayToDataTable([
+        ['Element', 'Density', { role: 'style' }],
+        ...arrData
+        //['Copper', 8.94, '#b87333']
+    ]);
+
+    var options = {
+        title: mTitle,
+        colors: ['#9575cd', '#33ac71'],
+        hAxis: {
+            title: hTitle,
+            format: 'h:mm a',
+            viewWindow: {
+                min: [7, 30, 0],
+                max: [17, 30, 0]
+            }
+        },
+        vAxis: {
+            title: vTitle
+        }
+    };
+
+    var chart = new google.visualization.ColumnChart(document.getElementById(elemById));
+    chart.draw(data, options);
+
+}
 

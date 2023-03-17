@@ -21,7 +21,7 @@ async function drawBusinessChart() {
         });
         // console.log([rbmArr])
         // //data.addRows([rbmArr]);
-    
+
         let options = {
             width: 300,
             height: 300,
@@ -52,24 +52,24 @@ async function getAllBusinessReport() {
         // console.log(res1.data);
         let reportDataItems = res1.data;
         brandsArr.forEach(brand => {
-           // console.log(brand);
+            // console.log(brand);
             let brandReport = reportDataItems.filter(item => {
                 return item.brandName === brand
             })
-          //  console.log(brandReport)
+            //  console.log(brandReport)
             if (brandReport.length > 0) {
 
                 let data = new google.visualization.DataTable();
                 data.addColumn('string', 'Brand');
-               // data.addColumn('number', 'Target');
+                // data.addColumn('number', 'Target');
                 data.addColumn('number', 'Business Value');
-               // data.addColumn('number', 'achieved');
+                // data.addColumn('number', 'achieved');
 
                 brandReport.forEach(item => {
-                  //  data.addRows([[item.medicineName, item.Targets, item.Qty, item.Targets]])
+                    //  data.addRows([[item.medicineName, item.Targets, item.Qty, item.Targets]])
                     data.addRows([[item.medicineName, item.TotalSalesVAlue]])
                 });
-               // console.log(data)
+                // console.log(data)
                 let options = {
                     // width: 1050,
                     // height: 400,
@@ -99,22 +99,22 @@ async function getAllBusinessReport() {
 
 
 function drawBusinessChartWithData(businessTrackerData) {
-   
+
     let reportDataItems = businessTrackerData,
         brandsArr = ['FOLIGRAF', 'HUMOG', 'ASPORELIX', 'R-HUCOG', 'FOLICULIN', 'AGOTRIG', 'MIDYDROGEN'],
         reaportData = [];
-        
+
     let data = new google.visualization.DataTable();
     data.addColumn('string', 'Brand');
     data.addColumn('number', 'Business Value');
     data.addColumn('number', 'Unit sold');
     // let rbmArr = []
     //console.log(reportDataItems)
-    
-    brandsArr.forEach( brand => {
+
+    brandsArr.forEach(brand => {
         //console.log(brand);
         brandData = reportDataItems.filter(item => {
-                return item.brandName === brand;
+            return item.brandName === brand;
         })
         //console.log(brandData)
         let brandDataObj = {},
@@ -122,9 +122,9 @@ function drawBusinessChartWithData(businessTrackerData) {
             brandTotalValue = 0;
 
         brandData.forEach(data => {
-         //   console.log(data)
-            brandTotalUnit +=  parseInt(data.qty);
-            brandTotalValue +=  parseFloat(data.rate);
+            //   console.log(data)
+            brandTotalUnit += parseInt(data.qty);
+            brandTotalValue += parseFloat(data.rate);
         });
         brandDataObj = {
             brandName: brand,
@@ -135,7 +135,7 @@ function drawBusinessChartWithData(businessTrackerData) {
 
     });
 
-  //  console.log(reaportData);
+    //  console.log(reaportData);
 
     reaportData.forEach(item => {
         //rbmArr.push([1,2,3])
@@ -164,9 +164,9 @@ function drawBusinessChartWithData(businessTrackerData) {
 function getAllBusinessReportWithData(data) {
     let brandsArr = ['FOLIGRAF', 'HUMOG', 'ASPORELIX', 'R-HUCOG', 'FOLICULIN', 'AGOTRIG', 'MIDYDROGEN'],
         reportDataItems = data;
-    
+
     brandsArr.forEach(brand => {
-       // console.log(brand);
+        // console.log(brand);
         let brandReport = reportDataItems.filter(item => {
             return item.brandName === brand
         })
@@ -177,12 +177,12 @@ function getAllBusinessReportWithData(data) {
             let data = new google.visualization.DataTable();
             data.addColumn('string', 'Brand');
             data.addColumn('number', 'Business Value');
-           
+
             brandReport.forEach(item => {
-              //  data.addRows([[item.medicineName, item.Targets, item.Qty, item.Targets]])
+                //  data.addRows([[item.medicineName, item.Targets, item.Qty, item.Targets]])
                 data.addRows([[item.medicineName, item.TotalSalesValue]])
             });
-           // console.log(data)
+            // console.log(data)
             let options = {
                 width: 300,
                 height: 300,

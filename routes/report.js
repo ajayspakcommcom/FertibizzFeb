@@ -27,6 +27,8 @@ router.post('/potential-report-ivf-cycle-categary', reportController.getPotentia
 router.post('/hosp-count-brand-wise', reportController.getHospCountBrandWise);
 router.post('/top-15-business-records', reportController.getTop15BusinessRecords);
 
+router.post('/market-insight-data', reportController.getMarketInsightData);
+
 
 //Ajay
 

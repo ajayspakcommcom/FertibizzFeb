@@ -168,9 +168,10 @@ getHospCountBrandWise = (objParam) => {
                     .input("empId", sql.Int, parseInt(objParam.empId))
                     .input("month", sql.Int, parseInt(objParam.month))
                     .input("Year", sql.Int, parseInt(objParam.Year))
-                    .execute("USP_REPORT_HospitalCount_brandWise")
+                    .execute("USP_REPORT_HOSPITALCOUNT_BRANDWISE")
+                    //.execute("USP_REPORT_HospitalCount_brandWise")
                     .then(function (resp) {
-                        resolve(resp.recordset);
+                        resolve(resp.recordsets);
                         dbConn.close();
                     })
                     .catch(function (err) {
@@ -204,6 +205,40 @@ getTop15BusinessRecords = (objParam) => {
                     .execute("USP_REPORT_TOP_15_ACCOUNTS")
                     .then(function (resp) {
                         resolve(resp.recordset);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    });
+};
+
+exports.getMarketInsightData = (req, res, next) => {
+    getMarketInsightData(req.body).then((result) => {
+        res.status(200).json(result);
+    });
+};
+
+getMarketInsightData = (objParam) => {
+    console.log(objParam);
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    .input("empId", sql.Int, parseInt(objParam.empId))
+                    .input("month", sql.Int, parseInt(objParam.month))
+                    .input("Year", sql.Int, parseInt(objParam.Year))
+                    .execute("USP_REPORT_MARKET_INSIGHT")
+                    .then(function (resp) {
+                        //resolve(resp);
+                        resolve(resp.recordsets);
                         dbConn.close();
                     })
                     .catch(function (err) {
