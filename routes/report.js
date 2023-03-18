@@ -29,6 +29,9 @@ router.post('/top-15-business-records', reportController.getTop15BusinessRecords
 
 router.post('/market-insight-data', reportController.getMarketInsightData);
 
+//latest
+router.post('/potential-report1', reportController.getPotentialReport1);
+
 
 //Ajay
 

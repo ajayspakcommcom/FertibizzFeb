@@ -9916,7 +9916,8 @@ svg.rejected {
 .ivf-cycle-report,
 .hosp-count-report,
 .top-15-report,
-.trigger-protocol-report {
+.trigger-protocol-report,
+.donor-self-report {
   border-radius: 10px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
@@ -9929,7 +9930,8 @@ svg.rejected {
 .ivf-cycle-report h3,
 .hosp-count-report h3,
 .top-15-report h3,
-.trigger-protocol-report h3 {
+.trigger-protocol-report h3,
+.donor-self-report h3 {
   margin: 0 0 15px 0;
   font-size: 18px;
 }
@@ -9938,7 +9940,8 @@ svg.rejected {
 .ivf-cycle-report.none,
 .hosp-count-report.none,
 .top-15-report.none,
-.trigger-protocol-report.none {
+.trigger-protocol-report.none,
+.donor-self-report.none {
   display: none;
 }
 
@@ -9946,7 +9949,8 @@ svg.rejected {
 .ivf-cycle-report.show,
 .hosp-count-report.show,
 .top-15-report.show,
-.trigger-protocol-report.show {
+.trigger-protocol-report.show,
+.donor-self-report.show {
   display: block;
   margin-bottom: 20px;
 }

@@ -173,7 +173,6 @@ function filterData(e) {
 
     axios
         .post('/market-insight-data', param).then((response) => {
-            console.log(response);
 
             let triggerProtocolData = response.data[0][0], lpsProtocolData = response.data[1][0], gonadotropinslData = response.data[2][0], obstetricsData = response.data[3][0];
 
@@ -207,6 +206,36 @@ function filterData(e) {
 
 
             $('.trigger-protocol-report').addClass('show').removeClass('none');
+            isLoaderVisible(false);
+
+        }).catch((err) => {
+            console.log(err);
+        });
+
+
+
+    axios
+        .post('/potential-report1', param).then((response) => {
+
+            let donorSelfData = response.data[0][0], arrDonorSelfData = [], agonistAntagonistData = response.data[1][0], arrAgonistAntagonistData = [];
+
+            google.charts.load('current', { 'packages': ['corechart'] });
+            google.charts.setOnLoadCallback(drawChart);
+
+            for (let item in donorSelfData) {
+                arrDonorSelfData.push([item, donorSelfData[item]]);
+            }
+
+            for (let item in agonistAntagonistData) {
+                arrAgonistAntagonistData.push([item, agonistAntagonistData[item]]);
+            }
+
+            function drawChart() {
+                renderPieChart('pPieChartDonorSelf', 'Donor Self Cycles', arrDonorSelfData);
+                renderPieChart('pPieChartAgonistAntagonist', 'Agonist and Antagonist Cycle', arrAgonistAntagonistData);
+            }
+
+            $('.donor-self-report').addClass('show').removeClass('none');
             isLoaderVisible(false);
 
         }).catch((err) => {

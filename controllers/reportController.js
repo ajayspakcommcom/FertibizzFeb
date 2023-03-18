@@ -251,6 +251,39 @@ getMarketInsightData = (objParam) => {
     });
 };
 
+exports.getPotentialReport1 = (req, res, next) => {
+    getPotentialReport1(req.body).then((result) => {
+        res.status(200).json(result);
+    });
+};
+
+getPotentialReport1 = (objParam) => {
+    console.log(objParam);
+    return new Promise((resolve) => {
+        var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
+        dbConn
+            .connect()
+            .then(function () {
+                var request = new sql.Request(dbConn);
+                request
+                    .input("empId", sql.Int, parseInt(objParam.empId))
+                    .input("month", sql.Int, parseInt(objParam.month))
+                    .input("Year", sql.Int, parseInt(objParam.Year))
+                    .execute("USP_REPORT_POTENTIALS_V1")
+                    .then(function (resp) {
+                        resolve(resp.recordsets);
+                        dbConn.close();
+                    })
+                    .catch(function (err) {
+                        dbConn.close();
+                    });
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    });
+};
+
 getPotentialData = (objParam) => {
     //console.log('I am Here', objParam);
     return new Promise((resolve) => {
