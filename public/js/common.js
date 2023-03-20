@@ -491,7 +491,7 @@ function renderBarchar(elemById, mTitle, hTitle, vTitle, arrData) {
             viewWindow: {
                 min: [7, 30, 0],
                 max: [17, 30, 0]
-            }
+            },
         },
         vAxis: {
             title: vTitle

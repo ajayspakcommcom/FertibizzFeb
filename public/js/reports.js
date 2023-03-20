@@ -191,7 +191,10 @@ function filterData(e) {
             }
 
             for (let item in obstetricsData) {
-                arrObstetricsData.push([item, obstetricsData[item], Math.floor(Math.random() * 16777215).toString(16)]);
+                arrObstetricsData.push([
+                    item, obstetricsData[item],
+                    Math.floor(Math.random() * 16777215).toString(16)
+                ]);
             }
 
             google.charts.load('current', { 'packages': ['corechart'] });
@@ -201,7 +204,7 @@ function filterData(e) {
                 renderPieChart('miPieChartTriggerProtocol', 'Trigger Protocol', arrTriggerData);
                 renderPieChart('miLpsProtocol', 'Luteal Phase Support Protocol', arrLpsData);
                 renderPieChart('miGonadotropinsProtocol', 'Gonadotropins Protocol', arrGonadotropinsData);
-                renderBarchar('miBarChart', 'Main Heading', 'H Title', 'V Title', arrObstetricsData);
+                renderBarchar('miBarChart', 'Obstetrics Bar Char', 'Count', 'Obstetrics', arrObstetricsData);
             }
 
 
