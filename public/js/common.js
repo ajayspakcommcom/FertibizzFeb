@@ -503,3 +503,11 @@ function renderBarchar(elemById, mTitle, hTitle, vTitle, arrData) {
 
 }
 
+function enabledMonth() {
+    $('#cmbMonth').removeAttr('disabled');
+}
+
+
+
+
+

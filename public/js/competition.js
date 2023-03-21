@@ -14,7 +14,7 @@ function setupPage() {
 function loadMonthYear() {
   const date = new Date();
   let dt = new Date(date.getFullYear(), date.getMonth() - 1, 1);
-  $('#cmbMonth').val(dt.getMonth() + 1); // our combo box starts with 1
+  $('#cmbMonth').val(dt.getMonth()); // our combo box starts with 1
   $('#cmbYear').val(dt.getFullYear());
   $('#cmbMonth').prop('disabled', true);
   $('#cmbYear').prop('disabled', true);
@@ -23,7 +23,7 @@ function loadMonthYear() {
 
 async function getSkuDetails() {
 
-  console.log('competition');
+  //console.log('competition');
   isLoaderVisible(true);
 
   let centerId = new URLSearchParams(window.location.search).get('cid'),
@@ -31,7 +31,7 @@ async function getSkuDetails() {
     month = $('#cmbMonth').val(),
     userData = JSON.parse(localStorage.getItem("BSV_IVF_Admin_Data"));
 
-  console.log(userData);
+  //console.log(userData);
 
   if (userData.post.toLowerCase() != 'kam') {
     $('.confirmchk').hide();
@@ -51,8 +51,10 @@ async function getSkuDetails() {
   const getAllSKURequest = axios.get("/competitor-sku-details/");
   const getSkuContractDetailsRequest = axios.get(`/competitor-sku-details/${month}/${year}/${centerId}`);
   await axios.all([getAllSKURequest, getSkuContractDetailsRequest]).then(axios.spread(function (skuResponse, competitionResponse) {
-    // console.log(skuResponse.data);
-    //console.log(contractResponse.data);
+
+    console.log(skuResponse.data);
+    console.log(competitionResponse.data);
+
     competitorSkus = skuResponse.data;
     let competitionRes = competitionResponse.data,
       html = [], collapseHtml = [], showCollapseHtml = [], rows = [],
@@ -66,6 +68,7 @@ async function getSkuDetails() {
         $('#rejectedcompetitionCommentTxt').text(competitionRes[0].rejectComments);
       }
     }
+
     console.log(competitorSkus);
     console.log(competitionRes);
 

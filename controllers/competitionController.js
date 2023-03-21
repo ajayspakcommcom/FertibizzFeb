@@ -88,7 +88,7 @@ function addUpdateCompetitionSkus(objParam) {
                     .input("year", sql.Int, parseInt(objParam.year))
                     .input("value", sql.Float, parseFloat(objParam.value))
                     .input("comments", sql.NText, (objParam.comments))
-                    .execute("USP_ADD_UPDATE_SKU_COMPETITION")
+                    .execute("USP_ADD_UPDATE_SKU_COMPETITIONv1")
                     .then(function (resp) {
                         //  console.log(resp.recordset)
                         resolve(resp.recordset);
@@ -151,12 +151,12 @@ getCompetitionDetailsByCenterId = (objParam) => {
 
 exports.approveCenterCompetition = (req, res, next) => {
     // console.log('inside update employee');
-    
+
     let params = Object.assign(req.params, req.body);
     approveCenterCompetition(params).then(result => {
         res.status(_STATUSCODE).json(result)
-       //console.log(req.params.kamid)
-       //res.redirect(`/account-mapping/${req.params.kamid}/competition-list`)
+        //console.log(req.params.kamid)
+        //res.redirect(`/account-mapping/${req.params.kamid}/competition-list`)
     })
 };
 
@@ -180,7 +180,7 @@ function approveCenterCompetition(objParam) {
                     .input("mode", sql.SmallInt, objParam.mode)
                     .input("rejectReason", sql.NVarChar, objParam.rejectReason)
 
-                    .execute("USP_APPROVE_CUSTOMER_COMPETITION")
+                    .execute("USP_APPROVE_CUSTOMER_COMPETITIONv1")
                     .then(function (resp) {
                         //console.log(resp.recordset)
                         resolve(resp.recordset);

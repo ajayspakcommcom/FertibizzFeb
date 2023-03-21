@@ -46,9 +46,9 @@ function addUpdateBusinessTracker(objParam) {
                     .input("rate", sql.Float, parseFloat(objParam.rate))
                     .input("qty", sql.Int, objParam.qty)
                     .input("isContractApplicable", sql.Bit, objParam.isContractApplicable)
-                    .execute("USP_add_update_BUSINESS_TRACKER")
+                    .execute("USP_add_update_BUSINESS_TRACKERv1")
                     .then(function (resp) {
-                      //  console.log(resp.recordset)
+                        //  console.log(resp.recordset)
                         resolve(resp.recordset);
                         dbConn.close();
                     })
@@ -218,7 +218,7 @@ function approveCenterBusinessTrackerByHospitalId(objParam) {
                     .input("rbmId", sql.Int, objParam.rbmId)
                     .input("mode", sql.Int, objParam.mode)
                     .input("rejectReason", sql.NVarChar, objParam.rejectReason)
-                    .execute("USP_APPROVE_CUSTOMER_BUSINESS_TRACKER_BY_HOSPITALID")
+                    .execute("USP_APPROVE_CUSTOMER_BUSINESS_TRACKER_BY_HOSPITALIDv1")
                     .then(function (resp) {
                         //console.log(resp.recordset)
                         resolve(resp.recordset);
@@ -245,11 +245,11 @@ exports.approveCenteRateContractByCATId = (req, res, next) => {
     })
 };
 
-function approveCenteRateContractByCATId(objParam) {    
+function approveCenteRateContractByCATId(objParam) {
     console.log('--------------------------------')
     console.log(objParam)
     console.log('--------------------------------')
-   
+
     return new Promise((resolve) => {
         var dbConn = new sql.ConnectionPool(dbConfig.dataBaseConfig);
         dbConn

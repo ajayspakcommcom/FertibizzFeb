@@ -7,7 +7,7 @@ function setupPage() {
 function loadMonthYear() {
     const date = new Date();
     let dt = new Date(date.getFullYear(), date.getMonth() - 1, 1);
-    $('#cmbMonth').val(dt.getMonth() + 1); // our combo box starts with 1
+    $('#cmbMonth').val(dt.getMonth()); // our combo box starts with 1
     $('#cmbYear').val(dt.getFullYear());
     $('#cmbMonth').prop('disabled', true);
     $('#cmbYear').prop('disabled', true);
@@ -267,7 +267,7 @@ function isNumber(evt) {
 
 function validateMe() {
 
-    //console.log('save into database')
+    console.log('save into database')
 
     if ($('#cmbMonth').val() === "") {
         alert('Month field is empty');
