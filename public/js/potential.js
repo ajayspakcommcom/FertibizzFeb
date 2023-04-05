@@ -2,7 +2,8 @@
 function loadMonthYear() {
     const date = new Date();
     let dt = new Date(date.getFullYear(), date.getMonth() - 1, 1);
-    $('#cmbMonth').val(dt.getMonth() + 1); // our combo box starts with 1
+    // $('#cmbMonth').val(dt.getMonth() + 1); // our combo box starts with 1
+    $('#cmbMonth').val(1);
     $('#cmbYear').val(dt.getFullYear());
     $('#cmbMonth').prop('disabled', true);
     $('#cmbYear').prop('disabled', true);
@@ -217,7 +218,7 @@ function getPotentialsDetails() {
                     month = arr[1] <= 9 ? parseInt(arr[1].substring(1, 2)) : parseInt(arr[1])
                 $('#cmbYear').val(year)
                 //$('#cmbMonth').val(month)
-                getFirstDayPreviousMonth();
+                //getFirstDayPreviousMonth();
                 getFieldData();
 
                 // ajay modified 23-02-2023
