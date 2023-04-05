@@ -15,7 +15,7 @@ function loadMonthYear() {
   const date = new Date();
   let dt = new Date(date.getFullYear(), date.getMonth() - 1, 1);
   //$('#cmbMonth').val(dt.getMonth()); // our combo box starts with 1
-  $('#cmbMonth').val(1); // our combo box starts with 1
+  $('#cmbMonth').val(2); // our combo box starts with 1
   $('#cmbYear').val(dt.getFullYear());
   $('#cmbMonth').prop('disabled', true);
   $('#cmbYear').prop('disabled', true);
